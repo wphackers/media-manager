@@ -1,0 +1,15 @@
+{
+	"apiVersion": 2,
+	"name": "media-center/media-theater",
+	"title": "Media Theater",
+	"category": "media",
+	"icon": "smiley",
+	"description": "Connect different media sources and blocks in general with each other.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "media-theater",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}
