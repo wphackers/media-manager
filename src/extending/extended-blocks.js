@@ -11,10 +11,12 @@ export const BLOCKS_ATTRIBUTE_SCHEMA = {
 	[ BLOCK_NAME_CORE_VIDEO ]: {
 		name: 'src',
 		type: 'string',
+		domTypeName: 'video',
 	},
 
 	[ BLOCK_NAME_CORE_AUDIO ]: {
 		name: 'src',
 		type: 'string',
+		domTypeName: 'audio',
 	},
 };

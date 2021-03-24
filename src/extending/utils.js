@@ -41,6 +41,6 @@ export function shouldExtendBlock( name, settings ) {
 	return hasBLockValidScheme( name, settings?.attributes );
 }
 
-export function getBlockSourceAttributeName( name ) {
-	return BLOCKS_ATTRIBUTE_SCHEMA?.[ name ].name;
+export function getBlockSourceProps( name ) {
+	return BLOCKS_ATTRIBUTE_SCHEMA?.[ name ];
 }
