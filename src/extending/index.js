@@ -9,7 +9,7 @@ import { addFilter } from '@wordpress/hooks';
 import { shouldExtendBlock } from './utils';
 
 function registerMediaBlocksSource( settings, name ) {
-	if ( ! shouldExtendBlock( name ) ) {
+	if ( ! shouldExtendBlock( name, settings ) ) {
 		return settings;
 	}
 
