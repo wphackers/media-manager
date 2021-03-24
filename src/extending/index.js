@@ -3,15 +3,13 @@
  */
 import { addFilter } from '@wordpress/hooks';
 
-const EXTENDED_BLOCKS = [
-	'core/video',
-	'core/audio',
-];
-
-console.log( 'EXTENDED_BLOCKS: ', EXTENDED_BLOCKS );
+/**
+ * Internal dependencies
+ */
+import { shouldExtendBlock } from './utils';
 
 function registerMediaBlocksSource( settings, name ) {
-	if ( EXTENDED_BLOCKS.indexOf( name ) < 0 ) {
+	if ( ! shouldExtendBlock( name ) ) {
 		return settings;
 	}
 
