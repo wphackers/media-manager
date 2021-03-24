@@ -7,11 +7,11 @@ import { useDispatch } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { shouldExtendBlock } from './utils';
+import { shouldExtendBlock, getBlockSourceAttributeName } from './utils';
 import { registerMediaSource } from '../store';
 import { STORE_ID } from '../store/constants';
 
-const blockEditWithMediaRegister = BlockEdit => ( props ) => {
+const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 	const { clientId } = props;
 	const { registerMediaSource } = useDispatch( STORE_ID );
 
@@ -19,7 +19,10 @@ const blockEditWithMediaRegister = BlockEdit => ( props ) => {
 		return <BlockEdit { ...props } />;
 	}
 
-	registerMediaSource( clientId );
+	const sourceAttributeName = getBlockSourceAttributeName( name );
+	registerMediaSource( clientId, {
+		source: props?.attributes?.[ sourceAttributeName ],
+	} );
 
 	return <BlockEdit { ...props } />;
 }
@@ -31,7 +34,7 @@ function registerMediaBlocksSource( settings, name ) {
 
 	return {
 		...settings,
-		edit: blockEditWithMediaRegister( settings.edit ),
+		edit: blockEditWithMediaRegister( name, settings.edit ),
 	};
 }
 
