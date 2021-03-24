@@ -12,4 +12,9 @@ export const BLOCKS_ATTRIBUTE_SCHEMA = {
 		name: 'src',
 		type: 'string',
 	},
+
+	[ BLOCK_NAME_CORE_AUDIO ]: {
+		name: 'src',
+		type: 'string',
+	},
 };
