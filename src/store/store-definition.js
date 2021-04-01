@@ -80,6 +80,10 @@ const actions = {
 };
 
 const selectors = {
+	getMediaSources( state ) {
+		return state.sources;
+	},
+
 	getDefaultMediaSource( state ) {
 		let playerId = null;
 		const keys = Object.keys( state.sources );
