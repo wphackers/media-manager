@@ -1,4 +1,4 @@
-=== Media Theater ===
+=== Media Center ===
 Contributors:      Damián Suárez (retrofox)
 Tags:              block
 Requires at least: 5.6.0

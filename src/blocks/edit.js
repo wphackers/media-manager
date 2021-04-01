@@ -32,7 +32,7 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
-			{ __( 'Media Theater – hello from the editor!', 'media-center' ) }
+			{ __( 'Media Center – hello from the editor!', 'media-center' ) }
 		</p>
 	);
 }
