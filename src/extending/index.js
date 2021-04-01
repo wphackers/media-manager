@@ -9,12 +9,11 @@ import { useEffect } from '@wordpress/element';
  * Internal dependencies
  */
 import { shouldExtendBlock, getBlockSourceProps } from './utils';
-import { registerMediaSource } from '../store';
 import { STORE_ID } from '../store/constants';
 
 const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 	const { clientId } = props;
-	const { registerMediaSource } = useDispatch( STORE_ID );
+	const { registerMediaSource, updateMediaSourceData } = useDispatch( STORE_ID );
 
 	// Bail early when no clientId.
 	if ( ! clientId ) {
@@ -30,11 +29,19 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 	// Interact with the client API.
 	useEffect( () => {
 		// Pick DOM element reference through client ID and dom type name.
-		const domEl = document?.querySelector( `#block-${ clientId } ${domTypeName }` );
+		// We rely on this for now.
+		// Probably, we should replace it with useRef() hook,
+		// adding a wrapper element.
+		const querySelector = `#block-${ clientId } ${domTypeName }`;
+		const domEl = document?.querySelector( querySelector );
 		if ( ! domEl ) {
 			return;
 		}
 
+		// Store the element ID.
+		updateMediaSourceData( clientId, {
+			querySelector,
+		} );
 	}, [ clientId ] );
 
 	return <BlockEdit { ...props } />;
