@@ -27,7 +27,7 @@ export default function save() {
 		<p { ...useBlockProps.save() }>
 			{ __(
 				'Media Theater – hello from the saved content!',
-				'media-theater'
+				'media-center'
 			) }
 		</p>
 	);

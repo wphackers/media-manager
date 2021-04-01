@@ -1,5 +1,5 @@
 // Store ID
-export const STORE_ID = 'media-theater/media-source';
+export const STORE_ID = 'media-center/media-source';
 
 // Media statuses
 export const STATE_PLAYING = 'is-playing';

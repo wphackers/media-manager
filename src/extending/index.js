@@ -53,6 +53,6 @@ function registerMediaBlocksSource( settings, name ) {
 
 addFilter(
 	'blocks.registerBlockType',
-	'media-theater/registerMediaBlockSource',
+	'media-center/registerMediaBlockSource',
 	registerMediaBlocksSource
 );

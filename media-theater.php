@@ -6,7 +6,7 @@
  * Author:          Damián Suárez (retrofox)
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:     media-theater
+ * Text Domain:     media-center
  *
  * @package         media-center
  */

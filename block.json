@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "media-center/media-theater",
+	"name": "media-center/media-center",
 	"title": "Media Theater",
 	"category": "media",
 	"icon": "smiley",
@@ -8,7 +8,7 @@
 	"supports": {
 		"html": false
 	},
-	"textdomain": "media-theater",
+	"textdomain": "media-center",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
 	"style": "file:./build/style-index.css"
