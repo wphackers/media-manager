@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
-	"name": "media-center/media-center",
-	"title": "Media Center",
+	"name": "media-center/media-theater",
+	"title": "Media Theater",
 	"category": "media",
 	"icon": "smiley",
 	"description": "Connect different media sources and blocks in general with each other.",
