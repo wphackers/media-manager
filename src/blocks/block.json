@@ -3,7 +3,6 @@
 	"name": "media-center/media-theater",
 	"title": "Media Theater",
 	"category": "media",
-	"icon": "smiley",
 	"description": "Manage all media and connect them with other blocks, from a single block.",
 	"supports": {
 		"html": false
