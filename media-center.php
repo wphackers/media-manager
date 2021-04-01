@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Media Theater
+ * Plugin Name:     Media Center
  * Description:     Connect different media sources and blocks in general with each other.
  * Version:         0.0.1
  * Author:          Damián Suárez (retrofox)
