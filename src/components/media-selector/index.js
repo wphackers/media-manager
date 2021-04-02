@@ -15,7 +15,7 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.scss';
 
-function MediaItem( { type, source } ) {
+function MediaItem( { type, source, onItemSelect, id } ) {
 	const itemReference = useRef();
 	useEffect( () => {
 		if ( ! itemReference?.current ) {
@@ -35,6 +35,7 @@ function MediaItem( { type, source } ) {
 			className="media-selector__item-wrapper"
 			onMouseEnter={ ( { target } ) => target.querySelector( type )?.play() }
 			onMouseLeave={ ( { target } ) => target.querySelector( type )?.pause() }
+			onClick={ () => onItemSelect( id ) }
 		>
 			<div className="media-selector__item" ref={ itemReference } />
 
@@ -47,7 +48,7 @@ function MediaItem( { type, source } ) {
 	);
 }
 
-export default function MediaSelector( { media } ) {
+export default function MediaSelector( { media, onMediaSelect } ) {
 	if ( ! media?.length ) {
 		return null;
 	}
@@ -60,7 +61,12 @@ export default function MediaSelector( { media } ) {
 					media.map( function( { elementType, source, id } ) {
 						return (
 							<li key={ `item-${ id }`}>
-								<MediaItem type={ elementType } source={ source } />
+								<MediaItem
+									id={ id }
+									type={ elementType }
+									source={ source }
+									onItemSelect={ onMediaSelect }
+								/>
 							</li>
 						);
 					} )

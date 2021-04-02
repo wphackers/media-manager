@@ -37,7 +37,10 @@ export default function MediaTheaterEdit() {
 				label={ __( 'Media Theater', 'media-center' ) }
 				instructions={ __( 'Manage all media sources, comfortable, from your couch.', 'media-center' ) }
 			>
-					<MediaSelector media={ values( mediaSources ) } />
+					<MediaSelector
+						media={ values( mediaSources ) }
+						onMediaSelect={ console.log }
+					/>
 			</Placeholder>
 		</div>
 	);
