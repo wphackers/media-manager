@@ -23,25 +23,35 @@ import MediaSelector from '../../components/media-selector/';
  */
 import './editor.scss';
 
-export default function MediaTheaterEdit() {
+export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 	const { mediaSources } = useSelect( select => {
 		return {
 			mediaSources: select( STORE_ID ).getMediaSources(),
 		};
 	}, [] );
 
+	const { sourceId } = attributes;
+	const setSourceId = ( sourceId ) => setAttributes( { sourceId } );
+
+	if ( ! sourceId ) {
+		return (
+			<div { ...useBlockProps() }>
+				<Placeholder
+					icon={ MediaTheaterIcon }
+					label={ __( 'Media Theater', 'media-center' ) }
+					instructions={ __( 'Manage all media sources, comfortable, from your couch.', 'media-center' ) }
+				>
+						<MediaSelector
+							media={ values( mediaSources ) }
+							onMediaSelect={ setSourceId }
+						/>
+				</Placeholder>
+			</div>
+		);
+	}
+
 	return (
 		<div { ...useBlockProps() }>
-			<Placeholder
-				icon={ MediaTheaterIcon }
-				label={ __( 'Media Theater', 'media-center' ) }
-				instructions={ __( 'Manage all media sources, comfortable, from your couch.', 'media-center' ) }
-			>
-					<MediaSelector
-						media={ values( mediaSources ) }
-						onMediaSelect={ console.log }
-					/>
-			</Placeholder>
 		</div>
 	);
 }
