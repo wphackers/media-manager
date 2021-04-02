@@ -10,6 +10,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { Placeholder } from '@wordpress/components';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -17,6 +18,10 @@ import { Placeholder } from '@wordpress/components';
 import { STORE_ID } from '../../store/constants';
 import { MediaTheaterIcon } from '../../icons';
 import MediaSelector from '../../components/media-selector/';
+
+const MEDIA_THEATER_TEMPLATE = [
+	[ 'core/paragraph', { placeholder: __( 'Type / to choose a block, from your couch!', 'media-center' ) } ],
+];
 
 /**
  * Internal dependencies
@@ -52,6 +57,7 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 
 	return (
 		<div { ...useBlockProps() }>
+			<InnerBlocks template={ MEDIA_THEATER_TEMPLATE } />
 		</div>
 	);
 }

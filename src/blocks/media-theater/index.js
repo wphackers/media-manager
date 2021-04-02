@@ -21,4 +21,9 @@ registerBlockType( 'media-center/media-theater', {
 	edit: Edit,
 	save,
 	icon,
+	attributes: {
+		sourceId: {
+			type: 'string',
+		},
+	},
 } );
