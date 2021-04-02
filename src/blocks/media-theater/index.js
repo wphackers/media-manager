@@ -26,4 +26,7 @@ registerBlockType( 'media-center/media-theater', {
 			type: 'string',
 		},
 	},
+	supports: {
+		align: true,
+	},
 } );
