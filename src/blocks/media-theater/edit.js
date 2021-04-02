@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+
+import { values } from 'lodash';
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -11,6 +16,7 @@ import { Placeholder } from '@wordpress/components';
  */
 import { STORE_ID } from '../../store/constants';
 import { MediaTheaterIcon } from '../../icons';
+import MediaSelector from '../../components/media-selector/';
 
 /**
  * Internal dependencies
@@ -29,8 +35,10 @@ export default function MediaTheaterEdit() {
 			<Placeholder
 				icon={ MediaTheaterIcon }
 				label={ __( 'Media Theater', 'media-center' ) }
-				instructions={ __( 'Select a media source to manage', 'media-center' ) }
-			/>
+				instructions={ __( 'Manage all media sources, comfortable, from your couch.', 'media-center' ) }
+			>
+					<MediaSelector media={ values( mediaSources ) } />
+			</Placeholder>
 		</div>
 	);
 }
