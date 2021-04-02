@@ -3,6 +3,7 @@
  */
 import { select } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+
 /**
  * Internal dependencies
  */
@@ -66,7 +67,6 @@ export function shouldExtendBlockWithMedia( name ) {
 		return false;
 	}
 
-	return !! select( blockEditorStore )
-		.getBlockParentsByBlockName( selectedBlock.clientId, 'media-center/media-theater' )
-		.length;
+	return select( blockEditorStore )
+		.getBlockParentsByBlockName( selectedBlock.clientId, 'media-center/media-theater' );
 }

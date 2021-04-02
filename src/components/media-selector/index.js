@@ -17,6 +17,7 @@ import './style.scss';
 
 function MediaItem( { type, source, onItemSelect, id } ) {
 	const itemReference = useRef();
+
 	useEffect( () => {
 		if ( ! itemReference?.current ) {
 			return;

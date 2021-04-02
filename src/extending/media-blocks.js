@@ -9,6 +9,7 @@ import { debounce } from 'lodash';
 import { addFilter } from '@wordpress/hooks';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useEffect, useRef } from '@wordpress/element';
+import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -18,6 +19,7 @@ import { STORE_ID, STATE_PAUSED, STATE_PLAYING, STATE_ERROR } from '../store/con
 
 const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 	const { clientId } = props;
+
 	// Bail early when no clientId.
 	const { registerMediaSource, updateMediaSourceData, unregisterMediaSource } = useDispatch( STORE_ID );
 	
@@ -26,26 +28,25 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 	}
 
 	const mediaElementRef = useRef();
-	const mediaSourceId = `media-source-${ clientId }`;
-
-	// Register media source.
+	const { attributes, setAttributes } = props;
 	const { name: attrName, domTypeName } = getBlockSourceProps( name );
-	registerMediaSource( mediaSourceId, {
-		source: props?.attributes?.[ attrName ],
-		elementType: domTypeName,
-		state: STATE_PAUSED,
-	} );
+
+	// Check media ahs defined its source.
+	const mediaSource = attributes?.[ attrName ];
+	if( ! MediaSource ) {
+		return <BlockEdit { ...props } />;
+	}
 
 	const { mediaPlayingState } = useSelect(
 		select => ( {
-				mediaPlayingState: select( STORE_ID ).getMediaPlayerState( mediaSourceId ),
+				mediaPlayingState: select( STORE_ID ).getMediaPlayerState( attributes.mediaSourceId ),
 			}
 		),
 		[]
 	);
 
 	function onMetadataReady( event ) {
-		updateMediaSourceData( mediaSourceId, {
+		updateMediaSourceData( attributes.mediaSourceId, {
 			duration: event?.srcElement?.duration,
 		} );
 	}
@@ -64,19 +65,30 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 		// We rely on this for now.
 		// Probably, we should replace it with useRef() hook,
 		// adding a wrapper element.
-		const querySelector = `#block-${ clientId } ${domTypeName }`;
+		let mediaSourceId = attributes?.mediaSourceId;	
+		if ( ! mediaSourceId ) {
+			mediaSourceId = `media-source-${ clientId }`;
+			// update the block attribute.
+			setAttributes( { mediaSourceId } );
+		}
+	
+		const querySelector = `#${ mediaSourceId } ${domTypeName }`;
 		const mediaElement = document?.querySelector( querySelector );
 		if ( ! mediaElement ) {
 			return;
 		}
 
+		// ref the media element.
 		mediaElementRef.current = mediaElement;
 
 		// Pre load audio metadata.
 		mediaElement.preload = 'metadata';
 
-		// Store the element ID.
-		updateMediaSourceData( mediaSourceId, {
+		// Register media source.
+		registerMediaSource( mediaSourceId, {
+			source: mediaSource,
+			elementType: domTypeName,
+			state: STATE_PAUSED,
 			querySelector,
 		} );
 
@@ -86,7 +98,7 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 			mediaElement.removeEventListener( 'loadedmetadata', onMetadataReady );
 			unregisterMediaSource( mediaSourceId );
 		};
-	}, [ clientId ] );
+	}, [ attributes, setAttributes, mediaSource ] );
 
 	// Play/Pause media depending on its media store status.
 	useEffect( () => {
@@ -112,7 +124,11 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 		};
 	}, [ mediaPlayingState, mediaElementRef ] );
 
-	return <BlockEdit { ...props } />;
+	return (
+		<div id={ attributes?.mediaSourceId }>
+			<BlockEdit { ...props } />
+		</div>
+	);
 }
 
 function registerMediaBlocksSource( settings, name ) {
@@ -122,6 +138,12 @@ function registerMediaBlocksSource( settings, name ) {
 
 	return {
 		...settings,
+		attributes: {
+			...settings.attributes,
+			mediaSourceId: {
+				type: 'string',
+			},
+		},
 		edit: blockEditWithMediaRegister( name, settings.edit ),
 	};
 }

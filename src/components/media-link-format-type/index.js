@@ -3,20 +3,36 @@
  */
 import { __ } from '@wordpress/i18n';
 import { registerFormatType, toggleFormat } from '@wordpress/rich-text';
-import { RichTextToolbarButton } from '@wordpress/block-editor';
+import { RichTextToolbarButton, store as blockEditorStore } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
 import { MediaLinkIcon } from '../../icons';
 import { shouldExtendBlockWithMedia } from '../../extending/utils';
+import { STORE_ID } from '../../store/constants';
 
 const MEDIA_LINK_FORMAT_TYPE = 'media-center/media-link-format-type';
  
 function MediaLinkFormatButton( { value, onChange, isActive } ) {
-	if ( ! shouldExtendBlockWithMedia() ) {
+	const mediatTheatherBlockClientId = shouldExtendBlockWithMedia();
+	if ( ! mediatTheatherBlockClientId?.length ) {
 		return null;
 	}
+
+	const mediaTheaterBlock = useSelect(
+		select => select( blockEditorStore ).getBlock( mediatTheatherBlockClientId[ 0 ] ),
+		[]
+	);
+
+	const { sourceId } = mediaTheaterBlock?.attributes || {};
+	const { domRef } = useSelect(
+		select => ( {
+			domRef: select( STORE_ID ).getMediaSourceDomReference( sourceId ),
+		} ),
+		[]
+	);
 
 	return (
 		<RichTextToolbarButton
@@ -27,7 +43,7 @@ function MediaLinkFormatButton( { value, onChange, isActive } ) {
 				onChange( toggleFormat( value, {
 					type: MEDIA_LINK_FORMAT_TYPE,
 					attributes: {
-						url: '#123',
+						url: `#${ domRef.currentTime }`,
 					}
 				} ) );
 			} }

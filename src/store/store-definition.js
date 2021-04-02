@@ -127,20 +127,19 @@ const selectors = {
 	},
 
 	getMediaSourceDomReference( state, id ) {
-		const defaultMediaSource = id
+		const mediaSource = id
 			? state.sources?.[ id ]
 			: selectors.getDefaultMediaSource( state );
 
-		if ( ! defaultMediaSource ) {
+		if ( ! mediaSource ) {
 			return;
 		}
 
-		const domId = defaultMediaSource?.domId;
-		if ( ! domId ) {
+		if ( ! mediaSource?.querySelector ) {
 			return;
 		}
 
-		return document.getElementById( domId );
+		return document.querySelector( mediaSource.querySelector );
 	}
 };
 
