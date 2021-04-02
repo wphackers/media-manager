@@ -3,19 +3,19 @@
  * Internal dependencies
  */
 
-import { EXTENDED_BLOCKS, BLOCKS_ATTRIBUTE_SCHEMA } from './extended-blocks';
+import { EXTENDED_MEDIA_BLOCKS, MEDIA_BLOCKS_ATTRIBUTE_SCHEMA } from './extended-blocks';
 
 function isBlockListed( name ) {
-	return EXTENDED_BLOCKS.indexOf( name ) >= 0;
+	return EXTENDED_MEDIA_BLOCKS.indexOf( name ) >= 0;
 }
 
 function hasBlockValidScheme( name, attributes ) {
 	// check if the scheme is defined.
-	if ( ! BLOCKS_ATTRIBUTE_SCHEMA[ name ] ) {
+	if ( ! MEDIA_BLOCKS_ATTRIBUTE_SCHEMA[ name ] ) {
 		return false;
 	}
 
-	const blockSchema = BLOCKS_ATTRIBUTE_SCHEMA[ name ];
+	const blockSchema = MEDIA_BLOCKS_ATTRIBUTE_SCHEMA[ name ];
 
 	// check if the attribute name exists in the scheme.
 	if ( ! attributes[ blockSchema.name ] ) {
@@ -42,5 +42,5 @@ export function shouldExtendBlock( name, settings ) {
 }
 
 export function getBlockSourceProps( name ) {
-	return BLOCKS_ATTRIBUTE_SCHEMA?.[ name ];
+	return MEDIA_BLOCKS_ATTRIBUTE_SCHEMA?.[ name ];
 }
