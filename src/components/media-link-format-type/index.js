@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { registerFormatType } from '@wordpress/rich-text';
+import { registerFormatType, toggleFormat } from '@wordpress/rich-text';
 import { RichTextToolbarButton } from '@wordpress/block-editor';
 
 /**
@@ -10,8 +10,10 @@ import { RichTextToolbarButton } from '@wordpress/block-editor';
  */
 import { MediaLinkIcon } from '../../icons';
 import { shouldExtendBlockWithMedia } from '../../extending/utils';
+
+const MEDIA_LINK_FORMAT_TYPE = 'media-center/media-link-format-type';
  
-function MediaLinkFormatType() {
+function MediaLinkFormatButton( { value, onChange, isActive } ) {
 	if ( ! shouldExtendBlockWithMedia() ) {
 		return null;
 	}
@@ -21,13 +23,19 @@ function MediaLinkFormatType() {
 			shortcutType="primary"
 			icon= { <MediaLinkIcon /> }
 			title= { __( 'Link to media', 'media-center' ) }
-			onClick= { console.log }
+			onClick= { function() {
+				onChange( toggleFormat(
+					value,
+					{ type: MEDIA_LINK_FORMAT_TYPE }
+				) );
+			} }
+			isActive={ isActive }
 		/>
 	);
 }
 
 registerFormatType(
-	'media-center/media-link-format-type', {
+	MEDIA_LINK_FORMAT_TYPE, {
 		title: 'Media link',
 		tagName: 'a',
 		className: 'media-link-format-type',
@@ -37,6 +45,6 @@ registerFormatType(
 			id: 'data-id',
 			target: 'target',
 		},
-		edit: MediaLinkFormatType,
+		edit: MediaLinkFormatButton,
 	}
 );
