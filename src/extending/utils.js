@@ -3,10 +3,18 @@
  * Internal dependencies
  */
 
-import { EXTENDED_MEDIA_BLOCKS, MEDIA_BLOCKS_ATTRIBUTE_SCHEMA } from './extended-blocks';
+import {
+	EXTENDED_MEDIA_BLOCKS,
+	MEDIA_BLOCKS_ATTRIBUTE_SCHEMA,
+	EXTEND_BLOCKS_WITH_MEDIA,
+} from './extended-blocks';
+
+function isMediaBlockListed( name ) {
+	return EXTENDED_MEDIA_BLOCKS.indexOf( name ) >= 0;
+}
 
 function isBlockListed( name ) {
-	return EXTENDED_MEDIA_BLOCKS.indexOf( name ) >= 0;
+	return EXTEND_BLOCKS_WITH_MEDIA.indexOf( name ) >= 0;
 }
 
 function hasBlockValidScheme( name, attributes ) {
@@ -33,8 +41,8 @@ function hasBlockValidScheme( name, attributes ) {
 	return true;
 }
 
-export function shouldExtendBlock( name, settings ) {
-	if ( ! isBlockListed( name ) ) {
+export function shouldExtendMediaBlock( name, settings ) {
+	if ( ! isMediaBlockListed( name ) ) {
 		return false;
 	}
 
@@ -43,4 +51,8 @@ export function shouldExtendBlock( name, settings ) {
 
 export function getBlockSourceProps( name ) {
 	return MEDIA_BLOCKS_ATTRIBUTE_SCHEMA?.[ name ];
+}
+
+export function shouldExtendBlockWithMedia( name ) {
+	return isBlockListed( name );
 }

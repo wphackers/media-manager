@@ -13,7 +13,7 @@ import { useEffect, useRef } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { shouldExtendBlock, getBlockSourceProps } from './utils';
+import { shouldExtendMediaBlock, getBlockSourceProps } from './utils';
 import { STORE_ID, STATE_PAUSED, STATE_PLAYING, STATE_ERROR } from '../store/constants';
 
 const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
@@ -116,7 +116,7 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 }
 
 function registerMediaBlocksSource( settings, name ) {
-	if ( ! shouldExtendBlock( name, settings ) ) {
+	if ( ! shouldExtendMediaBlock( name, settings ) ) {
 		return settings;
 	}
 
