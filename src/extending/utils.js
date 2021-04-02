@@ -1,8 +1,11 @@
-
+/**
+ * WordPress dependencies
+ */
+import { select } from '@wordpress/data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-
 import {
 	EXTENDED_MEDIA_BLOCKS,
 	MEDIA_BLOCKS_ATTRIBUTE_SCHEMA,
@@ -14,7 +17,7 @@ function isMediaBlockListed( name ) {
 }
 
 function isBlockListed( name ) {
-	return EXTEND_BLOCKS_WITH_MEDIA.indexOf( name ) >= 0;
+	return name && EXTEND_BLOCKS_WITH_MEDIA.indexOf( name ) >= 0;
 }
 
 function hasBlockValidScheme( name, attributes ) {
@@ -54,5 +57,16 @@ export function getBlockSourceProps( name ) {
 }
 
 export function shouldExtendBlockWithMedia( name ) {
-	return isBlockListed( name );
+	const selectedBlock = select( blockEditorStore ).getSelectedBlock();
+	if( ! isBlockListed( name || selectedBlock?.name ) ) {
+		return false;
+	}
+	
+	if ( ! selectedBlock?.clientId ) {
+		return false;
+	}
+
+	return !! select( blockEditorStore )
+		.getBlockParentsByBlockName( selectedBlock.clientId, 'media-center/media-theater' )
+		.length;
 }
