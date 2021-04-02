@@ -24,10 +24,12 @@ function MediaLinkFormatButton( { value, onChange, isActive } ) {
 			icon= { <MediaLinkIcon /> }
 			title= { __( 'Link to media', 'media-center' ) }
 			onClick= { function() {
-				onChange( toggleFormat(
-					value,
-					{ type: MEDIA_LINK_FORMAT_TYPE }
-				) );
+				onChange( toggleFormat( value, {
+					type: MEDIA_LINK_FORMAT_TYPE,
+					attributes: {
+						url: '#123',
+					}
+				} ) );
 			} }
 			isActive={ isActive }
 		/>
@@ -41,9 +43,6 @@ registerFormatType(
 		className: 'media-link-format-type',
 		attributes: {
 			url: 'href',
-			type: 'data-type',
-			id: 'data-id',
-			target: 'target',
 		},
 		edit: MediaLinkFormatButton,
 	}
