@@ -1,4 +1,3 @@
-
 const BLOCK_NAME_CORE_VIDEO = 'core/video';
 const BLOCK_NAME_CORE_AUDIO = 'core/audio';
 const BLOCK_NAME_CORE_PARAGRAPH = 'core/paragraph';

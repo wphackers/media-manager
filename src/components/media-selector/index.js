@@ -1,4 +1,3 @@
-
 /**
  * External dependencies
  */
@@ -34,8 +33,12 @@ function MediaItem( { type, source, onItemSelect, id } ) {
 	return (
 		<div
 			className="media-selector__item-wrapper"
-			onMouseEnter={ ( { target } ) => target.querySelector( type )?.play() }
-			onMouseLeave={ ( { target } ) => target.querySelector( type )?.pause() }
+			onMouseEnter={ ( { target } ) =>
+				target.querySelector( type )?.play()
+			}
+			onMouseLeave={ ( { target } ) =>
+				target.querySelector( type )?.pause()
+			}
 			onClick={ () => onItemSelect( id ) }
 		>
 			<div className="media-selector__item" ref={ itemReference } />
@@ -56,23 +59,26 @@ export default function MediaSelector( { media, onMediaSelect } ) {
 
 	return (
 		<div className="media-selector">
-			<h4>{ __( 'Pick up the media source from this content', 'media-center' ) }</h4>
+			<h4>
+				{ __(
+					'Pick up the media source from this content',
+					'media-center'
+				) }
+			</h4>
 			<ul>
-				{
-					media.map( function( { elementType, source, id } ) {
-						return (
-							<li key={ `item-${ id }`}>
-								<MediaItem
-									id={ id }
-									type={ elementType }
-									source={ source }
-									onItemSelect={ onMediaSelect }
-								/>
-							</li>
-						);
-					} )
-				}
+				{ media.map( function ( { elementType, source, id } ) {
+					return (
+						<li key={ `item-${ id }` }>
+							<MediaItem
+								id={ id }
+								type={ elementType }
+								source={ source }
+								onItemSelect={ onMediaSelect }
+							/>
+						</li>
+					);
+				} ) }
 			</ul>
 		</div>
-	)
+	);
 }

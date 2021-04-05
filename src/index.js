@@ -7,4 +7,4 @@
  */
 import './blocks';
 import './store';
-import './extending'
+import './extending';

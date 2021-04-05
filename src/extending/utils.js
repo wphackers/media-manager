@@ -59,14 +59,16 @@ export function getBlockSourceProps( name ) {
 
 export function shouldExtendBlockWithMedia( name ) {
 	const selectedBlock = select( blockEditorStore ).getSelectedBlock();
-	if( ! isBlockListed( name || selectedBlock?.name ) ) {
+	if ( ! isBlockListed( name || selectedBlock?.name ) ) {
 		return false;
 	}
-	
+
 	if ( ! selectedBlock?.clientId ) {
 		return false;
 	}
 
-	return select( blockEditorStore )
-		.getBlockParentsByBlockName( selectedBlock.clientId, 'media-center/media-theater' );
+	return select( blockEditorStore ).getBlockParentsByBlockName(
+		selectedBlock.clientId,
+		'media-center/media-theater'
+	);
 }

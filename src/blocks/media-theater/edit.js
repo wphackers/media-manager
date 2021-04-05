@@ -20,7 +20,15 @@ import { MediaTheaterIcon } from '../../icons';
 import MediaSelector from '../../components/media-selector/';
 
 const MEDIA_THEATER_TEMPLATE = [
-	[ 'core/paragraph', { placeholder: __( 'Type / to choose a block, from your couch!', 'media-center' ) } ],
+	[
+		'core/paragraph',
+		{
+			placeholder: __(
+				'Type / to choose a block, from your couch!',
+				'media-center'
+			),
+		},
+	],
 ];
 
 /**
@@ -29,7 +37,7 @@ const MEDIA_THEATER_TEMPLATE = [
 import './editor.scss';
 
 export default function MediaTheaterEdit( { attributes, setAttributes } ) {
-	const { mediaSources } = useSelect( select => {
+	const { mediaSources } = useSelect( ( select ) => {
 		return {
 			mediaSources: select( STORE_ID ).getMediaSources(),
 		};
@@ -44,12 +52,15 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 				<Placeholder
 					icon={ MediaTheaterIcon }
 					label={ __( 'Media Theater', 'media-center' ) }
-					instructions={ __( 'Manage all media sources, comfortable, from your couch.', 'media-center' ) }
+					instructions={ __(
+						'Manage all media sources, comfortable, from your couch.',
+						'media-center'
+					) }
 				>
-						<MediaSelector
-							media={ values( mediaSources ) }
-							onMediaSelect={ setSourceId }
-						/>
+					<MediaSelector
+						media={ values( mediaSources ) }
+						onMediaSelect={ setSourceId }
+					/>
 				</Placeholder>
 			</div>
 		);

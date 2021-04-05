@@ -2,23 +2,26 @@
  * External dependencies
  */
 
- /**
-  * WordPress dependencies
-  */
- import { addFilter } from '@wordpress/hooks';
- import { useSelect } from '@wordpress/data';
+/**
+ * WordPress dependencies
+ */
+import { addFilter } from '@wordpress/hooks';
+import { useSelect } from '@wordpress/data';
 
- /**
-  * Internal dependencies
-  */
- import { shouldExtendBlockWithMedia } from './utils';
- import '../components/media-link-format-type';
+/**
+ * Internal dependencies
+ */
+import { shouldExtendBlockWithMedia } from './utils';
+import '../components/media-link-format-type';
 
- const blockEditWithMedia = ( name, BlockEdit ) => ( props ) => {
+const blockEditWithMedia = ( name, BlockEdit ) => ( props ) => {
 	const { clientId } = props;
 	const isChildOfMediaTheater = useSelect(
-		select => !! select( 'core/block-editor' )
-			.getBlockParentsByBlockName( clientId, 'media-center/media-theater' ).length,
+		( select ) =>
+			!! select( 'core/block-editor' ).getBlockParentsByBlockName(
+				clientId,
+				'media-center/media-theater'
+			).length,
 		[]
 	);
 
@@ -27,22 +30,21 @@
 	}
 
 	return <BlockEdit { ...props } />;
- }
- 
- function empowerBlocksWithMedia( settings, name ) {
+};
+
+function empowerBlocksWithMedia( settings, name ) {
 	if ( ! shouldExtendBlockWithMedia( name ) ) {
 		return settings;
 	}
- 
+
 	return {
 		...settings,
 		edit: blockEditWithMedia( name, settings.edit ),
 	};
- }
- 
- addFilter(
+}
+
+addFilter(
 	'blocks.registerBlockType',
 	'media-center/empowerBlocksWithMedia',
 	empowerBlocksWithMedia
- );
- 
+);
