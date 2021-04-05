@@ -12,10 +12,16 @@ import { useSelect } from '@wordpress/data';
 import { MediaLinkIcon } from '../../icons';
 import { shouldExtendBlockWithMedia } from '../../extending/utils';
 import { STORE_ID } from '../../store/constants';
+import MediaLinkPopover from './media-link-popover';
 
 const MEDIA_LINK_FORMAT_TYPE = 'media-center/media-link-format-type';
  
-function MediaLinkFormatButton( { value, onChange, isActive } ) {
+function MediaLinkFormatButton( {
+	value,
+	onChange,
+	isActive,
+	contentRef,
+} ) {
 	const mediatTheatherBlockClientId = shouldExtendBlockWithMedia();
 	if ( ! mediatTheatherBlockClientId?.length ) {
 		return null;
@@ -34,32 +40,43 @@ function MediaLinkFormatButton( { value, onChange, isActive } ) {
 		[]
 	);
 
+	const currentTime = domRef?.currentTime || 0;
+
 	return (
-		<RichTextToolbarButton
-			shortcutType="primary"
-			icon= { <MediaLinkIcon /> }
-			title= { __( 'Link to media', 'media-center' ) }
-			onClick= { function() {
-				onChange( toggleFormat( value, {
-					type: MEDIA_LINK_FORMAT_TYPE,
-					attributes: {
-						url: `#${ domRef.currentTime }`,
-					}
-				} ) );
-			} }
-			isActive={ isActive }
-		/>
+		<>
+			<RichTextToolbarButton
+				shortcutType="primary"
+				icon= { <MediaLinkIcon /> }
+				title= { __( 'Link to media', 'media-center' ) }
+				onClick= { function() {
+					onChange( toggleFormat( value, {
+						type: MEDIA_LINK_FORMAT_TYPE,
+						attributes: {
+							url: `#${ currentTime }`,
+						}
+					} ) );
+				} }
+				isActive={ isActive }
+			/>
+
+			<MediaLinkPopover
+				value={ value }
+				contentRef={ contentRef }
+				currentTime={ currentTime }
+				isActive={ isActive }
+			/>
+		</>
 	);
 }
 
-registerFormatType(
-	MEDIA_LINK_FORMAT_TYPE, {
-		title: 'Media link',
-		tagName: 'a',
-		className: 'media-link-format-type',
-		attributes: {
-			url: 'href',
-		},
-		edit: MediaLinkFormatButton,
-	}
-);
+export const mediaLinkFormatButtonSettings = {
+	title: 'Media link',
+	tagName: 'a',
+	className: 'media-link-format-type',
+	attributes: {
+		url: 'href',
+	},
+	edit: MediaLinkFormatButton,
+};
+
+registerFormatType( MEDIA_LINK_FORMAT_TYPE, mediaLinkFormatButtonSettings );
