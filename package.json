@@ -16,7 +16,10 @@
 	"dependencies": {
 		"@wordpress/block-editor": "^5.3.0",
 		"@wordpress/blocks": "^8.0.0",
-		"@wordpress/i18n": "^3.19.0"
+		"@wordpress/i18n": "^3.19.0",
+		"@wordpress/rich-text": "^3.25.0",
+		"gridicons": "^3.3.1",
+		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^14.0.1"
