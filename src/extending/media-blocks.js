@@ -20,9 +20,13 @@ import { STORE_ID, STATE_PAUSED, STATE_PLAYING, STATE_ERROR } from '../store/con
 const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 	const { clientId } = props;
 
-	// Bail early when no clientId.
-	const { registerMediaSource, updateMediaSourceData, unregisterMediaSource } = useDispatch( STORE_ID );
+	const {
+		registerMediaSource,
+		updateMediaSourceData,
+		unregisterMediaSource,
+	} = useDispatch( STORE_ID );
 	
+	// Bail early when no clientId.
 	if ( ! clientId ) {
 		return <BlockEdit { ...props } />;
 	}
@@ -31,7 +35,7 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 	const { attributes, setAttributes } = props;
 	const { name: attrName, domTypeName } = getBlockSourceProps( name );
 
-	// Check media ahs defined its source.
+	// Check media has defined its source.
 	const mediaSource = attributes?.[ attrName ];
 	if( ! MediaSource ) {
 		return <BlockEdit { ...props } />;
@@ -39,9 +43,8 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 
 	const { mediaPlayingState } = useSelect(
 		select => ( {
-				mediaPlayingState: select( STORE_ID ).getMediaPlayerState( attributes.mediaSourceId ),
-			}
-		),
+			mediaPlayingState: select( STORE_ID ).getMediaPlayerState( attributes.mediaSourceId ),
+		} ),
 		[]
 	);
 
@@ -61,10 +64,11 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 
 	// Interact with the client API.
 	useEffect( () => {
-		// Pick DOM element reference through client ID and dom type name.
-		// We rely on this for now.
-		// Probably, we should replace it with useRef() hook,
-		// adding a wrapper element.
+		/*
+		 * Check if the mediaSourceId attribute is defined.
+		 * If so, take it as the media reference.
+		 * Otherwise, creates a new ID using the current clientId.
+		 */
 		let mediaSourceId = attributes?.mediaSourceId;	
 		if ( ! mediaSourceId ) {
 			mediaSourceId = `media-source-${ clientId }`;
@@ -72,19 +76,28 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 			setAttributes( { mediaSourceId } );
 		}
 	
+		/*
+		 * querySelector is the string used to pick up
+		 * the DOM Element reference.
+		 */
 		const querySelector = `#${ mediaSourceId } ${domTypeName }`;
 		const mediaElement = document?.querySelector( querySelector );
 		if ( ! mediaElement ) {
 			return;
 		}
 
-		// ref the media element.
+		// Store the media element reference.
 		mediaElementRef.current = mediaElement;
 
-		// Pre load audio metadata.
+		/*
+		 * Pre load audio metadata.
+		 * It allows preloading useful metadata
+		 * of the media source, for instance,
+		 * the media duration.
+		 */
 		mediaElement.preload = 'metadata';
 
-		// Register media source.
+		// Register media source in the store.
 		registerMediaSource( mediaSourceId, {
 			source: mediaSource,
 			elementType: domTypeName,
@@ -92,15 +105,20 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 			querySelector,
 		} );
 
+		// Subscribe to media events.
 		mediaElement.addEventListener( 'loadedmetadata', onMetadataReady );
 
+		// Clean.
 		return function() {
+			// Cleaning the attr probably shoulnd't needed.
+			setAttributes( { mediaSourceId: null } );
+
 			mediaElement.removeEventListener( 'loadedmetadata', onMetadataReady );
 			unregisterMediaSource( mediaSourceId );
 		};
 	}, [ attributes, setAttributes, mediaSource ] );
 
-	// Play/Pause media depending on its media store status.
+	// Play/Pause media depending on playing state (via store).
 	useEffect( () => {
 		if ( ! mediaElementRef?.current ) {
 			return;
@@ -108,7 +126,10 @@ const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
 
 		const { current: mediaElement } = mediaElementRef;
 
-		// Get the current status of the audio element and the required action to toggle it.
+		/*
+		 * Get the current status of the audio element,
+		 * and the required action to toggle it.
+		 */
 		const [ audioStatus, action ] = mediaElement.paused === false 
 			? [ STATE_PLAYING, pause ]
 			: [ STATE_PAUSED, play ];
@@ -136,14 +157,18 @@ function registerMediaBlocksSource( settings, name ) {
 		return settings;
 	}
 
+	// `mediaSourceId` attribute stores the reference
+	// to the media source store.
+	const attributes = {
+		...settings.attributes,
+		mediaSourceId: {
+			type: 'string',
+		},
+	};
+
 	return {
 		...settings,
-		attributes: {
-			...settings.attributes,
-			mediaSourceId: {
-				type: 'string',
-			},
-		},
+		attributes,
 		edit: blockEditWithMediaRegister( name, settings.edit ),
 	};
 }
