@@ -7,9 +7,9 @@ import { values } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
-import { Placeholder } from '@wordpress/components';
+import { Placeholder, Panel, PanelBody } from '@wordpress/components';
 import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
@@ -17,7 +17,8 @@ import { InnerBlocks } from '@wordpress/block-editor';
  */
 import { STORE_ID } from '../../store/constants';
 import { MediaTheaterIcon } from '../../icons';
-import MediaSelector from '../../components/media-selector/';
+import MediaSelector, { MediaItem } from '../../components/media-selector/';
+import { MediaPlayerControl } from '../../components/media-link-format-type/media-link-popover';
 
 const MEDIA_THEATER_TEMPLATE = [
 	[
@@ -37,13 +38,20 @@ const MEDIA_THEATER_TEMPLATE = [
 import './editor.scss';
 
 export default function MediaTheaterEdit( { attributes, setAttributes } ) {
+	const { sourceId } = attributes;
+
 	const { mediaSources } = useSelect( ( select ) => {
 		return {
 			mediaSources: select( STORE_ID ).getMediaSources(),
 		};
 	}, [] );
 
-	const { sourceId } = attributes;
+	const { mediaSource } = useSelect( ( select ) => {
+		return {
+			mediaSource: select( STORE_ID ).getMediaSourceById( sourceId )
+		};
+	}, [ sourceId ] );
+
 	const setSourceId = ( sourceId ) => setAttributes( { sourceId } );
 
 	if ( ! sourceId ) {
@@ -67,8 +75,37 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 	}
 
 	return (
-		<div { ...useBlockProps() }>
-			<InnerBlocks template={ MEDIA_THEATER_TEMPLATE } />
-		</div>
+		<>
+			<InspectorControls>
+				<Panel>
+					<PanelBody title={ __( 'Media Source', 'media-center' ) }>
+						{ mediaSource && (
+							<>
+								<MediaItem
+									type={ mediaSource.elementType }
+									source={ mediaSource.source }
+									id={ mediaSource.id }
+									onItemSelect={ console.log }
+								/>
+								<MediaPlayerControl
+									sourceId={ sourceId }
+								/>
+							</>
+						) }
+
+						{ ! mediaSource && (
+							<MediaSelector
+								media={ values( mediaSources ) }
+								onMediaSelect={ setSourceId }
+							/>
+						) }
+					</PanelBody>
+				</Panel>
+			</InspectorControls>
+
+			<div { ...useBlockProps() }>
+				<InnerBlocks template={ MEDIA_THEATER_TEMPLATE } />
+			</div>
+		</>
 	);
 }

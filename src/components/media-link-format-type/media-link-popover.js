@@ -16,7 +16,7 @@ import { STORE_ID, STATE_PAUSED, STATE_PLAYING } from '../../store/constants';
 const playIcon = 'controls-play';
 const pauseIcon = 'controls-pause';
 
-function MediaPlayerControl( { sourceId } ) {
+export function MediaPlayerControl( { sourceId } ) {
 	const { mediaPlayingState } = useSelect(
 		( select ) => ( {
 			mediaPlayingState: select( STORE_ID ).getMediaPlayerState(

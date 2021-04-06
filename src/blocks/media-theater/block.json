@@ -3,7 +3,7 @@
 	"name": "media-center/media-theater",
 	"title": "Media Theater",
 	"category": "media",
-	"description": "Manage all media and connect them with other blocks, from a single block.",
+	"description": "Manage all media sources, comfortable, from your couch.",
 	"supports": {
 		"html": false
 	},

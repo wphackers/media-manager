@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.scss';
 
-function MediaItem( { type, source, onItemSelect, id } ) {
+export function MediaItem( { type, source, onItemSelect, id } ) {
 	const itemReference = useRef();
 
 	useEffect( () => {
@@ -61,7 +61,7 @@ export default function MediaSelector( { media, onMediaSelect } ) {
 		<div className="media-selector">
 			<h4>
 				{ __(
-					'Pick up the media source from this content',
+					'Pick up the media source from entrance content',
 					'media-center'
 				) }
 			</h4>
