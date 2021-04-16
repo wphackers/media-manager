@@ -1,27 +1,41 @@
 /**
+ * External dependencies
+ */
+import { debounce } from 'lodash';
+
+/**
  * WordPress dependencies
  */
-import { Popover, Button } from '@wordpress/components';
+import { Popover, Button, RangeControl } from '@wordpress/components';
 import { useAnchorRef } from '@wordpress/rich-text';
 import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch } from '@wordpress/data';
+import { useState, useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import { convertSecondsToTimeFormat } from '../../lib/time-utils';
+import { convertSecondsToTimeCode, convertTimeCodeToSeconds } from '../../lib/time-utils';
 import { mediaLinkFormatButtonSettings } from './';
 import { STORE_ID, STATE_PAUSED, STATE_PLAYING } from '../../store/constants';
 
 const playIcon = 'controls-play';
 const pauseIcon = 'controls-pause';
 
-export function MediaPlayerControl( { sourceId } ) {
-	const { mediaPlayingState } = useSelect(
+const debouncedOnChange = debounce( function ( time, onChange ) {
+	onChange( time );
+}, 250 );
+
+export function MediaPlayerControl( { sourceId, time, onChange } ) {
+	const [ rangeTime, setRangeTime ] = useState( time );
+	useEffect( () => setRangeTime( time ), [ time ] );
+
+	const { mediaPlayingState, mediaDuration } = useSelect(
 		( select ) => ( {
 			mediaPlayingState: select( STORE_ID ).getMediaPlayerState(
 				sourceId
 			),
+			mediaDuration: select( STORE_ID ).getMediaSourceDuration( sourceId ),
 		} ),
 		[]
 	);
@@ -32,12 +46,20 @@ export function MediaPlayerControl( { sourceId } ) {
 
 	const isPaused = mediaPlayingState === STATE_PAUSED;
 
-	function toggleInTime( time = 3 ) {
+	function toggleInTime() {
 		if ( mediaPlayingState !== STATE_PLAYING ) {
 			setMediaSourceCurrentTime( sourceId, time );
 		}
 		toggleMediaSource( sourceId );
 	}
+
+	function onChangeTimeHandler( time ) {
+		setRangeTime( time );
+		debouncedOnChange( time, onChange );
+	}
+
+
+	const currentTimeFormatted = convertSecondsToTimeCode( rangeTime );
 
 	return (
 		<div className="media-player-control">
@@ -51,6 +73,20 @@ export function MediaPlayerControl( { sourceId } ) {
 						: __( 'Pause', 'media-center' )
 				}
 			/>
+
+			<div className="media-player-control__display">
+				{ currentTimeFormatted }
+			</div>
+
+			<RangeControl
+				disabled={ typeof mediaDuration === 'undefined' }
+				value={ rangeTime }
+				min={ 0 }
+				max={ mediaDuration }
+				onChange={ onChangeTimeHandler }
+				withInputField={ false }
+				showTooltip={ false }
+			/>
 		</div>
 	);
 }
@@ -61,28 +97,29 @@ export default function MediaLinkPopover( {
 	contentRef,
 	currentTime,
 	sourceId,
+	onTimeChange,
 } ) {
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
 		value,
 		settings: mediaLinkFormatButtonSettings,
 	} );
+
 	if ( ! isActive ) {
 		return null;
 	}
 
-	const currentTimeFormatted = convertSecondsToTimeFormat( currentTime );
-
 	return (
 		<Popover
 			anchorRef={ anchorRef }
-			onClose={ console.log }
 			position="bottom center"
 		>
 			<div className="media-link-popover">
-				{ currentTimeFormatted }
-
-				<MediaPlayerControl sourceId={ sourceId } />
+				<MediaPlayerControl
+					sourceId={ sourceId }
+					time={ currentTime }
+					onChange={ onTimeChange }
+				/>
 			</div>
 		</Popover>
 	);

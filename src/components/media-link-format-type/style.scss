@@ -1,4 +1,13 @@
 .media-link-popover {
 	margin: 0;
 	padding: 16px;
+	min-width: 250px;
+}
+
+.media-player-control__display {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: bottom;
+	height: 36px;
+    padding: 6px;
 }

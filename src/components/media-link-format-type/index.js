@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { registerFormatType, toggleFormat } from '@wordpress/rich-text';
+import { registerFormatType, toggleFormat, applyFormat, getTextContent, slice, getActiveFormat } from '@wordpress/rich-text';
 import {
 	RichTextToolbarButton,
 	store as blockEditorStore,
@@ -42,7 +42,15 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 		[]
 	);
 
-	const currentTime = domRef?.currentTime || 0;
+	// Media link format time position.
+	const { attributes } = getActiveFormat( value, MEDIA_LINK_FORMAT_TYPE ) || {};
+
+	// Pick the initial current time,
+	// either from the attribute.
+	// or from the media source.
+	const mediaLinkFormatPosition = attributes?.url
+		? Number( attributes?.url?.replace(/#/, '' ) )
+		: domRef?.currentTime || 0;
 
 	return (
 		<>
@@ -55,7 +63,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 						toggleFormat( value, {
 							type: MEDIA_LINK_FORMAT_TYPE,
 							attributes: {
-								url: `#${ currentTime }`,
+								url: `#${ mediaLinkFormatPosition }`,
 							},
 						} )
 					);
@@ -66,9 +74,19 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 			<MediaLinkPopover
 				value={ value }
 				contentRef={ contentRef }
-				currentTime={ currentTime }
+				currentTime={ mediaLinkFormatPosition }
 				isActive={ isActive }
 				sourceId={ sourceId }
+				onTimeChange={ function ( newTimePosition ) {
+					onChange(
+						applyFormat( value, {
+							type: MEDIA_LINK_FORMAT_TYPE,
+							attributes: {
+								url: `#${ newTimePosition }`,
+							},
+						} )
+					);
+				} }
 			/>
 		</>
 	);
