@@ -2,7 +2,7 @@
  * External dependencies
  */
 import domReady from '@wordpress/dom-ready';
-import { dispatch } from '@wordpress/data';
+import { select, dispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -12,7 +12,6 @@ import { getBlockSourceProps } from '../utils';
 
 domReady( function() {
 	// Register media element in the store.
-
 	const mediaElements = document.querySelectorAll( '.media-center-media-source' );
 	if ( mediaElements.length ) {
 		mediaElements.forEach( function( media ) {			
@@ -28,4 +27,29 @@ domReady( function() {
 			} );
 		} );
 	}
+
+	// Handle all media-link-format elements.
+	const mediaLinkFormatElemens = document.querySelectorAll( 'a.media-link-format-type' );
+	mediaLinkFormatElemens.forEach( function( anchor ) {
+		anchor.addEventListener( 'click', function( event ) {
+			event.stopPropagation();
+			const { mediaSourceId } = event.target.dataset;
+			const timestamp = event.target.getAttribute( 'href' ).replace( /#/, '' );
+
+			dispatch( STORE_ID ).toggleMediaSource( mediaSourceId );
+			dispatch( STORE_ID ).setMediaSourceCurrentTime( mediaSourceId, timestamp );
+
+			const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceId );
+			const mediaElement = document.querySelector( querySelector );
+
+			// playback to the timestamp
+			mediaElement.currentTime = timestamp;
+
+			if ( STATE_PAUSED === state ) {
+				mediaElement.pause();
+			} else {
+				mediaElement.play();
+			}
+		} );
+	} );
 } );
