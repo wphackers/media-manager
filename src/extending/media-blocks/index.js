@@ -24,8 +24,8 @@ import {
 const MEDIA_CURRENT_TIME_THRESHOLD = 1000;
 const MEDIA_CURRENT_STATE_THRESHOLD = 1000;
 
-const blockEditWithMediaRegister = ( name, BlockEdit ) => ( props ) => {
-	const { clientId } = props;
+const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
+	const { clientId, name } = props;
 
 	const {
 		registerMediaSource,
@@ -247,7 +247,7 @@ function registerMediaBlocksSource( settings, name ) {
 	return {
 		...settings,
 		attributes,
-		edit: blockEditWithMediaRegister( name, settings.edit ),
+		edit: blockEditWithMediaRegister( settings.edit ),
 	};
 }
 
