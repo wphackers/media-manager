@@ -53,8 +53,9 @@ function media_center_wrap_media_source( $block_content, $block ) {
 	}
 
 	return sprintf(
-		'<div className="%s" data-media-source-id="%s">%s</div>',
+		'<div class="%s" data-block-name="%s" data-media-source-id="%s">%s</div>',
 		'media-center-media-source',
+		$block['blockName'],
 		$block['attrs']['mediaSourceId'],
 		$block_content
 	);   
