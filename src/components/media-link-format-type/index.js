@@ -64,6 +64,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 							type: MEDIA_LINK_FORMAT_TYPE,
 							attributes: {
 								url: `#${ mediaLinkFormatPosition }`,
+								mediaSourceId: sourceId,
 							},
 						} )
 					);
@@ -83,6 +84,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 							type: MEDIA_LINK_FORMAT_TYPE,
 							attributes: {
 								url: `#${ newTimePosition }`,
+								mediaSourceId: sourceId,
 							},
 						} )
 					);
@@ -98,6 +100,7 @@ export const mediaLinkFormatButtonSettings = {
 	className: 'media-link-format-type',
 	attributes: {
 		url: 'href',
+		mediaSourceId: 'data-media-source-id'
 	},
 	edit: MediaLinkFormatButton,
 };
