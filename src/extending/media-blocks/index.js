@@ -13,13 +13,13 @@ import { useEffect, useRef } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { shouldExtendMediaBlock, getBlockSourceProps } from './utils';
+import { shouldExtendMediaBlock, getBlockSourceProps } from '../utils';
 import {
 	STORE_ID,
 	STATE_PAUSED,
 	STATE_PLAYING,
 	STATE_ERROR,
-} from '../store/constants';
+} from '../../store/constants';
 
 const MEDIA_CURRENT_TIME_THRESHOLD = 1000;
 const MEDIA_CURRENT_STATE_THRESHOLD = 1000;
