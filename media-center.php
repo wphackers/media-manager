@@ -23,6 +23,10 @@ function media_center_media_theater_block_init() {
 }
 add_action( 'init', 'media_center_media_theater_block_init' );
 
+/*
+ * Load frontend scripts only when
+ * media-theater block is into the content.
+ */
 function add_frontend_scripts() {
 	if ( has_block( 'media-center/media-theater' ) ) {
 		$path = plugins_url( 'build/view.js', __FILE__ );
@@ -39,3 +43,21 @@ function add_frontend_scripts() {
 }
 
 add_action( 'wp_enqueue_scripts', 'add_frontend_scripts' );
+
+/*
+ * Wrap media elements with media center data
+ */
+function media_center_wrap_media_source( $block_content, $block ) {
+	if( ! isset( $block['attrs']['mediaSourceId'] ) ) {
+		return $block_content;
+	}
+
+	return sprintf(
+		'<div className="%s" data-media-source-id="%s">%s</div>',
+		'media-center-media-source',
+		$block['attrs']['mediaSourceId'],
+		$block_content
+	);   
+}
+ 
+add_filter( 'render_block', 'media_center_wrap_media_source', 10, 2 );
