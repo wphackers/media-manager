@@ -177,7 +177,6 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 	// Handling media state.
 	useEffect( () => {
 		const { current: mediaElement } = mediaElementRef;
-
 		if ( ! mediaElement ) {
 			return;
 		}
@@ -204,7 +203,7 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 	// Handling current time.
 	useEffect( () => {
 		const { current: mediaElement } = mediaElementRef;
-		if ( ! currentTime || ! mediaElement ) {
+		if ( typeof currentTime !== 'number' || ! mediaElement ) {
 			return;
 		}
 
