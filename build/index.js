@@ -1698,7 +1698,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function save(_ref) {
   var attributes = _ref.attributes;
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"].save(), {
+  console.log('attributes: ', attributes);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["useBlockProps"].save({
+    className: 'entry-content'
+  }), {
     "data-media-source-ref": attributes === null || attributes === void 0 ? void 0 : attributes.sourceId
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InnerBlocks"].Content, null));
 }
