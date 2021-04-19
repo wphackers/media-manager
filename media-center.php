@@ -48,17 +48,18 @@ add_action( 'wp_enqueue_scripts', 'add_frontend_scripts' );
  * Wrap media elements with media center data
  */
 function media_center_wrap_media_source( $block_content, $block ) {
-	if( ! isset( $block['attrs']['mediaSourceId'] ) ) {
+	if( empty( $block_content) || ! isset( $block['attrs']['mediaSourceId'] ) ) {
 		return $block_content;
 	}
 
-	return sprintf(
-		'<div class="%s" data-block-name="%s" data-media-source-id="%s">%s</div>',
-		'media-center-media-source',
-		$block['blockName'],
-		$block['attrs']['mediaSourceId'],
-		$block_content
-	);   
+	// store edia source data to the block wrapper element.
+	$dom = new DomDocument();
+	@$dom->loadHTML( $block_content );
+	$elem = $dom->documentElement->childNodes->item( 0 )->childNodes->item( 0 );
+	$elem->setAttribute( 'data-media-source-id', $block['attrs']['mediaSourceId'] );
+	$elem->setAttribute( 'data-media-source-type', $block['blockName'] );
+
+	return $dom->saveHTML();
 }
  
 add_filter( 'render_block', 'media_center_wrap_media_source', 10, 2 );
