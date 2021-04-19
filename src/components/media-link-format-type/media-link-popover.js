@@ -113,6 +113,7 @@ export default function MediaLinkPopover( {
 		<Popover
 			anchorRef={ anchorRef }
 			position="bottom center"
+			focusOnMount={ false }
 		>
 			<div className="media-link-popover">
 				<MediaPlayerControl
