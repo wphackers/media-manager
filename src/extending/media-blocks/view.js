@@ -12,12 +12,12 @@ import { getBlockSourceProps } from '../utils';
 
 domReady( function() {
 	// Register media element in the store.
-	const mediaElements = document.querySelectorAll( '.media-center-media-source' );
+	const mediaElements = document.querySelectorAll( '[data-media-source-id]' );
 	if ( mediaElements.length ) {
 		mediaElements.forEach( function( media ) {			
-			const { mediaSourceId, blockName } = media.dataset;
-			const { domTypeName } = getBlockSourceProps( blockName );
-			const query = `.media-center-media-source[data-media-source-id="${ mediaSourceId }"] ${ domTypeName }`;
+			const { mediaSourceId, mediaSourceType } = media.dataset;
+			const { domTypeName } = getBlockSourceProps( mediaSourceType );
+			const query = `[data-media-source-id="${ mediaSourceId }"] ${ domTypeName }`;
 
 			dispatch( STORE_ID ).registerMediaSource( mediaSourceId, {
 				// source: mediaSource,
@@ -28,28 +28,38 @@ domReady( function() {
 		} );
 	}
 
-	// Handle all media-link-format elements.
-	const mediaLinkFormatElemens = document.querySelectorAll( 'a.media-link-format-type' );
-	mediaLinkFormatElemens.forEach( function( anchor ) {
-		anchor.addEventListener( 'click', function( event ) {
-			event.stopPropagation();
-			const { mediaSourceId } = event.target.dataset;
-			const timestamp = event.target.getAttribute( 'href' ).replace( /#/, '' );
+	// All media-theater blocks.
+	const mediaTheaterBlocks = document.querySelectorAll( '.wp-block-media-center-media-theater' );
+	if ( ! mediaTheaterBlocks?.length ) {
+		return;
+	}
 
-			dispatch( STORE_ID ).toggleMediaSource( mediaSourceId );
-			dispatch( STORE_ID ).setMediaSourceCurrentTime( mediaSourceId, timestamp );
+	mediaTheaterBlocks.forEach( function( theaterBlock ) {
+		const mediaLinkFormatElements = theaterBlock.querySelectorAll( 'a.media-link-format-type' );
+		if ( ! mediaLinkFormatElements?.length ) {
+			return;
+		}
 
-			const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceId );
-			const mediaElement = document.querySelector( querySelector );
+		const { mediaSourceRef } = theaterBlock.dataset;
+		mediaLinkFormatElements.forEach( function( anchor ) {
+			anchor.addEventListener( 'click', function( event ) {
+				event.stopPropagation();
+				const timestamp = event.target.getAttribute( 'href' ).replace( /#/, '' );
+				
+				const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceRef );
+				const mediaElement = document.querySelector( querySelector );
+				
+				// playback to the timestamp.
+				dispatch( STORE_ID ).setMediaSourceCurrentTime( mediaSourceRef, timestamp );
+				mediaElement.currentTime = timestamp;
 
-			// playback to the timestamp
-			mediaElement.currentTime = timestamp;
-
-			if ( STATE_PAUSED === state ) {
-				mediaElement.pause();
-			} else {
-				mediaElement.play();
-			}
+				dispatch( STORE_ID ).toggleMediaSource( mediaSourceRef );
+				if ( STATE_PAUSED === state ) {
+					mediaElement.pause();
+				} else {
+					mediaElement.play();
+				}
+			} );
 		} );
 	} );
 } );
