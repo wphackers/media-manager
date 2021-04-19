@@ -48,17 +48,28 @@ domReady( function() {
 				
 				const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceRef );
 				const mediaElement = document.querySelector( querySelector );
-				
+
+				const rePlay = 
+					Math.abs( Math.floor( timestamp - mediaElement.currentTime ) * 1000 ) >
+					2000;
+					
 				// playback to the timestamp.
 				dispatch( STORE_ID ).setMediaSourceCurrentTime( mediaSourceRef, timestamp );
 				mediaElement.currentTime = timestamp;
 
-				dispatch( STORE_ID ).toggleMediaSource( mediaSourceRef );
-				if ( STATE_PAUSED === state ) {
-					mediaElement.pause();
-				} else {
+				if ( rePlay ) {
 					mediaElement.play();
+					dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
+				} else {
+					if ( STATE_PAUSED === state ) {
+						dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
+						mediaElement.pause();
+					} else {
+						mediaElement.play();
+						dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
+					}
 				}
+
 			} );
 		} );
 	} );
