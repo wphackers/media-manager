@@ -28,18 +28,20 @@ add_action( 'init', 'media_center_media_theater_block_init' );
  * media-theater block is into the content.
  */
 function add_frontend_scripts() {
-	if ( has_block( 'media-center/media-theater' ) ) {
-		$path = plugins_url( 'build/view.js', __FILE__ );
-		$build_assets = require_once __DIR__ . '/build/view.asset.php';
-	
-		wp_enqueue_script(
-			'media-center-media-theater',
-			$path,
-			$build_assets['dependencies'], 
-			filemtime( plugin_dir_path( __FILE__ ) . 'build/view.js' ),
-			true
-		);
+	if ( ! has_block( 'media-center/media-theater' ) ) {
+		return;
 	}
+
+	$path = plugins_url( 'build/view.js', __FILE__ );
+	$build_assets = require_once __DIR__ . '/build/view.asset.php';
+
+	wp_enqueue_script(
+		'media-center-media-theater',
+		$path,
+		$build_assets['dependencies'], 
+		filemtime( plugin_dir_path( __FILE__ ) . 'build/view.js' ),
+		true
+	);
 }
 
 add_action( 'wp_enqueue_scripts', 'add_frontend_scripts' );
