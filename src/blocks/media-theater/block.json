@@ -5,7 +5,7 @@
 	"category": "media",
 	"description": "Manage all media sources, comfortable, from your couch.",
 	"supports": {
-		"html": false
+		"align": true
 	},
 	"attributes": {
 		"sourceId": {
