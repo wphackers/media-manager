@@ -3,9 +3,9 @@
  */
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-export default function save() {
+export default function save( { attributes } ) {
 	return (
-		<div { ...useBlockProps.save() }>
+		<div { ...useBlockProps.save() } data-media-source-ref={ attributes?.sourceId }>
 			<InnerBlocks.Content />
 		</div>
 	);
