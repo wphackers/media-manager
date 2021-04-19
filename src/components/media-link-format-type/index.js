@@ -93,6 +93,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 }
 
 export const mediaLinkFormatButtonSettings = {
+	name: MEDIA_LINK_FORMAT_TYPE,
 	title: 'Media link',
 	tagName: 'a',
 	className: 'media-link-format-type',
