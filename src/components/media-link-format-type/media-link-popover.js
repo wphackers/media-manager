@@ -18,16 +18,17 @@ import { useState, useEffect } from '@wordpress/element';
 import { convertSecondsToTimeCode, convertTimeCodeToSeconds } from '../../lib/time-utils';
 import { mediaLinkFormatButtonSettings } from './';
 import { STORE_ID, STATE_PAUSED, STATE_PLAYING } from '../../store/constants';
-import { ControlBackFiveIcon, ControlForwardFiveIcon } from '../icons';
-
-const playIcon = 'controls-play';
-const pauseIcon = 'controls-pause';
+import { PlayPauseButton, SkipForwardButton, JumpBackButton } from '../media-player';
 
 const debouncedOnChange = debounce( function ( time, onChange ) {
 	onChange( time );
 }, 250 );
 
-export function MediaPlayerControl( { sourceId, time, onChange } ) {
+export function MediaPlayerControl( {
+	sourceId,
+	time,
+	onChange = () => {},
+} ) {
 	const [ rangeTime, setRangeTime ] = useState( time );
 	useEffect( () => setRangeTime( time ), [ time ] );
 
@@ -64,27 +65,17 @@ export function MediaPlayerControl( { sourceId, time, onChange } ) {
 
 	return (
 		<div className="media-player-control">
-			<Button
-				icon={ ControlBackFiveIcon }
-				onClick={ () => onChange( Math.max( 0, time - 5 ) ) }
-				label={ __( 'Jump back', 'media-center' ) }
+			<JumpBackButton
+				onClick={ () => onChangeTimeHandler( Math.max( 0, time - 5 ) ) }
 			/>
 
-			<Button
-				icon={ isPaused ? playIcon : pauseIcon }
-				disabled={ false }
+			<PlayPauseButton
+				isPaused={ isPaused }
 				onClick={ () => toggleInTime() }
-				label={
-					isPaused
-						? __( 'Play', 'media-center' )
-						: __( 'Pause', 'media-center' )
-				}
 			/>
 
-			<Button
-				icon={ ControlForwardFiveIcon }
-				onClick={ () => onChange( Math.min( mediaDuration, time + 5 ) ) }
-				label={ __( 'Skip forward', 'media-center' ) }
+			<SkipForwardButton
+				onClick={ () => onChangeTimeHandler( Math.min( mediaDuration, time + 5 ) ) }
 			/>
 
 			<div className="media-player-control__display">
