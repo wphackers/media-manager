@@ -9,7 +9,7 @@ import { values } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
-import { Placeholder, Panel, PanelBody } from '@wordpress/components';
+import { Placeholder, Panel } from '@wordpress/components';
 import { InnerBlocks } from '@wordpress/block-editor';
 
 /**
@@ -17,8 +17,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
  */
 import { STORE_ID } from '../../store/constants';
 import { MediaTheaterIcon } from '../../icons';
-import MediaSelector, { MediaItem } from '../../components/media-selector/';
-import { MediaPlayerControl } from '../../components/media-link-format-type/media-link-popover';
+import MediaSelector, { MediaItemPanelBody } from '../../components/media-selector/';
 
 const MEDIA_THEATER_TEMPLATE = [
 	[
@@ -78,28 +77,7 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<Panel>
-					<PanelBody title={ __( 'Media Source', 'media-center' ) }>
-						{ mediaSource && (
-							<>
-								<MediaItem
-									type={ mediaSource.elementType }
-									source={ mediaSource.source }
-									id={ mediaSource.id }
-									onItemSelect={ console.log }
-								/>
-								<MediaPlayerControl
-									sourceId={ sourceId }
-								/>
-							</>
-						) }
-
-						{ ! mediaSource && (
-							<MediaSelector
-								media={ values( mediaSources ) }
-								onMediaSelect={ setSourceId }
-							/>
-						) }
-					</PanelBody>
+					<MediaItemPanelBody source={ mediaSource } />
 				</Panel>
 			</InspectorControls>
 
