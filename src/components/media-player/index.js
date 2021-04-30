@@ -9,17 +9,18 @@ import { ControlBackFiveIcon, ControlForwardFiveIcon } from '../icons';
 const playIcon = 'controls-play';
 const pauseIcon = 'controls-pause';
 
-export function JumpBackButton( { onClick } ) {
+export function JumpBackButton( { onClick, ...other } ) {
 	return (
 		<Button
 			icon={ ControlBackFiveIcon }
 			onClick={ onClick }
 			label={ __( 'Jump back', 'media-center' ) }
+			{ ...other }
 		/>
 	);
 }
 
-export function PlayPauseButton( { onClick, isPaused = false } ) {
+export function PlayPauseButton( { onClick, isPaused = false, ...other } ) {
 	return (
 		<Button
 			icon={ isPaused ? playIcon : pauseIcon }
@@ -30,6 +31,7 @@ export function PlayPauseButton( { onClick, isPaused = false } ) {
 					? __( 'Play', 'media-center' )
 					: __( 'Pause', 'media-center' )
 			}
+			{ ...other }
 		/>
 	);
 }
