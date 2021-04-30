@@ -60,7 +60,6 @@ export function MediaPlayerControl( {
 		debouncedOnChange( time, onChange );
 	}
 
-
 	const currentTimeFormatted = convertSecondsToTimeCode( rangeTime );
 
 	return (
