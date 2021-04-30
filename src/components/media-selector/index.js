@@ -7,8 +7,10 @@ import Gridicon from 'gridicons';
  * WordPress dependencies
  */
 import { useRef, useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { PanelBody, PanelRow, Button } from '@wordpress/components';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useDispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -102,6 +104,8 @@ export function MediaItemPanelBody( {
 		return null;
 	}
 
+	const { selectBlock } = useDispatch( blockEditorStore );
+
 	return (
 		<PanelBody className="media-source-panel" title={ title }>
 			<p>{ __( 'Media source connected to the theater', 'media-center' ) }</p>
@@ -133,6 +137,29 @@ export function MediaItemPanelBody( {
 					<li>
 						{ __( 'Duration:', 'media-center' ) }
 						<strong> { convertSecondsToTimeCode( source.duration ) }</strong>
+					</li>
+
+					<li>
+						{
+							sprintf(
+								/* translators: %1$s: block title, %2$s: author name. */
+								__( 'Connected to a %1$s.' ),
+								source.elementType
+							)
+						}
+
+						<Button
+							className="components-button__focus"
+							isLink
+							onClick={ () => {
+								if ( ! source.mediaBlockClientId ) {
+									return;
+								}
+								selectBlock( source.mediaBlockClientId );
+							} }
+						>
+							{ __( 'Focus', 'media-center' ) }
+						</Button>
 					</li>
 				</ul>
 			</PanelRow>
@@ -176,7 +203,7 @@ export default function MediaSelector( { media, onMediaSelect } ) {
 								id={ id }
 								{ ...other }
 								isPaused={ mediaPlayingElementRef?.paused }
-								onPlayToggle={ ( element, mediaId ) => {
+								onPlayToggle={ ( element ) => {
 									// Seek previous media element by media Id.
 									// If so, stop it.
 									if ( mediaPlayingElementRef && mediaPlayingElementRef !== element) {

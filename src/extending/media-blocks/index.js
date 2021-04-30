@@ -117,6 +117,7 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 
 		// Register media source in the store.
 		registerMediaSource( mediaSourceId, {
+			mediaBlockClientId: clientId,
 			source: mediaSource,
 			elementType: domTypeName,
 			state: STATE_PAUSED,
