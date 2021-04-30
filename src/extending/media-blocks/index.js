@@ -79,6 +79,8 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 		setMediaSourceCurrentTime( attributes.mediaSourceId, time );
 	}
 
+	const { mediaSourceId: mediaSourceIdAttr } = attributes;
+
 	// Interact with the client API.
 	useEffect( () => {
 		/*
@@ -86,7 +88,7 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 		 * If so, take it as the media reference.
 		 * Otherwise, creates a new ID using the current clientId.
 		 */
-		let mediaSourceId = attributes?.mediaSourceId;
+		let mediaSourceId = mediaSourceIdAttr;
 		if ( ! mediaSourceId ) {
 			mediaSourceId = `media-source-${ clientId }`;
 			// update the block attribute.
@@ -138,7 +140,7 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 			);
 			unregisterMediaSource( mediaSourceId );
 		};
-	}, [ attributes, setAttributes, mediaSource ] );
+	}, [ mediaSourceIdAttr, setAttributes, mediaSource ] );
 
 	// Play / Pause media depending on playing state (via store).
 	useEffect( () => {
