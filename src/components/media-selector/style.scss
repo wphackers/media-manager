@@ -1,7 +1,9 @@
 $item-size: 120px;
 
-.components-placeholder__fieldset {
+.wp-block-media-center-media-theater .components-placeholder__fieldset {
 	.media-selector {
+		width: 100%;
+
 		h4 {
 			font-size: 14pt;
     		font-weight: 400;
@@ -21,6 +23,14 @@ $item-size: 120px;
 			box-sizing: border-box;
 			border: 1px solid #eee;
 			margin: 5px;
+
+			&:first-child {
+				margin-left: 0;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 
 		.media__item-wrapper {
@@ -55,7 +65,7 @@ $item-size: 120px;
 				transition: opacity ease-in-out 200ms;
 			}
 
-			.media__item-button {
+			.media__item-play-button {
 				z-index: 2;
 				position: absolute;
 				right: 3px;
@@ -90,7 +100,7 @@ $item-size: 120px;
 		position: relative;
 	}
 
-	.components-button {
+	.media__item-play-button {
 		position: absolute;
 		right: 0;
 	}

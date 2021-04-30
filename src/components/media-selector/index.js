@@ -6,9 +6,9 @@ import Gridicon from 'gridicons';
 /**
  * WordPress dependencies
  */
-import { useRef, useEffect, useState, select } from '@wordpress/element';
+import { useRef, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, PanelRow, Button } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -80,7 +80,7 @@ export function MediaItem( {
 				) }
 
 				<PlayPauseButton
-					className="media__item-button"
+					className="media__item-play-button"
 					isPaused={ ! isPlaying }
 					onClick={ ( event ) => {
 						event.stopPropagation();
@@ -96,6 +96,7 @@ export function MediaItem( {
 export function MediaItemPanelBody( {
 	title = __( 'Media Source', 'media-center' ),
 	source,
+	onReplace,
 } ) {
 	if ( ! source ) {
 		return null;
@@ -105,32 +106,49 @@ export function MediaItemPanelBody( {
 		<PanelBody className="media-source-panel" title={ title }>
 			<p>{ __( 'Media source connected to the theater', 'media-center' ) }</p>
 
-			<MediaItem
-				{ ...source }
-				showTypeLabel={ true }
-				onPlayToggle={ ( element ) => {
-					if ( ! element ) {
-						return;
-					}
+			<PanelRow>
+				<MediaItem
+					{ ...source }
+					showTypeLabel={ true }
+					onPlayToggle={ ( element ) => {
+						if ( ! element ) {
+							return;
+						}
 
-					if ( element.paused ) {
-						return element.play();
-					}
+						if ( element.paused ) {
+							return element.play();
+						}
 
-					element.pause();
-				} }
-			/>
+						element.pause();
+					} }
+				/>
+			</PanelRow>
 
-			<ul>
-				<li>
-					{ __( 'Filename:', 'media-center' ) }
-					<strong> { source.source }</strong>
-				</li>
-				<li>
-					{ __( 'Duration:', 'media-center' ) }
-					<strong> { convertSecondsToTimeCode( source.duration ) }</strong>
-				</li>
-			</ul>
+			<PanelRow>
+				<ul>
+					<li>
+						{ __( 'Filename:', 'media-center' ) }
+						<strong> { source.source }</strong>
+					</li>
+					<li>
+						{ __( 'Duration:', 'media-center' ) }
+						<strong> { convertSecondsToTimeCode( source.duration ) }</strong>
+					</li>
+				</ul>
+			</PanelRow>
+
+			<PanelRow>
+				<div className="media-source-panel__actions">
+					<Button
+						isSecondary
+						isSmall
+						label={ __( 'Cancel replacing media source', 'media-center' ) }
+						onClick={ () => onReplace( true ) }
+					>
+						{ __( 'Replace Media', 'media-center' ) }
+					</Button>
+				</div>
+			</PanelRow>
 		</PanelBody>
 	);
 }
