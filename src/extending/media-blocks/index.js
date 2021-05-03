@@ -8,7 +8,9 @@ import { debounce, throttle } from 'lodash';
  */
 import { addFilter } from '@wordpress/hooks';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef, Fragment } from '@wordpress/element';
+import { InspectorControls } from '@wordpress/block-editor';
+import { Panel } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -230,9 +232,15 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 	}, [ mediaElementRef, currentTime ] );
 
 	return (
-		<div id={ attributes?.mediaSourceId }>
-			<BlockEdit { ...props } />
-		</div>
+		<Fragment>
+			<InspectorControls>
+				<Panel>
+				</Panel>
+			</InspectorControls>
+			<div id={ attributes?.mediaSourceId }>
+				<BlockEdit { ...props } />
+			</div>
+		</Fragment>
 	);
 };
 
