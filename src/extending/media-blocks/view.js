@@ -53,7 +53,7 @@ domReady( function() {
 					Math.abs( Math.floor( timestamp - mediaElement.currentTime ) * 1000 ) >
 					2000;
 					
-				// playback to the timestamp.
+				// Playback to the timestamp.
 				dispatch( STORE_ID ).setMediaSourceCurrentTime( mediaSourceRef, timestamp );
 				mediaElement.currentTime = timestamp;
 
@@ -69,7 +69,6 @@ domReady( function() {
 						dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
 					}
 				}
-
 			} );
 		} );
 	} );
