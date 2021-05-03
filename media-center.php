@@ -47,14 +47,14 @@ function add_frontend_scripts() {
 add_action( 'wp_enqueue_scripts', 'add_frontend_scripts' );
 
 /*
- * Wrap media elements with media center data
+ * Wrap media elements with media center data.
  */
 function media_center_wrap_media_source( $block_content, $block ) {
-	if( empty( $block_content) || ! isset( $block['attrs']['mediaSourceId'] ) ) {
+	if ( empty( $block_content) || ! isset( $block['attrs']['mediaSourceId'] ) ) {
 		return $block_content;
 	}
 
-	// store edia source data to the block wrapper element.
+	// store media source data to the block wrapper element.
 	$dom = new DomDocument();
 	@$dom->loadHTML( $block_content );
 	$elem = $dom->documentElement->childNodes->item( 0 )->childNodes->item( 0 );
@@ -65,3 +65,34 @@ function media_center_wrap_media_source( $block_content, $block ) {
 }
  
 add_filter( 'render_block', 'media_center_wrap_media_source', 10, 2 );
+
+
+function register_media_center_block_category() {
+	if ( class_exists( 'WP_Block_Patterns_Registry' ) ) {
+
+		register_block_pattern_category(
+			'media-center',
+			array( 'label' => _x( 'Media Center', 'Block pattern category', 'media-center' ) )
+		);
+	}
+}
+
+add_action( 'init', 'register_media_center_block_category' );
+
+function my_plugin_register_my_patterns() {
+	register_block_pattern(
+		'media-center/show-notes',
+		array(
+			'title'       => __( 'Show Notes', 'media-center' ),
+			'description' => __( 'A show notes sectins for your favorite media','media-center' ),
+			'categories'  => array( 'media', 'media-center' ),
+			'content'     => "<!-- wp:media-center/media-theater {\"sourceId\":\"media-source-ce97ab7a-c738-4961-ab56-d9566240e856\",\"align\":\"wide\"} -->\n<div class=\"wp-block-media-center-media-theater alignwide entry-content\" data-media-source-ref=\"media-source-ce97ab7a-c738-4961-ab56-d9566240e856\"><!-- wp:video {\"align\":\"full\",\"mediaSourceId\":\"media-source-ce97ab7a-c738-4961-ab56-d9566240e856\"} -->\n<figure class=\"wp-block-video alignfull\"><video controls src=\"https://videos.files.wordpress.com/f8uj77vB/2020-sotw-compressed_dvd.mp4\"></video></figure>\n<!-- /wp:video -->\n\n<!-- wp:heading {\"textAlign\":\"center\",\"align\":\"full\"} -->\n<h2 class=\"alignfull has-text-align-center\">State of The Word @2020</h2>\n<!-- /wp:heading -->\n\n<!-- wp:paragraph -->\n<p><a href=\"#3\" class=\"media-link-format-type\">Had everyone</a> my name is Matt Mullenweg and this is the state of the word, about 17 years ago. <a href=\"#10.667850999999999\" class=\"media-link-format-type\">I co-founded</a> a project known as WordPress alongside a gentleman named Mike Little from the United Kingdom.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p><a href=\"#17\" class=\"media-link-format-type\">WordPress</a> is open-source software for creating the Web. <a href=\"#21\" class=\"media-link-format-type\">We like</a> to say it's both free and prices at the same time. But, <a href=\"#24\" class=\"media-link-format-type\">about once a year</a>, the state of the word address, which is, of course, an image to the <a href=\"#28\" class=\"media-link-format-type\">State of the Union that the United States</a> president gives the Congress is something we usually do at our annual WordCamp, United States events.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p><a href=\"#38.094559\" class=\"media-link-format-type\">This is once a year event</a> where we bring folks from all over the U.S. together to talk about and create their future versions of WordPress.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:quote {\"className\":\"is-style-large\"} -->\n<blockquote class=\"wp-block-quote is-style-large\"><p><a href=\"#46\" class=\"media-link-format-type\">Today</a>, as many things are happening this year, we are doing it virtually. So thank you so much for tuning in.</p><cite>Matt Mullenweg</cite></blockquote>\n<!-- /wp:quote -->\n\n<!-- wp:paragraph -->\n<p><a href=\"#52\" class=\"media-link-format-type\">Whether you are a WordPress</a> pro or just kind of curious about our community, we hope that you'll find lots to learn and hopefully inspire you to future action and involvement.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p><a href=\"#63\" class=\"media-link-format-type\">Twenty-Twenty</a> was a very surprising year for us, as I'm sure it was for many.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:paragraph -->\n<p>...</p>\n<!-- /wp:paragraph --></div>\n<!-- /wp:media-center/media-theater -->",
+			'keywords'    => array(
+				__( 'video', 'media-center' ),
+				__( 'transcription', 'media-center' ),
+			),
+		)
+	);
+}
+   
+add_action( 'init', 'my_plugin_register_my_patterns' );
