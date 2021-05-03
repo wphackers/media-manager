@@ -27,13 +27,6 @@ const MEDIA_CURRENT_STATE_THRESHOLD = 1000;
 const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 	const { clientId, name } = props;
 
-	const {
-		registerMediaSource,
-		updateMediaSourceData,
-		unregisterMediaSource,
-		setMediaSourceCurrentTime,
-	} = useDispatch( STORE_ID );
-
 	// Bail early when no clientId.
 	if ( ! clientId ) {
 		return <BlockEdit { ...props } />;
@@ -49,6 +42,16 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 		return <BlockEdit { ...props } />;
 	}
 
+
+	// Media Source actions.
+	const {
+		registerMediaSource,
+		updateMediaSourceData,
+		unregisterMediaSource,
+		setMediaSourceCurrentTime,
+	} = useDispatch( STORE_ID );
+
+	// Media Source selectors.
 	const { mediaPlayingState, currentTime } = useSelect(
 		( select ) => ( {
 			mediaPlayingState: select( STORE_ID ).getMediaPlayerState(
@@ -134,10 +137,13 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 			// Cleaning the attr probably shoulnd't needed.
 			setAttributes( { mediaSourceId: null } );
 
+			// Remove listeners.
 			mediaElement.removeEventListener(
 				'loadedmetadata',
 				onMetadataReady
 			);
+
+			// Unregister media from store.
 			unregisterMediaSource( mediaSourceId );
 		};
 	}, [ mediaSourceIdAttr, setAttributes, mediaSource ] );
