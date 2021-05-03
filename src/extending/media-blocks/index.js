@@ -17,6 +17,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
  * Internal dependencies
  */
 import { shouldExtendMediaBlock, getBlockSourceProps } from '../utils';
+import { MediaTheaterPanelBody } from '../../components/media-selector';
 import {
 	STORE_ID,
 	STATE_PAUSED,
@@ -47,7 +48,7 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 	} = useDispatch( STORE_ID );
 
 	// Media Source selectors.
-	const { mediaPlayingState, currentTime } = useSelect(
+	const { mediaPlayingState, currentTime, mediaSource } = useSelect(
 		( select ) => ( {
 			mediaPlayingState: select( STORE_ID ).getMediaPlayerState(
 				attributes.mediaSourceId
@@ -55,9 +56,9 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 			currentTime: select( STORE_ID ).getMediaSourceCurrentTime(
 				attributes.mediaSourceId
 			),
-			// mediaSource: select( STORE_ID ).getMediaSourceById(
-			// 	attributes.mediaSourceId
-			// ),
+			mediaSource: select( STORE_ID ).getMediaSourceById(
+				attributes.mediaSourceId
+			),
 		} ),
 		[]
 	);
@@ -240,6 +241,7 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 		<Fragment>
 			<InspectorControls>
 				<Panel>
+					<MediaTheaterPanelBody source={ mediaSource } />
 				</Panel>
 			</InspectorControls>
 			<div id={ attributes?.mediaSourceId }>

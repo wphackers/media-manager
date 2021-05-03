@@ -180,6 +180,21 @@ export function MediaItemPanelBody( {
 	);
 }
 
+export function MediaTheaterPanelBody( {
+	title = __( 'Media Source', 'media-center' ),
+	source,
+} ) {
+	if ( ! source ) {
+		return null;
+	}
+
+	return (
+		<PanelBody className="media-source-panel" title={ title }>
+			<p>{ __( 'Media Theater connected to the media', 'media-center' ) }</p>
+		</PanelBody>
+	);
+}
+
 export default function MediaSelector( { media, onMediaSelect } ) {
 	if ( ! media?.length ) {
 		return null;
