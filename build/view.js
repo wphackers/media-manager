@@ -224,16 +224,23 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(function () {
             state = _select$getMediaSourc.state,
             querySelector = _select$getMediaSourc.querySelector;
 
-        var mediaElement = document.querySelector(querySelector); // playback to the timestamp.
+        var mediaElement = document.querySelector(querySelector);
+        var rePlay = Math.abs(Math.floor(timestamp - mediaElement.currentTime) * 1000) > 2000; // Playback to the timestamp.
 
         Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).setMediaSourceCurrentTime(mediaSourceRef, timestamp);
         mediaElement.currentTime = timestamp;
-        Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).toggleMediaSource(mediaSourceRef);
 
-        if (_store_constants__WEBPACK_IMPORTED_MODULE_2__["STATE_PAUSED"] === state) {
-          mediaElement.pause();
-        } else {
+        if (rePlay) {
           mediaElement.play();
+          Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).playMediaSource(mediaSourceRef);
+        } else {
+          if (_store_constants__WEBPACK_IMPORTED_MODULE_2__["STATE_PAUSED"] === state) {
+            Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).playMediaSource(mediaSourceRef);
+            mediaElement.pause();
+          } else {
+            mediaElement.play();
+            Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).pauseMediaSource(mediaSourceRef);
+          }
         }
       });
     });
