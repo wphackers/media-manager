@@ -34,6 +34,7 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 
 	const mediaElementRef = useRef();
 	const { attributes, setAttributes } = props;
+	const { mediaSourceId: mediaSourceIdAttr } = attributes;
 	const { name: attrName, domTypeName } = getBlockSourceProps( name );
 
 	// Check media has defined its source.
@@ -50,21 +51,15 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 	// Media Source selectors.
 	const { mediaPlayingState, currentTime, mediaSource } = useSelect(
 		( select ) => ( {
-			mediaPlayingState: select( STORE_ID ).getMediaPlayerState(
-				attributes.mediaSourceId
-			),
-			currentTime: select( STORE_ID ).getMediaSourceCurrentTime(
-				attributes.mediaSourceId
-			),
-			mediaSource: select( STORE_ID ).getMediaSourceById(
-				attributes.mediaSourceId
-			),
+			mediaPlayingState: select( STORE_ID ).getMediaPlayerState( mediaSourceIdAttr ),
+			currentTime: select( STORE_ID ).getMediaSourceCurrentTime( mediaSourceIdAttr ),
+			mediaSource: select( STORE_ID ).getMediaSourceById( mediaSourceIdAttr ),
 		} ),
 		[]
 	);
 
 	function onMetadataReady( event ) {
-		updateMediaSourceData( attributes.mediaSourceId, {
+		updateMediaSourceData( mediaSourceIdAttr, {
 			duration: event?.srcElement?.duration,
 		} );
 	}
@@ -78,12 +73,13 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 	}
 
 	function onTimeChange( time ) {
-		setMediaSourceCurrentTime( attributes.mediaSourceId, time );
+		setMediaSourceCurrentTime( mediaSourceIdAttr, time );
 	}
 
-	const { mediaSourceId: mediaSourceIdAttr } = attributes;
-
-	// Interact with the client API.
+	/*
+	 * - Register/Unregister Media source in the store.
+	 * - Set preload to load metadata.
+	 */
 	useEffect( () => {
 		/*
 		 * Check if the mediaSourceId attribute is defined.
