@@ -24,26 +24,19 @@ import {
 	STATE_ERROR,
 } from '../../store/constants';
 
+// In-sync constants.
 const MEDIA_CURRENT_TIME_THRESHOLD = 1000;
 const MEDIA_CURRENT_STATE_THRESHOLD = 1000;
 
 const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => ( props ) => {
 	const { clientId, name } = props;
 
-	// Bail early when no clientId.
-	if ( ! clientId ) {
-		return <BlockEdit { ...props } />;
-	}
-
 	const mediaElementRef = useRef();
 	const { attributes, setAttributes } = props;
 	const { name: attrName, domTypeName } = getBlockSourceProps( name );
 
 	// Check media has defined its source.
-	const mediaSource = attributes?.[ attrName ];
-	if ( ! MediaSource ) {
-		return <BlockEdit { ...props } />;
-	}
+	const mediaSourceUrl = attributes?.[ attrName ];
 
 	// Media Source actions.
 	const {
@@ -62,6 +55,9 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 			currentTime: select( STORE_ID ).getMediaSourceCurrentTime(
 				attributes.mediaSourceId
 			),
+			// mediaSource: select( STORE_ID ).getMediaSourceById(
+			// 	attributes.mediaSourceId
+			// ),
 		} ),
 		[]
 	);
@@ -125,7 +121,7 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 		// Register media source in the store.
 		registerMediaSource( mediaSourceId, {
 			mediaBlockClientId: clientId,
-			source: mediaSource,
+			source: mediaSourceUrl,
 			elementType: domTypeName,
 			state: STATE_PAUSED,
 			querySelector,
@@ -148,9 +144,9 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 			// Unregister media from store.
 			unregisterMediaSource( mediaSourceId );
 		};
-	}, [ mediaSourceIdAttr, setAttributes, mediaSource ] );
+	}, [ mediaSourceIdAttr, setAttributes, mediaSourceUrl ] );
 
-	// Play / Pause media depending on playing state (via store).
+	// Play/Pause media depending on playing status (via store).
 	useEffect( () => {
 		if ( ! mediaElementRef?.current ) {
 			return;
@@ -230,6 +226,15 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 			mediaElement.currentTime = currentTime;
 		}
 	}, [ mediaElementRef, currentTime ] );
+
+	// Bail early when no clientId.
+	if ( ! clientId ) {
+		return <BlockEdit { ...props } />;
+	}
+	
+	if ( ! mediaSourceUrl ) {
+		return <BlockEdit { ...props } />;
+	}
 
 	return (
 		<Fragment>
