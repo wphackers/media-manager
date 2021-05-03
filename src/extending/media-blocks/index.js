@@ -11,6 +11,7 @@ import { useDispatch, useSelect } from '@wordpress/data';
 import { useEffect, useRef, Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import { Panel } from '@wordpress/components';
+import { createHigherOrderComponent } from '@wordpress/compose';
 
 /**
  * Internal dependencies
@@ -26,7 +27,7 @@ import {
 const MEDIA_CURRENT_TIME_THRESHOLD = 1000;
 const MEDIA_CURRENT_STATE_THRESHOLD = 1000;
 
-const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
+const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => ( props ) => {
 	const { clientId, name } = props;
 
 	// Bail early when no clientId.
@@ -43,7 +44,6 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 	if ( ! MediaSource ) {
 		return <BlockEdit { ...props } />;
 	}
-
 
 	// Media Source actions.
 	const {
@@ -242,7 +242,7 @@ const blockEditWithMediaRegister = ( BlockEdit ) => ( props ) => {
 			</div>
 		</Fragment>
 	);
-};
+}, 'MediaBlockEdit' );
 
 function registerMediaBlocksSource( settings, name ) {
 	if ( ! shouldExtendMediaBlock( name, settings ) ) {
