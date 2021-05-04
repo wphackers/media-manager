@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { registerFormatType, toggleFormat, applyFormat, getTextContent, slice, getActiveFormat } from '@wordpress/rich-text';
 import {
 	RichTextToolbarButton,
@@ -17,6 +17,7 @@ import { shouldExtendBlockWithMedia } from '../../extending/utils';
 import { STORE_ID } from '../../store/constants';
 import MediaLinkPopover from './media-link-popover';
 import './style.scss';
+import { convertSecondsToTimeCode } from '../../lib/time-utils';
 
 const MEDIA_LINK_FORMAT_TYPE = 'media-center/media-link-format-type';
 
@@ -83,6 +84,10 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 							type: MEDIA_LINK_FORMAT_TYPE,
 							attributes: {
 								url: `#${ newTimePosition }`,
+								label: sprintf(
+									__( 'Playback at %1$s' ),
+									convertSecondsToTimeCode( newTimePosition )
+								),
 							},
 						} )
 					);
@@ -99,6 +104,7 @@ export const mediaLinkFormatButtonSettings = {
 	className: 'media-link-format-type',
 	attributes: {
 		url: 'href',
+		label: 'title',
 	},
 	edit: MediaLinkFormatButton,
 };
