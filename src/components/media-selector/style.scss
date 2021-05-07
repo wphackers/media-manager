@@ -90,6 +90,10 @@ $item-size: 120px;
 
 // Media Source Panel
 .media-source-panel {
+	.media__item-wrapper {
+		width: 100%;
+	}
+
 	.media__item-metadata {
 		display: flex;
 		align-items: center;
