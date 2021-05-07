@@ -29,7 +29,7 @@ domReady( function() {
 	}
 
 	// All media-theater blocks.
-	const mediaTheaterBlocks = document.querySelectorAll( '.wp-block-media-center-media-theater' );
+	const mediaTheaterBlocks = document.querySelectorAll( '.wp-block-media-manager-media-theater' );
 	if ( ! mediaTheaterBlocks?.length ) {
 		return;
 	}

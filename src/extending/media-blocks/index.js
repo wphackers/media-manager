@@ -272,6 +272,6 @@ function registerMediaBlocksSource( settings, name ) {
 
 addFilter(
 	'blocks.registerBlockType',
-	'media-center/registerMediaBlockSource',
+	'media-manager/registerMediaBlockSource',
 	registerMediaBlocksSource
 );

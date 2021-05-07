@@ -96,7 +96,7 @@ export function MediaItem( {
 }
 
 export function MediaItemPanelBody( {
-	title = __( 'Media Source', 'media-center' ),
+	title = __( 'Media Source', 'media-manager' ),
 	source,
 	onReplace,
 } ) {
@@ -108,7 +108,7 @@ export function MediaItemPanelBody( {
 
 	return (
 		<PanelBody className="media-source-panel" title={ title }>
-			<p>{ __( 'Media source connected to the theater', 'media-center' ) }</p>
+			<p>{ __( 'Media source connected to the theater', 'media-manager' ) }</p>
 
 			<PanelRow>
 				<MediaItem
@@ -131,11 +131,11 @@ export function MediaItemPanelBody( {
 			<PanelRow>
 				<ul>
 					<li>
-						{ __( 'Filename:', 'media-center' ) }
+						{ __( 'Filename:', 'media-manager' ) }
 						<strong> { source.source }</strong>
 					</li>
 					<li>
-						{ __( 'Duration:', 'media-center' ) }
+						{ __( 'Duration:', 'media-manager' ) }
 						<strong> { convertSecondsToTimeCode( source.duration ) }</strong>
 					</li>
 
@@ -158,7 +158,7 @@ export function MediaItemPanelBody( {
 								selectBlock( source.mediaBlockClientId );
 							} }
 						>
-							{ __( 'Focus', 'media-center' ) }
+							{ __( 'Focus', 'media-manager' ) }
 						</Button>
 					</li>
 				</ul>
@@ -169,10 +169,10 @@ export function MediaItemPanelBody( {
 					<Button
 						isSecondary
 						isSmall
-						label={ __( 'Cancel replacing media source', 'media-center' ) }
+						label={ __( 'Cancel replacing media source', 'media-manager' ) }
 						onClick={ () => onReplace( true ) }
 					>
-						{ __( 'Replace Media', 'media-center' ) }
+						{ __( 'Replace Media', 'media-manager' ) }
 					</Button>
 				</div>
 			</PanelRow>
@@ -181,7 +181,7 @@ export function MediaItemPanelBody( {
 }
 
 export function MediaTheaterPanelBody( {
-	title = __( 'Media Source', 'media-center' ),
+	title = __( 'Media Source', 'media-manager' ),
 	source,
 } ) {
 	if ( ! source ) {
@@ -190,7 +190,7 @@ export function MediaTheaterPanelBody( {
 
 	return (
 		<PanelBody className="media-source-panel" title={ title }>
-			<p>{ __( 'Media Theater connected to the media', 'media-center' ) }</p>
+			<p>{ __( 'Media Theater connected to the media', 'media-manager' ) }</p>
 		</PanelBody>
 	);
 }
@@ -207,7 +207,7 @@ export default function MediaSelector( { media, onMediaSelect } ) {
 			<h4>
 				{ __(
 					'Pick up the media source from entrance content',
-					'media-center'
+					'media-manager'
 				) }
 			</h4>
 			<ul>

@@ -14,7 +14,7 @@ export function JumpBackButton( { onClick, ...other } ) {
 		<Button
 			icon={ ControlBackFiveIcon }
 			onClick={ onClick }
-			label={ __( 'Jump back', 'media-center' ) }
+			label={ __( 'Jump back', 'media-manager' ) }
 			{ ...other }
 		/>
 	);
@@ -28,8 +28,8 @@ export function PlayPauseButton( { onClick, isPaused = false, ...other } ) {
 			onClick={ onClick }
 			label={
 				isPaused
-					? __( 'Play', 'media-center' )
-					: __( 'Pause', 'media-center' )
+					? __( 'Play', 'media-manager' )
+					: __( 'Pause', 'media-manager' )
 			}
 			{ ...other }
 		/>
@@ -41,7 +41,7 @@ export function SkipForwardButton( { onClick } ) {
 		<Button
 			icon={ ControlForwardFiveIcon }
 			onClick={ onClick }
-			label={ __( 'Skip forward', 'media-center' ) }
+			label={ __( 'Skip forward', 'media-manager' ) }
 		/>
 	);
 }

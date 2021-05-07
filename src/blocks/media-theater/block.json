@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "media-center/media-theater",
+	"name": "media-manager/media-theater",
 	"title": "Media Theater",
 	"category": "media",
 	"description": "Manage all media sources, comfortable, from your couch.",
@@ -12,5 +12,5 @@
 			"type": "string"
 		}
 	},
-	"textdomain": "media-center"
+	"textdomain": "media-manager"
 }

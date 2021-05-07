@@ -19,7 +19,7 @@ import MediaLinkPopover from './media-link-popover';
 import './style.scss';
 import { convertSecondsToTimeCode } from '../../lib/time-utils';
 
-const MEDIA_LINK_FORMAT_TYPE = 'media-center/media-link-format-type';
+const MEDIA_LINK_FORMAT_TYPE = 'media-manager/media-link-format-type';
 
 function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	const mediatTheatherBlockClientId = shouldExtendBlockWithMedia();
@@ -58,7 +58,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 			<RichTextToolbarButton
 				shortcutType="primary"
 				icon={ <MediaLinkIcon /> }
-				title={ __( 'Link to media', 'media-center' ) }
+				title={ __( 'Link to media', 'media-manager' ) }
 				onClick={ function () {
 					onChange(
 						toggleFormat( value, {

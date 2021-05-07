@@ -15,7 +15,7 @@ import './style.scss';
 import Edit from './edit';
 import save from './save';
 
-registerBlockType( 'media-center/media-theater', {
+registerBlockType( 'media-manager/media-theater', {
 	apiVersion: 2,
 	edit: Edit,
 	save,

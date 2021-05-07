@@ -1,4 +1,4 @@
-Media Center Plugin
+Media Manager Plugin
 ===================
 
 Bind different media sources and with generic blocks with each other.

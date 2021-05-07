@@ -20,7 +20,7 @@ const blockEditWithMedia = ( name, BlockEdit ) => ( props ) => {
 		( select ) =>
 			!! select( 'core/block-editor' ).getBlockParentsByBlockName(
 				clientId,
-				'media-center/media-theater'
+				'media-manager/media-theater'
 			).length,
 		[]
 	);
@@ -45,6 +45,6 @@ function empowerBlocksWithMedia( settings, name ) {
 
 addFilter(
 	'blocks.registerBlockType',
-	'media-center/empowerBlocksWithMedia',
+	'media-manager/empowerBlocksWithMedia',
 	empowerBlocksWithMedia
 );

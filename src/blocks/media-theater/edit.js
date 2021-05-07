@@ -26,7 +26,7 @@ const MEDIA_THEATER_TEMPLATE = [
 		{
 			placeholder: __(
 				'Type / to choose a block, from your couch!',
-				'media-center'
+				'media-manager'
 			),
 		},
 	],
@@ -60,10 +60,10 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 			<div { ...useBlockProps() }>
 				<Placeholder
 					icon={ MediaTheaterIcon }
-					label={ __( 'Media Theater', 'media-center' ) }
+					label={ __( 'Media Theater', 'media-manager' ) }
 					instructions={ __(
 						'Manage all media sources, comfortable, from your couch.',
-						'media-center'
+						'media-manager'
 					) }
 				>
 					<MediaSelector
@@ -77,10 +77,10 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 					{ isReplacing && (
 						<Button
 							isSecondary
-							label={ __( 'Cancel replacing media source', 'media-center' ) }
+							label={ __( 'Cancel replacing media source', 'media-manager' ) }
 							onClick={ () => setIsReplacing( false ) }
 						>
-							{ __( 'Cancel replacement', 'media-center' ) }
+							{ __( 'Cancel replacement', 'media-manager' ) }
 						</Button>
 					) }
 				</Placeholder>
@@ -93,7 +93,7 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 			<BlockControls>
 				<Toolbar>
 					<Button onClick={ () => setIsReplacing( sourceId ) }>
-						{ __( 'Replace', 'media-center' ) }
+						{ __( 'Replace', 'media-manager' ) }
 					</Button>
 				</Toolbar>
 			</BlockControls>
