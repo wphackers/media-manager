@@ -4,10 +4,16 @@
  */
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
-import { ControlBackFiveIcon, ControlForwardFiveIcon } from '../icons';
 
-const playIcon = 'controls-play';
-const pauseIcon = 'controls-pause';
+/**
+ * Internal dependencies
+ */
+import {
+	ControlBackFiveIcon,
+	ControlForwardFiveIcon,
+	PlayerPlayIcon,
+	PlayerPauseIcon,
+} from '../../icons';
 
 export function JumpBackButton( { onClick, ...other } ) {
 	return (
@@ -23,7 +29,7 @@ export function JumpBackButton( { onClick, ...other } ) {
 export function PlayPauseButton( { onClick, isPaused = false, ...other } ) {
 	return (
 		<Button
-			icon={ isPaused ? playIcon : pauseIcon }
+			icon={ isPaused ? PlayerPlayIcon : PlayerPauseIcon }
 			disabled={ false }
 			onClick={ onClick }
 			label={
