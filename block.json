@@ -4,7 +4,7 @@
 	"title": "Media Theater",
 	"category": "media",
 	"icon": "smiley",
-	"description": "Connect different media sources and blocks in general with each other.",
+	"description": "Bind different media sources and with generic blocks with each other.",
 	"supports": {
 		"html": false
 	},

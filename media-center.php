@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:     Media Center
- * Description:     Connect different media sources and blocks in general with each other.
+ * Description:     Bind different media sources and with generic blocks with each other.
  * Version:         0.0.1
  * Author:          Damián Suárez (retrofox)
  * License:         GPL-2.0-or-later
