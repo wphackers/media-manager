@@ -1840,6 +1840,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _media_link_popover__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./media-link-popover */ "./src/components/media-link-format-type/media-link-popover.js");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style.scss */ "./src/components/media-link-format-type/style.scss");
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _lib_time_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../lib/time-utils */ "./src/lib/time-utils.js");
 
 
 /**
@@ -1852,6 +1853,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 
 
@@ -1918,7 +1920,8 @@ function MediaLinkFormatButton(_ref) {
       onChange(Object(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2__["applyFormat"])(value, {
         type: MEDIA_LINK_FORMAT_TYPE,
         attributes: {
-          url: "#".concat(newTimePosition)
+          url: "#".concat(newTimePosition),
+          label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Playback at %1$s'), Object(_lib_time_utils__WEBPACK_IMPORTED_MODULE_10__["convertSecondsToTimeCode"])(newTimePosition))
         }
       }));
     }
@@ -1931,7 +1934,8 @@ var mediaLinkFormatButtonSettings = {
   tagName: 'a',
   className: 'media-link-format-type',
   attributes: {
-    url: 'href'
+    url: 'href',
+    label: 'title'
   },
   edit: MediaLinkFormatButton
 };
