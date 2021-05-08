@@ -23,7 +23,7 @@ import {
 	PlayerPauseIcon,
 } from '../../icons';
 import { convertSecondsToTimeCode } from '../../lib/time-utils';
-import { STORE_ID, STATE_PAUSED, STATE_PLAYING } from '../../store/constants';
+import { STORE_ID, STATE_PAUSED } from '../../store/constants';
 
 export function JumpBackButton( { onClick, ...other } ) {
 	return (
