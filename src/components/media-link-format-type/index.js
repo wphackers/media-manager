@@ -2,7 +2,15 @@
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { registerFormatType, toggleFormat, applyFormat, getTextContent, slice, getActiveFormat } from '@wordpress/rich-text';
+import {
+	registerFormatType,
+	toggleFormat,
+	applyFormat,
+	isCollapsed,
+	getActiveFormat,
+	getTextContent,
+	slice,
+} from '@wordpress/rich-text';
 import {
 	RichTextToolbarButton,
 	store as blockEditorStore,
@@ -17,7 +25,7 @@ import { shouldExtendBlockWithMedia } from '../../extending/utils';
 import { STORE_ID } from '../../store/constants';
 import MediaLinkPopover from './media-link-popover';
 import './style.scss';
-import { convertSecondsToTimeCode } from '../../lib/time-utils';
+import { convertSecondsToTimeCode, convertTimeCodeToSeconds, isTimecode } from '../../lib/time-utils';
 
 const MEDIA_LINK_FORMAT_TYPE = 'media-manager/media-link-format-type';
 
@@ -46,12 +54,27 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	// Media link format time position.
 	const { attributes } = getActiveFormat( value, MEDIA_LINK_FORMAT_TYPE ) || {};
 
-	// Pick the initial current time,
-	// either from the attribute.
-	// or from the media source.
-	const mediaLinkFormatPosition = attributes?.url
-		? Number( attributes?.url?.replace(/#/, '' ) )
-		: domRef?.currentTime || 0;
+	const { ownerDocument } = contentRef.current;
+	const { defaultView } = ownerDocument;
+
+	// Set the initial time position for the format:
+	// (1) From extended `timestamp` block attr.
+	// (2) Selected text when it has time format.
+	// (3) Current position of the media source
+	let mediaLinkFormatPosition = 0;
+	
+	if ( attributes?.timestamp ) {
+		mediaLinkFormatPosition = Number( attributes?.timestamp?.replace(/#/, '' ) );
+	} else if ( ! isCollapsed( value ) ) {
+		// Check whether the selected text has a timestamp shape.
+		const selection = defaultView.getSelection();
+		const selectedText = selection.toString();
+		if ( isTimecode( selectedText ) ) {
+			mediaLinkFormatPosition = convertTimeCodeToSeconds( selectedText );
+		}
+	} else if ( domRef?.currentTime ) {
+		mediaLinkFormatPosition = domRef.currentTime;
+	}
 
 	return (
 		<>
@@ -64,7 +87,11 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 						toggleFormat( value, {
 							type: MEDIA_LINK_FORMAT_TYPE,
 							attributes: {
-								url: `#${ mediaLinkFormatPosition }`,
+								timestamp: `#${ mediaLinkFormatPosition }`,
+								label: sprintf(
+									__( 'Playback at %1$s' ),
+									convertSecondsToTimeCode( mediaLinkFormatPosition )
+								),
 							},
 						} )
 					);
@@ -83,7 +110,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 						applyFormat( value, {
 							type: MEDIA_LINK_FORMAT_TYPE,
 							attributes: {
-								url: `#${ newTimePosition }`,
+								timestamp: `#${ newTimePosition }`,
 								label: sprintf(
 									__( 'Playback at %1$s' ),
 									convertSecondsToTimeCode( newTimePosition )
@@ -103,7 +130,7 @@ export const mediaLinkFormatButtonSettings = {
 	tagName: 'a',
 	className: 'media-link-format-type',
 	attributes: {
-		url: 'href',
+		timestamp: 'href',
 		label: 'title',
 	},
 	edit: MediaLinkFormatButton,
