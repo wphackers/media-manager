@@ -10,7 +10,7 @@
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useCallback } from '@wordpress/element';
 import { RangeControl } from '@wordpress/components';
 
 /**
@@ -62,10 +62,6 @@ export function SkipForwardButton( { onClick } ) {
 	);
 }
 
-const debouncedOnChange = debounce( function ( time, onChange ) {
-	onChange( time );
-}, 250 );
-
 export function MediaPlayerControl( {
 	sourceId,
 	time,
@@ -90,6 +86,16 @@ export function MediaPlayerControl( {
 
 	const isPaused = mediaPlayingState === STATE_PAUSED;
 
+	const debouncedOnChange = useCallback(
+		debounce( function ( time, onChange ) {
+			onChange( time );
+		}, 250 )
+	, [] );
+
+	/**
+	 * Toggle media playing status.
+	 * Set current position when not playing.
+	 */
 	function toggleInTime() {
 		if ( mediaPlayingState !== STATE_PLAYING ) {
 			setMediaSourceCurrentTime( sourceId, time );
