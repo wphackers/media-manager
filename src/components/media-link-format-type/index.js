@@ -8,8 +8,7 @@ import {
 	applyFormat,
 	isCollapsed,
 	getActiveFormat,
-	getTextContent,
-	slice,
+	remove,
 } from '@wordpress/rich-text';
 import {
 	RichTextToolbarButton,
@@ -134,6 +133,54 @@ export const mediaLinkFormatButtonSettings = {
 		label: 'title',
 	},
 	edit: MediaLinkFormatButton,
+	__unstableInputRule( value ) {
+		const WRAPCHAR = '|';
+		const { start, text } = value;
+		const characterBefore = text.slice( start - 1, start );
+
+		// Bail early when prev char is not the backtick.
+		if ( characterBefore !== WRAPCHAR ) {
+			return value;
+		}
+
+		const textBefore = text.slice( 0, start - 1 );
+		const indexBefore = textBefore.lastIndexOf( WRAPCHAR );
+		if ( indexBefore === -1 ) {
+			return value;
+		}
+
+		const startIndex = indexBefore;
+		const endIndex = start - 2;
+		if ( startIndex === endIndex ) {
+			return value;
+		}
+
+		// Check if it's a valid time format text.
+		const wrapText = text.substring( startIndex + 1, endIndex + 1);
+		if ( ! isTimecode( wrapText ) ) {
+			return value;
+		}
+		
+		value = remove( value, startIndex, startIndex + 1 );
+		value = remove( value, endIndex, endIndex + 1 );
+
+		value = applyFormat(
+			value, {
+				type: MEDIA_LINK_FORMAT_TYPE,
+				attributes: {
+					timestamp: `#${ convertTimeCodeToSeconds( wrapText ) }`,
+					label: sprintf(
+						__( 'Playback at %1$s' ),
+						wrapText
+					),
+				},
+			},
+			startIndex,
+			endIndex
+		);
+
+		return value;
+	},
 };
 
 registerFormatType( MEDIA_LINK_FORMAT_TYPE, mediaLinkFormatButtonSettings );
