@@ -88,16 +88,20 @@ export function MediaPlayerControl( {
 
 	const debouncedOnChange = useCallback(
 		debounce( function ( time, onChange ) {
+			if ( ! isPaused ) {
+				setMediaSourceCurrentTime( sourceId, time );
+			}
+
 			onChange( time );
 		}, 250 )
-	, [] );
+	, [ isPaused ] );
 
 	/**
 	 * Toggle media playing status.
 	 * Set current position when not playing.
 	 */
 	function toggleInTime() {
-		if ( mediaPlayingState !== STATE_PLAYING ) {
+		if ( isPaused ) {
 			setMediaSourceCurrentTime( sourceId, time );
 		}
 		toggleMediaSource( sourceId );
