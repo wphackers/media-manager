@@ -34,7 +34,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 		return null;
 	}
 
-	const mediaTheaterBlock = useSelect(
+	const mediaCenterBlock = useSelect(
 		( select ) =>
 			select( blockEditorStore ).getBlock(
 				mediatTheatherBlockClientId[ 0 ]
@@ -42,7 +42,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 		[]
 	);
 
-	const { sourceId } = mediaTheaterBlock?.attributes || {};
+	const { sourceId } = mediaCenterBlock?.attributes || {};
 	const { domRef } = useSelect(
 		( select ) => ( {
 			domRef: select( STORE_ID ).getMediaSourceDomReference( sourceId ),

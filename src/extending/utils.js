@@ -69,6 +69,6 @@ export function shouldExtendBlockWithMedia( name ) {
 
 	return select( blockEditorStore ).getBlockParentsByBlockName(
 		selectedBlock.clientId,
-		'media-manager/media-theater'
+		'media-manager/media-center'
 	);
 }

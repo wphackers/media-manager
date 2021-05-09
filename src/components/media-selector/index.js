@@ -108,7 +108,7 @@ export function MediaItemPanelBody( {
 
 	return (
 		<PanelBody className="media-source-panel" title={ title }>
-			<p>{ __( 'Media source connected to the theater', 'media-manager' ) }</p>
+			<p>{ __( 'Media source connected to the media center', 'media-manager' ) }</p>
 
 			<PanelRow>
 				<MediaItem
@@ -180,7 +180,7 @@ export function MediaItemPanelBody( {
 	);
 }
 
-export function MediaTheaterPanelBody( {
+export function MediaCenterPanelBody( {
 	title = __( 'Media Source', 'media-manager' ),
 	source,
 } ) {
@@ -190,7 +190,7 @@ export function MediaTheaterPanelBody( {
 
 	return (
 		<PanelBody className="media-source-panel" title={ title }>
-			<p>{ __( 'Media Theater connected to the media', 'media-manager' ) }</p>
+			<p>{ __( 'Media Center connected to the media', 'media-manager' ) }</p>
 		</PanelBody>
 	);
 }

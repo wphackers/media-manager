@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
-	"name": "media-manager/media-theater",
-	"title": "Media Theater",
+	"name": "media-manager/media-center",
+	"title": "Media Center",
 	"category": "media",
 	"description": "Manage all media sources, comfortable, from your couch.",
 	"supports": {

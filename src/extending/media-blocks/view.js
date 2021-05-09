@@ -28,19 +28,19 @@ domReady( function() {
 		} );
 	}
 
-	// All media-theater blocks.
-	const mediaTheaterBlocks = document.querySelectorAll( '.wp-block-media-manager-media-theater' );
-	if ( ! mediaTheaterBlocks?.length ) {
+	// All media-center blocks.
+	const mediaCenterBlocks = document.querySelectorAll( '.wp-block-media-manager-media-center' );
+	if ( ! mediaCenterBlocks?.length ) {
 		return;
 	}
 
-	mediaTheaterBlocks.forEach( function( theaterBlock ) {
-		const mediaLinkFormatElements = theaterBlock.querySelectorAll( 'a.media-link-format-type' );
+	mediaCenterBlocks.forEach( function( mediaCenterBlock ) {
+		const mediaLinkFormatElements = mediaCenterBlock.querySelectorAll( 'a.media-link-format-type' );
 		if ( ! mediaLinkFormatElements?.length ) {
 			return;
 		}
 
-		const { mediaSourceRef } = theaterBlock.dataset;
+		const { mediaSourceRef } = mediaCenterBlock.dataset;
 		mediaLinkFormatElements.forEach( function( anchor ) {
 			anchor.addEventListener( 'click', function( event ) {
 				event.stopPropagation();

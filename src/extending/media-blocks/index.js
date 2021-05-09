@@ -17,7 +17,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
  * Internal dependencies
  */
 import { shouldExtendMediaBlock, getBlockSourceProps } from '../utils';
-import { MediaTheaterPanelBody } from '../../components/media-selector';
+import { MediaCenterPanelBody } from '../../components/media-selector';
 import {
 	STORE_ID,
 	STATE_PAUSED,
@@ -237,7 +237,7 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 		<Fragment>
 			<InspectorControls>
 				<Panel>
-					<MediaTheaterPanelBody source={ mediaSource } />
+					<MediaCenterPanelBody source={ mediaSource } />
 				</Panel>
 			</InspectorControls>
 			<div id={ attributes?.mediaSourceId }>

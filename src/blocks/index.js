@@ -1,4 +1,4 @@
 /**
  * Internal dependencies
  */
-import './media-theater';
+import './media-center';

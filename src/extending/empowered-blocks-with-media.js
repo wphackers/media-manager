@@ -16,16 +16,16 @@ import '../components/media-link-format-type';
 
 const blockEditWithMedia = ( name, BlockEdit ) => ( props ) => {
 	const { clientId } = props;
-	const isChildOfMediaTheater = useSelect(
+	const isChildOfMediaCenter = useSelect(
 		( select ) =>
 			!! select( 'core/block-editor' ).getBlockParentsByBlockName(
 				clientId,
-				'media-manager/media-theater'
+				'media-manager/media-center'
 			).length,
 		[]
 	);
 
-	if ( ! isChildOfMediaTheater ) {
+	if ( ! isChildOfMediaCenter ) {
 		return <BlockEdit { ...props } />;
 	}
 

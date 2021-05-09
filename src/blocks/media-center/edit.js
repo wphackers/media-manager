@@ -17,10 +17,10 @@ import { useState } from '@wordpress/element';
  * Internal dependencies
  */
 import { STORE_ID } from '../../store/constants';
-import { MediaTheaterIcon } from '../../icons';
+import { MediaCenterIcon } from '../../icons';
 import MediaSelector, { MediaItemPanelBody } from '../../components/media-selector/';
 
-const MEDIA_THEATER_TEMPLATE = [
+const MEDIA_CENTER_TEMPLATE = [
 	[
 		'core/paragraph',
 		{
@@ -37,7 +37,7 @@ const MEDIA_THEATER_TEMPLATE = [
  */
 import './editor.scss';
 
-export default function MediaTheaterEdit( { attributes, setAttributes } ) {
+export default function MediaCenterEdit( { attributes, setAttributes } ) {
 	const { sourceId } = attributes;
 	const [ isReplacing, setIsReplacing ] = useState( false );
 
@@ -59,8 +59,8 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 		return (
 			<div { ...useBlockProps() }>
 				<Placeholder
-					icon={ MediaTheaterIcon }
-					label={ __( 'Media Theater', 'media-manager' ) }
+					icon={ MediaCenterIcon }
+					label={ __( 'Media Center', 'media-manager' ) }
 					instructions={ __(
 						'Manage all media sources, comfortable, from your couch.',
 						'media-manager'
@@ -108,7 +108,7 @@ export default function MediaTheaterEdit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<div { ...useBlockProps() }>
-				<InnerBlocks template={ MEDIA_THEATER_TEMPLATE } />
+				<InnerBlocks template={ MEDIA_CENTER_TEMPLATE } />
 			</div>
 		</>
 	);
