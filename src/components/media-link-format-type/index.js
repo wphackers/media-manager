@@ -24,7 +24,7 @@ import { shouldExtendBlockWithMedia } from '../../extending/utils';
 import { STORE_ID } from '../../store/constants';
 import MediaLinkPopover from './media-link-popover';
 import './style.scss';
-import { convertSecondsToTimeCode, convertTimeCodeToSeconds, isTimecode } from '../../lib/time-utils';
+import { convertSecondsToTimeCode, convertTimeCodeToSeconds, isTimeformat } from '../../lib/time-utils';
 
 const MEDIA_LINK_FORMAT_TYPE = 'media-manager/media-link-format-type';
 
@@ -68,7 +68,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 		// Check whether the selected text has a timestamp shape.
 		const selection = defaultView.getSelection();
 		const selectedText = selection.toString();
-		if ( isTimecode( selectedText ) ) {
+		if ( isTimeformat( selectedText ) ) {
 			mediaLinkFormatPosition = convertTimeCodeToSeconds( selectedText );
 		}
 	} else if ( domRef?.currentTime ) {
@@ -157,7 +157,7 @@ export const mediaLinkFormatButtonSettings = {
 
 		// Check if it's a valid time format text.
 		const wrapText = text.substring( startIndex + 1, endIndex + 1);
-		if ( ! isTimecode( wrapText ) ) {
+		if ( ! isTimeformat( wrapText ) ) {
 			return value;
 		}
 		

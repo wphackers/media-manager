@@ -8,7 +8,7 @@ export function convertSecondsToTimeCode( seconds ) {
 }
 
 export const convertTimeCodeToSeconds = ( string ) => {
-	if ( ! isTimecode( string ) ) {
+	if ( ! isTimeformat( string ) ) {
 		return;
 	}
 	let parts = string.match( timecodeRegExp );
@@ -32,4 +32,4 @@ export const convertTimeCodeToSeconds = ( string ) => {
 	return time;
 }
 
-export const isTimecode = ( value ) => timecodeRegExp.test( value );
+export const isTimeformat = ( value ) => timecodeRegExp.test( value );
