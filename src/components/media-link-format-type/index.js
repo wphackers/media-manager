@@ -15,6 +15,7 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
+import { useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -24,16 +25,17 @@ import { shouldExtendBlockWithMedia } from '../../extending/utils';
 import { STORE_ID } from '../../store/constants';
 import MediaLinkPopover from './media-link-popover';
 import './style.scss';
-import { convertSecondsToTimeCode, convertTimeCodeToSeconds, isTimeformat } from '../../lib/time-utils';
+import {
+	convertSecondsToTimeCode,
+	convertTimeCodeToSeconds,
+	isTimeformat,
+	hasMultipleTimeformats,
+} from '../../lib/time-utils';
 
 const MEDIA_LINK_FORMAT_TYPE = 'media-manager/media-link-format-type';
 
 function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	const mediatTheatherBlockClientId = shouldExtendBlockWithMedia();
-	if ( ! mediatTheatherBlockClientId?.length ) {
-		return null;
-	}
-
 	const mediaCenterBlock = useSelect(
 		( select ) =>
 			select( blockEditorStore ).getBlock(
@@ -42,13 +44,20 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 		[]
 	);
 
-	const { sourceId } = mediaCenterBlock?.attributes || {};
 	const { domRef } = useSelect(
 		( select ) => ( {
 			domRef: select( STORE_ID ).getMediaSourceDomReference( sourceId ),
 		} ),
 		[]
 	);
+
+	const [ isMultipleEdition, setIsMultipleEdition ] = useState( false );
+
+	if ( ! mediatTheatherBlockClientId?.length ) {
+		return null;
+	}
+
+	const { sourceId } = mediaCenterBlock?.attributes || {};
 
 	// Media link format time position.
 	const { attributes } = getActiveFormat( value, MEDIA_LINK_FORMAT_TYPE ) || {};
@@ -60,19 +69,56 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	// (1) From extended `timestamp` block attr.
 	// (2) Selected text when it has time format.
 	// (3) Current position of the media source
-	let mediaLinkFormatPosition = 0;
+	let mediaLinkFormatTimestamp = 0;
+	let isSingleOnTheFlyStyle = false; // <- detects a single timeformat selected hh:mm:ss
+
+	// Check whether the selected text has a timestamp shape.
+	const selection = defaultView.getSelection();
+	const selectedText = selection.toString();
 	
 	if ( attributes?.timestamp ) {
-		mediaLinkFormatPosition = Number( attributes?.timestamp?.replace(/#/, '' ) );
+		mediaLinkFormatTimestamp = Number( attributes?.timestamp?.replace(/#/, '' ) );
 	} else if ( ! isCollapsed( value ) ) {
-		// Check whether the selected text has a timestamp shape.
-		const selection = defaultView.getSelection();
-		const selectedText = selection.toString();
 		if ( isTimeformat( selectedText ) ) {
-			mediaLinkFormatPosition = convertTimeCodeToSeconds( selectedText );
+			isSingleOnTheFlyStyle = true;
+			mediaLinkFormatTimestamp = convertTimeCodeToSeconds( selectedText );
 		}
 	} else if ( domRef?.currentTime ) {
-		mediaLinkFormatPosition = domRef.currentTime;
+		mediaLinkFormatTimestamp = domRef.currentTime;
+	}
+
+	const multipleFormats = hasMultipleTimeformats( selectedText );
+
+	/**
+	 * Helper function to apply the style format
+	 * 
+	 * @param {string} time timestamp to apply to the format
+	 * @returns {object} style forat object
+	 */
+	function getStyleObject( time ) {
+		return {
+			type: MEDIA_LINK_FORMAT_TYPE,
+			attributes: {
+				timestamp: `#${ time }`,
+				label: sprintf(
+					__( 'Playback at %1$s' ),
+					convertSecondsToTimeCode( time )
+				),
+			},
+		}
+	}
+
+	/**
+	 * Apply style format event handler.
+	 * 
+	 * @param {string} newTimestamp new timestamp value to apply (optional)
+	 */
+	function applyFormatStyleHandler( newTimestamp ) {
+		if ( newTimestamp ) {
+			return onChange( applyFormat( value, getStyleObject( newTimestamp ) ) );
+		}
+
+		onChange( toggleFormat( value, getStyleObject( mediaLinkFormatTimestamp ) ) );
 	}
 
 	return (
@@ -81,42 +127,34 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 				shortcutType="primary"
 				icon={ <MediaLinkIcon /> }
 				title={ __( 'Link to media', 'media-manager' ) }
-				onClick={ function () {
-					onChange(
-						toggleFormat( value, {
-							type: MEDIA_LINK_FORMAT_TYPE,
-							attributes: {
-								timestamp: `#${ mediaLinkFormatPosition }`,
-								label: sprintf(
-									__( 'Playback at %1$s' ),
-									convertSecondsToTimeCode( mediaLinkFormatPosition )
-								),
-							},
-						} )
-					);
+				onClick={ () => {
+					/*
+					 * Set edition mode when:
+					 * - selected text has multi timeformats
+					 * - it is not a single selection
+					 * - there is not format active
+					 */
+					if ( multipleFormats?.length && ! isSingleOnTheFlyStyle && ! isActive ) {
+						return setIsMultipleEdition( true );
+					}
+
+					applyFormatStyleHandler( false );
 				} }
 				isActive={ isActive }
 			/>
 
 			<MediaLinkPopover
 				value={ value }
+				hasMultipleTimeformats = { multipleFormats }
+				isMultipleEdition = { isMultipleEdition }
 				contentRef={ contentRef }
-				currentTime={ mediaLinkFormatPosition }
+				currentTime={ mediaLinkFormatTimestamp }
 				isActive={ isActive }
 				sourceId={ sourceId }
-				onTimeChange={ function ( newTimePosition ) {
-					onChange(
-						applyFormat( value, {
-							type: MEDIA_LINK_FORMAT_TYPE,
-							attributes: {
-								timestamp: `#${ newTimePosition }`,
-								label: sprintf(
-									__( 'Playback at %1$s' ),
-									convertSecondsToTimeCode( newTimePosition )
-								),
-							},
-						} )
-					);
+				onTimeChange={ applyFormatStyleHandler }
+				onCancelMultipleFormat={ () => {
+					setIsMultipleEdition( false );
+					applyFormatStyleHandler();
 				} }
 			/>
 		</>
