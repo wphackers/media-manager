@@ -198,23 +198,23 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(function () {
         querySelector: query
       });
     });
-  } // All media-theater blocks.
+  } // All media-center blocks.
 
 
-  var mediaTheaterBlocks = document.querySelectorAll('.wp-block-media-center-media-theater');
+  var mediaCenterBlocks = document.querySelectorAll('.wp-block-media-manager-media-center');
 
-  if (!(mediaTheaterBlocks !== null && mediaTheaterBlocks !== void 0 && mediaTheaterBlocks.length)) {
+  if (!(mediaCenterBlocks !== null && mediaCenterBlocks !== void 0 && mediaCenterBlocks.length)) {
     return;
   }
 
-  mediaTheaterBlocks.forEach(function (theaterBlock) {
-    var mediaLinkFormatElements = theaterBlock.querySelectorAll('a.media-link-format-type');
+  mediaCenterBlocks.forEach(function (mediaCenterBlock) {
+    var mediaLinkFormatElements = mediaCenterBlock.querySelectorAll('a.media-link-format-type');
 
     if (!(mediaLinkFormatElements !== null && mediaLinkFormatElements !== void 0 && mediaLinkFormatElements.length)) {
       return;
     }
 
-    var mediaSourceRef = theaterBlock.dataset.mediaSourceRef;
+    var mediaSourceRef = mediaCenterBlock.dataset.mediaSourceRef;
     mediaLinkFormatElements.forEach(function (anchor) {
       anchor.addEventListener('click', function (event) {
         event.stopPropagation();
@@ -326,7 +326,7 @@ function shouldExtendBlockWithMedia(name) {
     return false;
   }
 
-  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["store"]).getBlockParentsByBlockName(selectedBlock.clientId, 'media-center/media-theater');
+  return Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["select"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["store"]).getBlockParentsByBlockName(selectedBlock.clientId, 'media-manager/media-center');
 }
 
 /***/ }),
@@ -352,7 +352,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************!*\
   !*** ./src/store/constants.js ***!
   \********************************/
-/*! exports provided: STORE_ID, STATE_PLAYING, STATE_ERROR, STATE_PAUSED */
+/*! exports provided: STORE_ID, STATE_PLAYING, STATE_ERROR, STATE_PAUSED, MEDIA_NOT_DEFINED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -361,12 +361,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_PLAYING", function() { return STATE_PLAYING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_ERROR", function() { return STATE_ERROR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_PAUSED", function() { return STATE_PAUSED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MEDIA_NOT_DEFINED", function() { return MEDIA_NOT_DEFINED; });
 // Store ID
-var STORE_ID = 'media-center/media-source'; // Media statuses
+var STORE_ID = 'media-manager/media-source'; // Media statuses
 
 var STATE_PLAYING = 'is-playing';
 var STATE_ERROR = 'is-error';
 var STATE_PAUSED = 'is-paused';
+var MEDIA_NOT_DEFINED = 'media-not-defined-yet';
 
 /***/ }),
 
@@ -498,6 +500,10 @@ var selectors = {
   getMediaSourceById: function getMediaSourceById(state, id) {
     var _state$sources;
 
+    if (id === _constants__WEBPACK_IMPORTED_MODULE_1__["MEDIA_NOT_DEFINED"]) {
+      return;
+    }
+
     return (_state$sources = state.sources) === null || _state$sources === void 0 ? void 0 : _state$sources[id];
   },
   getDefaultMediaSource: function getDefaultMediaSource(state) {
@@ -563,7 +569,11 @@ var storeDefinition = {
     // Some actions doesn't have defined the source ID
     // On this case, we try to get safe getting the default ID.
     // Othewise, it will try to pick the first fro the souces list.
-    var actionId = action.id || state.default || ((_Object$keys = Object.keys(state.sources)) === null || _Object$keys === void 0 ? void 0 : _Object$keys[0]);
+    var actionId = action.id || state.default || ((_Object$keys = Object.keys(state.sources)) === null || _Object$keys === void 0 ? void 0 : _Object$keys[0]); // Do not register when it sets explicitely as not defined.
+
+    if (actionId === _constants__WEBPACK_IMPORTED_MODULE_1__["MEDIA_NOT_DEFINED"]) {
+      return state;
+    }
 
     switch (action.type) {
       case 'REGISTER_MEDIA_SOURCE':
