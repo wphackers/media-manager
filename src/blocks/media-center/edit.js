@@ -16,7 +16,7 @@ import { useState } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { STORE_ID } from '../../store/constants';
+import { STORE_ID, MEDIA_NOT_DEFINED } from '../../store/constants';
 import { MediaCenterIcon } from '../../icons';
 import MediaSelector, { MediaItemPanelBody } from '../../components/media-selector/';
 
@@ -81,6 +81,16 @@ export default function MediaCenterEdit( { attributes, setAttributes } ) {
 							onClick={ () => setIsReplacing( false ) }
 						>
 							{ __( 'Cancel replacement', 'media-manager' ) }
+						</Button>
+					) }
+
+					{ ! isReplacing && (
+						<Button
+							isSecondary
+							label={ __( 'Continue without media source', 'media-manager' ) }
+							onClick={ () => setSourceId( MEDIA_NOT_DEFINED ) }
+						>
+							{ __( 'Skip', 'media-manager' ) }
 						</Button>
 					) }
 				</Placeholder>

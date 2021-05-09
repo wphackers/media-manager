@@ -1,7 +1,12 @@
 /**
  * Internal dependencies
  */
-import { STATE_PLAYING, STATE_PAUSED, STATE_ERROR } from './constants';
+import {
+	STATE_PLAYING,
+	STATE_PAUSED,
+	STATE_ERROR,
+	MEDIA_NOT_DEFINED,
+} from './constants';
 
 const DEFAULT_STATE = {
 	sources: {},
@@ -85,6 +90,9 @@ const selectors = {
 	},
 
 	getMediaSourceById( state, id ) {
+		if ( id === MEDIA_NOT_DEFINED ) {
+			return;
+		}
 		return state.sources?.[ id ];
 	},
 
@@ -155,6 +163,11 @@ const storeDefinition = {
 		const actionId = action.id ||
 			state.default ||
 			Object.keys( state.sources )?.[ 0 ];
+
+		// Do not register when it sets explicitely as not defined.
+		if ( actionId === MEDIA_NOT_DEFINED ) {
+			return state;
+		}
 
 		switch ( action.type ) {
 			case 'REGISTER_MEDIA_SOURCE': {
