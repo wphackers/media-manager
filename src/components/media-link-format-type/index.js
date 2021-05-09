@@ -199,17 +199,19 @@ export const mediaLinkFormatButtonSettings = {
 	},
 	edit: MediaLinkFormatButton,
 	__unstableInputRule( value ) {
-		const WRAPCHAR = '|';
+		const WRAP_START_CHAR = '[';
+		const WRAP_END_CHAR = ']';
 		const { start, text } = value;
 		const characterBefore = text.slice( start - 1, start );
 
-		// Bail early when prev char is not the backtick.
-		if ( characterBefore !== WRAPCHAR ) {
+		// Bail early when ending char is not the wrap-end-char.
+		if ( characterBefore !== WRAP_END_CHAR ) {
 			return value;
 		}
 
 		const textBefore = text.slice( 0, start - 1 );
-		const indexBefore = textBefore.lastIndexOf( WRAPCHAR );
+		// Bail early when the starting char is not wrap-start-char.
+		const indexBefore = textBefore.lastIndexOf( WRAP_START_CHAR );
 		if ( indexBefore === -1 ) {
 			return value;
 		}
