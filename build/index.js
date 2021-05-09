@@ -1992,18 +1992,20 @@ var mediaLinkFormatButtonSettings = {
   },
   edit: MediaLinkFormatButton,
   __unstableInputRule: function __unstableInputRule(value) {
-    var WRAPCHAR = '|';
+    var WRAP_START_CHAR = '[';
+    var WRAP_END_CHAR = ']';
     var _value = value,
         start = _value.start,
         text = _value.text;
-    var characterBefore = text.slice(start - 1, start); // Bail early when prev char is not the backtick.
+    var characterBefore = text.slice(start - 1, start); // Bail early when ending char is not the wrap-end-char.
 
-    if (characterBefore !== WRAPCHAR) {
+    if (characterBefore !== WRAP_END_CHAR) {
       return value;
     }
 
-    var textBefore = text.slice(0, start - 1);
-    var indexBefore = textBefore.lastIndexOf(WRAPCHAR);
+    var textBefore = text.slice(0, start - 1); // Bail early when the starting char is not wrap-start-char.
+
+    var indexBefore = textBefore.lastIndexOf(WRAP_START_CHAR);
 
     if (indexBefore === -1) {
       return value;
