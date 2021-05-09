@@ -1,5 +1,8 @@
 const timecodeRegExp = new RegExp( /^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/ );
-const multipleTimecodeRegExp = new RegExp( /(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)/, 'gm' );
+
+const multiple = /(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)/;
+const singleTimecodeRegExp = new RegExp( multiple, 'g' );
+const multipleTimecodeRegExp = new RegExp( multiple, 'gm' );
 
 export function convertSecondsToTimeCode( seconds ) {
 	if ( ! seconds ) {
@@ -34,4 +37,5 @@ export const convertTimeCodeToSeconds = ( string ) => {
 }
 
 export const isTimeformat = ( value ) => timecodeRegExp.test( value );
+export const getTimeformatMatch = ( value ) => singleTimecodeRegExp.exec( value );
 export const hasMultipleTimeformats = ( value ) => value.match( multipleTimecodeRegExp );

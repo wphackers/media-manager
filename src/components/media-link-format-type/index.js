@@ -30,6 +30,7 @@ import {
 	convertTimeCodeToSeconds,
 	isTimeformat,
 	hasMultipleTimeformats,
+	getTimeformatMatch,
 } from '../../lib/time-utils';
 
 const MEDIA_LINK_FORMAT_TYPE = 'media-manager/media-link-format-type';
@@ -155,6 +156,32 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 				onCancelMultipleFormat={ () => {
 					setIsMultipleEdition( false );
 					applyFormatStyleHandler();
+				} }
+				onApplyMultipleFormat={ () => {	
+					let match;
+					while ( ( match = getTimeformatMatch( selectedText ) ) != null) {
+						const timestamp = match[ 0 ];
+						const { index: startIndex } = match;
+						const endIndex = startIndex + timestamp.length;
+
+						value = applyFormat(
+							value, {
+								type: MEDIA_LINK_FORMAT_TYPE,
+								attributes: {
+									timestamp: `#${ convertTimeCodeToSeconds( timestamp ) }`,
+									label: sprintf(
+										__( 'Playback at %1$s' ),
+										timestamp
+									),
+								},
+							},
+							startIndex,
+							endIndex
+						);
+					}
+
+					onChange( value );
+					setIsMultipleEdition( false );
 				} }
 			/>
 		</>
