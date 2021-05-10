@@ -1954,7 +1954,7 @@ function MediaLinkFormatButton(_ref) {
     isActive: isActive,
     sourceId: sourceId,
     onTimeChange: applyFormatStyleHandler,
-    onCancelMultipleFormat: function onCancelMultipleFormat() {
+    onIgnoreMultipleFormat: function onIgnoreMultipleFormat() {
       setIsMultipleEdition(false);
       applyFormatStyleHandler();
     },
@@ -2086,7 +2086,7 @@ function MediaLinkPopover(_ref) {
       sourceId = _ref.sourceId,
       onTimeChange = _ref.onTimeChange,
       onApplyMultipleFormat = _ref.onApplyMultipleFormat,
-      onCancelMultipleFormat = _ref.onCancelMultipleFormat;
+      onIgnoreMultipleFormat = _ref.onIgnoreMultipleFormat;
   var anchorRef = Object(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_2__["useAnchorRef"])({
     ref: contentRef,
     value: value,
@@ -2117,8 +2117,8 @@ function MediaLinkPopover(_ref) {
   }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Apply Media Link format', 'media-manager')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     isTertiary: true,
     isSmall: true,
-    onClick: onCancelMultipleFormat
-  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Cancel', 'media-manager'))), !showMultipleEdition && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_player__WEBPACK_IMPORTED_MODULE_5__["MediaPlayerControl"], {
+    onClick: onIgnoreMultipleFormat
+  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Ignore', 'media-manager'))), !showMultipleEdition && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_player__WEBPACK_IMPORTED_MODULE_5__["MediaPlayerControl"], {
     sourceId: sourceId,
     time: currentTime,
     onChange: onTimeChange
