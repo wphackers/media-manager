@@ -3,7 +3,7 @@ Media Manager Plugin
 
 Bind different media sources and with generic blocks with each other.
 
-<img src="../assets/media-manager-media-center-video.png?raw=true" width="600px" />
+<img src="../assets/media-manager-media-theater-video.png?raw=true" width="600px" />
 
 ## Development
 
