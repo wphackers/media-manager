@@ -23,7 +23,7 @@ export default function MediaLinkPopover( {
 
 	onTimeChange,
 	onApplyMultipleFormat,
-	onCancelMultipleFormat,
+	onIgnoreMultipleFormat,
 } ) {
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
@@ -75,9 +75,9 @@ export default function MediaLinkPopover( {
 					<Button
 						isTertiary
 						isSmall
-						onClick={ onCancelMultipleFormat }
+						onClick={ onIgnoreMultipleFormat }
 					>
-						{ __( 'Cancel', 'media-manager' ) }	
+						{ __( 'Ignore', 'media-manager' ) }	
 					</Button>
 
 					</div>

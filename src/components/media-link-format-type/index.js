@@ -153,7 +153,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 				isActive={ isActive }
 				sourceId={ sourceId }
 				onTimeChange={ applyFormatStyleHandler }
-				onCancelMultipleFormat={ () => {
+				onIgnoreMultipleFormat={ () => {
 					setIsMultipleEdition( false );
 					applyFormatStyleHandler();
 				} }
