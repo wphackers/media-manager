@@ -22,7 +22,7 @@ import {
 	PlayerPlayIcon,
 	PlayerPauseIcon,
 } from '../../icons';
-import { convertSecondsToTimeCode } from '../../lib/time-utils';
+import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import { STORE_ID, STATE_PAUSED } from '../../store/constants';
 
 export function JumpBackButton( { onClick, ...other } ) {

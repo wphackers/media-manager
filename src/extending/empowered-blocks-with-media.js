@@ -14,7 +14,7 @@ import { useSelect } from '@wordpress/data';
 import { shouldExtendBlockWithMedia } from './utils';
 import '../components/media-link-format-type';
 
-const blockEditWithMedia = ( name, BlockEdit ) => ( props ) => {
+const BlockEditWithMedia = ( name, BlockEdit ) => ( props ) => {
 	const { clientId } = props;
 	const isChildOfMediaCenter = useSelect(
 		( select ) =>
@@ -39,7 +39,7 @@ function empowerBlocksWithMedia( settings, name ) {
 
 	return {
 		...settings,
-		edit: blockEditWithMedia( name, settings.edit ),
+		edit: BlockEditWithMedia( name, settings.edit ),
 	};
 }
 

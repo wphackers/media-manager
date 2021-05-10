@@ -30,7 +30,7 @@ import {
 	isTimeformat,
 	hasMultipleTimeformats,
 	getTimeformatMatch,
-} from '../../lib/time-utils';
+} from '../../lib/utils/time';
 import inputRuleHandler from './input-rule-handler';
 
 export const MEDIA_LINK_FORMAT_TYPE = 'media-manager/media-link-format-type';

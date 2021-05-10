@@ -16,7 +16,7 @@ import { useDispatch } from '@wordpress/data';
  * Internal dependencies
  */
 import './style.scss';
-import { convertSecondsToTimeCode } from '../../lib/time-utils';
+import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import { PlayPauseButton } from '../media-player';
 
 export function MediaItem( {

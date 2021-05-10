@@ -7,7 +7,7 @@ import { __, sprintf } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { convertTimeCodeToSeconds, isTimeformat } from '../../lib/time-utils';
+import { convertTimeCodeToSeconds, isTimeformat } from '../../lib/utils/time';
 import { MEDIA_LINK_FORMAT_TYPE } from './';
 
 export default function( value ) {
