@@ -15,7 +15,9 @@ import './style.scss';
 import Edit from './edit';
 import save from './save';
 
-registerBlockType( 'media-manager/media-center', {
+export const blockName = 'media-manager/media-center';
+
+registerBlockType( blockName, {
 	apiVersion: 2,
 	edit: Edit,
 	save,
