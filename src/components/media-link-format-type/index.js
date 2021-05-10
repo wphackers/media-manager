@@ -36,11 +36,11 @@ import inputRuleHandler from './input-rule-handler';
 export const MEDIA_LINK_FORMAT_TYPE = 'media-manager/media-link-format-type';
 
 function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
-	const mediatTheatherBlockClientId = shouldExtendBlockWithMedia();
+	const mediatCenterBlockClientId = shouldExtendBlockWithMedia();
 	const mediaCenterBlock = useSelect(
 		( select ) =>
 			select( blockEditorStore ).getBlock(
-				mediatTheatherBlockClientId[ 0 ]
+				mediatCenterBlockClientId[ 0 ]
 			),
 		[]
 	);
@@ -53,8 +53,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	);
 
 	const [ isMultipleEdition, setIsMultipleEdition ] = useState( false );
-
-	if ( ! mediatTheatherBlockClientId?.length ) {
+	if ( ! mediatCenterBlockClientId?.length ) {
 		return null;
 	}
 

@@ -4,13 +4,29 @@
  */
 import { applyFormat, remove } from '@wordpress/rich-text';
 import { __, sprintf } from '@wordpress/i18n';
+import { select } from '@wordpress/data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+
 /**
  * Internal dependencies
  */
 import { convertTimeCodeToSeconds, isTimeformat } from '../../lib/utils/time';
 import { MEDIA_LINK_FORMAT_TYPE } from './';
+import { blockName as mediaCenterBlockName } from '../../blocks/media-center';
 
 export default function( value ) {
+	// Apply rule handler only when current block
+	// is child of media center.
+	const { getSelectedBlockClientId, getBlockParentsByBlockName } = select( blockEditorStore );
+	const isChildOfMediaCenter = getBlockParentsByBlockName(
+		getSelectedBlockClientId(),
+		mediaCenterBlockName
+	).length;
+
+	if ( ! isChildOfMediaCenter ) {
+		return value;
+	}
+
 	const WRAP_START_CHAR = '[';
 	const WRAP_END_CHAR = ']';
 	const { start, text } = value;
