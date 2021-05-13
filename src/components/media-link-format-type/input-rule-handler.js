@@ -27,43 +27,56 @@ export default function( value ) {
 		return value;
 	}
 
-	const WRAP_VALUE_END_CHAR = ')';
+	const SIMPLE_OPEN_TRIGGER_CHAR = '[';
+	const SIMPLE_CLOSE_TRIGGER_CHAR = ']';
+	const MD_OPEN_TRIGGER_CHAR = '(';
+	const MD_CLOSE_TRIGGER_CHAR = ')';
 	const { start, text } = value;
-	const characterBefore = text.slice( start - 1, start );
-	const isTriggerChar = characterBefore === WRAP_VALUE_END_CHAR;
 
+	const characterBefore = text.slice( start - 1, start );
+	const trigger = text.slice( start - 2, start - 1);
+
+	const isTriggerChar = trigger === SIMPLE_CLOSE_TRIGGER_CHAR || trigger === MD_CLOSE_TRIGGER_CHAR;
 	if ( ! isTriggerChar ) {
 		return value;
 	}
 
-	const subText = text.substr( 0, start );
-	const markdownParts = isMarkfownTimeformat( subText );
-	if ( ! markdownParts ) {
-		return value;
-	}
+	const textBefore = text.substr( 0, start );
+	if ( characterBefore !== MD_OPEN_TRIGGER_CHAR ) {
+		const startIndex = textBefore.lastIndexOf( SIMPLE_OPEN_TRIGGER_CHAR );		
+		if ( startIndex === -1 ) {
+			return value;
+		}
 
-	const timestamp = markdownParts[ 1 ];
-	const link = markdownParts[ 2 ];
-	const startIndex = start - timestamp.length - link.length - 4;
-	const endIndex = startIndex + link.length;
+		const parts = isMarkfownTimeformat( textBefore );
+		if ( ! parts?.[ 1 ] ) {
+			return value;
+		}
 
-	value = remove( value, startIndex, startIndex + timestamp.length + 3 );
-	value = remove( value, endIndex, endIndex + 1 );
+		const timestamp = parts[ 1 ];
+		const endIndex = start - ( parts?.[ 2 ] ? timestamp.length + 5 : 3 ); // [hh:mm:ss].
+		const charsToRemove = parts?.[ 2 ] ? timestamp.length + 3 : 1; // // [hh:mm:ss](link).
 
-	value = applyFormat(
-		value, {
-			type: MEDIA_LINK_FORMAT_TYPE,
-			attributes: {
-				timestamp: `#${ convertTimeCodeToSeconds( timestamp ) }`,
-				label: sprintf(
-					__( 'Playback at %1$s' ),
-					timestamp
-				),
+		value = remove( value, startIndex, startIndex + charsToRemove );
+		value = remove( value, endIndex, endIndex + 1 );
+
+		value = applyFormat(
+			value, {
+				type: MEDIA_LINK_FORMAT_TYPE,
+				attributes: {
+					timestamp: `#${ convertTimeCodeToSeconds( timestamp ) }`,
+					label: sprintf(
+						__( 'Playback at %1$s' ),
+						timestamp
+					),
+				},
 			},
-		},
-		startIndex,
-		endIndex
-	);
+			startIndex,
+			endIndex
+		);
+
+		value = remove( value, endIndex + 1, endIndex + 2 ); // <- move the carte at the init position.
+	}
 
 	return value;
 };
