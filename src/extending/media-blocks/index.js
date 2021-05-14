@@ -9,7 +9,7 @@ import { debounce, throttle } from 'lodash';
 import { addFilter } from '@wordpress/hooks';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useEffect, useRef, Fragment } from '@wordpress/element';
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, store as blockEditorStore } from '@wordpress/block-editor';
 import { Panel } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
 
@@ -18,11 +18,13 @@ import { createHigherOrderComponent } from '@wordpress/compose';
  */
 import { shouldExtendMediaBlock, getBlockSourceProps } from '../utils';
 import { MediaCenterPanelBody } from '../../components/media-selector';
+import { blockName as mediaCenterBlockName } from '../../blocks/media-center';
 import {
 	STORE_ID,
 	STATE_PAUSED,
 	STATE_PLAYING,
 	STATE_ERROR,
+	MEDIA_NOT_DEFINED
 } from '../../store/constants';
 
 // In-sync constants.
@@ -48,6 +50,8 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 		setMediaSourceCurrentTime,
 	} = useDispatch( STORE_ID );
 
+	const { updateBlockAttributes } = useDispatch( blockEditorStore );
+
 	// Media Source selectors.
 	const { mediaPlayingState, currentTime, mediaSource } = useSelect(
 		( select ) => ( {
@@ -57,6 +61,19 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 		} ),
 		[]
 	);
+
+	const mediaCenterParentBlock = useSelect(
+		( select ) => select( blockEditorStore ).getBlock(
+			select( blockEditorStore ).getBlockParentsByBlockName(
+				clientId,
+				mediaCenterBlockName
+			)?.[ 0 ]
+		),
+		[]
+	);
+	
+	const mediaCenterParentClientId = mediaCenterParentBlock?.clientId;
+	const mediaCenterParentSourceIdAttr = mediaCenterParentBlock?.attributes.sourceId;
 
 	function onMetadataReady( event ) {
 		updateMediaSourceData( mediaSourceIdAttr, {
@@ -78,9 +95,14 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 
 	/*
 	 * - Register/Unregister Media source in the store.
-	 * - Set preload to load metadata.
+	 * - Set `preload` equal to `metadata` to load it.
 	 */
 	useEffect( () => {
+		// Bail early when no source for the current block.
+		if ( ! mediaSourceUrl ) {
+			return;
+		}
+
 		/*
 		 * Check if the mediaSourceId attribute is defined.
 		 * If so, take it as the media reference.
@@ -129,8 +151,11 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 
 		// Clean.
 		return function () {
-			// Cleaning the attr probably shoulnd't needed.
-			setAttributes( { mediaSourceId: null } );
+			// Cleaning Media Source source ID
+			// if the block is linked to it.
+			if ( mediaCenterParentSourceIdAttr === mediaSourceIdAttr ) {
+				updateBlockAttributes( mediaCenterParentClientId, { sourceId: MEDIA_NOT_DEFINED } );
+			}
 
 			// Remove listeners.
 			mediaElement.removeEventListener(
@@ -141,7 +166,36 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 			// Unregister media from store.
 			unregisterMediaSource( mediaSourceId );
 		};
-	}, [ mediaSourceIdAttr, setAttributes, mediaSourceUrl ] );
+	}, [
+		mediaSourceIdAttr,
+		setAttributes,
+		mediaSourceUrl,
+		mediaCenterParentClientId,
+		mediaCenterParentSourceIdAttr,
+	] );
+
+	useEffect( () => {
+		// Block doesn't have defined its source. Bail early.
+		if ( ! mediaSourceUrl || ! mediaSourceIdAttr ) {
+			return;
+		}
+
+		// Block is not child of MediaCenter. Bail Early.
+		if ( ! mediaCenterParentClientId ) {
+			return;
+		}
+
+		// Media Center source ID is defined properly. Bail eraly.
+		if (
+			mediaCenterParentSourceIdAttr &&
+			mediaCenterParentSourceIdAttr !== MEDIA_NOT_DEFINED
+		) {
+			return;
+		}
+
+		// Link MediaCenter block on the fly with the media block.
+		updateBlockAttributes( mediaCenterParentClientId, { sourceId: mediaSourceIdAttr } );
+	}, [ mediaSourceUrl, mediaSourceIdAttr, mediaCenterParentClientId, mediaCenterParentSourceIdAttr ] );
 
 	// Play/Pause media depending on playing status (via store).
 	useEffect( () => {

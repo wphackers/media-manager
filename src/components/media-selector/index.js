@@ -217,16 +217,13 @@ export function MediaItemPanelBody( {
 	);
 }
 
-export function MediaCenterPanelBody( {
-	title = __( 'Media Source', 'media-manager' ),
-	source,
-} ) {
+export function MediaCenterPanelBody( { source } ) {
 	if ( ! source ) {
 		return null;
 	}
 
 	return (
-		<PanelBody className="media-source-panel" title={ title }>
+		<PanelBody className="media-source-panel" title={ __( 'Media Source', 'media-manager' ) }>
 			<p>{ __( 'Media Center connected to the media', 'media-manager' ) }</p>
 		</PanelBody>
 	);
