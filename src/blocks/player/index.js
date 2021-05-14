@@ -25,7 +25,7 @@
 	save,
 	icon,
 	supports: {
-		"align": [ "left", "center", "right" ],
+		"align": true,
 	},
  } );
  

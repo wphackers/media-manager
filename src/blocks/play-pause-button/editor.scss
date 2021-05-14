@@ -1,0 +1,10 @@
+.wp-block-media-manager-play-pause-button {
+	line-height: 0;
+	border-radius: 9999px;
+	display: inline-flex;
+
+	.components-button {
+		padding: 0;
+		overflow: hidden;
+	}
+}
