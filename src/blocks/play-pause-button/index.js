@@ -24,5 +24,6 @@
 	edit: Edit,
 	save,
 	icon,
+	usesContext: [ 'mediaSourceId' ],
  } );
  
