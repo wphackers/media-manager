@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 
  export default function save() {
 	return (
-		<div { ...useBlockProps }>
+		<div { ...useBlockProps.save() }>
 			{ __( 'Play/Pause', 'media-manager' ) }
 		</div>
 	);

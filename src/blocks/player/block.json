@@ -5,6 +5,11 @@
 	"category": "media",
 	"icon": "media-play",
 	"description": "Add a block that displays a player content, then add player's blocks you’d like.",
-	"supports": {},
-	"textdomain": "media-manager"
+	"textdomain": "media-manager",
+	"supports": {
+		"align": [ "left", "center", "right" ],
+		"anchor": true
+	},
+	"editorStyle": "wp-block-player-editor",
+	"style": "wp-block-player"
 }

@@ -24,5 +24,8 @@
 	edit: Edit,
 	save,
 	icon,
+	supports: {
+		"align": [ "left", "center", "right" ],
+	},
  } );
  

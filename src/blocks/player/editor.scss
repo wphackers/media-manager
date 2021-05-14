@@ -1,0 +1,25 @@
+.editor-styles-wrapper ul.wp-block-media-manager-player {
+	display: flex;
+	justify-content: flex-start;
+	align-content: flex-start;
+	padding: 0;
+
+	.block-list-appender {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+	}
+
+	li.wp-block-media-manager-play-pause-button {
+		margin: 4px 8px 4px 0;
+		line-height: 0;
+		display: block;
+		border-radius: 9999px;
+
+		.components-button {
+			padding: 0;
+			overflow: hidden;
+		}
+	}
+}

@@ -2,13 +2,38 @@
 /**
  * WordPress dependencies
  */
-import { useBlockProps } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
+import {
+	useBlockProps,
+	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
+} from '@wordpress/block-editor';
+import { Fragment } from '@wordpress/element';
+
+/**
+ * Internal dependencies
+ */
+import { blockName as playPauseButtonBlockName } from '../play-pause-button';
+import './editor.scss';
+
+const ALLOWED_BLOCKS = [
+	playPauseButtonBlockName,
+	'core/cover',
+];
 
 export default function PlayerEditBlock() {
+	const blockProps = useBlockProps();
+	console.log( 'blockProps: ', blockProps );
+
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		allowedBlocks: ALLOWED_BLOCKS,
+		orientation: 'horizontal',
+		templateLock: false,
+		__experimentalAppenderTagName: 'li',
+	} );
+
 	return (
-		<div { ...useBlockProps() }>
-			{ __( 'Player', 'media-manager' ) }
-		</div>
+		<Fragment>
+			<ul { ...innerBlocksProps }>
+			</ul>
+		</Fragment>
 	);
 }
