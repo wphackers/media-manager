@@ -1,7 +1,8 @@
 /**
  * WordPress dependencies
  */
- import { G, Icon, Path, Polygon, Rect, SVG } from '@wordpress/components';
+ import { Path, SVG } from '@wordpress/components';
+ import { createHigherOrderComponent } from '@wordpress/compose';
 
 export const MovieIcon = () => (
 	<SVG
@@ -37,40 +38,50 @@ export const MediaLinkIcon = () => (
 	</SVG>
 );
 
-export const PlayerPlayIcon = ( { scale = 1 } ) => {
-	const width = 24 * scale;
-	const height = 24 * scale;
+export const withScale = createHigherOrderComponent( ( Icon ) => ( props ) => {
+	if ( props?.scale === 1 ) {
+		return (
+			<Icon { ...props } />
+		);
+	}
 
-	const translate = ( scale - 1 ) * 12;
-	const inlineStyle = scale ==! 1
-		? null
-		: {
-			transform: `scale(${ scale }) translate( ${ translate }px, ${ translate }px )`,
-		};
+	const width = 24 * props.scale;
+	const height = 24 * props.scale;
+	const translate = ( props.scale - 1 ) * 12;
+	const inlineStyle = {
+		transform: `scale(${ props.scale }) translate( ${ translate }px, ${ translate }px )`,
+	};
 
 	return (
-		<SVG
-			style={ inlineStyle }
-			xmlns="https://www.w3.org/2000/svg"
-			viewBox={ `0 0 ${ width } ${ height }` }
-			width={ width }
-			height={ height }
-		>
-			<Path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
-		</SVG>
+		<Icon { ...props } width={ width } height={ height } style={ inlineStyle } />
 	);
-};
+},
+'withIconScale'
+);
 
-export const PlayerPauseIcon = () => (
+export const PlayerPlayIcon = withScale( ( { width = 24, height = 24, style = null } ) => (
 	<SVG
 		xmlns="https://www.w3.org/2000/svg"
-		viewBox="0 0 24 24"
-		width="24"
-		height="24"
+		style={ style }
+		viewBox={ `0 0 ${ width } ${ height }` }
+		width={ width }
+		height={ height }
+	>
+		<Path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+	</SVG>
+) );
+
+export const PlayerPauseIcon = withScale( ( { width = 24, height = 24, style = null } ) => (
+	<SVG
+		xmlns="https://www.w3.org/2000/svg"
+		style={ style }
+		viewBox={ `0 0 ${ width } ${ height }` }
+		width={ width }
+		height={ height }
 	>
 		<Path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M11,16H9V8h2V16z M15,16h-2V8h2V16z" />
 	</SVG>
-);
+) );
 
 export const ControlForwardFiveIcon = (
 	 <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
