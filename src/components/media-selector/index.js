@@ -6,9 +6,9 @@ import Gridicon from 'gridicons';
 /**
  * WordPress dependencies
  */
-import { useRef, useEffect, useState } from '@wordpress/element';
+import { useRef, useEffect, useState, Fragment } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
-import { PanelBody, PanelRow, Button } from '@wordpress/components';
+import { PanelBody, PanelRow, Button, Notice } from '@wordpress/components';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
 
@@ -18,6 +18,7 @@ import { useDispatch } from '@wordpress/data';
 import './style.scss';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import { PlayPauseButton } from '../media-player';
+import { MEDIA_NOT_DEFINED } from '../../store/constants';
 
 export function MediaItem( {
 	elementType: type,
@@ -96,96 +97,122 @@ export function MediaItem( {
 }
 
 export function MediaItemPanelBody( {
-	title = __( 'Media Source', 'media-manager' ),
 	source,
+	mediaSourceId,
 	onReplace,
 	onUnlink,
 } ) {
-	if ( ! source ) {
-		return null;
-	}
-
+	const isMediaNotDefined = mediaSourceId === MEDIA_NOT_DEFINED;
 	const { selectBlock } = useDispatch( blockEditorStore );
 
 	return (
-		<PanelBody className="media-source-panel" title={ title }>
-			<p>{ __( 'Media source connected to the media center', 'media-manager' ) }</p>
+		<PanelBody className="media-source-panel" title={ __( 'Media Source', 'media-manager' ) }>
+			<p>{ __( 'Media source connected to the media center block', 'media-manager' ) }</p>
 
-			<PanelRow>
-				<MediaItem
-					{ ...source }
-					showTypeLabel={ true }
-					onPlayToggle={ ( element ) => {
-						if ( ! element ) {
-							return;
-						}
+			{ isMediaNotDefined && (
+				<Fragment>
+					<PanelRow>
+						<Notice
+							spokenMessage={ null }
+							status="warning"
+							isDismissible={ false }
+						>
+							{ __( 'No media linked to this block', 'context' ) }
+						</Notice>
+					</PanelRow>
 
-						if ( element.paused ) {
-							return element.play();
-						}
-
-						element.pause();
-					} }
-				/>
-			</PanelRow>
-
-			<PanelRow>
-				<ul>
-					<li>
-						{ __( 'Filename:', 'media-manager' ) }
-						<strong> { source.source }</strong>
-					</li>
-					<li>
-						{ __( 'Duration:', 'media-manager' ) }
-						<strong> { convertSecondsToTimeCode( source.duration ) }</strong>
-					</li>
-
-					<li>
-						{
-							sprintf(
-								/* translators: %1$s: block title, %2$s: author name. */
-								__( 'Connected to a %1$s.' ),
-								source.elementType
-							)
-						}
-
+					<PanelRow>
 						<Button
-							className="components-button__focus"
-							isLink
-							onClick={ () => {
-								if ( ! source.mediaBlockClientId ) {
+							isSecondary
+							isSmall
+							label={ __( 'Link to a media source', 'media-manager' ) }
+							onClick={ onReplace }
+						>
+							{ __( 'Link to Media', 'media-manager' ) }
+						</Button>
+					</PanelRow>
+				</Fragment>
+			) }
+
+			{ source && (
+				<Fragment>
+					<PanelRow>
+						<MediaItem
+							{ ...source }
+							showTypeLabel={ true }
+							onPlayToggle={ ( element ) => {
+								if ( ! element ) {
 									return;
 								}
-								selectBlock( source.mediaBlockClientId );
+
+								if ( element.paused ) {
+									return element.play();
+								}
+
+								element.pause();
 							} }
-						>
-							{ __( 'Focus', 'media-manager' ) }
-						</Button>
-					</li>
-				</ul>
-			</PanelRow>
+						/>
+					</PanelRow>
 
-			<PanelRow>
-				<div className="media-source-panel__actions">
-					<Button
-						isSecondary
-						isSmall
-						label={ __( 'Replacing linked media source', 'media-manager' ) }
-						onClick={ () => onReplace( true ) }
-					>
-						{ __( 'Replace Media', 'media-manager' ) }
-					</Button>
+					<PanelRow>
+						<ul>
+							<li>
+								{ __( 'Filename:', 'media-manager' ) }
+								<strong> { source.source }</strong>
+							</li>
+							<li>
+								{ __( 'Duration:', 'media-manager' ) }
+								<strong> { convertSecondsToTimeCode( source.duration ) }</strong>
+							</li>
 
-					<Button
-						isTertiary
-						isSmall
-						label={ __( 'Unlink media source', 'media-manager' ) }
-						onClick={ () => onUnlink( true ) }
-					>
-						{ __( 'Unlink Media', 'media-manager' ) }
-					</Button>
-				</div>
-			</PanelRow>
+							<li>
+								{
+									sprintf(
+										/* translators: %1$s: block title, %2$s: author name. */
+										__( 'Connected to a %1$s.' ),
+										source.elementType
+									)
+								}
+
+								<Button
+									className="components-button__focus"
+									isLink
+									onClick={ () => {
+										if ( ! source.mediaBlockClientId ) {
+											return;
+										}
+										selectBlock( source.mediaBlockClientId );
+									} }
+								>
+									{ __( 'Focus', 'media-manager' ) }
+								</Button>
+							</li>
+						</ul>
+					</PanelRow>
+
+					<PanelRow>
+						<div className="media-source-panel__actions">
+							<Button
+								isSecondary
+								isSmall
+								label={ __( 'Replacing linked media source', 'media-manager' ) }
+								onClick={ onReplace }
+							>
+								{ __( 'Replace Media', 'media-manager' ) }
+							</Button>
+
+							<Button
+								isTertiary
+								isSmall
+								label={ __( 'Unlink media source', 'media-manager' ) }
+								onClick={ () => onUnlink( true ) }
+							>
+								{ __( 'Unlink Media', 'media-manager' ) }
+							</Button>
+						</div>
+					</PanelRow>
+				</Fragment>
+			) }
 		</PanelBody>
 	);
 }
