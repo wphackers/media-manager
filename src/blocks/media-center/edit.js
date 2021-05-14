@@ -7,11 +7,17 @@ import { values } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls, BlockControls } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
+import {
+	useBlockProps,
+	InspectorControls,
+	BlockControls,
+	store as blockEditorStore,
+} from '@wordpress/block-editor';
+import { useSelect, useDispatch } from '@wordpress/data';
 import { Placeholder, Panel, Button, Toolbar } from '@wordpress/components';
 import { InnerBlocks } from '@wordpress/block-editor';
-import { useState } from '@wordpress/element';
+import { useState, useCallback } from '@wordpress/element';
+import { createBlock } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -37,7 +43,20 @@ const MEDIA_CENTER_TEMPLATE = [
  */
 import './editor.scss';
 
-export default function MediaCenterEdit( { attributes, setAttributes } ) {
+const useInsertMediaBlock = () => {
+	const { insertBlock } = useDispatch( blockEditorStore );
+
+	return useCallback( async ( blockType = 'core/video', clientId, index = 0 ) => {
+		const mediaBlock = await createBlock( blockType );
+		await insertBlock( mediaBlock, index, clientId, false );
+	}, [ insertBlock ] );
+};
+
+export default function MediaCenterEdit( {
+	attributes,
+	setAttributes,
+	clientId,
+} ) {
 	const { sourceId } = attributes;
 	const [ isReplacing, setIsReplacing ] = useState( false );
 
@@ -54,6 +73,13 @@ export default function MediaCenterEdit( { attributes, setAttributes } ) {
 	}, [ sourceId ] );
 
 	const setSourceId = ( sourceId ) => setAttributes( { sourceId } );
+	const insertMediaBlock = useInsertMediaBlock();
+
+	function insertMedia( type ) {
+		setSourceId( MEDIA_NOT_DEFINED );
+		setIsReplacing( false );
+		insertMediaBlock( type, clientId )
+	}
 
 	if ( ! sourceId || isReplacing ) {
 		return (
@@ -74,9 +100,25 @@ export default function MediaCenterEdit( { attributes, setAttributes } ) {
 						} }
 					/>
 
+					<Button
+						isSecondary
+						label={ __( 'Continue adding a video block', 'media-manager' ) }
+						onClick={ () => insertMedia( 'core/video' ) }
+					>
+						{ __( 'Start with Video block', 'media-manager' ) }
+					</Button>
+
+					<Button
+						isSecondary
+						label={ __( 'Continue adding a audio block', 'media-manager' ) }
+						onClick={ () => insertMedia( 'core/audio' ) }
+					>
+						{ __( 'Start with an Audio block', 'media-manager' ) }
+					</Button>
+
 					{ isReplacing && (
 						<Button
-							isSecondary
+							isTertiary
 							label={ __( 'Cancel replacing media source', 'media-manager' ) }
 							onClick={ () => setIsReplacing( false ) }
 						>
@@ -86,7 +128,7 @@ export default function MediaCenterEdit( { attributes, setAttributes } ) {
 
 					{ ! isReplacing && (
 						<Button
-							isSecondary
+							isTertiary
 							label={ __( 'Continue without media source', 'media-manager' ) }
 							onClick={ () => setSourceId( MEDIA_NOT_DEFINED ) }
 						>

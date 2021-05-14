@@ -206,7 +206,7 @@ export default function MediaSelector( { media, onMediaSelect } ) {
 		<div className="media-selector">
 			<h4>
 				{ __(
-					'Pick up the media source from entrance content',
+					'Pick up a media from the media sources list available for this entrance.',
 					'media-manager'
 				) }
 			</h4>
