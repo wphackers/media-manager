@@ -1,0 +1,10 @@
+{
+	"apiVersion": 2,
+	"name": "media-manager/play-pause-button",
+	"title": "Play/Pause button",
+	"category": "media",
+	"icon": "media-play",
+	"description": "Block to play and pause a media, connected through Media Center block",
+	"supports": {},
+	"textdomain": "media-manager"
+}
