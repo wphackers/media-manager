@@ -155,6 +155,7 @@ export default function MediaCenterEdit( {
 					<MediaItemPanelBody
 						source={ mediaSource }
 						onReplace={ setIsReplacing }
+						onUnlink={ () => setSourceId( null ) }
 					/>
 				</Panel>
 			</InspectorControls>

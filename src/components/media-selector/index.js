@@ -99,6 +99,7 @@ export function MediaItemPanelBody( {
 	title = __( 'Media Source', 'media-manager' ),
 	source,
 	onReplace,
+	onUnlink,
 } ) {
 	if ( ! source ) {
 		return null;
@@ -169,10 +170,19 @@ export function MediaItemPanelBody( {
 					<Button
 						isSecondary
 						isSmall
-						label={ __( 'Cancel replacing media source', 'media-manager' ) }
+						label={ __( 'Replacing linked media source', 'media-manager' ) }
 						onClick={ () => onReplace( true ) }
 					>
 						{ __( 'Replace Media', 'media-manager' ) }
+					</Button>
+
+					<Button
+						isTertiary
+						isSmall
+						label={ __( 'Unlink media source', 'media-manager' ) }
+						onClick={ () => onUnlink( true ) }
+					>
+						{ __( 'Unlink Media', 'media-manager' ) }
 					</Button>
 				</div>
 			</PanelRow>
