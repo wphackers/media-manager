@@ -52,12 +52,13 @@ export function PlayPauseButton( { onClick, isPaused = false, ...other } ) {
 	);
 }
 
-export function SkipForwardButton( { onClick } ) {
+export function SkipForwardButton( { onClick, ...other } ) {
 	return (
 		<Button
 			icon={ ControlForwardFiveIcon }
 			onClick={ onClick }
 			label={ __( 'Skip forward', 'media-manager' ) }
+			{ ...other }
 		/>
 	);
 }
@@ -70,14 +71,15 @@ export function MediaPlayerControl( {
 	const [ rangeTime, setRangeTime ] = useState( time );
 	useEffect( () => setRangeTime( time ), [ time ] );
 
-	const { mediaPlayingState, mediaDuration } = useSelect(
+	const { mediaPlayingState, mediaDuration, mediaSource } = useSelect(
 		( select ) => ( {
 			mediaPlayingState: select( STORE_ID ).getMediaPlayerState(
 				sourceId
 			),
 			mediaDuration: select( STORE_ID ).getMediaSourceDuration( sourceId ),
+			mediaSource: select( STORE_ID ).getMediaSourceById( sourceId ),
 		} ),
-		[]
+		[ sourceId ]
 	);
 
 	const { toggleMediaSource, setMediaSourceCurrentTime } = useDispatch(
@@ -117,15 +119,18 @@ export function MediaPlayerControl( {
 	return (
 		<div className="media-player-control">
 			<JumpBackButton
+				disabled={ ! mediaSource }
 				onClick={ () => onChangeTimeHandler( Math.max( 0, time - 5 ) ) }
 			/>
 
 			<PlayPauseButton
 				isPaused={ isPaused }
+				disabled={ ! mediaSource }
 				onClick={ () => toggleInTime() }
 			/>
 
 			<SkipForwardButton
+				disabled={ ! mediaSource }
 				onClick={ () => onChangeTimeHandler( Math.min( mediaDuration, time + 5 ) ) }
 			/>
 
@@ -134,7 +139,7 @@ export function MediaPlayerControl( {
 			</div>
 
 			<RangeControl
-				disabled={ typeof mediaDuration === 'undefined' }
+				disabled={ ! mediaSource || typeof mediaDuration === 'undefined' }
 				value={ rangeTime }
 				min={ 0 }
 				max={ mediaDuration }
