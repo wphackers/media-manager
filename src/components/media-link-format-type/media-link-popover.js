@@ -89,7 +89,7 @@ export default function MediaLinkPopover( {
 						time={ currentTime }
 						onChange={ onTimeChange }
 					/>
-					) }
+				) }
 				</div>
 		</Popover>
 	);

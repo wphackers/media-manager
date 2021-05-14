@@ -8,10 +8,9 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useState, useEffect, useCallback } from '@wordpress/element';
-import { RangeControl } from '@wordpress/components';
+import { RangeControl, Notice, Button } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -24,6 +23,7 @@ import {
 } from '../../icons';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import { STORE_ID, STATE_PAUSED } from '../../store/constants';
+import './style.scss';
 
 export function JumpBackButton( { onClick, ...other } ) {
 	return (
@@ -118,6 +118,16 @@ export function MediaPlayerControl( {
 
 	return (
 		<div className="media-player-control">
+			{ ! mediaSource && (
+				<Notice
+					spokenMessage={ null }
+					status="warning"
+					isDismissible={ false }
+				>
+					{ __( 'No media linked to this block', 'context' ) }
+				</Notice>
+			) }
+
 			<JumpBackButton
 				disabled={ ! mediaSource }
 				onClick={ () => onChangeTimeHandler( Math.max( 0, time - 5 ) ) }
