@@ -30,4 +30,7 @@ registerBlockType( blockName, {
 	supports: {
 		align: true,
 	},
+	providesContext: {
+		'mediaSourceId': 'sourceId',
+	},
 } );
