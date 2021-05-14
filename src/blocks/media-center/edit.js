@@ -81,7 +81,7 @@ export default function MediaCenterEdit( {
 		insertMediaBlock( type, clientId )
 	}
 
-	if ( ! sourceId || isReplacing ) {
+	if ( isReplacing || ! sourceId ) {
 		return (
 			<div { ...useBlockProps() }>
 				<Placeholder
@@ -116,7 +116,7 @@ export default function MediaCenterEdit( {
 						{ __( 'Start with an Audio block', 'media-manager' ) }
 					</Button>
 
-					{ isReplacing && (
+					{ ( isReplacing && sourceId !== MEDIA_NOT_DEFINED ) && (
 						<Button
 							isTertiary
 							label={ __( 'Cancel replacing media source', 'media-manager' ) }
@@ -126,11 +126,14 @@ export default function MediaCenterEdit( {
 						</Button>
 					) }
 
-					{ ! isReplacing && (
+					{ ( ! isReplacing || sourceId === MEDIA_NOT_DEFINED ) && (
 						<Button
 							isTertiary
 							label={ __( 'Continue without media source', 'media-manager' ) }
-							onClick={ () => setSourceId( MEDIA_NOT_DEFINED ) }
+							onClick={ () => {
+								setIsReplacing( false );
+								setSourceId( MEDIA_NOT_DEFINED );
+							} }
 						>
 							{ __( 'Skip', 'media-manager' ) }
 						</Button>
@@ -144,8 +147,12 @@ export default function MediaCenterEdit( {
 		<>
 			<BlockControls>
 				<Toolbar>
-					<Button onClick={ () => setIsReplacing( sourceId ) }>
-						{ __( 'Replace', 'media-manager' ) }
+					<Button onClick={ () => setIsReplacing( true ) }>
+						{
+							( sourceId !== MEDIA_NOT_DEFINED )
+								? __( 'Replace', 'media-manager' )
+								: __( 'Link', 'media-manager' )
+						}
 					</Button>
 				</Toolbar>
 			</BlockControls>
