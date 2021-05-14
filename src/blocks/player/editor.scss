@@ -1,4 +1,4 @@
-.editor-styles-wrapper ul.wp-block-media-manager-player {
+.editor-styles-wrapper .wp-block-media-manager-player {
 	display: flex;
 	justify-content: flex-start;
 	align-content: flex-start;
@@ -11,7 +11,7 @@
 		margin: 0;
 	}
 
-	li.wp-block-media-manager-play-pause-button {
+	.wp-block-media-manager-play-pause-button {
 		margin: 4px 8px 4px 0;
 		line-height: 0;
 		display: block;

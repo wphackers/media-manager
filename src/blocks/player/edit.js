@@ -16,24 +16,16 @@ import './editor.scss';
 
 const ALLOWED_BLOCKS = [
 	playPauseButtonBlockName,
-	'core/cover',
 ];
 
 export default function PlayerEditBlock() {
 	const blockProps = useBlockProps();
-	console.log( 'blockProps: ', blockProps );
 
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: ALLOWED_BLOCKS,
 		orientation: 'horizontal',
 		templateLock: false,
-		__experimentalAppenderTagName: 'li',
 	} );
 
-	return (
-		<Fragment>
-			<ul { ...innerBlocksProps }>
-			</ul>
-		</Fragment>
-	);
+	return <div { ...innerBlocksProps } />;
 }

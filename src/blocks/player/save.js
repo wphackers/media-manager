@@ -7,9 +7,9 @@ import { __ } from '@wordpress/i18n';
 
  export default function save() {
 	return (
-		<ul { ...useBlockProps.save() }>
+		<div { ...useBlockProps.save() }>
 			<InnerBlocks.Content />
-		</ul>
+		</div>
 	);
  }
  
