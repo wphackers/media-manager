@@ -24,10 +24,10 @@ export default function PlayPauseEditBlock( { context } ) {
 	const { toggleMediaSource } = useDispatch( STORE_ID );
 
 	return (
-		<div { ...useBlockProps( { className: 'wp-media-manager-player-block' } ) }>
+		<div { ...useBlockProps( { className: 'wp-block-media-manager__button' } ) }>
 			<PlayPauseButton
 				isPaused= {mediaPlayingState === STATE_PAUSED }
-				scale={ 2 }
+				scale={ 1.5 }
 				onClick={ () => toggleMediaSource( sourceId ) }
 			/>
 		</div>

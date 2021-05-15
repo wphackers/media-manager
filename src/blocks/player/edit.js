@@ -6,15 +6,16 @@ import {
 	useBlockProps,
 	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
 } from '@wordpress/block-editor';
-import { Fragment } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import { blockName as playPauseButtonBlockName } from '../play-pause-button';
+import { blockName as playButtonBlockName } from '../play-button';
 import './editor.scss';
 
 const ALLOWED_BLOCKS = [
+	playButtonBlockName,
 	playPauseButtonBlockName,
 ];
 
