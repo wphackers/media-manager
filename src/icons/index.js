@@ -39,7 +39,7 @@ export const MediaLinkIcon = () => (
 );
 
 export const withScale = createHigherOrderComponent( ( Icon ) => ( props ) => {
-	if ( props?.scale === 1 ) {
+	if ( ! props?.scale || props.scale === 1 ) {
 		return (
 			<Icon { ...props } />
 		);

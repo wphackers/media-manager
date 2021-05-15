@@ -4,15 +4,14 @@
  */
 import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { Button } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
-import { PlayerPlayIcon, PlayerPauseIcon } from '../../icons';
-import { STATE_PAUSED, STORE_ID } from '../../store/constants';
+import { STORE_ID, STATE_PAUSED } from '../../store/constants';
 import './editor.scss';
+import { PlayPauseButton } from '../../components/media-player';
 
 export default function PlayPauseEditBlock( { context } ) {
 	const sourceId = context.mediaSourceId;
@@ -26,12 +25,9 @@ export default function PlayPauseEditBlock( { context } ) {
 
 	return (
 		<div { ...useBlockProps( { className: 'wp-media-manager-player-block' } ) }>
-			<Button
-				icon={
-					mediaPlayingState === STATE_PAUSED
-						? <PlayerPlayIcon scale={ 1.5 } />
-						: <PlayerPauseIcon scale={ 1.5 } />
-				}
+			<PlayPauseButton
+				isPaused= {mediaPlayingState === STATE_PAUSED }
+				scale={ 2 }
 				onClick={ () => toggleMediaSource( sourceId ) }
 			/>
 		</div>
