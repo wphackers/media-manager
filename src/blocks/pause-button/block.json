@@ -1,0 +1,10 @@
+{
+	"apiVersion": 2,
+	"name": "media-manager/pause-button",
+	"title": "Pause button",
+	"category": "media",
+	"icon": "media-pause",
+	"description": "Block to pause a media, connected through Media Center block",
+	"supports": {},
+	"textdomain": "media-manager"
+}

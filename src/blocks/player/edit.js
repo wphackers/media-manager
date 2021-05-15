@@ -10,12 +10,14 @@ import {
 /**
  * Internal dependencies
  */
-import { blockName as playPauseButtonBlockName } from '../play-pause-button';
 import { blockName as playButtonBlockName } from '../play-button';
+import { blockName as pauseButtonBlockName } from '../pause-button';
+import { blockName as playPauseButtonBlockName } from '../play-pause-button';
 import './editor.scss';
 
 const ALLOWED_BLOCKS = [
 	playButtonBlockName,
+	pauseButtonBlockName,
 	playPauseButtonBlockName,
 ];
 

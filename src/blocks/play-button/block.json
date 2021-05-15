@@ -1,0 +1,10 @@
+{
+	"apiVersion": 2,
+	"name": "media-manager/play-button",
+	"title": "Playbutton",
+	"category": "media",
+	"icon": "media-play",
+	"description": "Block to play a media, connected through Media Center block",
+	"supports": {},
+	"textdomain": "media-manager"
+}

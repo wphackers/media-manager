@@ -66,6 +66,17 @@ export function PlayButton( { onClick, isPaused = false, scale,...other } ) {
 	);
 }
 
+export function PauseButton( { onClick, isPaused = false, scale,...other } ) {
+	return (
+		<Button
+			icon={ <PlayerPauseIcon scale={ scale } /> }
+			onClick={ onClick }
+			label={ __( 'Pause', 'media-manager' ) }
+			{ ...other }
+		/>
+	);
+}
+
 export function SkipForwardButton( { onClick, ...other } ) {
 	return (
 		<Button
