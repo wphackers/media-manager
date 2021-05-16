@@ -17,6 +17,7 @@
 		display: inline-block;
 		align-self: center;
 		max-width: var(--responsive--aligndefault-width);
+		border-radius: 9999px; // 100% causes an oval, but any explicit but really high value retains the pill shape.
 
 		.components-button {
 			padding: 0;

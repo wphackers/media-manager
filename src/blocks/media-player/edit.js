@@ -6,9 +6,14 @@ import {
 	useBlockProps,
 	__experimentalUseColorProps as useColorProps,
 	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
+	withColors,
 } from '@wordpress/block-editor';
+import { Fragment } from '@wordpress/element';
 
-
+/**
+ * External dependencies
+ */
+import classnames from 'classnames';
 /**
  * Internal dependencies
  */
@@ -25,9 +30,21 @@ const ALLOWED_BLOCKS = [
 	TimePositionBlockName,
 ];
 
-export default function MediaPlayerEditBlock( { attributes } ) {
-	const colorProps = useColorProps( attributes );
-	const blockProps = useBlockProps( colorProps );
+export function MediaPlayerEditBlock( {
+	attributes,
+	backgroundColor,
+	setBetbackgroundColor,
+} ) {
+	const hasBackground = !! backgroundColor.color;
+	const className = classnames( {
+		[ backgroundColor.class ]: backgroundColor.class,
+	} );
+
+	const style = {
+		backgroundColor: backgroundColor.color,
+	};
+
+	const blockProps = useBlockProps( { style, className } );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: ALLOWED_BLOCKS,
 		orientation: 'horizontal',
@@ -36,3 +53,5 @@ export default function MediaPlayerEditBlock( { attributes } ) {
 
 	return <div { ...innerBlocksProps } />;
 }
+
+export default withColors( { backgroundColor: 'background-color' } )( MediaPlayerEditBlock );
