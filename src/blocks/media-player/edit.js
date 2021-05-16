@@ -25,7 +25,7 @@ const ALLOWED_BLOCKS = [
 	TimePositionBlockName,
 ];
 
-export default function PlayerEditBlock( { attributes } ) {
+export default function MediaPlayerEditBlock( { attributes } ) {
 	const colorProps = useColorProps( attributes );
 	const blockProps = useBlockProps( colorProps );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {

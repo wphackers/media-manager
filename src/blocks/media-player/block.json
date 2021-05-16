@@ -1,19 +1,15 @@
 {
 	"apiVersion": 2,
-	"name": "media-manager/player",
-	"title": "Player",
+	"name": "media-manager/media-player",
+	"title": "Player Player",
 	"category": "media",
 	"icon": "media-play",
-	"description": "Add a block that displays a player content, then add player's blocks you’d like.",
+	"description": "Compose your custom media player with blocks",
 	"textdomain": "media-manager",
 	"attributes": {
 		"backgroundColor": {
 			"type": "string"
 		}
-	},
-	"supports": {
-		"align": [ "left", "center", "right" ],
-		"anchor": true
 	},
 	"editorStyle": "wp-block-player-editor",
 	"style": "wp-block-player"

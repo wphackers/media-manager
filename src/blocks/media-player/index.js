@@ -20,7 +20,8 @@
  
  registerBlockType( blockName, {
 	apiVersion: 2,
-	title: __( 'Player', 'media-manager' ),
+	title: __( 'Media Player', 'media-manager' ),
+	description: __( 'Compose your custom media player with blocks', 'media-manager' ),
 	edit: Edit,
 	save,
 	icon,
