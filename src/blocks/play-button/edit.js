@@ -24,7 +24,7 @@ export default function PlayEditBlock( { context } ) {
 	const { playMediaSource } = useDispatch( STORE_ID );
 
 	return (
-		<div { ...useBlockProps( { className: 'wp-block-media-manager__button' } ) }>
+		<div { ...useBlockProps( { className: 'wp-block-media-manager__item' } ) }>
 			<PlayButton
 				disabled={ mediaPlayingState === STATE_PLAYING }
 				scale={ 1.5 }

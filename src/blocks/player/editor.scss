@@ -1,8 +1,8 @@
 .editor-styles-wrapper .wp-block-media-manager-player {
 	display: flex;
-	justify-content: flex-start;
-	align-content: flex-start;
-	padding: 0;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 0.5em;
 
 	.block-list-appender {
 		display: flex;
@@ -11,15 +11,16 @@
 		margin: 0;
 	}
 
-	.wp-block-media-manager__button {
-		margin: 4px 8px 4px 0;
-		line-height: 0;
-		display: block;
-		border-radius: 9999px;
+	.wp-block-media-manager__item {
+		margin: 0;
+		display: inline-block;
+		align-self: center;
+		max-width: var(--responsive--aligndefault-width);
 
 		.components-button {
 			padding: 0;
 			overflow: hidden;
+			display: flex;
 		}
 	}
 }

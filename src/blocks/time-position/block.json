@@ -1,0 +1,10 @@
+{
+	"apiVersion": 2,
+	"name": "media-manager/time-position-diaplay",
+	"title": "Time position display",
+	"category": "media",
+	"icon": "time",
+	"description": "Block show the current time position of the media source",
+	"supports": {},
+	"textdomain": "media-manager"
+}

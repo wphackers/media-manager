@@ -24,7 +24,7 @@ export default function PauseEditBlock( { context } ) {
 	const { pauseMediaSource } = useDispatch( STORE_ID );
 
 	return (
-		<div { ...useBlockProps( { className: 'wp-block-media-manager__button' } ) }>
+		<div { ...useBlockProps( { className: 'wp-block-media-manager__item' } ) }>
 			<PauseButton
 				disabled={ mediaPlayingState === STATE_PAUSED }
 				scale={ 1.5 }
