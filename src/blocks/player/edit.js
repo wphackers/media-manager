@@ -4,8 +4,10 @@
  */
 import {
 	useBlockProps,
+	__experimentalUseColorProps as useColorProps,
 	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
 } from '@wordpress/block-editor';
+
 
 /**
  * Internal dependencies
@@ -23,9 +25,9 @@ const ALLOWED_BLOCKS = [
 	TimePositionBlockName,
 ];
 
-export default function PlayerEditBlock() {
-	const blockProps = useBlockProps();
-
+export default function PlayerEditBlock( { attributes } ) {
+	const colorProps = useColorProps( attributes );
+	const blockProps = useBlockProps( colorProps );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: ALLOWED_BLOCKS,
 		orientation: 'horizontal',

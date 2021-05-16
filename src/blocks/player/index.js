@@ -25,7 +25,16 @@
 	save,
 	icon,
 	supports: {
-		"align": true,
+		align: true,
+		color: {
+			text: false,
+			background: true,
+		},
+	},
+	attributes: {
+		backgroundColor: {
+			type: 'string',
+		},
 	},
  } );
  
