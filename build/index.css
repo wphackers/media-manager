@@ -1,3 +1,23 @@
+.media-source-panel__actions .components-button {
+  margin-right: 5px;
+}
 
+
+
+.editor-styles-wrapper .wp-block-media-manager-media-player .block-list-appender {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0 0.5em;
+}
+.editor-styles-wrapper .wp-block-media-manager-media-player .wp-block-media-manager__item {
+  margin: 0;
+  max-width: var(--responsive--aligndefault-width);
+}
+.editor-styles-wrapper .wp-block-media-manager-media-player .wp-block-media-manager__item .components-button {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+}
 
 /*# sourceMappingURL=index.css.map*/
