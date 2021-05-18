@@ -1,19 +1,17 @@
+/**
+ * External dependencies
+ */
+import classnames from 'classnames';
 
 /**
  * WordPress dependencies
  */
 import {
 	useBlockProps,
-	__experimentalUseColorProps as useColorProps,
 	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
 	withColors,
 } from '@wordpress/block-editor';
-import { Fragment } from '@wordpress/element';
 
-/**
- * External dependencies
- */
-import classnames from 'classnames';
 /**
  * Internal dependencies
  */
@@ -31,14 +29,10 @@ const ALLOWED_BLOCKS = [
 	TimePositionBlockName,
 ];
 
-export function MediaPlayerEditBlock( {
-	attributes,
-	backgroundColor,
-	setBetbackgroundColor,
-} ) {
-	const hasBackground = !! backgroundColor.color;
+export function MediaPlayerEditBlock( { backgroundColor } ) {
 	const className = classnames( {
 		[ backgroundColor.class ]: backgroundColor.class,
+		'has-background': !! backgroundColor.color,
 	} );
 
 	const style = {

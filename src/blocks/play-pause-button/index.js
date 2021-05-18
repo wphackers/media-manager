@@ -25,5 +25,20 @@
 	save,
 	icon,
 	usesContext: [ 'mediaSourceId' ],
+	supports: {
+		align: true,
+		color: {
+			text: true,
+			background: true,
+		},
+	},
+	attributes: {
+		backgroundColor: {
+			type: 'string',
+		},
+		textColor: {
+			type: 'string',
+		},
+	},
  } );
  
