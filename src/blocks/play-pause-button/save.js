@@ -7,13 +7,13 @@
  /**
   * Internal dependencies
   */
- import { PlayerPauseIcon, PlayerPlayIcon } from '../../icons';
+ import { PlayerPauseIcon, PlayerPlayPauseIcon } from '../../icons';
  
  export default function save() {
 	 return (
 		 <div { ...useBlockProps.save( { className: 'wp-block-media-manager__item wp-block-media-manager__play-button is-paused' } ) }>
 			 	<div className="play-icon icon">
-					<PlayerPlayIcon scale={ 1.5 } />
+					<PlayerPlayPauseIcon scale={ 1.5 } />
 				 </div>
 			 	<div className="pause-icon icon">
 					<PlayerPauseIcon scale={ 1.5 } />

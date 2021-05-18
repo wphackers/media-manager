@@ -20,6 +20,7 @@ import {
 	ControlForwardFiveIcon,
 	PlayerPlayIcon,
 	PlayerPauseIcon,
+	PlayerPlayPauseIcon,
 } from '../../icons';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import { STORE_ID, STATE_PAUSED } from '../../store/constants';
@@ -40,7 +41,7 @@ export function PlayPauseButton( { onClick, isPaused = false, scale,...other } )
 	return (
 		<Button
 			icon={ isPaused
-				? <PlayerPlayIcon scale={ scale } />
+				? <PlayerPlayPauseIcon scale={ scale } />
 				: <PlayerPauseIcon  scale={ scale } />
 			}
 			disabled={ false }

@@ -7,7 +7,7 @@
  /**
   * Internal dependencies
   */
- import { PlayPauseIcon as icon } from '../../icons';
+ import { PlayerPlayPauseIcon as icon } from '../../icons';
  
  /**
   * Internal dependencies
