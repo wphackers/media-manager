@@ -10,7 +10,6 @@ import { useSelect, useDispatch } from '@wordpress/data';
  * Internal dependencies
  */
 import { STORE_ID, STATE_PLAYING } from '../../store/constants';
-import './editor.scss';
 import { PlayButton } from '../../components/media-player';
 
 export default function PlayEditBlock( { context } ) {

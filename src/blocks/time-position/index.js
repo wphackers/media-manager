@@ -26,5 +26,8 @@ registerBlockType( blockName, {
 	save,
 	icon,
 	usesContext: [ 'mediaSourceId' ],
+	supports: {
+		fontSize: true,
+		lineHeight: true,
+	},
 } );
- 

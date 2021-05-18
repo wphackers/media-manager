@@ -1,13 +1,22 @@
 /**
  * WordPress dependencies
  */
-import { useBlockProps } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-
-export default function save() {
-	return (
-		<div { ...useBlockProps.save() }>
-			{ __( 'Pause', 'media-manager' ) }
-		</div>
-	);
-}
+ import { useBlockProps } from '@wordpress/block-editor';
+ import { __ } from '@wordpress/i18n';
+ 
+ /**
+  * Internal dependencies
+  */
+ import { PlayerPauseIcon, PlayerPlayIcon } from '../../icons';
+ 
+ 
+ export default function save() {
+	 return (
+		 <div { ...useBlockProps.save( { className: 'wp-block-media-manager__item' } ) }>
+			 <button>
+				 <PlayerPauseIcon scale={ 1.5 } />
+			 </button>
+		 </div>
+	 );
+ }
+ 

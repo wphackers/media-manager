@@ -28,48 +28,72 @@ domReady( function() {
 		} );
 	}
 
-	// All media-center blocks.
+	// All Media Center blocks.
 	const mediaCenterBlocks = document.querySelectorAll( '.wp-block-media-manager-media-center' );
 	if ( ! mediaCenterBlocks?.length ) {
 		return;
 	}
 
 	mediaCenterBlocks.forEach( function( mediaCenterBlock ) {
+		const { mediaSourceRef } = mediaCenterBlock?.dataset;
+
+		// Media Link Format Style.
 		const mediaLinkFormatElements = mediaCenterBlock.querySelectorAll( 'a.media-link-format-type' );
-		if ( ! mediaLinkFormatElements?.length ) {
-			return;
+		if ( mediaLinkFormatElements?.length ) {
+			mediaLinkFormatElements.forEach( function( anchor ) {
+				const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceRef );
+				const isPlayerPaused = STATE_PAUSED === state
+				const mediaElement = document.querySelector( querySelector );
+				
+				anchor.addEventListener( 'click', function( event ) {
+					event.stopPropagation();
+					const timestamp = event.target.getAttribute( 'href' ).replace( /#/, '' );
+					
+					const rePlay = 
+						Math.abs( Math.floor( timestamp - mediaElement.currentTime ) * 1000 ) >
+						2000;
+						
+					// Playback to the timestamp.
+					dispatch( STORE_ID ).setMediaSourceCurrentTime( mediaSourceRef, timestamp );
+					mediaElement.currentTime = timestamp;
+
+					if ( rePlay ) {
+						mediaElement.play();
+						dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
+					} else {
+						if ( isPlayerPaused ) {
+							dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
+							mediaElement.play();
+						} else {
+							dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
+							mediaElement.pause();
+						}
+					}
+				} );
+			} );
 		}
 
-		const { mediaSourceRef } = mediaCenterBlock.dataset;
-		mediaLinkFormatElements.forEach( function( anchor ) {
-			anchor.addEventListener( 'click', function( event ) {
-				event.stopPropagation();
-				const timestamp = event.target.getAttribute( 'href' ).replace( /#/, '' );
-				
-				const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceRef );
-				const mediaElement = document.querySelector( querySelector );
+		const playPauseButtons = mediaCenterBlock.querySelectorAll( '.wp-block-media-manager-play-pause-button' );
+		if ( playPauseButtons?.length ) {
+			playPauseButtons.forEach( function( playPauseButton ) {
+				playPauseButton.addEventListener( 'click', function( event ) {
+					event.stopPropagation();
 
-				const rePlay = 
-					Math.abs( Math.floor( timestamp - mediaElement.currentTime ) * 1000 ) >
-					2000;
-					
-				// Playback to the timestamp.
-				dispatch( STORE_ID ).setMediaSourceCurrentTime( mediaSourceRef, timestamp );
-				mediaElement.currentTime = timestamp;
+					const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceRef );
+					const isPlayerPaused = STATE_PAUSED === state
+					const mediaElement = document.querySelector( querySelector );
 
-				if ( rePlay ) {
-					mediaElement.play();
-					dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
-				} else {
-					if ( STATE_PAUSED === state ) {
+					if ( isPlayerPaused ) {
 						dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
-						mediaElement.pause();
-					} else {
 						mediaElement.play();
+						playPauseButton.classList.remove( 'is-paused' );
+					} else {
 						dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
+						mediaElement.pause();
+						playPauseButton.classList.add( 'is-paused' );
 					}
-				}
+				} );
 			} );
-		} );
+		}	
 	} );
 } );

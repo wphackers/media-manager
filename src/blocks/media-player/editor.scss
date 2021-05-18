@@ -1,10 +1,4 @@
 .editor-styles-wrapper .wp-block-media-manager-media-player {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	padding: 0.5em;
-	border-radius: 28px;
-
 	.block-list-appender {
 		display: flex;
 		align-items: center;
@@ -14,10 +8,7 @@
 
 	.wp-block-media-manager__item {
 		margin: 0;
-		display: inline-block;
-		align-self: center;
 		max-width: var(--responsive--aligndefault-width);
-		border-radius: 9999px; // 100% causes an oval, but any explicit but really high value retains the pill shape.
 
 		.components-button {
 			padding: 0;

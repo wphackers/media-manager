@@ -1,0 +1,26 @@
+.wp-block-media-manager-play-pause-button {
+	cursor: pointer;
+
+	.play-icon {
+		display: none;
+	}
+	
+	.pause-icon {
+		display: block;
+	}
+
+	&.is-paused {
+		.play-icon {
+			display: block;
+		}
+		
+		.pause-icon {
+			display: none;
+		}
+	}
+
+
+	&:hover {
+		opacity: 0.8;
+	}
+}

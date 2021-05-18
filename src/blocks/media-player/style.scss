@@ -1,0 +1,29 @@
+.wp-block-media-manager-media-player {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 0.5em;
+	border-radius: 50vh;
+
+	.wp-block-media-manager__item {
+		margin: 0;
+		display: inline-block;
+		align-self: center;
+		max-width: var(--responsive--aligndefault-width);
+		border-radius: 9999px; // 100% causes an oval, but any explicit but really high value retains the pill shape.
+		line-height: 0;
+		
+		button {
+			width: 36px;
+			height: 36px;
+			overflow: hidden;
+			padding: 0;
+			margin: 0;
+			border: 0;
+		}
+	}
+}
+
+.has-background .wp-block-media-manager__item button:not(:hover):not(:active):not(.has-background) {
+	background-color: transparent;
+}

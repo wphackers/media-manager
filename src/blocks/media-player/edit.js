@@ -22,6 +22,7 @@ import { blockName as pauseButtonBlockName } from '../pause-button';
 import { blockName as playPauseButtonBlockName } from '../play-pause-button';
 import { blockName as TimePositionBlockName } from '../time-position';
 import './editor.scss';
+import './style.scss';
 
 const ALLOWED_BLOCKS = [
 	playButtonBlockName,
