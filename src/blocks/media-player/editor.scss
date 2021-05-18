@@ -6,15 +6,16 @@
 		margin: 0 0 0 0.5em;
 	}
 
+	// All children items (play, pause, time-position, etc...)
 	.wp-block-media-manager__item {
 		margin: 0;
 		max-width: var(--responsive--aligndefault-width);
+	}
 
-		.components-button {
-			padding: 0;
-			overflow: hidden;
-			display: flex;
-			color: inherit;
-		}
+	.components-button {
+		padding: 0;
+		overflow: hidden;
+		display: flex;
+		color: inherit;
 	}
 }

@@ -5,6 +5,7 @@
 	padding: 0.5em;
 	border-radius: 50vh;
 
+	// All children items (play, pause, time-position, etc...)
 	.wp-block-media-manager__item {
 		margin: 0;
 		display: inline-block;
@@ -12,18 +13,21 @@
 		max-width: var(--responsive--aligndefault-width);
 		border-radius: 9999px; // 100% causes an oval, but any explicit but really high value retains the pill shape.
 		line-height: 0;
-		
-		button {
-			width: 36px;
-			height: 36px;
-			overflow: hidden;
-			padding: 0;
-			margin: 0;
-			border: 0;
+	}
+
+	button {
+		width: 36px;
+		height: 36px;
+		padding: 0;
+		margin: 0;
+		border: 0;
+
+		&:focus {
+			outline: none;
+		}
+
+		svg {
+			fill: currentColor;
 		}
 	}
-}
-
-.has-background .wp-block-media-manager__item button:not(:hover):not(:active):not(.has-background) {
-	background-color: transparent;
 }
