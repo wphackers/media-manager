@@ -27,10 +27,6 @@
 	usesContext: [ 'mediaSourceId' ],
 	supports: {
 		align: true,
-		color: {
-			text: true,
-			background: true,
-		},
 	},
 	attributes: {
 		iconColor: {

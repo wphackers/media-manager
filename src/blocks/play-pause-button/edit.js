@@ -27,22 +27,28 @@ import './editor.scss';
 
 const buttonSizes = [
 	{
+		name: __( 'Small', 'media-manager' ),
+		slug: 'small',
+		key: 'key-small',
+		size: 1,
+	},
+	{
 		name: __( 'Normal', 'media-manager' ),
 		slug: 'normal',
 		key: 'key-normal',
-		size: 1,
+		size: 1.5,
 	},
 	{
 		name: __( 'Medium', 'media-manager' ),
 		slug: 'medium',
 		key: 'key-medium',
-		size: 1.5,
+		size: 2,
 	},
 	{
 		name: __( 'Large', 'media-manager' ),
 		slug: 'large',
 		key: 'key-large',
-		size: 2,
+		size: 2.5,
 	},
 ];
 
@@ -110,14 +116,14 @@ function PlayPauseEditBlock( {
 					<ContrastChecker
 						{ ...{
 							backgroundColor: backgroundColor.color,
-							backgroundColor: iconColor.color,
+							color: iconColor.color,
 						} }
 						isLargeText={ false }
 					/>
 				</PanelColorSettings>
 
 				<Panel>
-					<PanelBody title={ __( 'Button size', 'media-manager' ) }>
+					<PanelBody>
 						<CustomSelectControl
 							label={ __( 'Button size', 'media-manager' ) }
 							options={ buttonSizes }

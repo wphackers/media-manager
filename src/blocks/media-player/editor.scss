@@ -8,7 +8,7 @@
 
 	// All children items (play, pause, time-position, etc...)
 	.wp-block-media-manager__item {
-		margin: 0;
+		margin: 0 5px 0 0;
 		max-width: var(--responsive--aligndefault-width);
 	}
 
