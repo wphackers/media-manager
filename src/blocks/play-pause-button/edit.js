@@ -14,6 +14,7 @@ import { useSelect, useDispatch } from '@wordpress/data';
  */
 import { STORE_ID, STATE_PAUSED } from '../../store/constants';
 import { PlayPauseButton } from '../../components/media-player';
+import './editor.scss';
 
 export default function PlayPauseEditBlock( { context, scale } ) {
 	const sourceId = context.mediaSourceId;
