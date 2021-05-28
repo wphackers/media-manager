@@ -26,29 +26,29 @@
 		svg {
 			fill: currentColor;
 		}
+	}
 
-		&.is-small-size {
-			width: 24px;
-			min-width: 24px;
-			height: 24px;
-		}
+	.is-small-size button {
+		width: 24px;
+		min-width: 24px;
+		height: 24px;
+	}
 
-		&.is-normal-size {
-			width: 36px;
-			min-width: 36px;
-			height: 36px;
-		}
+	.is-normal-size button {
+		width: 36px;
+		min-width: 36px;
+		height: 36px;
+	}
 
-		&.is-medium-size {
-			width: 48px;
-			min-width: 48px;
-			height: 48px;
-		}
+	.is-medium-size button {
+		width: 48px;
+		min-width: 48px;
+		height: 48px;
+	}
 
-		&.is-large-size {
-			width: 60px;
-			min-width: 60px;
-			height: 60px;
-		}
+	.is-large-size button {
+		width: 60px;
+		min-width: 60px;
+		height: 60px;
 	}
 }

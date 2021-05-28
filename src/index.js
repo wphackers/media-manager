@@ -5,6 +5,8 @@
 /**
  * Internal dependencies
  */
-import './blocks';
-import './store';
 import './extending';
+
+import './store';
+import './blocks';
+

@@ -2,20 +2,17 @@
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
-import { PlayerPauseIcon, PlayerPlayIcon } from '../../icons';
+import { PlayerPlayIcon } from '../../icons';
+import { getButtonSizseBySlug } from '../../components/with-player-button-settings';
 
-
-export default function save() {
+export default function save( { attributes } ) {
 	return (
-		<div { ...useBlockProps.save( { className: 'wp-block-media-manager__item' } ) }>
-			<button>
-				<PlayerPlayIcon scale={ 1.5 } />
-			</button>
-		</div>
+		<button { ...useBlockProps.save() }>
+			<PlayerPlayIcon scale={ getButtonSizseBySlug( attributes?.size ) } />
+		</button>
 	);
 }

@@ -1,0 +1,7 @@
+.wp-block-media-manager-media-player {	
+	&.is-paused {
+		.wp-block-media-manager__pause-button {
+			opacity: 0.7;
+		}
+	}
+}

@@ -30,24 +30,6 @@ domReady( function() { // we need this if we'd like to extend the block :'(
 		supports: {
 			align: true,
 		},
-		attributes: {
-			iconColor: {
-				type: 'string',
-			},
-			customIconColor: {
-				type: 'string',
-			},
-			backgroundColor: {
-				type: 'string',
-			},
-			customBackgroundColor: {
-				type: 'string',
-			},
-			size: {
-				type: 'string',
-				default: 'normal',
-			},
-		},
 	} );
 } );
  

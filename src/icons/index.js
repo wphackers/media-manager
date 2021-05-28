@@ -61,6 +61,7 @@ export const withScale = createHigherOrderComponent( ( Icon ) => ( props ) => {
 
 export const PlayerPlayIcon = withScale( ( { width = 24, height = 24, style = null } ) => (
 	<SVG
+		className="player-play-icon"
 		xmlns="https://www.w3.org/2000/svg"
 		style={ style }
 		viewBox={ `0 0 ${ width } ${ height }` }
@@ -73,6 +74,7 @@ export const PlayerPlayIcon = withScale( ( { width = 24, height = 24, style = nu
 
 export const PlayerPauseIcon = withScale( ( { width = 24, height = 24, style = null } ) => (
 	<SVG
+		className="player-pause-icon"
 		xmlns="https://www.w3.org/2000/svg"
 		style={ style }
 		viewBox={ `0 0 ${ width } ${ height }` }
@@ -97,6 +99,7 @@ export const ControlBackFiveIcon = (
 
 export const PlayerPlayPauseIcon = withScale( ( { width = 24, height = 24, style = null } ) => (
 	<SVG
+		className="player-play-pause-icon"
 		xmlns="https://www.w3.org/2000/svg"
 		style={ style }
 		viewBox={ `0 0 ${ width } ${ height }` }

@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 
  export default function save() {
 	return (
-		<div { ...useBlockProps.save() }>
+		<div { ...useBlockProps.save( { className: 'is-paused' } ) }>
 			<InnerBlocks.Content />
 		</div>
 	);

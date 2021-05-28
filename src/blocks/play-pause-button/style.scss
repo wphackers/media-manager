@@ -1,25 +1,23 @@
-.wp-block-media-manager-play-pause-button {
-	cursor: pointer;
-
-	.play-icon {
-		display: none;
-	}
-	
-	.pause-icon {
-		display: block;
-	}
-
-	&.is-paused {
-		.play-icon {
-			display: block;
-		}
-		
-		.pause-icon {
+.wp-block-media-manager-media-player {
+	.wp-block-media-manager__play-pause-button {
+		.player-play-pause-icon {
 			display: none;
 		}
+	
+		.player-pause-icon {
+			display: block;
+		}
 	}
-
-	&:hover {
-		opacity: 0.8;
+	
+	&.is-paused {
+		.wp-block-media-manager__play-pause-button {
+			.player-play-pause-icon {
+				display: block;
+			}
+	
+			.player-pause-icon {
+				display: none;
+			}	
+		}
 	}
 }

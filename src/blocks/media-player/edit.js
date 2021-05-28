@@ -22,7 +22,7 @@ import { blockName as TimePositionBlockName } from '../time-position';
 import './editor.scss';
 import './style.scss';
 
-const ALLOWED_BLOCKS = [
+export const PLAYER_BLOCKS = [
 	playButtonBlockName,
 	pauseButtonBlockName,
 	playPauseButtonBlockName,
@@ -41,7 +41,7 @@ export function MediaPlayerEditBlock( { backgroundColor } ) {
 
 	const blockProps = useBlockProps( { style, className } );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		allowedBlocks: ALLOWED_BLOCKS,
+		allowedBlocks: PLAYER_BLOCKS,
 		orientation: 'horizontal',
 		templateLock: false,
 	} );
