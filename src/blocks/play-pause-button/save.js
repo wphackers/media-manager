@@ -6,13 +6,14 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
- import { useBlockProps, getColorClassName } from '@wordpress/block-editor';
- import { __ } from '@wordpress/i18n';
+import { useBlockProps, getColorClassName } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
  
  /**
   * Internal dependencies
   */
- import { PlayerPauseIcon, PlayerPlayPauseIcon } from '../../icons';
+import { PlayerPauseIcon, PlayerPlayPauseIcon } from '../../icons';
+import { getButtonSizseBySlug } from './edit';
  
  export default function save( { attributes } ) {
 	 const {
@@ -20,6 +21,7 @@ import classnames from 'classnames';
 		customIconColor,
 		backgroundColor,
 		customBackgroundColor,
+		size,
 	} = attributes;
 
 	const backgroundColorClass = getColorClassName(
@@ -37,7 +39,8 @@ import classnames from 'classnames';
 		'wp-block-media-manager__play-button',
 		'is-paused',
 		backgroundColorClass,
-		iconColorClass
+		iconColorClass,
+		`is-${ size }-size`,
 	);
 
 	const style = {
@@ -48,10 +51,10 @@ import classnames from 'classnames';
 	 return (
 		<button { ...useBlockProps.save( { className, style } ) }>
 			<div className="play-icon icon">
-				<PlayerPlayPauseIcon scale={ 1.5 } />
-				</div>
+				<PlayerPlayPauseIcon scale={ getButtonSizseBySlug( size ) } />
+			</div>
 			<div className="pause-icon icon">
-				<PlayerPauseIcon scale={ 1.5 } />
+				<PlayerPauseIcon scale={ getButtonSizseBySlug( size ) } />
 			</div>
 		 </button>
 	 );

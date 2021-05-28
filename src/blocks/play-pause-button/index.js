@@ -45,6 +45,10 @@
 		customBackgroundColor: {
 			type: 'string',
 		},
+		size: {
+			type: 'string',
+			default: 'normal',
+		},
 	},
  } );
  

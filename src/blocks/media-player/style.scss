@@ -16,8 +16,6 @@
 	}
 
 	button {
-		width: 36px;
-		height: 36px;
 		padding: 0;
 		margin: 0;
 		border: 0;
@@ -28,6 +26,24 @@
 
 		svg {
 			fill: currentColor;
+		}
+
+		&.is-normal-size {
+			width: 24px;
+			min-width: 24px;
+			height: 24px;
+		}
+
+		&.is-medium-size {
+			width: 36px;
+			min-width: 36px;
+			height: 36px;
+		}
+
+		&.is-large-size {
+			width: 48px;
+			min-width: 48px;
+			height: 48px;
 		}
 	}
 }
