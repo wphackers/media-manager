@@ -16,8 +16,8 @@ import classnames from 'classnames';
  
  export default function save( { attributes } ) {
 	 const {
-		textColor,
-		customTextColor,
+		iconColor,
+		customIconColor,
 		backgroundColor,
 		customBackgroundColor,
 	} = attributes;
@@ -27,9 +27,9 @@ import classnames from 'classnames';
 		backgroundColor
 	);
 
-	const textColorClass = getColorClassName(
-		'text-color',
-		textColor
+	const iconColorClass = getColorClassName(
+		'color',
+		iconColor
 	);
 
 	const className = classnames(
@@ -37,12 +37,12 @@ import classnames from 'classnames';
 		'wp-block-media-manager__play-button',
 		'is-paused',
 		backgroundColorClass,
-		textColorClass
+		iconColorClass
 	);
 
 	const style = {
 		backgroundColor: ! backgroundColorClass ? customBackgroundColor : undefined,
-		textColor: ! textColorClass ? customTextColor : undefined,
+		color: ! iconColorClass ? customIconColor : undefined,
 	};
 
 	 return (

@@ -33,10 +33,16 @@
 		},
 	},
 	attributes: {
+		iconColor: {
+			type: 'string',
+		},
+		customIconColor: {
+			type: 'string',
+		},
 		backgroundColor: {
 			type: 'string',
 		},
-		textColor: {
+		customBackgroundColor: {
 			type: 'string',
 		},
 	},
