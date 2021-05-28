@@ -3,6 +3,7 @@
  */
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
+import domReady from '@wordpress/dom-ready';
 
 /**
  * Internal dependencies
@@ -18,12 +19,13 @@ import save from './save';
  
 export const blockName = 'media-manager/pause-button';
  
-registerBlockType( blockName, {
-	apiVersion: 2,
-	title: __( 'Pause button', 'media-manager' ),
-	edit: Edit,
-	save,
-	icon,
-	usesContext: [ 'mediaSourceId' ],
+domReady( function() { // we need this if we'd like to extend the block :'(
+	registerBlockType( blockName, {
+		apiVersion: 2,
+		title: __( 'Pause button', 'media-manager' ),
+		edit: Edit,
+		save,
+		icon,
+		usesContext: [ 'mediaSourceId' ],
+	} );
 } );
- 
