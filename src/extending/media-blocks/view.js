@@ -73,10 +73,16 @@ domReady( function() {
 			} );
 		}
 
-		const playPauseButtons = mediaCenterBlock.querySelectorAll( '.wp-block-media-manager-play-pause-button' );
-		if ( playPauseButtons?.length ) {
-			playPauseButtons.forEach( function( playPauseButton ) {
-				playPauseButton.addEventListener( 'click', function( event ) {
+		// Player button blocks.
+		const mediaPlayerButtons = mediaCenterBlock.querySelectorAll( 'button.wp-block-media-manager__item' );
+		if ( mediaPlayerButtons?.length ) {
+			mediaPlayerButtons.forEach( function( playerButton ) {
+				
+				const isPlayPauseButton = playerButton.classList.contains( 'wp-block-media-manager__play-pause-button' );
+				const isPlayButton = playerButton.classList.contains( 'wp-block-media-manager__play-button' );
+				const isPauseButton = playerButton.classList.contains( 'wp-block-media-manager__pause-button' );
+
+				playerButton.addEventListener( 'click', function( event ) {
 					event.stopPropagation();
 
 					const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceRef );
@@ -84,13 +90,18 @@ domReady( function() {
 					const mediaElement = document.querySelector( querySelector );
 
 					if ( isPlayerPaused ) {
-						dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
-						mediaElement.play();
-						playPauseButton.classList.remove( 'is-paused' );
+						if ( isPlayPauseButton || isPlayButton ) {
+							dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
+							mediaElement.play();
+						}
+
+						playerButton.classList.remove( 'is-paused' );
 					} else {
-						dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
-						mediaElement.pause();
-						playPauseButton.classList.add( 'is-paused' );
+						if ( isPlayPauseButton || isPauseButton ) {
+							dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
+							mediaElement.pause();
+						}
+						playerButton.classList.add( 'is-paused' );
 					}
 				} );
 			} );

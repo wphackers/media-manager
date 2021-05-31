@@ -8,16 +8,14 @@
 			display: block;
 		}
 	}
+
+	.wp-block-media-manager__play-pause-button.is-paused {
+		.player-play-pause-icon {
+			display: block;
+		}
 	
-	&.is-paused {
-		.wp-block-media-manager__play-pause-button {
-			.player-play-pause-icon {
-				display: block;
-			}
-	
-			.player-pause-icon {
-				display: none;
-			}	
+		.player-pause-icon {
+			display: none;
 		}
 	}
 }

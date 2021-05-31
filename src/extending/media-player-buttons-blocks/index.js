@@ -47,6 +47,7 @@ function addSaveProps( props, { name }, attributes ) {
 		backgroundColorClass,
 		iconColorClass,
 		`is-${ size }-size`,
+		'is-paused',
 	);
 
 	newProps.style = {
