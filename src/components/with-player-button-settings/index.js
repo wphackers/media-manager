@@ -75,15 +75,15 @@ export default ( supportProps ) => {
 			}
 
 			const support = supportProps[ prop ];
-			const value = props[ support.propName ]?.color;
+			const value = props[ support.attributeName ]?.color;
 			colorSettings.push( {
 				label: supportProps[ prop ]?.label,
 				value,
-				onChange: props[ support.setterName ],
+				onChange: props[ support.setterAttributeName ],
 			} );
 
 			if ( supportProps.__contrastChecker ) {
-				contrastCheckerProps[ support.style === 'color' ? 'textColor' : support.style ] = value;
+				contrastCheckerProps[ support.style === 'color' ? 'textColor' : 'backgroundColor' ] = value;
 			}
 		}
 

@@ -1,4 +1,4 @@
-.wp-block-media-manager__media-player {
+.wp-block-media-manager-media-player {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -6,7 +6,7 @@
 	border-radius: 50vh;
 
 	// All children items (play, pause, time-position, etc...)
-	.wp-block-media-manager__item {
+	.wp-block {
 		margin: 0 5px 0 0;
 		display: inline-block;
 		align-self: center;

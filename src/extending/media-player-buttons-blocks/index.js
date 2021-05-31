@@ -16,66 +16,86 @@ import { getBlockSupport } from '@wordpress/blocks';
  */
 import withPlayerButtonSettings from '../../components/with-player-button-settings';
 
+const getMediaManagerColorSupport = ( settings ) => getBlockSupport( settings, 'media-manager/color' );
+
 function addSaveProps( props, settings, attributes ) {
-	const mediaColor = getBlockSupport( settings, 'media-manager/color' );
+	const mediaColor = getMediaManagerColorSupport( settings );
 	if ( ! mediaColor ) {
 		return props;
 	}
 
-	const {
-		iconColor,
-		customIconColor,
-		backgroundColor,
-		customBackgroundColor,
-		size,
-	} = attributes;
+	const { size } = attributes;
 
-	const backgroundColorClass = getColorClassName(
-		'background-color',
-		backgroundColor
-	);
+	const newProps = { ...props, style: props.style || {} };
 
-	const iconColorClass = getColorClassName(
-		'color',
-		iconColor
-	);
+	const mediaColorClassNames = [];
+	for( const prop in mediaColor ) {
+		if ( /^__/.test( prop ) ) {
+			continue;
+		}
 
-	const newProps = { ...props };
+		const colorClassName = getColorClassName(
+			mediaColor[ prop ].style,
+			attributes[ mediaColor[ prop ].attributeName ]
+		);
+
+		mediaColorClassNames.push( colorClassName );
+
+		const attrName = mediaColor[ prop ].customAttributeName;
+
+		const stylePropName = mediaColor[ prop ].style === 'background-color'
+			? 'backgroundColor'
+			: 'color';
+
+		newProps.style[ stylePropName ] = colorClassName ? undefined : attributes[ attrName ];
+	}
 
 	newProps.className = classnames(
-		'wp-block-media-manager__item',
-		`wp-block-media-manager__${ settings.name.substring( 14 ) }`,
-		backgroundColorClass,
-		iconColorClass,
+		props?.className,
+		mediaColorClassNames.concat( ' ' ),
 		`is-${ size }-size`,
 		'is-paused',
 	);
-
-	newProps.style = {
-		backgroundColor: ! backgroundColorClass ? customBackgroundColor : undefined,
-		color: ! iconColorClass ? customIconColor : undefined,
-	};
 
 	return newProps;
 }
 
 function regiterMediaPlayerButtonBlocks( settings ) {
-	const mediaColor = getBlockSupport( settings, 'media-manager/color' );
+	const mediaColor = getMediaManagerColorSupport( settings );
 	if ( ! mediaColor ) {
 		return settings;
 	}
 
+	// HOC withColors settings object.
 	let supportStylePropsMap = {};
+
+	// Block attributes.
+	const attributes = {};
+
 	for ( const prop in mediaColor ) {
 		if ( /^__/.test( prop ) ) {
 			continue;
 		}
 
-		const propName = /\wColor$/.test( prop ) ? prop : `${ prop }Color`;
-		mediaColor[ prop ].propName = propName;
-		mediaColor[ prop ].setterName = `set${ propName.charAt( 0 ).toUpperCase() + propName.slice( 1 ) }`;
-		mediaColor[ prop ].style = mediaColor[ prop ]?.style || 'color';
-		supportStylePropsMap[ propName ] = mediaColor[ prop ].style;
+		const attributeName = /\wColor$/.test( prop ) ? prop : `${ prop }Color`;
+		const upperCaseName = attributeName.charAt( 0 ).toUpperCase() + attributeName.slice( 1 );
+
+		// Populate mediaColor supports object.
+		mediaColor[ prop ] = {
+			...mediaColor[ prop ],
+			attributeName: attributeName,
+			customAttributeName: `custom${ upperCaseName }`,
+			setterAttributeName: `set${ upperCaseName }`,
+			style: mediaColor[ prop ]?.style || 'color',
+			className: attributeName,
+		};
+
+		// Build withColors HOC settings.
+		supportStylePropsMap[ attributeName ] = mediaColor[ prop ].style;
+
+		// Populate block attributes.
+		attributes[ attributeName ] = { type: 'string' };
+		attributes[ mediaColor[ prop ].customAttributeName ] = { type: 'string' };
 	}
 
 	const existingGetEditWrapperProps = settings.getEditWrapperProps;
@@ -84,18 +104,7 @@ function regiterMediaPlayerButtonBlocks( settings ) {
 		...settings,
 		attributes: {
 			...settings.attributes,
-			iconColor: {
-				type: 'string',
-			},
-			customIconColor: {
-				type: 'string',
-			},
-			backgroundColor: {
-				type: 'string',
-			},
-			customBackgroundColor: {
-				type: 'string',
-			},
+			...attributes,
 			size: {
 				type: 'string',
 				default: 'normal',

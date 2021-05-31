@@ -21,7 +21,7 @@ export default function TimePositionDisplayEditBlock( { context } ) {
 	} ), [ sourceId ] );
 
 	return (
-		<div { ...useBlockProps( { className: 'wp-block-media-manager__item' } ) }>
+		<div { ...useBlockProps() }>
 			<div className="time-position-diaplay__wrapper">
 				{ convertSecondsToTimeCode( currentTime ) }
 			</div>

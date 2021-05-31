@@ -30,8 +30,8 @@ registerBlockType( blockName, {
 		'media-manager/color': {
 			background:  {
 				label: __( 'Background color', 'media-manager' ),
+				style: 'background-color',
 			},
-			__panelTitle: __( 'Player color', 'media-manager' ),
 		},
 	},
 } );
@@ -42,7 +42,7 @@ export const buttonSupports = {
 	'media-manager/color': {
 		icon: {
 			label: __( 'Icon color', 'media-manager' ),
-			style: 'backgroundColor',
+			style: 'background-color',
 		},
 		background:  {
 			label: __( 'Background color', 'media-manager' ),

@@ -1,4 +1,4 @@
-.editor-styles-wrapper .wp-block-media-manager__media-player {
+.editor-styles-wrapper .wp-block-media-manager-media-player {
 	.block-list-appender {
 		display: flex;
 		align-items: center;
@@ -7,7 +7,7 @@
 	}
 
 	// All children items (play, pause, time-position, etc...)
-	.wp-block-media-manager__item {
+	.wp-block {
 		margin: 0 5px 0 0;
 		max-width: var(--responsive--aligndefault-width);
 	}
