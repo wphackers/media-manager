@@ -123,10 +123,10 @@
 .wp-block-media-manager-media-player .wp-block-media-manager__play-button {
   opacity: 0.7;
 }
-.wp-block-media-manager-media-player.is-paused .wp-block-media-manager__play-button {
+.wp-block-media-manager-media-player .wp-block-media-manager__play-button.is-paused {
   opacity: 1;
 }
-.wp-block-media-manager-media-player.is-paused .wp-block-media-manager__pause-button {
+.wp-block-media-manager-media-player .wp-block-media-manager__pause-button.is-paused {
   opacity: 0.7;
 }
 .wp-block-media-manager-media-player .wp-block-media-manager__play-pause-button .player-play-pause-icon {
@@ -135,10 +135,10 @@
 .wp-block-media-manager-media-player .wp-block-media-manager__play-pause-button .player-pause-icon {
   display: block;
 }
-.wp-block-media-manager-media-player.is-paused .wp-block-media-manager__play-pause-button .player-play-pause-icon {
+.wp-block-media-manager-media-player .wp-block-media-manager__play-pause-button.is-paused .player-play-pause-icon {
   display: block;
 }
-.wp-block-media-manager-media-player.is-paused .wp-block-media-manager__play-pause-button .player-pause-icon {
+.wp-block-media-manager-media-player .wp-block-media-manager__play-pause-button.is-paused .player-pause-icon {
   display: none;
 }
 .wp-block-media-manager-time-position-diaplay .time-position-diaplay__wrapper {
@@ -153,7 +153,7 @@
   padding: 0.5em;
   border-radius: 50vh;
 }
-.wp-block-media-manager-media-player .wp-block-media-manager__item {
+.wp-block-media-manager-media-player .wp-block {
   margin: 0 5px 0 0;
   display: inline-block;
   -ms-grid-row-align: center;

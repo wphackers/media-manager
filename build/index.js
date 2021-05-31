@@ -2049,40 +2049,30 @@ function save(_ref) {
 /*!*****************************************!*\
   !*** ./src/blocks/media-player/edit.js ***!
   \*****************************************/
-/*! exports provided: PLAYER_BLOCKS, MediaPlayerEditBlock, default */
+/*! exports provided: PLAYER_BLOCKS, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PLAYER_BLOCKS", function() { return PLAYER_BLOCKS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MediaPlayerEditBlock", function() { return MediaPlayerEditBlock; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _play_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../play-button */ "./src/blocks/play-button/index.js");
-/* harmony import */ var _pause_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pause-button */ "./src/blocks/pause-button/index.js");
-/* harmony import */ var _play_pause_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../play-pause-button */ "./src/blocks/play-pause-button/index.js");
-/* harmony import */ var _time_position__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../time-position */ "./src/blocks/time-position/index.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/media-player/editor.scss");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/media-player/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MediaPlayerEditBlock; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _play_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../play-button */ "./src/blocks/play-button/index.js");
+/* harmony import */ var _pause_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pause-button */ "./src/blocks/pause-button/index.js");
+/* harmony import */ var _play_pause_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../play-pause-button */ "./src/blocks/play-pause-button/index.js");
+/* harmony import */ var _time_position__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../time-position */ "./src/blocks/time-position/index.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/media-player/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/media-player/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_7__);
 
-
-
-/**
- * External dependencies
- */
 
 /**
  * WordPress dependencies
  */
-
 
 /**
  * Internal dependencies
@@ -2094,29 +2084,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var PLAYER_BLOCKS = [_play_button__WEBPACK_IMPORTED_MODULE_4__["blockName"], _pause_button__WEBPACK_IMPORTED_MODULE_5__["blockName"], _play_pause_button__WEBPACK_IMPORTED_MODULE_6__["blockName"], _time_position__WEBPACK_IMPORTED_MODULE_7__["blockName"]];
-function MediaPlayerEditBlock(_ref) {
-  var _classnames;
-
-  var backgroundColor = _ref.backgroundColor;
-  var className = classnames__WEBPACK_IMPORTED_MODULE_2___default()((_classnames = {}, _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, backgroundColor.class, backgroundColor.class), _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(_classnames, 'has-background', !!backgroundColor.color), _classnames));
-  var style = {
-    backgroundColor: backgroundColor.color
-  };
-  var blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["useBlockProps"])({
-    style: style,
-    className: className
-  });
-  var innerBlocksProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["__experimentalUseInnerBlocksProps"])(blockProps, {
+var PLAYER_BLOCKS = [_play_button__WEBPACK_IMPORTED_MODULE_2__["blockName"], _pause_button__WEBPACK_IMPORTED_MODULE_3__["blockName"], _play_pause_button__WEBPACK_IMPORTED_MODULE_4__["blockName"], _time_position__WEBPACK_IMPORTED_MODULE_5__["blockName"]];
+function MediaPlayerEditBlock() {
+  var blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"])();
+  var innerBlocksProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["__experimentalUseInnerBlocksProps"])(blockProps, {
     allowedBlocks: PLAYER_BLOCKS,
     orientation: 'horizontal',
     templateLock: false
   });
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", innerBlocksProps);
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", innerBlocksProps);
 }
-/* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["withColors"])({
-  backgroundColor: 'background-color'
-})(MediaPlayerEditBlock));
 
 /***/ }),
 
@@ -2135,21 +2112,22 @@ function MediaPlayerEditBlock(_ref) {
 /*!******************************************!*\
   !*** ./src/blocks/media-player/index.js ***!
   \******************************************/
-/*! exports provided: blockName */
+/*! exports provided: blockName, buttonSupports */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockName", function() { return blockName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buttonSupports", function() { return buttonSupports; });
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/media-player/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./edit */ "./src/blocks/media-player/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./save */ "./src/blocks/media-player/save.js");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/blocks/media-player/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/blocks/media-player/save.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/media-player/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_5__);
 /**
  * WordPress dependencies
  */
@@ -2172,22 +2150,34 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])(bloc
   apiVersion: 2,
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Media Player', 'media-manager'),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Compose your custom media player with blocks', 'media-manager'),
-  edit: _edit__WEBPACK_IMPORTED_MODULE_4__["default"],
-  save: _save__WEBPACK_IMPORTED_MODULE_5__["default"],
+  edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
+  save: _save__WEBPACK_IMPORTED_MODULE_4__["default"],
   icon: _icons__WEBPACK_IMPORTED_MODULE_2__["PlayerIcon"],
   supports: {
     align: true,
-    color: {
-      text: false,
-      background: true
-    }
-  },
-  attributes: {
-    backgroundColor: {
-      type: 'string'
+    'media-manager/color': {
+      background: {
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Background color', 'media-manager'),
+        style: 'background-color'
+      }
     }
   }
-});
+}); // Common supports for player buttons blocks.
+
+var buttonSupports = {
+  align: true,
+  'media-manager/color': {
+    icon: {
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Icon color', 'media-manager'),
+      style: 'background-color'
+    },
+    background: {
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Background color', 'media-manager')
+    },
+    __contrastChecker: ['icon', 'background'],
+    __panelTitle: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Color', 'media-manager')
+  }
+};
 
 /***/ }),
 
@@ -2205,19 +2195,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 
 
 /**
  * WordPress dependencies
  */
 
-
 function save() {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save({
-    className: 'is-paused'
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"].Content, null));
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"].Content, null));
 }
 
 /***/ }),
@@ -2292,10 +2277,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/pause-button/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _media_player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../media-player */ "./src/blocks/media-player/index.js");
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit */ "./src/blocks/pause-button/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./save */ "./src/blocks/pause-button/save.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/pause-button/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_7__);
 /**
  * WordPress dependencies
  */
@@ -2314,6 +2300,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var blockName = 'media-manager/pause-button';
 _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default()(function () {
   // we need this if we'd like to extend the block :'(
@@ -2323,7 +2310,8 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default()(function () {
     edit: _edit__WEBPACK_IMPORTED_MODULE_5__["default"],
     save: _save__WEBPACK_IMPORTED_MODULE_6__["default"],
     icon: _icons__WEBPACK_IMPORTED_MODULE_3__["PlayerPauseIcon"],
-    usesContext: ['mediaSourceId']
+    usesContext: ['mediaSourceId'],
+    supports: _media_player__WEBPACK_IMPORTED_MODULE_4__["buttonSupports"]
   });
 });
 
@@ -2436,10 +2424,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/play-button/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _media_player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../media-player */ "./src/blocks/media-player/index.js");
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit */ "./src/blocks/play-button/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./save */ "./src/blocks/play-button/save.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/play-button/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_7__);
 /**
  * WordPress dependencies
  */
@@ -2458,6 +2447,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var blockName = 'media-manager/play-button';
 _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default()(function () {
   // we need this if we'd like to extend the block :'(
@@ -2467,7 +2457,8 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default()(function () {
     edit: _edit__WEBPACK_IMPORTED_MODULE_5__["default"],
     save: _save__WEBPACK_IMPORTED_MODULE_6__["default"],
     icon: _icons__WEBPACK_IMPORTED_MODULE_3__["PlayerPlayIcon"],
-    usesContext: ['mediaSourceId']
+    usesContext: ['mediaSourceId'],
+    supports: _media_player__WEBPACK_IMPORTED_MODULE_4__["buttonSupports"]
   });
 });
 
@@ -2530,6 +2521,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _store_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store/constants */ "./src/store/constants.js");
 /* harmony import */ var _components_media_player__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/media-player */ "./src/components/media-player/index.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/blocks/play-pause-button/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_6__);
 
 
 /**
@@ -2545,6 +2538,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 
 
@@ -2570,6 +2564,17 @@ function PlayPauseEditBlock(_ref) {
 
 /***/ }),
 
+/***/ "./src/blocks/play-pause-button/editor.scss":
+/*!**************************************************!*\
+  !*** ./src/blocks/play-pause-button/editor.scss ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./src/blocks/play-pause-button/index.js":
 /*!***********************************************!*\
   !*** ./src/blocks/play-pause-button/index.js ***!
@@ -2587,10 +2592,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icons */ "./src/icons/index.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/play-pause-button/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edit */ "./src/blocks/play-pause-button/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./save */ "./src/blocks/play-pause-button/save.js");
+/* harmony import */ var _media_player__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../media-player */ "./src/blocks/media-player/index.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/play-pause-button/style.scss");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit */ "./src/blocks/play-pause-button/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./save */ "./src/blocks/play-pause-button/save.js");
 /**
  * WordPress dependencies
  */
@@ -2609,19 +2615,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var blockName = 'media-manager/play-pause-button';
 _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default()(function () {
   // we need this if we'd like to extend the block :'(
   Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])(blockName, {
     apiVersion: 2,
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Play/Pause button', 'media-manager'),
-    edit: _edit__WEBPACK_IMPORTED_MODULE_5__["default"],
-    save: _save__WEBPACK_IMPORTED_MODULE_6__["default"],
+    edit: _edit__WEBPACK_IMPORTED_MODULE_6__["default"],
+    save: _save__WEBPACK_IMPORTED_MODULE_7__["default"],
     icon: _icons__WEBPACK_IMPORTED_MODULE_3__["PlayerPlayPauseIcon"],
     usesContext: ['mediaSourceId'],
-    supports: {
-      align: true
-    }
+    supports: _media_player__WEBPACK_IMPORTED_MODULE_4__["buttonSupports"]
   });
 });
 
@@ -2716,9 +2721,7 @@ function TimePositionDisplayEditBlock(_ref) {
       _useSelect$currentTim = _useSelect.currentTime,
       currentTime = _useSelect$currentTim === void 0 ? 0 : _useSelect$currentTim;
 
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"])({
-    className: 'wp-block-media-manager__item'
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"])(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "time-position-diaplay__wrapper"
   }, Object(_lib_utils_time__WEBPACK_IMPORTED_MODULE_5__["convertSecondsToTimeCode"])(currentTime)));
 }
@@ -2813,9 +2816,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function save() {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save({
-    className: 'wp-block-media-manager__item'
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "time-position-diaplay__wrapper"
   }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('00:00', 'media-manager')));
 }
@@ -3774,58 +3775,72 @@ function getButtonSizseBySlug(slug) {
     return option.slug === slug;
   })) === null || _buttonSizes$find === void 0 ? void 0 : _buttonSizes$find.size) || 1.5;
 }
-/* harmony default export */ __webpack_exports__["default"] = (Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_3__["createHigherOrderComponent"])(function (BlockEdit) {
-  return function (props) {
-    var iconColor = props.iconColor,
-        setIconColor = props.setIconColor,
-        backgroundColor = props.backgroundColor,
-        setBackgroundColor = props.setBackgroundColor,
-        attributes = props.attributes,
-        setAttributes = props.setAttributes;
-    var size = attributes.size;
-    var scale = getButtonSizseBySlug(size);
+/* harmony default export */ __webpack_exports__["default"] = (function (supportProps) {
+  return Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_3__["createHigherOrderComponent"])(function (BlockEdit) {
+    return function (props) {
+      var attributes = props.attributes,
+          setAttributes = props.setAttributes;
+      var size = attributes.size;
+      var scale = getButtonSizseBySlug(size);
 
-    function setSize(_ref) {
-      var selectedItem = _ref.selectedItem;
+      function setSize(_ref) {
+        var selectedItem = _ref.selectedItem;
 
-      if (!(selectedItem !== null && selectedItem !== void 0 && selectedItem.slug)) {
-        return;
+        if (!(selectedItem !== null && selectedItem !== void 0 && selectedItem.slug)) {
+          return;
+        }
+
+        setAttributes({
+          size: selectedItem.slug
+        });
+      } // Panel title.
+
+
+      var panelTitle = supportProps.__panelTitle || Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Color settings', 'media-manager'); // Panel color settings.
+
+
+      var colorSettings = []; // Contrast checker.
+
+      var contrastCheckerProps = {};
+
+      for (var prop in supportProps) {
+        var _props$support$attrib, _supportProps$prop;
+
+        if (/^__/.test(prop)) {
+          continue;
+        }
+
+        var support = supportProps[prop];
+        var value = (_props$support$attrib = props[support.attributeName]) === null || _props$support$attrib === void 0 ? void 0 : _props$support$attrib.color;
+        colorSettings.push({
+          label: (_supportProps$prop = supportProps[prop]) === null || _supportProps$prop === void 0 ? void 0 : _supportProps$prop.label,
+          value: value,
+          onChange: props[support.setterAttributeName]
+        });
+
+        if (supportProps.__contrastChecker) {
+          contrastCheckerProps[support.style === 'color' ? 'textColor' : 'backgroundColor'] = value;
+        }
       }
 
-      setAttributes({
-        size: selectedItem.slug
-      });
-    }
-
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["PanelColorSettings"], {
-      title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Color', 'media-manager'),
-      colorSettings: [{
-        value: backgroundColor.color,
-        onChange: setBackgroundColor,
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Icon color', 'media-manager') // <- confusing, same.
-
-      }, {
-        value: iconColor.color,
-        onChange: setIconColor,
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Background color', 'media-manager') // <- confusing, indeed.
-
-      }]
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["ContrastChecker"], {
-      backgroundColor: backgroundColor.color,
-      color: iconColor.color,
-      isLargeText: false
-    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Panel"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["CustomSelectControl"], {
-      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Button size', 'media-manager'),
-      options: buttonSizes,
-      onChange: setSize,
-      value: buttonSizes.find(function (option) {
-        return option.slug === size;
-      })
-    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
-      scale: scale
-    })));
-  };
-}, 'withPlayerButtonSettings'));
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["PanelColorSettings"], {
+        title: panelTitle,
+        colorSettings: colorSettings
+      }, supportProps.__contrastChecker && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__["ContrastChecker"], _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, contrastCheckerProps, {
+        isLargeText: false
+      }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Panel"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["CustomSelectControl"], {
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])('Button size', 'media-manager'),
+        options: buttonSizes,
+        onChange: setSize,
+        value: buttonSizes.find(function (option) {
+          return option.slug === size;
+        })
+      })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0___default()({}, props, {
+        scale: scale
+      })));
+    };
+  }, 'withPlayerButtonSettings');
+});
 
 /***/ }),
 
@@ -4327,7 +4342,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
 /* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _blocks_media_player_edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../blocks/media-player/edit */ "./src/blocks/media-player/edit.js");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_with_player_button_settings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/with-player-button-settings */ "./src/components/with-player-button-settings/index.js");
 
 
@@ -4346,58 +4362,91 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+
 /**
  * External dependencies
  */
 
 
 
+var getMediaManagerColorSupport = function getMediaManagerColorSupport(settings) {
+  return Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_5__["getBlockSupport"])(settings, 'media-manager/color');
+};
 
-function addSaveProps(props, _ref, attributes) {
-  var name = _ref.name;
+function addSaveProps(props, settings, attributes) {
+  var mediaColor = getMediaManagerColorSupport(settings);
 
-  if (!_blocks_media_player_edit__WEBPACK_IMPORTED_MODULE_5__["PLAYER_BLOCKS"].includes(name)) {
+  if (!mediaColor) {
     return props;
   }
 
-  var iconColor = attributes.iconColor,
-      customIconColor = attributes.customIconColor,
-      backgroundColor = attributes.backgroundColor,
-      customBackgroundColor = attributes.customBackgroundColor,
-      size = attributes.size;
-  var backgroundColorClass = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["getColorClassName"])('background-color', backgroundColor);
-  var iconColorClass = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["getColorClassName"])('color', iconColor);
+  var size = attributes.size;
 
-  var newProps = _objectSpread({}, props);
+  var newProps = _objectSpread(_objectSpread({}, props), {}, {
+    style: props.style || {}
+  });
 
-  newProps.className = classnames__WEBPACK_IMPORTED_MODULE_1___default()('wp-block-media-manager__item', "wp-block-media-manager__".concat(name.substring(14)), backgroundColorClass, iconColorClass, "is-".concat(size, "-size"));
-  newProps.style = {
-    backgroundColor: !backgroundColorClass ? customBackgroundColor : undefined,
-    color: !iconColorClass ? customIconColor : undefined
-  };
+  var mediaColorClassNames = [];
+
+  for (var prop in mediaColor) {
+    if (/^__/.test(prop)) {
+      continue;
+    }
+
+    var colorClassName = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["getColorClassName"])(mediaColor[prop].style, attributes[mediaColor[prop].attributeName]);
+    mediaColorClassNames.push(colorClassName);
+    var attrName = mediaColor[prop].customAttributeName;
+    var stylePropName = mediaColor[prop].style === 'background-color' ? 'backgroundColor' : 'color';
+    newProps.style[stylePropName] = colorClassName ? undefined : attributes[attrName];
+  }
+
+  newProps.className = classnames__WEBPACK_IMPORTED_MODULE_1___default()(props === null || props === void 0 ? void 0 : props.className, mediaColorClassNames.concat(' '), "is-".concat(size, "-size"), 'is-paused');
   return newProps;
 }
 
-function regiterMediaPlayerButtonBlocks(settings, name) {
-  if (!_blocks_media_player_edit__WEBPACK_IMPORTED_MODULE_5__["PLAYER_BLOCKS"].includes(name)) {
+function regiterMediaPlayerButtonBlocks(settings) {
+  var mediaColor = getMediaManagerColorSupport(settings);
+
+  if (!mediaColor) {
     return settings;
+  } // HOC withColors settings object.
+
+
+  var supportStylePropsMap = {}; // Block attributes.
+
+  var attributes = {};
+
+  for (var prop in mediaColor) {
+    var _mediaColor$prop;
+
+    if (/^__/.test(prop)) {
+      continue;
+    }
+
+    var attributeName = /\wColor$/.test(prop) ? prop : "".concat(prop, "Color");
+    var upperCaseName = attributeName.charAt(0).toUpperCase() + attributeName.slice(1); // Populate mediaColor supports object.
+
+    mediaColor[prop] = _objectSpread(_objectSpread({}, mediaColor[prop]), {}, {
+      attributeName: attributeName,
+      customAttributeName: "custom".concat(upperCaseName),
+      setterAttributeName: "set".concat(upperCaseName),
+      style: ((_mediaColor$prop = mediaColor[prop]) === null || _mediaColor$prop === void 0 ? void 0 : _mediaColor$prop.style) || 'color',
+      className: attributeName
+    }); // Build withColors HOC settings.
+
+    supportStylePropsMap[attributeName] = mediaColor[prop].style; // Populate block attributes.
+
+    attributes[attributeName] = {
+      type: 'string'
+    };
+    attributes[mediaColor[prop].customAttributeName] = {
+      type: 'string'
+    };
   }
 
   var existingGetEditWrapperProps = settings.getEditWrapperProps;
   return _objectSpread(_objectSpread({}, settings), {}, {
-    attributes: _objectSpread(_objectSpread({}, settings.attributes), {}, {
-      iconColor: {
-        type: 'string'
-      },
-      customIconColor: {
-        type: 'string'
-      },
-      backgroundColor: {
-        type: 'string'
-      },
-      customBackgroundColor: {
-        type: 'string'
-      },
+    attributes: _objectSpread(_objectSpread(_objectSpread({}, settings.attributes), attributes), {}, {
       size: {
         type: 'string',
         default: 'normal'
@@ -4412,10 +4461,7 @@ function regiterMediaPlayerButtonBlocks(settings, name) {
 
       return addSaveProps(props, settings, attributes);
     },
-    edit: Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__["compose"])([Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["withColors"])({
-      iconColor: 'color',
-      backgroundColor: 'background-color'
-    }), _components_with_player_button_settings__WEBPACK_IMPORTED_MODULE_6__["default"]])(settings.edit)
+    edit: Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__["compose"])([Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["withColors"])(supportStylePropsMap), Object(_components_with_player_button_settings__WEBPACK_IMPORTED_MODULE_6__["default"])(mediaColor)])(settings.edit)
   });
 }
 
