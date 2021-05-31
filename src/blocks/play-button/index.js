@@ -10,12 +10,13 @@ import domReady from '@wordpress/dom-ready';
  */
 import { PlayerPlayIcon as icon } from '../../icons';
  
- /**
-  * Internal dependencies
-  */
-import './style.scss';
+/**
+ * Internal dependencies
+ */
+import { buttonSupports as supports } from '../media-player';
 import Edit from './edit';
 import save from './save';
+import './style.scss';
  
 export const blockName = 'media-manager/play-button';
 
@@ -27,5 +28,6 @@ domReady( function() { // we need this if we'd like to extend the block :'(
 		save,
 		icon,
 		usesContext: [ 'mediaSourceId' ],
+		supports,
 	} );
 } )

@@ -1,7 +1,3 @@
-/**
- * External dependencies
- */
-import classnames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -9,7 +5,6 @@ import classnames from 'classnames';
 import {
 	useBlockProps,
 	__experimentalUseInnerBlocksProps as useInnerBlocksProps,
-	withColors,
 } from '@wordpress/block-editor';
 
 /**
@@ -19,6 +14,7 @@ import { blockName as playButtonBlockName } from '../play-button';
 import { blockName as pauseButtonBlockName } from '../pause-button';
 import { blockName as playPauseButtonBlockName } from '../play-pause-button';
 import { blockName as TimePositionBlockName } from '../time-position';
+
 import './editor.scss';
 import './style.scss';
 
@@ -29,17 +25,8 @@ export const PLAYER_BLOCKS = [
 	TimePositionBlockName,
 ];
 
-export function MediaPlayerEditBlock( { backgroundColor } ) {
-	const className = classnames( {
-		[ backgroundColor.class ]: backgroundColor.class,
-		'has-background': !! backgroundColor.color,
-	} );
-
-	const style = {
-		backgroundColor: backgroundColor.color,
-	};
-
-	const blockProps = useBlockProps( { style, className } );
+export default function MediaPlayerEditBlock() {
+	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: PLAYER_BLOCKS,
 		orientation: 'horizontal',
@@ -48,5 +35,3 @@ export function MediaPlayerEditBlock( { backgroundColor } ) {
 
 	return <div { ...innerBlocksProps } />;
 }
-
-export default withColors( { backgroundColor: 'background-color' } )( MediaPlayerEditBlock );

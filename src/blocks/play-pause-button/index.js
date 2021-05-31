@@ -13,12 +13,13 @@ import { PlayerPlayPauseIcon as icon } from '../../icons';
  /**
   * Internal dependencies
   */
+import { buttonSupports as supports } from '../media-player';
 import './style.scss';
 import Edit from './edit';
 import save from './save';
  
 export const blockName = 'media-manager/play-pause-button';
- 
+
 domReady( function() { // we need this if we'd like to extend the block :'(
 	registerBlockType( blockName, {
 		apiVersion: 2,
@@ -27,9 +28,7 @@ domReady( function() { // we need this if we'd like to extend the block :'(
 		save,
 		icon,
 		usesContext: [ 'mediaSourceId' ],
-		supports: {
-			align: true,
-		},
+		supports,
 	} );
 } );
  

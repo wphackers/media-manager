@@ -47,66 +47,72 @@ export function getButtonSizseBySlug( slug ) {
 	return buttonSizes.find( option => option.slug === slug )?.size || 1.5
 }
 
-export default createHigherOrderComponent( ( BlockEdit ) => ( props ) => {
-	const {
-		iconColor,
-		setIconColor,
-		backgroundColor,
-		setBackgroundColor,
-		attributes,
-		setAttributes,
-	} = props;
+export default ( supportProps ) => {
+	return createHigherOrderComponent( ( BlockEdit ) => ( props ) => {
+		const { attributes, setAttributes } = props;
+		const { size } = attributes;
+		const scale = getButtonSizseBySlug( size );
 
-	const { size } = attributes;
-	const scale = getButtonSizseBySlug( size );
-
-	function setSize( { selectedItem } ) {
-		if ( ! selectedItem?.slug ) {
-			return;
+		function setSize( { selectedItem } ) {
+			if ( ! selectedItem?.slug ) {
+				return;
+			}
+			setAttributes( { size: selectedItem.slug } );
 		}
-		setAttributes( { size: selectedItem.slug } );
-	}
 
-	return (
-		<Fragment>
-			<InspectorControls>
-				<PanelColorSettings
-					title={ __( 'Color', 'media-manager' ) }
-					colorSettings={ [
-						{
-							value: backgroundColor.color,
-							onChange: setBackgroundColor,
-							label: __( 'Icon color', 'media-manager' ), // <- confusing, same.
-						},
-						{
-							value: iconColor.color,
-							onChange: setIconColor,
-							label: __( 'Background color', 'media-manager' ), // <- confusing, indeed.
-						},
-					] }
-				>
-					<ContrastChecker
-						{ ...{
-							backgroundColor: backgroundColor.color,
-							color: iconColor.color,
-						} }
-						isLargeText={ false }
-					/>
-				</PanelColorSettings>
+		// Panel title.
+		const panelTitle = supportProps.__panelTitle || __( 'Color settings', 'media-manager' );
 
-				<Panel>
-					<PanelBody>
-						<CustomSelectControl
-							label={ __( 'Button size', 'media-manager' ) }
-							options={ buttonSizes }
-							onChange={ setSize }
-							value={ buttonSizes.find( option => option.slug === size ) }
-						/>
-					</PanelBody>
-				</Panel>
-			</InspectorControls>
+		// Panel color settings.
+		let colorSettings = [];
 
-			<BlockEdit { ...props } scale={ scale } />
-		</Fragment>
-	 );
- }, 'withPlayerButtonSettings' );
+		// Contrast checker.
+		let contrastCheckerProps = {};
+
+		for( const prop in supportProps ) {
+			if ( /^__/.test( prop ) ) {
+				continue;
+			}
+
+			const support = supportProps[ prop ];
+			const value = props[ support.propName ]?.color;
+			colorSettings.push( {
+				label: supportProps[ prop ]?.label,
+				value,
+				onChange: props[ support.setterName ],
+			} );
+
+			if ( supportProps.__contrastChecker ) {
+				contrastCheckerProps[ support.style === 'color' ? 'textColor' : support.style ] = value;
+			}
+		}
+
+		return (
+			<Fragment>
+				<InspectorControls>
+					<PanelColorSettings
+						title={ panelTitle }
+						colorSettings={ colorSettings }
+					>
+						{ supportProps.__contrastChecker && (
+							<ContrastChecker { ...contrastCheckerProps } isLargeText={ false } />
+						) }
+					</PanelColorSettings>
+
+					<Panel>
+						<PanelBody>
+							<CustomSelectControl
+								label={ __( 'Button size', 'media-manager' ) }
+								options={ buttonSizes }
+								onChange={ setSize }
+								value={ buttonSizes.find( option => option.slug === size ) }
+							/>
+						</PanelBody>
+					</Panel>
+				</InspectorControls>
+
+				<BlockEdit { ...props } scale={ scale } />
+			</Fragment>
+		);
+	}, 'withPlayerButtonSettings' );
+};
