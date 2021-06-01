@@ -50,4 +50,6 @@ export const buttonSupports = {
 		__contrastChecker: [ 'icon', 'background' ],
 		__sectionTitle: __( 'Color', 'media-manager' ),
 	},
+
+	'media-manager/customClassName': 'wp-media-manager-player-button', // <- @TODO: make its own implementation
 };

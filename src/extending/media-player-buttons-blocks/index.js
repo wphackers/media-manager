@@ -17,12 +17,15 @@ import { getBlockSupport } from '@wordpress/blocks';
 import withPlayerButtonSettings from '../../components/with-player-button-settings';
 
 export const getMediaManagerColorSupport = ( settings ) => getBlockSupport( settings, 'media-manager/color' );
+export const getMediaManagerCustomClassNameSupport = ( settings ) => getBlockSupport( settings, 'media-manager/customClassName' );
 
 function addSaveProps( props, settings, attributes ) {
 	const mediaColor = getMediaManagerColorSupport( settings );
 	if ( ! mediaColor ) {
 		return props;
 	}
+
+	const customClassName = getMediaManagerCustomClassNameSupport( settings );
 
 	const { size } = attributes;
 
@@ -55,6 +58,7 @@ function addSaveProps( props, settings, attributes ) {
 		...mediaColorClassNames,
 		`is-${ size }-size`,
 		'is-paused',
+		customClassName,
 	);
 
 	return newProps;
