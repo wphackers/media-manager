@@ -61,7 +61,7 @@ export default ( supportProps ) => {
 		}
 
 		// Panel title.
-		const panelTitle = supportProps.__panelTitle || __( 'Color settings', 'media-manager' );
+		const panelTitle = supportProps.__sectionTitle || __( 'Color settings', 'media-manager' );
 
 		// Panel color settings.
 		let colorSettings = [];

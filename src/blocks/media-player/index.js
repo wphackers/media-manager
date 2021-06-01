@@ -44,12 +44,10 @@ export const buttonSupports = {
 			label: __( 'Icon color', 'media-manager' ),
 			style: 'background-color',
 		},
-		background:  {
+		background: {
 			label: __( 'Background color', 'media-manager' ),
 		},
-
 		__contrastChecker: [ 'icon', 'background' ],
-
-		__panelTitle: __( 'Color', 'media-manager' ),
+		__sectionTitle: __( 'Color', 'media-manager' ),
 	},
 };
