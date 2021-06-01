@@ -41,6 +41,12 @@ const buttonSizes = [
 		key: 'key-large',
 		size: 2.5,
 	},
+	{
+		name: __( 'Giant', 'media-manager' ),
+		slug: 'giant',
+		key: 'key-giant',
+		size: 4,
+	},
 ];
 
 export function getButtonSizseBySlug( slug ) {
