@@ -1,5 +1,5 @@
 .wp-block-media-manager-media-player {
-	.wp-block-media-manager__play-pause-button {
+	.wp-block-media-manager-play-pause-button {
 		.player-play-pause-icon {
 			display: none;
 		}
@@ -9,7 +9,7 @@
 		}
 	}
 
-	.wp-block-media-manager__play-pause-button.is-paused {
+	.wp-block-media-manager-play-pause-button.is-paused {
 		.player-play-pause-icon {
 			display: block;
 		}

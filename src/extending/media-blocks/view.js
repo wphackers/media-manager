@@ -78,9 +78,9 @@ domReady( function() {
 		if ( mediaPlayerButtons?.length ) {
 			mediaPlayerButtons.forEach( function( playerButton ) {
 				
-				const isPlayPauseButton = playerButton.classList.contains( 'wp-block-media-manager__play-pause-button' );
-				const isPlayButton = playerButton.classList.contains( 'wp-block-media-manager__play-button' );
-				const isPauseButton = playerButton.classList.contains( 'wp-block-media-manager__pause-button' );
+				const isPlayPauseButton = playerButton.classList.contains( 'wp-block-media-manager-play-pause-button' );
+				const isPlayButton = playerButton.classList.contains( 'wp-block-media-manager-play-button' );
+				const isPauseButton = playerButton.classList.contains( 'wp-block-media-manager-pause-button' );
 
 				playerButton.addEventListener( 'click', function( event ) {
 					event.stopPropagation();

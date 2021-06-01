@@ -52,7 +52,7 @@ function addSaveProps( props, settings, attributes ) {
 
 	newProps.className = classnames(
 		props?.className,
-		mediaColorClassNames.concat( ' ' ),
+		...mediaColorClassNames,
 		`is-${ size }-size`,
 		'is-paused',
 	);
