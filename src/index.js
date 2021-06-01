@@ -6,7 +6,6 @@
  * Internal dependencies
  */
 import './extending';
-
 import './store';
 import './blocks';
-
+import './hooks';

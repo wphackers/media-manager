@@ -14,12 +14,12 @@ import { getBlockSupport } from '@wordpress/blocks';
 /**
  * External dependencies
  */
-import withPlayerButtonSettings from '../../components/with-player-button-settings';
+import withPlayerButtonSettings from '../components/with-player-button-settings';
 
 export const getMediaManagerColorSupport = ( settings ) => getBlockSupport( settings, 'media-manager/color' );
 export const getMediaManagerCustomClassNameSupport = ( settings ) => getBlockSupport( settings, 'media-manager/customClassName' );
 
-function addSaveProps( props, settings, attributes ) {
+function addMediaManagerColorSaveProps( props, settings, attributes ) {
 	const mediaColor = getMediaManagerColorSupport( settings );
 	if ( ! mediaColor ) {
 		return props;
@@ -64,7 +64,7 @@ function addSaveProps( props, settings, attributes ) {
 	return newProps;
 }
 
-function regiterMediaPlayerButtonBlocks( settings ) {
+function addMediaManagerColorSupport( settings ) {
 	const mediaColor = getMediaManagerColorSupport( settings );
 	if ( ! mediaColor ) {
 		return settings;
@@ -121,7 +121,7 @@ function regiterMediaPlayerButtonBlocks( settings ) {
 				props = existingGetEditWrapperProps( attributes );
 			}
 
-			return addSaveProps( props, settings, attributes );
+			return addMediaManagerColorSaveProps( props, settings, attributes );
 		},
 
 		edit: compose( [
@@ -134,11 +134,11 @@ function regiterMediaPlayerButtonBlocks( settings ) {
 addFilter(
 	'blocks.registerBlockType',
 	'media-manager/register-media-player-buttons-blocks',
-	regiterMediaPlayerButtonBlocks,
+	addMediaManagerColorSupport,
 );
 
 addFilter(
 	'blocks.getSaveContent.extraProps',
 	'media-manager/add-media-player-buttons-save-props',
-	addSaveProps
+	addMediaManagerColorSaveProps
 );
