@@ -16,7 +16,7 @@ import { getBlockSupport } from '@wordpress/blocks';
  */
 import withPlayerButtonSettings from '../../components/with-player-button-settings';
 
-const getMediaManagerColorSupport = ( settings ) => getBlockSupport( settings, 'media-manager/color' );
+export const getMediaManagerColorSupport = ( settings ) => getBlockSupport( settings, 'media-manager/color' );
 
 function addSaveProps( props, settings, attributes ) {
 	const mediaColor = getMediaManagerColorSupport( settings );
