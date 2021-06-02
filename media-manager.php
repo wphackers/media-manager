@@ -54,7 +54,7 @@ function media_center_wrap_media_source( $block_content, $block ) {
 		return $block_content;
 	}
 
-	// store media source data to the block wrapper element.
+	// Store media source data into the block wrapper element.
 	$dom = new DomDocument();
 	@$dom->loadHTML( $block_content );
 	$elem = $dom->documentElement->childNodes->item( 0 )->childNodes->item( 0 );
