@@ -57,7 +57,6 @@ function addMediaManagerColorSaveProps( props, settings, attributes ) {
 		props?.className,
 		...mediaColorClassNames,
 		`is-${ size }-size`,
-		'is-paused',
 		customClassName,
 	);
 
