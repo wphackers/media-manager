@@ -1,6 +1,8 @@
 .media-source-panel__actions .components-button {
   margin-right: 5px;
 }
+
+
 .wp-block-media-manager-media-player .block-editor-block-list__block.wp-block-media-manager-play-pause-button .player-play-pause-icon,
 .wp-block-media-manager-media-player .block-editor-block-list__block.wp-block-media-manager-play-pause-button .player-pause-icon {
   display: block;

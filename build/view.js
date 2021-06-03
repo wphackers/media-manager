@@ -270,14 +270,14 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(function () {
               mediaElement.play();
             }
 
-            playerButton.classList.remove('is-paused');
+            playerButton.classList.remove('is-media-paused');
           } else {
             if (isPlayPauseButton || isPauseButton) {
               Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).pauseMediaSource(mediaSourceRef);
               mediaElement.pause();
             }
 
-            playerButton.classList.add('is-paused');
+            playerButton.classList.add('is-media-paused');
           }
         });
       });
