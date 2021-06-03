@@ -1,37 +1,21 @@
 /**
- * External dependencies
- */
- import classnames from 'classnames';
-
-/**
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
-import { useSelect, useDispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
-import { STORE_ID, STATE_PAUSED } from '../../store/constants';
-import { PlayPauseButton } from '../../components/media-player';
+import { PlayPauseButton as Button } from '../../components/media-player';
 import './editor.scss';
 
-export default function PlayPauseEditBlock( { context, scale } ) {
-	const sourceId = context.mediaSourceId;
-
-	const mediaPlayingState = useSelect(
-		( select ) => ( select( STORE_ID ).getMediaPlayerState( sourceId ) ),
-		[ sourceId ]
-	);
-
-	const { toggleMediaSource } = useDispatch( STORE_ID );
-
+export default function PlayPauseEditBlock( { mediaSource, scale, className } ) {
 	return (
-		<div { ...useBlockProps() }>
-			<PlayPauseButton
-				isPaused= { mediaPlayingState === STATE_PAUSED }
+		<div { ...useBlockProps( { className } ) }>
+			<Button
+				isPaused= { mediaSource.isPaused }
 				scale={ scale }
-				onClick={ () => toggleMediaSource( sourceId ) }
+				onClick={ mediaSource.toggle }
 			/>
 		</div>
 	);

@@ -14,9 +14,9 @@ import { PlayerPlayPauseIcon as icon } from '../../icons';
   * Internal dependencies
   */
 import { buttonSupports as supports } from '../media-player';
-import './style.scss';
 import Edit from './edit';
 import save from './save';
+import './style.scss';
  
 export const blockName = 'media-manager/play-pause-button';
 
@@ -31,4 +31,3 @@ domReady( function() { // we need this if we'd like to extend the block :'(
 		supports,
 	} );
 } );
- 

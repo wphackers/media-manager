@@ -51,5 +51,7 @@ export const buttonSupports = {
 		__sectionTitle: __( 'Color', 'media-manager' ),
 	},
 
+	'media-manager/connect': true,
+
 	'media-manager/customClassName': 'wp-media-manager-player-button', // <- @TODO: make its own implementation
 };

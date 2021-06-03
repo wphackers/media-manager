@@ -95,13 +95,13 @@ domReady( function() {
 							mediaElement.play();
 						}
 
-						playerButton.classList.remove( 'is-paused' );
+						playerButton.classList.remove( 'is-media-paused' );
 					} else {
 						if ( isPlayPauseButton || isPauseButton ) {
 							dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
 							mediaElement.pause();
 						}
-						playerButton.classList.add( 'is-paused' );
+						playerButton.classList.add( 'is-media-paused' );
 					}
 				} );
 			} );
