@@ -15,6 +15,7 @@ import { PlayerIcon as icon } from '../../icons';
 import Edit from './edit';
 import save from './save';
 import './style.scss';
+import { SUPPORT_MEDIA_SELECTOR } from '../../hooks';
  
 export const blockName = 'media-manager/media-player';
  
@@ -27,6 +28,7 @@ registerBlockType( blockName, {
 	icon,
 	supports: {
 		align: true,
+		[ SUPPORT_MEDIA_SELECTOR ]: true,
 		'media-manager/color': {
 			background:  {
 				label: __( 'Background color', 'media-manager' ),
@@ -39,6 +41,7 @@ registerBlockType( blockName, {
 // Common supports for player buttons blocks.
 export const buttonSupports = {
 	align: true,
+	[ SUPPORT_MEDIA_SELECTOR ]: true,
 	'media-manager/color': {
 		icon: {
 			label: __( 'Icon color', 'media-manager' ),
