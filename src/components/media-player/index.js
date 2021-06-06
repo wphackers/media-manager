@@ -23,7 +23,7 @@ import {
 	PlayerPlayPauseIcon,
 } from '../../icons';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
-import { STORE_ID, STATE_PAUSED } from '../../store/constants';
+import { STORE_NAME, STATE_PAUSED } from '../../store/constants';
 import './style.scss';
 
 export function JumpBackButton( { onClick, ...other } ) {
@@ -99,17 +99,17 @@ export function MediaPlayerControl( {
 
 	const { mediaPlayingState, mediaDuration, mediaSource } = useSelect(
 		( select ) => ( {
-			mediaPlayingState: select( STORE_ID ).getMediaPlayerState(
+			mediaPlayingState: select( STORE_NAME ).getMediaPlayerState(
 				sourceId
 			),
-			mediaDuration: select( STORE_ID ).getMediaSourceDuration( sourceId ),
-			mediaSource: select( STORE_ID ).getMediaSourceById( sourceId ),
+			mediaDuration: select( STORE_NAME ).getMediaSourceDuration( sourceId ),
+			mediaSource: select( STORE_NAME ).getMediaSourceById( sourceId ),
 		} ),
 		[ sourceId ]
 	);
 
 	const { toggleMediaSource, setMediaSourceCurrentTime } = useDispatch(
-		STORE_ID
+		STORE_NAME
 	);
 
 	const isPaused = mediaPlayingState === STATE_PAUSED;

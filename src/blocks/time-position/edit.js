@@ -9,7 +9,7 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { STORE_ID } from '../../store/constants';
+import { STORE_NAME } from '../../store/constants';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import './editor.scss';
 
@@ -17,7 +17,7 @@ export default function TimePositionDisplayEditBlock( { context } ) {
 	const sourceId = context.mediaSourceId;
 
 	const { currentTime = 0 } = useSelect( ( select ) => ( {
-		currentTime: select( STORE_ID ).getMediaSourceCurrentTime( sourceId ),
+		currentTime: select( STORE_NAME ).getMediaSourceCurrentTime( sourceId ),
 	} ), [ sourceId ] );
 
 	return (

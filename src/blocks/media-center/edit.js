@@ -22,7 +22,7 @@ import { createBlock } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import { STORE_ID, MEDIA_NOT_DEFINED } from '../../store/constants';
+import { STORE_NAME, MEDIA_NOT_DEFINED } from '../../store/constants';
 import { MediaCenterIcon } from '../../icons';
 import MediaSelector, { MediaItemPanelBody } from '../../components/media-selector/';
 
@@ -62,13 +62,13 @@ export default function MediaCenterEdit( {
 
 	const { mediaSources } = useSelect( ( select ) => {
 		return {
-			mediaSources: select( STORE_ID ).getMediaSources(),
+			mediaSources: select( STORE_NAME ).getMediaSources(),
 		};
 	}, [] );
 
 	const { mediaSource } = useSelect( ( select ) => {
 		return {
-			mediaSource: select( STORE_ID ).getMediaSourceById( sourceId )
+			mediaSource: select( STORE_NAME ).getMediaSourceById( sourceId )
 		};
 	}, [ sourceId ] );
 

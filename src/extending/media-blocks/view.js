@@ -7,7 +7,7 @@ import { select, dispatch } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { STORE_ID, STATE_PAUSED } from '../../store/constants';
+import { STORE_NAME, STATE_PAUSED } from '../../store/constants';
 import { getBlockSourceProps } from '../utils';
 
 domReady( function() {
@@ -19,7 +19,7 @@ domReady( function() {
 			const { domTypeName } = getBlockSourceProps( mediaSourceType );
 			const query = `[data-media-source-id="${ mediaSourceId }"] ${ domTypeName }`;
 
-			dispatch( STORE_ID ).registerMediaSource( mediaSourceId, {
+			dispatch( STORE_NAME ).registerMediaSource( mediaSourceId, {
 				// source: mediaSource,
 				elementType: domTypeName,
 				state: STATE_PAUSED,
@@ -41,7 +41,7 @@ domReady( function() {
 		const mediaLinkFormatElements = mediaCenterBlock.querySelectorAll( 'a.media-link-format-type' );
 		if ( mediaLinkFormatElements?.length ) {
 			mediaLinkFormatElements.forEach( function( anchor ) {
-				const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceRef );
+				const { state, querySelector } = select( STORE_NAME ).getMediaSourceById( mediaSourceRef );
 				const isPlayerPaused = STATE_PAUSED === state
 				const mediaElement = document.querySelector( querySelector );
 				
@@ -54,18 +54,18 @@ domReady( function() {
 						2000;
 						
 					// Playback to the timestamp.
-					dispatch( STORE_ID ).setMediaSourceCurrentTime( mediaSourceRef, timestamp );
+					dispatch( STORE_NAME ).setMediaSourceCurrentTime( mediaSourceRef, timestamp );
 					mediaElement.currentTime = timestamp;
 
 					if ( rePlay ) {
 						mediaElement.play();
-						dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
+						dispatch( STORE_NAME ).playMediaSource( mediaSourceRef );
 					} else {
 						if ( isPlayerPaused ) {
-							dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
+							dispatch( STORE_NAME ).playMediaSource( mediaSourceRef );
 							mediaElement.play();
 						} else {
-							dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
+							dispatch( STORE_NAME ).pauseMediaSource( mediaSourceRef );
 							mediaElement.pause();
 						}
 					}
@@ -85,20 +85,20 @@ domReady( function() {
 				playerButton.addEventListener( 'click', function( event ) {
 					event.stopPropagation();
 
-					const { state, querySelector } = select( STORE_ID ).getMediaSourceById( mediaSourceRef );
+					const { state, querySelector } = select( STORE_NAME ).getMediaSourceById( mediaSourceRef );
 					const isPlayerPaused = STATE_PAUSED === state
 					const mediaElement = document.querySelector( querySelector );
 
 					if ( isPlayerPaused ) {
 						if ( isPlayPauseButton || isPlayButton ) {
-							dispatch( STORE_ID ).playMediaSource( mediaSourceRef );
+							dispatch( STORE_NAME ).playMediaSource( mediaSourceRef );
 							mediaElement.play();
 						}
 
 						playerButton.classList.remove( 'is-media-paused' );
 					} else {
 						if ( isPlayPauseButton || isPauseButton ) {
-							dispatch( STORE_ID ).pauseMediaSource( mediaSourceRef );
+							dispatch( STORE_NAME ).pauseMediaSource( mediaSourceRef );
 							mediaElement.pause();
 						}
 						playerButton.classList.add( 'is-media-paused' );

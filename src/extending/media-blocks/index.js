@@ -20,7 +20,7 @@ import { shouldExtendMediaBlock, getBlockSourceProps } from '../utils';
 import { MediaCenterPanelBody } from '../../components/media-selector';
 import { blockName as mediaCenterBlockName } from '../../blocks/media-center';
 import {
-	STORE_ID,
+	STORE_NAME,
 	STATE_PAUSED,
 	STATE_PLAYING,
 	STATE_ERROR,
@@ -48,16 +48,16 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 		updateMediaSourceData,
 		unregisterMediaSource,
 		setMediaSourceCurrentTime,
-	} = useDispatch( STORE_ID );
+	} = useDispatch( STORE_NAME );
 
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
 	// Media Source selectors.
 	const { mediaPlayingState, currentTime, mediaSource } = useSelect(
 		( select ) => ( {
-			mediaPlayingState: select( STORE_ID ).getMediaPlayerState( mediaSourceIdAttr ),
-			currentTime: select( STORE_ID ).getMediaSourceCurrentTime( mediaSourceIdAttr ),
-			mediaSource: select( STORE_ID ).getMediaSourceById( mediaSourceIdAttr ),
+			mediaPlayingState: select( STORE_NAME ).getMediaPlayerState( mediaSourceIdAttr ),
+			currentTime: select( STORE_NAME ).getMediaSourceCurrentTime( mediaSourceIdAttr ),
+			mediaSource: select( STORE_NAME ).getMediaSourceById( mediaSourceIdAttr ),
 		} ),
 		[]
 	);
