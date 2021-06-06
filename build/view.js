@@ -164,8 +164,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _store_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/constants */ "./src/store/constants.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils */ "./src/extending/utils.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
+/* harmony import */ var _store_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/constants */ "./src/store/constants.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils */ "./src/extending/utils.js");
 /**
  * External dependencies
  */
@@ -174,6 +175,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 
 
@@ -187,14 +189,14 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(function () {
           mediaSourceId = _media$dataset.mediaSourceId,
           mediaSourceType = _media$dataset.mediaSourceType;
 
-      var _getBlockSourceProps = Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getBlockSourceProps"])(mediaSourceType),
+      var _getBlockSourceProps = Object(_utils__WEBPACK_IMPORTED_MODULE_4__["getBlockSourceProps"])(mediaSourceType),
           domTypeName = _getBlockSourceProps.domTypeName;
 
       var query = "[data-media-source-id=\"".concat(mediaSourceId, "\"] ").concat(domTypeName);
-      Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).registerMediaSource(mediaSourceId, {
+      Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).registerMediaSource(mediaSourceId, {
         // source: mediaSource,
         elementType: domTypeName,
-        state: _store_constants__WEBPACK_IMPORTED_MODULE_2__["STATE_PAUSED"],
+        state: _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_PAUSED"],
         querySelector: query
       });
     });
@@ -216,29 +218,29 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(function () {
 
     if (mediaLinkFormatElements !== null && mediaLinkFormatElements !== void 0 && mediaLinkFormatElements.length) {
       mediaLinkFormatElements.forEach(function (anchor) {
-        var _select$getMediaSourc = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["select"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).getMediaSourceById(mediaSourceRef),
+        var _select$getMediaSourc = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["select"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).getMediaSourceById(mediaSourceRef),
             state = _select$getMediaSourc.state,
             querySelector = _select$getMediaSourc.querySelector;
 
-        var isPlayerPaused = _store_constants__WEBPACK_IMPORTED_MODULE_2__["STATE_PAUSED"] === state;
+        var isPlayerPaused = _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_PAUSED"] === state;
         var mediaElement = document.querySelector(querySelector);
         anchor.addEventListener('click', function (event) {
           event.stopPropagation();
           var timestamp = event.target.getAttribute('href').replace(/#/, '');
           var rePlay = Math.abs(Math.floor(timestamp - mediaElement.currentTime) * 1000) > 2000; // Playback to the timestamp.
 
-          Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).setMediaSourceCurrentTime(mediaSourceRef, timestamp);
+          Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).setMediaSourceCurrentTime(mediaSourceRef, timestamp);
           mediaElement.currentTime = timestamp;
 
           if (rePlay) {
             mediaElement.play();
-            Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).playMediaSource(mediaSourceRef);
+            Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).playMediaSource(mediaSourceRef);
           } else {
             if (isPlayerPaused) {
-              Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).playMediaSource(mediaSourceRef);
+              Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).playMediaSource(mediaSourceRef);
               mediaElement.play();
             } else {
-              Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).pauseMediaSource(mediaSourceRef);
+              Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).pauseMediaSource(mediaSourceRef);
               mediaElement.pause();
             }
           }
@@ -257,23 +259,23 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_0___default()(function () {
         playerButton.addEventListener('click', function (event) {
           event.stopPropagation();
 
-          var _select$getMediaSourc2 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["select"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).getMediaSourceById(mediaSourceRef),
+          var _select$getMediaSourc2 = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["select"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).getMediaSourceById(mediaSourceRef),
               state = _select$getMediaSourc2.state,
               querySelector = _select$getMediaSourc2.querySelector;
 
-          var isPlayerPaused = _store_constants__WEBPACK_IMPORTED_MODULE_2__["STATE_PAUSED"] === state;
+          var isPlayerPaused = _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_PAUSED"] === state;
           var mediaElement = document.querySelector(querySelector);
 
           if (isPlayerPaused) {
             if (isPlayPauseButton || isPlayButton) {
-              Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).playMediaSource(mediaSourceRef);
+              Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).playMediaSource(mediaSourceRef);
               mediaElement.play();
             }
 
             playerButton.classList.remove('is-media-paused');
           } else {
             if (isPlayPauseButton || isPauseButton) {
-              Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"]).pauseMediaSource(mediaSourceRef);
+              Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__["dispatch"])(_store__WEBPACK_IMPORTED_MODULE_2__["store"]).pauseMediaSource(mediaSourceRef);
               mediaElement.pause();
             }
 
@@ -390,18 +392,18 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************!*\
   !*** ./src/store/constants.js ***!
   \********************************/
-/*! exports provided: STORE_ID, STATE_PLAYING, STATE_ERROR, STATE_PAUSED, MEDIA_NOT_DEFINED */
+/*! exports provided: STORE_NAME, STATE_PLAYING, STATE_ERROR, STATE_PAUSED, MEDIA_NOT_DEFINED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STORE_ID", function() { return STORE_ID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STORE_NAME", function() { return STORE_NAME; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_PLAYING", function() { return STATE_PLAYING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_ERROR", function() { return STATE_ERROR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_PAUSED", function() { return STATE_PAUSED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MEDIA_NOT_DEFINED", function() { return MEDIA_NOT_DEFINED; });
 // Store ID
-var STORE_ID = 'media-manager/media-source'; // Media statuses
+var STORE_NAME = 'media-manager/media-source'; // Media statuses
 
 var STATE_PLAYING = 'is-playing';
 var STATE_ERROR = 'is-error';
@@ -414,11 +416,12 @@ var MEDIA_NOT_DEFINED = 'media-not-defined-yet';
 /*!****************************!*\
   !*** ./src/store/index.js ***!
   \****************************/
-/*! no exports provided */
+/*! exports provided: store */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_definition__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store-definition */ "./src/store/store-definition.js");
@@ -432,14 +435,20 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
- // Register the store, considering the API changes.
+ // @TODO: check compatibility with old core versions
 
-if (typeof _wordpress_data__WEBPACK_IMPORTED_MODULE_0__["createReduxStore"] !== 'undefined') {
-  var store = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["createReduxStore"])(_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"], _store_definition__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["register"])(store);
-} else {
-  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["registerStore"])(_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_ID"], _store_definition__WEBPACK_IMPORTED_MODULE_1__["default"]);
-}
+/*
+ * Register the store, considering the API changes.
+ * if ( typeof createReduxStore !== 'undefined' ) {
+ * 	const store = createReduxStore( STORE_NAME, storeDefinition );
+ * 	register( store );
+ * } else {
+ * 	registerStore( STORE_NAME, storeDefinition );
+ * }
+ */
+
+var store = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["createReduxStore"])(_constants__WEBPACK_IMPORTED_MODULE_2__["STORE_NAME"], _store_definition__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["register"])(store);
 
 /***/ }),
 
