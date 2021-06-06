@@ -7,7 +7,7 @@ import { values } from 'lodash';
  * WordPress dependencies
  */
 import { addFilter } from '@wordpress/hooks';
-import { getBlockSupport, createBlock } from '@wordpress/blocks';
+import { getBlockSupport, createBlock, getBlockType } from '@wordpress/blocks';
 import { useState, useCallback, Fragment } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
@@ -23,7 +23,6 @@ import { Placeholder, Panel, Button, Toolbar } from '@wordpress/components';
  */
 import { store as mediaManagerStore } from '../../store';
 import { MEDIA_NOT_DEFINED } from '../../store/constants';
-import { MediaCenterIcon } from '../../icons';
 import MediaSelector, { MediaItemPanelBody } from '../../components/media-selector/';
 
 const useInsertMediaBlock = () => {
@@ -39,7 +38,7 @@ export const SUPPORT_NAME = 'media-manager/media-selector';
 
 export function withMediaSelector( OriginalBlock ) {
 	return function ( props ) {
-		const { attributes, setAttributes, clientId } = props;
+		const { attributes, setAttributes, clientId, name } = props;
 		const [ isReplacing, setIsReplacing ] = useState( false );
 
 		const { sourceId } = attributes;
@@ -48,32 +47,37 @@ export function withMediaSelector( OriginalBlock ) {
 				mediaSources: select( mediaManagerStore ).getMediaSources(),
 			};
 		}, [] );
-	
+
+		
 		const { mediaSource } = useSelect( ( select ) => {
 			return {
 				mediaSource: select( mediaManagerStore ).getMediaSourceById( sourceId )
 			};
 		}, [ sourceId ] );
-	
+
+		
 		const setSourceId = ( sourceId ) => setAttributes( { sourceId } );
 		const insertMediaBlock = useInsertMediaBlock();
-	
+
 		function insertEmptyMediaBlock( type ) {
 			setSourceId( MEDIA_NOT_DEFINED );
 			setIsReplacing( false );
 			insertMediaBlock( type, clientId )
 		}
 		
+		const {
+			title: label,
+			description: instructions,
+			icon,
+		} = getBlockType( name );
+	
 		if ( isReplacing || ! sourceId ) {
 			return (
-				<div>
+				<div className="media-selector-placeholder">
 					<Placeholder
-						icon={ MediaCenterIcon }
-						label={ __( 'Media Center', 'media-manager' ) }
-						instructions={ __(
-							'Manage all media sources, comfortable, from your couch.',
-							'media-manager'
-						) }
+						icon={ icon.src }
+						label={ label }
+						instructions={ instructions }
 					>
 						<MediaSelector
 							media={ values( mediaSources ) }
