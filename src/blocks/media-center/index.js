@@ -16,19 +16,16 @@ import Edit from './edit';
 import save from './save';
 
 export const blockName = 'media-manager/media-center';
+import { SUPPORT_MEDIA_SELECTOR } from '../../hooks';
 
 registerBlockType( blockName, {
 	apiVersion: 2,
 	edit: Edit,
 	save,
 	icon,
-	attributes: {
-		sourceId: {
-			type: 'string',
-		},
-	},
 	supports: {
 		align: true,
+		[ SUPPORT_MEDIA_SELECTOR ]: true,
 	},
 	providesContext: {
 		'mediaSourceId': 'sourceId',
