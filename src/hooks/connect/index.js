@@ -13,7 +13,8 @@ import { useSelect, useDispatch } from '@wordpress/data';
 /**
  * External dependencies
  */
-import { STORE_NAME, STATE_PAUSED } from '../../store/constants';
+import { store as mediaManagerStore } from '../../store';
+import { STATE_PAUSED } from '../../store/constants';
 
 export function withMediaCenterConnection( OriginalBlock ) {
 	return function ( props ) {
@@ -22,8 +23,8 @@ export function withMediaCenterConnection( OriginalBlock ) {
 
 		const { isPaused, currentTime } = useSelect(
 			( select ) => ( {
-				isPaused: select( STORE_NAME ).getMediaPlayerState( sourceId ) === STATE_PAUSED,
-				currentTime: select( STORE_NAME ).getMediaSourceCurrentTime( sourceId ),
+				isPaused: select( mediaManagerStore ).getMediaPlayerState( sourceId ) === STATE_PAUSED,
+				currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( sourceId ),
 			} ),
 			[ sourceId ]
 		);
@@ -31,7 +32,7 @@ export function withMediaCenterConnection( OriginalBlock ) {
 			playMediaSource,
 			pauseMediaSource,
 			toggleMediaSource,
-		} = useDispatch( STORE_NAME );
+		} = useDispatch( mediaManagerStore );
 
 		return <OriginalBlock
 			{ ...props }

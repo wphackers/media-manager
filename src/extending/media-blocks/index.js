@@ -19,8 +19,8 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { shouldExtendMediaBlock, getBlockSourceProps } from '../utils';
 import { MediaCenterPanelBody } from '../../components/media-selector';
 import { blockName as mediaCenterBlockName } from '../../blocks/media-center';
+import { store as mediaManagerStore } from '../../store';
 import {
-	STORE_NAME,
 	STATE_PAUSED,
 	STATE_PLAYING,
 	STATE_ERROR,
@@ -48,16 +48,16 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 		updateMediaSourceData,
 		unregisterMediaSource,
 		setMediaSourceCurrentTime,
-	} = useDispatch( STORE_NAME );
+	} = useDispatch( mediaManagerStore );
 
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
 	// Media Source selectors.
 	const { mediaPlayingState, currentTime, mediaSource } = useSelect(
 		( select ) => ( {
-			mediaPlayingState: select( STORE_NAME ).getMediaPlayerState( mediaSourceIdAttr ),
-			currentTime: select( STORE_NAME ).getMediaSourceCurrentTime( mediaSourceIdAttr ),
-			mediaSource: select( STORE_NAME ).getMediaSourceById( mediaSourceIdAttr ),
+			mediaPlayingState: select( mediaManagerStore ).getMediaPlayerState( mediaSourceIdAttr ),
+			currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( mediaSourceIdAttr ),
+			mediaSource: select( mediaManagerStore ).getMediaSourceById( mediaSourceIdAttr ),
 		} ),
 		[]
 	);

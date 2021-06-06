@@ -19,9 +19,9 @@ import { useState } from '@wordpress/element';
 /**
  * Internal dependencies
  */
+import { store as mediaManagerStore } from '../../store';
 import { MediaLinkIcon } from '../../icons';
 import { shouldExtendBlockWithMedia } from '../../extending/utils';
-import { STORE_NAME } from '../../store/constants';
 import MediaLinkPopover from './media-link-popover';
 import './style.scss';
 import {
@@ -47,7 +47,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 
 	const { domRef } = useSelect(
 		( select ) => ( {
-			domRef: select( STORE_NAME ).getMediaSourceDomReference( sourceId ),
+			domRef: select( mediaManagerStore ).getMediaSourceDomReference( sourceId ),
 		} ),
 		[]
 	);
