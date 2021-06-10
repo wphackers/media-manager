@@ -27,7 +27,6 @@ domReady( function() { // we need this if we'd like to extend the block :'(
 		edit: Edit,
 		save,
 		icon,
-		usesContext: [ 'mediaSourceId' ],
 		supports,
 	} );
 } )

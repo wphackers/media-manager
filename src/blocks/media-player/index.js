@@ -36,6 +36,7 @@ registerBlockType( blockName, {
 			},
 		},
 	},
+	usesContext: [ 'mediaSourceId' ],
 } );
 
 // Common supports for player buttons blocks.
