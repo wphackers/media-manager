@@ -38,17 +38,22 @@ export const SUPPORT_NAME = 'media-manager/media-selector';
 
 export function withMediaSelector( OriginalBlock ) {
 	return function ( props ) {
-		const { attributes, setAttributes, clientId, name } = props;
+		const { attributes, setAttributes, clientId, name, context } = props;
 		const [ isReplacing, setIsReplacing ] = useState( false );
 
-		const { sourceId } = attributes;
+		const { sourceId: sourceIdAttr } = attributes;
+
+		// Source ID can be defined by parent blocks via context.
+		const sourceId = sourceIdAttr && sourceIdAttr !== MEDIA_NOT_DEFINED
+			? sourceIdAttr
+			: context?.mediaSourceId;
+
 		const { mediaSources } = useSelect( ( select ) => {
 			return {
 				mediaSources: select( mediaManagerStore ).getMediaSources(),
 			};
 		}, [] );
 
-		
 		const { mediaSource } = useSelect( ( select ) => {
 			return {
 				mediaSource: select( mediaManagerStore ).getMediaSourceById( sourceId )
@@ -69,7 +74,7 @@ export function withMediaSelector( OriginalBlock ) {
 			title: label,
 			description: instructions,
 			icon,
-		} = getBlockType( name );
+		} = getBlockType( name ) || {};
 	
 		if ( isReplacing || ! sourceId ) {
 			return (
@@ -132,23 +137,26 @@ export function withMediaSelector( OriginalBlock ) {
 
 		return (
 			<Fragment>
-				<BlockControls>
-					<Toolbar>
-						<Button onClick={ () => setIsReplacing( true ) }>
-							{
-								( sourceId !== MEDIA_NOT_DEFINED )
-									? __( 'Replace', 'media-manager' )
-									: __( 'Link', 'media-manager' )
-							}
-						</Button>
-					</Toolbar>
-				</BlockControls>
+				{ ! context?.mediaSourceId && (
+					<BlockControls>
+						<Toolbar>
+							<Button onClick={ () => setIsReplacing( true ) }>
+								{
+									( sourceId !== MEDIA_NOT_DEFINED )
+										? __( 'Replace', 'media-manager' )
+										: __( 'Link', 'media-manager' )
+								}
+							</Button>
+						</Toolbar>
+					</BlockControls>
+				) }
 
 				<InspectorControls>
 					<Panel>
 						<MediaItemPanelBody
 							source={ mediaSource }
 							mediaSourceId={ sourceId }
+							isMediaInherited = { !! context?.mediaSourceId }
 							onReplace={ setIsReplacing }
 							onUnlink={ () => setSourceId( null ) }
 						/>
