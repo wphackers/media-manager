@@ -57,6 +57,10 @@ function addMediaManagerConnectSupport( settings ) {
 
 	return {
 		...settings,
+		usesContext: [
+			settings.usesContext,
+			'mediaSourceId',
+		],
 		edit: withMediaCenterConnection( settings.edit ),
 	}
 }
