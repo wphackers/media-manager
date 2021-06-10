@@ -101,6 +101,7 @@ export function MediaItemPanelBody( {
 	mediaSourceId,
 	onReplace,
 	onUnlink,
+	isMediaInherited,
 } ) {
 	const isMediaNotDefined = mediaSourceId === MEDIA_NOT_DEFINED;
 	const { selectBlock } = useDispatch( blockEditorStore );
@@ -190,27 +191,29 @@ export function MediaItemPanelBody( {
 						</ul>
 					</PanelRow>
 
-					<PanelRow>
-						<div className="media-source-panel__actions">
-							<Button
-								isSecondary
-								isSmall
-								label={ __( 'Replacing linked media source', 'media-manager' ) }
-								onClick={ onReplace }
-							>
-								{ __( 'Replace Media', 'media-manager' ) }
-							</Button>
+					{ ! isMediaInherited && (
+						<PanelRow>
+							<div className="media-source-panel__actions">
+								<Button
+									isSecondary
+									isSmall
+									label={ __( 'Replacing linked media source', 'media-manager' ) }
+									onClick={ onReplace }
+								>
+									{ __( 'Replace Media', 'media-manager' ) }
+								</Button>
 
-							<Button
-								isTertiary
-								isSmall
-								label={ __( 'Unlink media source', 'media-manager' ) }
-								onClick={ () => onUnlink( true ) }
-							>
-								{ __( 'Unlink Media', 'media-manager' ) }
-							</Button>
-						</div>
-					</PanelRow>
+								<Button
+									isTertiary
+									isSmall
+									label={ __( 'Unlink media source', 'media-manager' ) }
+									onClick={ () => onUnlink( true ) }
+								>
+									{ __( 'Unlink Media', 'media-manager' ) }
+								</Button>
+							</div>
+						</PanelRow>
+					) }
 				</Fragment>
 			) }
 		</PanelBody>
