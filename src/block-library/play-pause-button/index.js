@@ -23,7 +23,7 @@ export const blockName = 'media-manager/play-pause-button';
 domReady( function() { // we need this if we'd like to extend the block :'(
 	registerBlockType( blockName, {
 		apiVersion: 2,
-		title: __( 'Play/Pause button', 'media-manager' ),
+		title: __( 'Play/Pause Button', 'media-manager' ),
 		edit: Edit,
 		save,
 		icon,

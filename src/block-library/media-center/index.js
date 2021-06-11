@@ -25,9 +25,7 @@ registerBlockType( blockName, {
 	icon,
 	supports: {
 		align: true,
+		'media-manager/connect': true,
 		[ SUPPORT_MEDIA_SELECTOR ]: true,
-	},
-	providesContext: {
-		'mediaSourceId': 'mediaSourceId',
 	},
 } );

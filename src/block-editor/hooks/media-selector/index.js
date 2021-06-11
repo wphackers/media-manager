@@ -25,6 +25,7 @@ import { Placeholder, Panel, Button, Toolbar } from '@wordpress/components';
 import { store as mediaManagerStore } from '../../../store';
 import { MEDIA_NOT_DEFINED } from '../../../store/constants';
 import MediaSelector, { MediaItemPanelBody } from '../../../components/media-selector/';
+import useMediaSourceId from '../../../components/hooks/use-media-source-id';
 
 const useInsertMediaBlock = () => {
 	const { insertBlock } = useDispatch( blockEditorStore );
@@ -42,13 +43,10 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 		const { attributes, setAttributes, clientId, name, context } = props;
 		const { mediaSourceId: mediaSourceIdAttr } = attributes;
 
+		
 		const [ isReplacing, setIsReplacing ] = useState( false );
-
-		// Source ID can be defined by parent blocks via context.
-		const mediaSourceId = mediaSourceIdAttr && mediaSourceIdAttr !== MEDIA_NOT_DEFINED
-			? mediaSourceIdAttr
-			: context?.mediaSourceId;
-
+		
+		const mediaSourceId = useMediaSourceId( props );
 		const { mediaSources } = useSelect( ( select ) => {
 			return {
 				mediaSources: select( mediaManagerStore ).getMediaSources(),
@@ -157,7 +155,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 						<MediaItemPanelBody
 							source={ mediaSource }
 							mediaSourceId={ mediaSourceId }
-							isMediaInherited = { !! context?.mediaSourceId }
+							isMediaInherited = { ! mediaSourceIdAttr }
 							onReplace={ setIsReplacing }
 							onUnlink={ () => setSourceId( null ) }
 						/>

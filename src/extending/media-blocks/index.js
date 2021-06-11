@@ -18,7 +18,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
  */
 import { shouldExtendMediaBlock, getBlockSourceProps } from '../utils';
 import { MediaCenterPanelBody } from '../../components/media-selector';
-import { blockName as mediaCenterBlockName } from '../../blocks/media-center';
+import { blockName as mediaCenterBlockName } from '../../block-library/media-center';
 import { store as mediaManagerStore } from '../../store';
 import {
 	STATE_PAUSED,

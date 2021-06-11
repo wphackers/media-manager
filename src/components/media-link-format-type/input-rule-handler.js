@@ -12,7 +12,7 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
  */
 import { convertTimeCodeToSeconds, isMarkfownTimeformat } from '../../lib/utils/time';
 import { MEDIA_LINK_FORMAT_TYPE } from './';
-import { blockName as mediaCenterBlockName } from '../../blocks/media-center';
+import { blockName as mediaCenterBlockName } from '../../block-library/media-center';
 
 export default function( value ) {
 	// Apply rule handler only when current block
