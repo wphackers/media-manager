@@ -7,5 +7,5 @@
  */
 import './extending';
 import './store';
-import './blocks';
+import './block-library';
 import './block-editor/hooks';
