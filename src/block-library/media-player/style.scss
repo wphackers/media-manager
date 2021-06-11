@@ -4,16 +4,17 @@
 	flex-wrap: wrap;
 	padding: 0.5em;
 	border-radius: 50vh;
+}
 
-	// All children items (play, pause, time-position, etc...)
-	.wp-media-manager-player-button {
-		margin: 0 5px 0 0;
-		display: inline-block;
-		align-self: center;
-		max-width: var(--responsive--aligndefault-width);
-		border-radius: 9999px; // 100% causes an oval, but any explicit but really high value retains the pill shape.
-		line-height: 0;
-	}
+
+// All children items (play, pause, time-position, etc...)
+.wp-media-manager-player-button {
+	margin: 0 5px 0 0;
+	display: inline-block;
+	align-self: center;
+	max-width: var(--responsive--aligndefault-width);
+	border-radius: 9999px; // 100% causes an oval, but any explicit but really high value retains the pill shape.
+	line-height: 0;
 
 	button {
 		padding: 0;
@@ -26,35 +27,41 @@
 		svg {
 			fill: currentColor;
 		}
-	}
 
-	.is-small-size button {
-		width: 24px;
-		min-width: 24px;
-		height: 24px;
+		&.wp-media-manager-player-button__button:not(:hover):not(:active):not(.has-text-color) {
+			background-color: transparent;
+			border-color: currentColor;
+			color: inherit;
+		}
 	}
+}
 
-	.is-normal-size button {
-		width: 36px;
-		min-width: 36px;
-		height: 36px;
-	}
+.is-small-size button {
+	width: 24px;
+	min-width: 24px;
+	height: 24px;
+}
 
-	.is-medium-size button {
-		width: 48px;
-		min-width: 48px;
-		height: 48px;
-	}
+.is-normal-size button {
+	width: 36px;
+	min-width: 36px;
+	height: 36px;
+}
 
-	.is-large-size button {
-		width: 60px;
-		min-width: 60px;
-		height: 60px;
-	}
+.is-medium-size button {
+	width: 48px;
+	min-width: 48px;
+	height: 48px;
+}
 
-	.is-giant-size button {
-		width: 102px;
-		min-width: 102px;
-		height: 102px;
-	}
+.is-large-size button {
+	width: 60px;
+	min-width: 60px;
+	height: 60px;
+}
+
+.is-giant-size button {
+	width: 102px;
+	min-width: 102px;
+	height: 102px;
 }

@@ -45,42 +45,23 @@ export const withScale = createHigherOrderComponent( ( Icon ) => ( props ) => {
 		);
 	}
 
-	const width = 24 * props.scale;
-	const height = 24 * props.scale;
-	const translate = ( props.scale - 1 ) * 12;
-	const inlineStyle = {
-		transform: `scale(${ props.scale }) translate( ${ translate }px, ${ translate }px )`,
-	};
-
 	return (
-		<Icon { ...props } width={ width } height={ height } style={ inlineStyle } />
+		<Icon { ...props } width={ 24 * props.scale } height={ 24 * props.scale } />
 	);
-},
-'withIconScale'
-);
+}, 'withIconScale' );
 
-export const PlayerPlayIcon = withScale( ( { width = 24, height = 24, style = null } ) => (
+export const PlayerPlayIcon = withScale( () => (
 	<SVG
 		className="player-play-icon"
 		xmlns="https://www.w3.org/2000/svg"
-		style={ style }
-		viewBox={ `0 0 ${ width } ${ height }` }
-		width={ width }
-		height={ height }
+		viewBox="0 0 24 24"
 	>
 		<Path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
 	</SVG>
 ) );
 
-export const PlayerPauseIcon = withScale( ( { width = 24, height = 24, style = null } ) => (
-	<SVG
-		className="player-pause-icon"
-		xmlns="https://www.w3.org/2000/svg"
-		style={ style }
-		viewBox={ `0 0 ${ width } ${ height }` }
-		width={ width }
-		height={ height }
-	>
+export const PlayerPauseIcon = withScale( () => (
+	<SVG className="player-pause-icon" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24">
 		<Path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M11,16H9V8h2V16z M15,16h-2V8h2V16z" />
 	</SVG>
 ) );
@@ -97,15 +78,8 @@ export const ControlBackFiveIcon = (
 	</SVG>
 );
 
-export const PlayerPlayPauseIcon = withScale( ( { width = 24, height = 24, style = null } ) => (
-	<SVG
-		className="player-play-pause-icon"
-		xmlns="https://www.w3.org/2000/svg"
-		style={ style }
-		viewBox={ `0 0 ${ width } ${ height }` }
-		width={ width }
-		height={ height }
-	>
+export const PlayerPlayPauseIcon = withScale( () => (
+	<SVG className="player-play-pause-icon" xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24">
 		<Path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z M11,16H9V8h2V16z M12,16V8l5,4L12,16z" />
 	</SVG>
 ) );

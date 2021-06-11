@@ -12,9 +12,11 @@ import { PlayerPauseIcon, PlayerPlayPauseIcon } from '../../components/icons';
 export default function save( { attributes } ) {
 	const scale = getButtonSizseBySlug( attributes?.size );
 	return (
-		<button { ...useBlockProps.save() }>
-			<PlayerPlayPauseIcon scale={ scale } />
-			<PlayerPauseIcon scale={ scale } />
-		</button>
+		<div { ...useBlockProps.save() }>
+			<button className="wp-media-manager-player-button__button">
+				<PlayerPlayPauseIcon scale={ scale } />
+				<PlayerPauseIcon scale={ scale } />
+			</button>
+		</div>
 	);
 }

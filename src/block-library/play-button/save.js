@@ -11,8 +11,10 @@ import { getButtonSizseBySlug } from '../../components/with-player-button-settin
 
 export default function save( { attributes } ) {
 	return (
-		<button { ...useBlockProps.save() }>
-			<PlayerPlayIcon scale={ getButtonSizseBySlug( attributes?.size ) } />
-		</button>
+		<div { ...useBlockProps.save() }>
+			<button className="wp-media-manager-player-button__button">
+				<PlayerPlayIcon scale={ getButtonSizseBySlug( attributes?.size ) } />
+			</button>
+		</div>
 	);
 }
