@@ -14,11 +14,11 @@ import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import './editor.scss';
 
 export default function TimePositionDisplayEditBlock( { context } ) {
-	const sourceId = context.mediaSourceId;
+	const mediaSourceId = context.mediaSourceId;
 
 	const { currentTime = 0 } = useSelect( ( select ) => ( {
-		currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( sourceId ),
-	} ), [ sourceId ] );
+		currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( mediaSourceId ),
+	} ), [ mediaSourceId ] );
 
 	return (
 		<div { ...useBlockProps() }>

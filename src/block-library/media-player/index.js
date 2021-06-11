@@ -37,7 +37,7 @@ registerBlockType( blockName, {
 		},
 	},
 	providesContext: {
-		'mediaSourceId': 'sourceId',
+		'mediaSourceId': 'mediaSourceId',
 	},
 	usesContext: [ 'mediaSourceId' ],
 } );

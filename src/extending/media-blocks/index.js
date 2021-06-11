@@ -73,7 +73,7 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 	);
 	
 	const mediaCenterParentClientId = mediaCenterParentBlock?.clientId;
-	const mediaCenterParentSourceIdAttr = mediaCenterParentBlock?.attributes.sourceId;
+	const mediaCenterParentSourceIdAttr = mediaCenterParentBlock?.attributes.mediaSourceId;
 
 	function onMetadataReady( event ) {
 		updateMediaSourceData( mediaSourceIdAttr, {
@@ -154,7 +154,7 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 			// Cleaning Media Source source ID
 			// if the block is linked to it.
 			if ( mediaCenterParentSourceIdAttr === mediaSourceIdAttr ) {
-				updateBlockAttributes( mediaCenterParentClientId, { sourceId: MEDIA_NOT_DEFINED } );
+				updateBlockAttributes( mediaCenterParentClientId, { mediaSourceId: MEDIA_NOT_DEFINED } );
 			}
 
 			// Remove listeners.
@@ -194,7 +194,7 @@ const blockEditWithMediaRegister = createHigherOrderComponent( ( BlockEdit ) => 
 		}
 
 		// Link MediaCenter block on the fly with the media block.
-		updateBlockAttributes( mediaCenterParentClientId, { sourceId: mediaSourceIdAttr } );
+		updateBlockAttributes( mediaCenterParentClientId, { mediaSourceId: mediaSourceIdAttr } );
 	}, [ mediaSourceUrl, mediaSourceIdAttr, mediaCenterParentClientId, mediaCenterParentSourceIdAttr ] );
 
 	// Play/Pause media depending on playing status (via store).

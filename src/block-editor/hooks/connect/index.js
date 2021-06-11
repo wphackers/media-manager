@@ -9,6 +9,7 @@ import classnames from 'classnames';
 import { addFilter } from '@wordpress/hooks';
 import { getBlockSupport } from '@wordpress/blocks';
 import { useSelect, useDispatch } from '@wordpress/data';
+import { createHigherOrderComponent } from '@wordpress/compose';
 
 /**
  * External dependencies
@@ -16,17 +17,21 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { store as mediaManagerStore } from '../../../store';
 import { STATE_PAUSED } from '../../../store/constants';
 
-export function withMediaCenterConnection( OriginalBlock ) {
+export const withMediaCenterConnect = createHigherOrderComponent( ( OriginalBlock ) => {
 	return function ( props ) {
 		const { context } = props;
-		const { mediaSourceId: sourceId } = context;
+
+		console.log( 'context: ', context );
+
+		// Media Source ID is provided by block context.
+		const { mediaSourceId } = context;
 
 		const { isPaused, currentTime } = useSelect(
 			( select ) => ( {
-				isPaused: select( mediaManagerStore ).getMediaPlayerState( sourceId ) === STATE_PAUSED,
-				currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( sourceId ),
+				isPaused: select( mediaManagerStore ).getMediaPlayerState( mediaSourceId ) === STATE_PAUSED,
+				currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( mediaSourceId ),
 			} ),
-			[ sourceId ]
+			[ mediaSourceId ]
 		);
 		const {
 			playMediaSource,
@@ -39,16 +44,16 @@ export function withMediaCenterConnection( OriginalBlock ) {
 			mediaSource={ {
 				isPaused,
 				currentTime,
-				play: () => playMediaSource( sourceId ),
-				pause: () => pauseMediaSource( sourceId ),
-				toggle: () => toggleMediaSource( sourceId ),
+				play: () => playMediaSource( mediaSourceId ),
+				pause: () => pauseMediaSource( mediaSourceId ),
+				toggle: () => toggleMediaSource( mediaSourceId ),
 			} }
 			className={ classnames( props.className, {
 				'is-media-paused': isPaused,
 			} ) }
 		/>
 	}
-}
+}, 'withMediaCenterConnect' );
 
 function addMediaManagerConnectSupport( settings ) {
 	if ( ! getBlockSupport( settings, 'media-manager/connect' ) ) {
@@ -61,7 +66,7 @@ function addMediaManagerConnectSupport( settings ) {
 			settings.usesContext,
 			'mediaSourceId',
 		],
-		edit: withMediaCenterConnection( settings.edit ),
+		edit: withMediaCenterConnect( settings.edit ),
 	}
 }
 

@@ -7,7 +7,7 @@ export default function save( { attributes } ) {
 	return (
 		<div
 			{ ...useBlockProps.save( { className: 'entry-content' } ) }
-			data-media-source-ref={ attributes?.sourceId }
+			data-media-source-ref={ attributes?.mediaSourceId }
 		>
 			<InnerBlocks.Content />
 		</div>

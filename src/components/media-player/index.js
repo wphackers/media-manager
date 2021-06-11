@@ -91,7 +91,7 @@ export function SkipForwardButton( { onClick, ...other } ) {
 }
 
 export function MediaPlayerControl( {
-	sourceId,
+	mediaSourceId,
 	time,
 	onChange = () => {},
 } ) {
@@ -101,12 +101,12 @@ export function MediaPlayerControl( {
 	const { mediaPlayingState, mediaDuration, mediaSource } = useSelect(
 		( select ) => ( {
 			mediaPlayingState: select( mediaManagerStore ).getMediaPlayerState(
-				sourceId
+				mediaSourceId
 			),
-			mediaDuration: select( mediaManagerStore ).getMediaSourceDuration( sourceId ),
-			mediaSource: select( mediaManagerStore ).getMediaSourceById( sourceId ),
+			mediaDuration: select( mediaManagerStore ).getMediaSourceDuration( mediaSourceId ),
+			mediaSource: select( mediaManagerStore ).getMediaSourceById( mediaSourceId ),
 		} ),
-		[ sourceId ]
+		[ mediaSourceId ]
 	);
 
 	const { toggleMediaSource, setMediaSourceCurrentTime } = useDispatch(
@@ -118,7 +118,7 @@ export function MediaPlayerControl( {
 	const debouncedOnChange = useCallback(
 		debounce( function ( time, onChange ) {
 			if ( ! isPaused ) {
-				setMediaSourceCurrentTime( sourceId, time );
+				setMediaSourceCurrentTime( mediaSourceId, time );
 			}
 
 			onChange( time );
@@ -131,9 +131,9 @@ export function MediaPlayerControl( {
 	 */
 	function toggleInTime() {
 		if ( isPaused ) {
-			setMediaSourceCurrentTime( sourceId, time );
+			setMediaSourceCurrentTime( mediaSourceId, time );
 		}
-		toggleMediaSource( sourceId );
+		toggleMediaSource( mediaSourceId );
 	}
 
 	function onChangeTimeHandler( time ) {

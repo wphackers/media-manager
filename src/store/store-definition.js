@@ -96,6 +96,15 @@ const selectors = {
 		return state.sources?.[ id ];
 	},
 
+	/**
+	 * Retunr the default media source.
+	 * - the default one in case it's defined.
+	 * - the first one in case there are sources defined
+	 * - null when no media sources :-o
+	 *
+	 * @param {object} state 
+	 * @returns {string|null} default media source ID.
+	 */
 	getDefaultMediaSource( state ) {
 		let playerId = null;
 		const keys = Object.keys( state.sources );

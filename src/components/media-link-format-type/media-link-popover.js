@@ -19,7 +19,7 @@ export default function MediaLinkPopover( {
 	isMultipleEdition,
 	contentRef,
 	currentTime,
-	sourceId,
+	mediaSourceId,
 
 	onTimeChange,
 	onApplyMultipleFormat,
@@ -85,7 +85,7 @@ export default function MediaLinkPopover( {
 
 				{ ! showMultipleEdition && (
 					<MediaPlayerControl
-						sourceId={ sourceId }
+						mediaSourceId={ mediaSourceId }
 						time={ currentTime }
 						onChange={ onTimeChange }
 					/>

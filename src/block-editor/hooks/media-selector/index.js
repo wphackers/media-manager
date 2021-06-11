@@ -40,13 +40,13 @@ export const SUPPORT_NAME = 'media-manager/media-selector';
 export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) => {
 	return function ( props ) {
 		const { attributes, setAttributes, clientId, name, context } = props;
-		const { sourceId: sourceIdAttr } = attributes;
+		const { mediaSourceId: mediaSourceIdAttr } = attributes;
 
 		const [ isReplacing, setIsReplacing ] = useState( false );
 
 		// Source ID can be defined by parent blocks via context.
-		const sourceId = sourceIdAttr && sourceIdAttr !== MEDIA_NOT_DEFINED
-			? sourceIdAttr
+		const mediaSourceId = mediaSourceIdAttr && mediaSourceIdAttr !== MEDIA_NOT_DEFINED
+			? mediaSourceIdAttr
 			: context?.mediaSourceId;
 
 		const { mediaSources } = useSelect( ( select ) => {
@@ -57,12 +57,12 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 
 		const { mediaSource } = useSelect( ( select ) => {
 			return {
-				mediaSource: select( mediaManagerStore ).getMediaSourceById( sourceId )
+				mediaSource: select( mediaManagerStore ).getMediaSourceById( mediaSourceId )
 			};
-		}, [ sourceId ] );
+		}, [ mediaSourceId ] );
 
 		
-		const setSourceId = ( sourceId ) => setAttributes( { sourceId } );
+		const setSourceId = ( mediaSourceId ) => setAttributes( { mediaSourceId } );
 		const insertMediaBlock = useInsertMediaBlock();
 
 		function insertEmptyMediaBlock( type ) {
@@ -77,7 +77,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 			icon,
 		} = getBlockType( name ) || {};
 	
-		if ( isReplacing || ! sourceId ) {
+		if ( isReplacing || ! mediaSourceId ) {
 			return (
 				<div className="media-selector-placeholder">
 					<Placeholder
@@ -109,7 +109,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 							{ __( 'Start with an Audio block', 'media-manager' ) }
 						</Button>
 	
-						{ ( isReplacing && sourceId !== MEDIA_NOT_DEFINED ) && (
+						{ ( isReplacing && mediaSourceId !== MEDIA_NOT_DEFINED ) && (
 							<Button
 								isTertiary
 								label={ __( 'Cancel replacing media source', 'media-manager' ) }
@@ -119,7 +119,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 							</Button>
 						) }
 	
-						{ ( ! isReplacing || sourceId === MEDIA_NOT_DEFINED ) && (
+						{ ( ! isReplacing || mediaSourceId === MEDIA_NOT_DEFINED ) && (
 							<Button
 								isTertiary
 								label={ __( 'Continue without media source', 'media-manager' ) }
@@ -143,7 +143,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 						<Toolbar>
 							<Button onClick={ () => setIsReplacing( true ) }>
 								{
-									( sourceId !== MEDIA_NOT_DEFINED )
+									( mediaSourceId !== MEDIA_NOT_DEFINED )
 										? __( 'Replace', 'media-manager' )
 										: __( 'Link', 'media-manager' )
 								}
@@ -156,7 +156,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 					<Panel>
 						<MediaItemPanelBody
 							source={ mediaSource }
-							mediaSourceId={ sourceId }
+							mediaSourceId={ mediaSourceId }
 							isMediaInherited = { !! context?.mediaSourceId }
 							onReplace={ setIsReplacing }
 							onUnlink={ () => setSourceId( null ) }
@@ -167,9 +167,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 			</Fragment>
 		);
 	}
-},
-	'withMediaSelector'
-);
+}, 'withMediaSelector' );
 
 function addMediaSelectorSupport( settings ) {
 	if ( ! getBlockSupport( settings, SUPPORT_NAME ) ) {
@@ -180,7 +178,7 @@ function addMediaSelectorSupport( settings ) {
 		...settings,
 		attributes: {
 			...settings.attributes,
-			sourceId: {
+			mediaSourceId: {
 				type: 'string',
 			},
 		},

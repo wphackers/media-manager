@@ -28,6 +28,6 @@ registerBlockType( blockName, {
 		[ SUPPORT_MEDIA_SELECTOR ]: true,
 	},
 	providesContext: {
-		'mediaSourceId': 'sourceId',
+		'mediaSourceId': 'mediaSourceId',
 	},
 } );

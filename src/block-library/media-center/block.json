@@ -8,7 +8,7 @@
 		"align": true
 	},
 	"attributes": {
-		"sourceId": {
+		"mediaSourceId": {
 			"type": "string"
 		}
 	},
