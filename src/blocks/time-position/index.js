@@ -7,7 +7,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { TimePositionIcon as icon } from '../../icons';
+import { TimePositionIcon as icon } from '../../components/icons';
  
  /**
   * Internal dependencies

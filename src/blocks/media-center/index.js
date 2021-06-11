@@ -6,7 +6,7 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import { MediaCenterIcon as icon } from '../../icons';
+import { MediaCenterIcon as icon } from '../../components/icons';
 
 /**
  * Internal dependencies

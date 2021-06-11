@@ -8,7 +8,7 @@ import domReady from '@wordpress/dom-ready';
 /**
  * Internal dependencies
  */
-import { PlayerPlayIcon as icon } from '../../icons';
+import { PlayerPlayIcon as icon } from '../../components/icons';
  
 /**
  * Internal dependencies

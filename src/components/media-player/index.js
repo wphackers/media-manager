@@ -21,7 +21,7 @@ import {
 	PlayerPlayIcon,
 	PlayerPauseIcon,
 	PlayerPlayPauseIcon,
-} from '../../icons';
+} from '../icons';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import { store as mediaManagerStore } from '../../store';
 import { STATE_PAUSED } from '../../store/constants';

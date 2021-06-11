@@ -6,7 +6,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import { PlayerPauseIcon } from '../../icons';
+import { PlayerPauseIcon } from '../../components/icons';
 import { getButtonSizseBySlug } from '../../components/with-player-button-settings';
 
 export default function save( { attributes } ) {

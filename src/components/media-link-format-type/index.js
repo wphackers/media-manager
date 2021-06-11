@@ -20,7 +20,7 @@ import { useState } from '@wordpress/element';
  * Internal dependencies
  */
 import { store as mediaManagerStore } from '../../store';
-import { MediaLinkIcon } from '../../icons';
+import { MediaLinkIcon } from '../icons';
 import { shouldExtendBlockWithMedia } from '../../extending/utils';
 import MediaLinkPopover from './media-link-popover';
 import './style.scss';
