@@ -16,7 +16,7 @@ import Edit from './edit';
 import save from './save';
 
 export const blockName = 'media-manager/media-center';
-import { SUPPORT_MEDIA_SELECTOR } from '../../supports';
+import { SUPPORT_MEDIA_SELECTOR } from '../../block-editor/hooks';
 
 registerBlockType( blockName, {
 	apiVersion: 2,

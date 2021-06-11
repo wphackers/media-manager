@@ -22,9 +22,9 @@ import { Placeholder, Panel, Button, Toolbar } from '@wordpress/components';
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../store';
-import { MEDIA_NOT_DEFINED } from '../../store/constants';
-import MediaSelector, { MediaItemPanelBody } from '../../components/media-selector/';
+import { store as mediaManagerStore } from '../../../store';
+import { MEDIA_NOT_DEFINED } from '../../../store/constants';
+import MediaSelector, { MediaItemPanelBody } from '../../../components/media-selector/';
 
 const useInsertMediaBlock = () => {
 	const { insertBlock } = useDispatch( blockEditorStore );

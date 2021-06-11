@@ -8,4 +8,4 @@
 import './extending';
 import './store';
 import './blocks';
-import './supports';
+import './block-editor/hooks';

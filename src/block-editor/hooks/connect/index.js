@@ -13,8 +13,8 @@ import { useSelect, useDispatch } from '@wordpress/data';
 /**
  * External dependencies
  */
-import { store as mediaManagerStore } from '../../store';
-import { STATE_PAUSED } from '../../store/constants';
+import { store as mediaManagerStore } from '../../../store';
+import { STATE_PAUSED } from '../../../store/constants';
 
 export function withMediaCenterConnection( OriginalBlock ) {
 	return function ( props ) {

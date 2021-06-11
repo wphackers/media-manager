@@ -15,7 +15,7 @@ import { PlayerIcon as icon } from '../../components/icons';
 import Edit from './edit';
 import save from './save';
 import './style.scss';
-import { SUPPORT_MEDIA_SELECTOR } from '../../supports';
+import { SUPPORT_MEDIA_SELECTOR } from '../../block-editor/hooks';
  
 export const blockName = 'media-manager/media-player';
  
