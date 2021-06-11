@@ -11,6 +11,7 @@ import { getBlockSupport, createBlock, getBlockType } from '@wordpress/blocks';
 import { useState, useCallback, Fragment } from '@wordpress/element';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+import { createHigherOrderComponent } from '@wordpress/compose';
 import {
 	InspectorControls,
 	BlockControls,
@@ -36,12 +37,12 @@ const useInsertMediaBlock = () => {
 
 export const SUPPORT_NAME = 'media-manager/media-selector';
 
-export function withMediaSelector( OriginalBlock ) {
+export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) => {
 	return function ( props ) {
 		const { attributes, setAttributes, clientId, name, context } = props;
-		const [ isReplacing, setIsReplacing ] = useState( false );
-
 		const { sourceId: sourceIdAttr } = attributes;
+
+		const [ isReplacing, setIsReplacing ] = useState( false );
 
 		// Source ID can be defined by parent blocks via context.
 		const sourceId = sourceIdAttr && sourceIdAttr !== MEDIA_NOT_DEFINED
@@ -166,7 +167,9 @@ export function withMediaSelector( OriginalBlock ) {
 			</Fragment>
 		);
 	}
-}
+},
+	'withMediaSelector'
+);
 
 function addMediaSelectorSupport( settings ) {
 	if ( ! getBlockSupport( settings, SUPPORT_NAME ) ) {
