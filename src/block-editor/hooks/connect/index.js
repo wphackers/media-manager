@@ -17,7 +17,7 @@ import { createHigherOrderComponent } from '@wordpress/compose';
 import { store as mediaManagerStore } from '../../../store';
 import { STATE_PAUSED } from '../../../store/constants';
 
-export const withMediaCenterConnect = createHigherOrderComponent( ( OriginalBlock ) => {
+export const withMediaConnect = createHigherOrderComponent( ( OriginalBlock ) => {
 	return function ( props ) {
 		const { context } = props;
 
@@ -53,7 +53,7 @@ export const withMediaCenterConnect = createHigherOrderComponent( ( OriginalBloc
 			} ) }
 		/>
 	}
-}, 'withMediaCenterConnect' );
+}, 'withMediaConnect' );
 
 function addMediaManagerConnectSupport( settings ) {
 	if ( ! getBlockSupport( settings, 'media-manager/connect' ) ) {
@@ -66,7 +66,7 @@ function addMediaManagerConnectSupport( settings ) {
 			settings.usesContext,
 			'mediaSourceId',
 		],
-		edit: withMediaCenterConnect( settings.edit ),
+		edit: withMediaConnect( settings.edit ),
 	}
 }
 
