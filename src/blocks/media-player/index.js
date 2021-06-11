@@ -15,7 +15,7 @@ import { PlayerIcon as icon } from '../../icons';
 import Edit from './edit';
 import save from './save';
 import './style.scss';
-import { SUPPORT_MEDIA_SELECTOR } from '../../hooks';
+import { SUPPORT_MEDIA_SELECTOR } from '../../supports';
  
 export const blockName = 'media-manager/media-player';
  
@@ -35,6 +35,9 @@ registerBlockType( blockName, {
 				style: 'background-color',
 			},
 		},
+	},
+	providesContext: {
+		'mediaSourceId': 'sourceId',
 	},
 	usesContext: [ 'mediaSourceId' ],
 } );
