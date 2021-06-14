@@ -12,9 +12,9 @@ import { TimePositionIcon as icon } from '../../components/icons';
  /**
   * Internal dependencies
   */
-import './style.scss';
-import Edit from './edit';
-import save from './save';
+ import Edit from './edit';
+ import save from './save';
+ import './style.scss';
  
 export const blockName = 'media-manager/time-position-diaplay';
  

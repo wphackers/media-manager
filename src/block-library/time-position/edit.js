@@ -9,7 +9,7 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
- import { store as mediaManagerStore } from '../../store';
+import { store as mediaManagerStore } from '../../store';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import './editor.scss';
 
