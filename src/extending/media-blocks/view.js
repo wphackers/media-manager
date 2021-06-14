@@ -17,6 +17,11 @@ domReady( function() {
 	if ( mediaElements.length ) {
 		mediaElements.forEach( function( media ) {			
 			const { mediaSourceId, mediaSourceType } = media.dataset;
+			const sourceProps = getBlockSourceProps( mediaSourceType );
+			if ( ! sourceProps ) {
+				return;
+			}
+
 			const { domTypeName } = getBlockSourceProps( mediaSourceType );
 			const query = `[data-media-source-id="${ mediaSourceId }"] ${ domTypeName }`;
 
@@ -75,15 +80,14 @@ domReady( function() {
 		}
 
 		// Player button blocks.
-		const mediaPlayerButtons = mediaCenterBlock.querySelectorAll( 'button.wp-block-media-manager__item' );
+		const mediaPlayerButtons = mediaCenterBlock.querySelectorAll( '.wp-media-manager-player-button' );
 		if ( mediaPlayerButtons?.length ) {
 			mediaPlayerButtons.forEach( function( playerButton ) {
-				
 				const isPlayPauseButton = playerButton.classList.contains( 'wp-block-media-manager-play-pause-button' );
 				const isPlayButton = playerButton.classList.contains( 'wp-block-media-manager-play-button' );
 				const isPauseButton = playerButton.classList.contains( 'wp-block-media-manager-pause-button' );
 
-				playerButton.addEventListener( 'click', function( event ) {
+				playerButton.children[0].addEventListener( 'click', function( event ) {
 					event.stopPropagation();
 
 					const { state, querySelector } = select( mediaManagerStore ).getMediaSourceById( mediaSourceRef );
@@ -106,6 +110,6 @@ domReady( function() {
 					}
 				} );
 			} );
-		}	
+		}
 	} );
 } );
