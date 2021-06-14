@@ -43,7 +43,6 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 		const { attributes, setAttributes, clientId, name, context } = props;
 		const { mediaSourceId: mediaSourceIdAttr } = attributes;
 
-		
 		const [ isReplacing, setIsReplacing ] = useState( false );
 		
 		const mediaSourceId = useMediaSourceId( props );

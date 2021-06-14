@@ -39,7 +39,6 @@ const MediaEdit = ( providerProps ) => createHigherOrderComponent( ( BlockEdit )
 	const { attributes, setAttributes } = props;
 	const { mediaSourceId: mediaSourceIdAttr } = attributes;
 
-
 	const { name: attrName, domTypeName } = providerProps;
 
 	// Check media has defined its source.
@@ -119,10 +118,11 @@ const MediaEdit = ( providerProps ) => createHigherOrderComponent( ( BlockEdit )
 		}
 
 		/*
-		 * querySelector is the string used to pick up
+		 * `querySelector` is the string used to pick up
 		 * the DOM Element reference.
 		 */
-		const querySelector = `#${ mediaSourceId } ${ domTypeName }`;
+		const querySelector = `[data-media-source-provider-id="${ mediaSourceId }"] ${ domTypeName }`;
+
 		const mediaElement = document?.querySelector( querySelector );
 		if ( ! mediaElement ) {
 			return;
@@ -297,7 +297,8 @@ const MediaEdit = ( providerProps ) => createHigherOrderComponent( ( BlockEdit )
 					<MediaCenterPanelBody source={ mediaSource } />
 				</Panel>
 			</InspectorControls>
-			<div id={ attributes?.mediaSourceId }>
+
+			<div data-media-source-provider-id={ attributes?.mediaSourceId }>
 				<BlockEdit { ...props } />
 			</div>
 		</Fragment>
