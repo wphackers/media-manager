@@ -24,13 +24,13 @@ function media_center_media_center_block_init() {
 add_action( 'init', 'media_center_media_center_block_init' );
 
 /*
- * Load frontend scripts only when
- * media-center block is into the content.
+ * Load frontend scripts
+ * (only when media-center block is into the content?)
  */
 function add_frontend_scripts() {
-	if ( ! has_block( 'media-manager/media-center' ) ) {
-		return;
-	}
+	// if ( ! has_block( 'media-manager/media-center' ) ) {
+	// 	return;
+	// }
 
 	$path = plugins_url( 'build/view.js', __FILE__ );
 	$build_assets = require_once __DIR__ . '/build/view.asset.php';
