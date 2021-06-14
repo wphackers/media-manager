@@ -12,7 +12,7 @@ import { STATE_PAUSED } from '../../store/constants';
 import { getBlockSourceProps } from '../utils';
 
 domReady( function() {
-	// Register media element in the store.
+	// Media Store: register source.
 	const mediaElements = document.querySelectorAll( '[data-media-source-id]' );
 	if ( mediaElements.length ) {
 		mediaElements.forEach( function( media ) {			
