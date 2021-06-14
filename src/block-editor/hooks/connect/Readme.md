@@ -1,6 +1,58 @@
 # Connect supports
 
-Use the `media-manager/connect` key to supports media manager connection with your blocks.
+You can connect blocks to the Media Source in two different ways. As a media provider or as a media consumer.
+
+## Connect Provider
+
+Use the `media-manager/connect-provider` to connect the block as a media provider.
+It will try to inspect and make it connect to the media source (media store). In this way, every time that the block is inserted in the editor, it will register a new media ready to use.
+
+For this purpose, it's needed to pass some essential data to the support:
+
+* **name**: the attribute name which contains reference to the media source
+* **domTypeName**: the name of the DOM type, for instance `video`, `audio`.
+
+```es6
+// Add media connect provider to the `my-awesome-video` block.
+registerBlockType( `my-plugin/my-awesome-video`, {
+	supports: {
+		'media-manager/connect-provider': {
+			name: 'src',
+			domTypeName: 'video',
+		},
+	},
+} );
+```
+
+For third-party blocks, you can extend them using the `blocks.registerBlockType` filter:
+
+```es6
+// Set `core/video` as media provider.
+addFilter(
+	'blocks.registerBlockType',
+	'media-manager/set-block-as-media-provider',
+	function( settings, name ) {
+		if ( name !== 'core/video' ) ) {
+			return settings;
+		}
+
+		return {
+			...settings,
+			supports: {
+				...settings.support,
+				'media-manager/connect-provider': {
+					name: 'src',
+					domTypeName: 'video',
+				},
+			}
+		}
+	}
+);
+```
+
+## Connect Consumer
+
+Use the `media-manager/connect-consumer` key to supports media manager connection with your blocks.
 
 ```es6
 registerBlockType( `my-plugin/my-block`, {

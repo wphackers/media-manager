@@ -28,6 +28,7 @@ export function Edit( { context } ) {
 ```
 
 ### `media-manager/media-selector` support
+
 It's possile to enhance a blok with the Media Selector feature simply setting the `media-manager/media-selector` as true in the block definition.
 
 ```es6
