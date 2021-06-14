@@ -41,7 +41,7 @@ export const SUPPORT_NAME = 'media-manager/media-selector';
 export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) => {
 	return function ( props ) {
 		const { attributes, setAttributes, clientId, name, context } = props;
-		const { mediaSourceId: mediaSourceIdAttr } = attributes;
+		const { mediaSourceReferenceId } = attributes;
 
 		const [ isReplacing, setIsReplacing ] = useState( false );
 		
@@ -59,11 +59,11 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 		}, [ mediaSourceId ] );
 
 		
-		const setSourceId = ( mediaSourceId ) => setAttributes( { mediaSourceId } );
+		const setSourceReferenceId = ( mediaSourceReferenceId ) => setAttributes( { mediaSourceReferenceId } );
 		const insertMediaBlock = useInsertMediaBlock();
 
 		function insertEmptyMediaBlock( type ) {
-			setSourceId( MEDIA_NOT_DEFINED );
+			setSourceReferenceId( MEDIA_NOT_DEFINED );
 			setIsReplacing( false );
 			insertMediaBlock( type, clientId )
 		}
@@ -85,7 +85,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 						<MediaSelector
 							media={ values( mediaSources ) }
 							onMediaSelect={ ( id ) => {
-								setSourceId( id );
+								setSourceReferenceId( id );
 								setIsReplacing( false );
 							} }
 						/>
@@ -122,7 +122,7 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 								label={ __( 'Continue without media source', 'media-manager' ) }
 								onClick={ () => {
 									setIsReplacing( false );
-									setSourceId( MEDIA_NOT_DEFINED );
+									setSourceReferenceId( MEDIA_NOT_DEFINED );
 								} }
 							>
 								{ __( 'Skip', 'media-manager' ) }
@@ -154,9 +154,9 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 						<MediaItemPanelBody
 							source={ mediaSource }
 							mediaSourceId={ mediaSourceId }
-							isMediaInherited = { ! mediaSourceIdAttr }
+							isMediaInherited = { ! mediaSourceReferenceId }
 							onReplace={ setIsReplacing }
-							onUnlink={ () => setSourceId( null ) }
+							onUnlink={ () => setSourceReferenceId( null ) }
 						/>
 					</Panel>
 				</InspectorControls>
@@ -165,6 +165,9 @@ export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) 
 		);
 	}
 }, 'withMediaSelector' );
+
+// Block attibute name used to poulate the consumers.
+export const mediaConsumerBlockAttributeName = 'mediaSourceReferenceId';
 
 function addMediaSelectorSupport( settings ) {
 	if ( ! getBlockSupport( settings, SUPPORT_NAME ) ) {
@@ -175,7 +178,7 @@ function addMediaSelectorSupport( settings ) {
 		...settings,
 		attributes: {
 			...settings.attributes,
-			mediaSourceId: {
+			[ mediaConsumerBlockAttributeName ]: {
 				type: 'string',
 			},
 		},
