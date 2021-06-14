@@ -18,7 +18,8 @@
   margin: 0 5px 0 0;
   max-width: var(--responsive--aligndefault-width);
 }
-.editor-styles-wrapper .wp-block-media-manager-media-player .components-button {
+
+.editor-styles-wrapper .wp-media-manager-player-button .components-button {
   padding: 0;
   overflow: hidden;
   display: flex;
