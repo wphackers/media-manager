@@ -5,7 +5,7 @@ Use the `media-manager/connect` key to supports media manager connection with yo
 ```es6
 registerBlockType( `my-plugin/my-block`, {
 	supports: {
-		'media-manager/connect': true,
+		'media-manager/connect-consumer': true,
 	},
 } );
 ```
@@ -21,7 +21,7 @@ True if the media source is paused. Otherwise, False. :smart:
 ```es6
 registerBlockType( `my-plugin/my-block`, {
 	supports: {
-		'media-manager/connect': true,
+		'media-manager/connect-consumer': true,
 	},
 	edit: function( { mediaSource } ) {
 		return (

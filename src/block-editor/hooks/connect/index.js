@@ -56,7 +56,7 @@ export const withMediaConnect = createHigherOrderComponent( ( OriginalBlock ) =>
 }, 'withMediaConnect' );
 
 function addMediaManagerConnectSupport( settings ) {
-	if ( ! getBlockSupport( settings, 'media-manager/connect' ) ) {
+	if ( ! getBlockSupport( settings, 'media-manager/connect-consumer' ) ) {
 		return settings;
 	}
 

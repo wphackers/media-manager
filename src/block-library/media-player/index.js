@@ -28,7 +28,7 @@ registerBlockType( blockName, {
 	icon,
 	supports: {
 		align: true,
-		'media-manager/connect': true,
+		'media-manager/connect-consumer': true,
 		[ SUPPORT_MEDIA_SELECTOR ]: true,
 		'media-manager/color': {
 			background:  {
@@ -42,7 +42,7 @@ registerBlockType( blockName, {
 // Common supports for player buttons blocks.
 export const buttonSupports = {
 	align: true,
-	'media-manager/connect': true,
+	'media-manager/connect-consumer': true,
 	[ SUPPORT_MEDIA_SELECTOR ]: true,
 	'media-manager/color': {
 		icon: {
