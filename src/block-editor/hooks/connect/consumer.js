@@ -19,17 +19,22 @@ import { store as mediaManagerStore } from '../../../store';
 import { STATE_PAUSED } from '../../../store/constants';
 import useMediaSourceId from '../../../components/hooks/use-media-source-id';
 
+export function useMediaStore( id ) {
+	return useSelect(
+		( select ) => ( {
+			isPaused: select( mediaManagerStore ).getMediaPlayerState( id ) === STATE_PAUSED,
+			currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( id ),
+		} ),
+		[ id ]
+	);
+}
+
 export const withMediaConnect = createHigherOrderComponent( ( OriginalBlock ) => {
 	return function ( props ) {
 		const mediaSourceId = useMediaSourceId( props );
 
-		const { isPaused, currentTime } = useSelect(
-			( select ) => ( {
-				isPaused: select( mediaManagerStore ).getMediaPlayerState( mediaSourceId ) === STATE_PAUSED,
-				currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( mediaSourceId ),
-			} ),
-			[ mediaSourceId ]
-		);
+		const { isPaused, currentTime } = useMediaStore( mediaSourceId );
+
 		const {
 			playMediaSource,
 			pauseMediaSource,
