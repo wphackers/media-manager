@@ -8,52 +8,27 @@ import classnames from 'classnames';
  */
 import { addFilter } from '@wordpress/hooks';
 import { getBlockSupport } from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { BlockContextProvider } from '@wordpress/block-editor';
 
 /**
  * External dependencies
  */
-import { store as mediaManagerStore } from '../../../store';
-import { STATE_PAUSED } from '../../../store/constants';
 import useMediaSourceId from '../../../components/hooks/use-media-source-id';
-
-export function useMediaStore( id ) {
-	return useSelect(
-		( select ) => ( {
-			isPaused: select( mediaManagerStore ).getMediaPlayerState( id ) === STATE_PAUSED,
-			currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( id ),
-		} ),
-		[ id ]
-	);
-}
+import useMediaStore from '../../../components/hooks/use-media-store';
 
 export const withMediaConnect = createHigherOrderComponent( ( OriginalBlock ) => {
 	return function ( props ) {
 		const mediaSourceId = useMediaSourceId( props );
-
-		const { isPaused, currentTime } = useMediaStore( mediaSourceId );
-
-		const {
-			playMediaSource,
-			pauseMediaSource,
-			toggleMediaSource,
-		} = useDispatch( mediaManagerStore );
+		const mediaSource = useMediaStore( mediaSourceId );
 
 		return <BlockContextProvider value={ { mediaSourceId } }>
 			<OriginalBlock
 				{ ...props }
 				mediaContext={ { mediaSourceId } }
-				mediaSource={ {
-					isPaused,
-					currentTime,
-					play: () => playMediaSource( mediaSourceId ),
-					pause: () => pauseMediaSource( mediaSourceId ),
-					toggle: () => toggleMediaSource( mediaSourceId ),
-				} }
+				mediaSource={ mediaSource }
 				className={ classnames( props.className, {
-					'is-media-paused': isPaused,
+					'is-media-paused': mediaSource.isPaused,
 				} ) }
 			/>
 		</BlockContextProvider>
