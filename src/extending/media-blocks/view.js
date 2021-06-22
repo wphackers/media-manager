@@ -1,8 +1,14 @@
 /**
  * External dependencies
  */
+import { debounce } from 'lodash';
+
+/**
+ * External dependencies
+ */
 import domReady from '@wordpress/dom-ready';
-import { select, dispatch } from '@wordpress/data';
+import { render, useEffect } from '@wordpress/element';
+import { dispatch } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -10,105 +16,146 @@ import { select, dispatch } from '@wordpress/data';
 import { store as mediaManagerStore } from '../../store';
 import { STATE_PAUSED } from '../../store/constants';
 import { getBlockSourceProps } from '../utils';
+import PlayPauseEditBlock from '../../block-library/play-pause-button/view';
+import useMediaStore from '../../components/hooks/use-media-store';
 
-domReady( function() {
-	// Media Store: register source.
-	const mediaElements = document.querySelectorAll( '[data-media-source-id]' );
-	if ( mediaElements.length ) {
-		mediaElements.forEach( function( media ) {			
-			const { mediaSourceId, mediaSourceType } = media.dataset;
-			const sourceProps = getBlockSourceProps( mediaSourceType );
-			if ( ! sourceProps ) {
-				return;
-			}
+function MediaSourceWrapper( {
+	children: mediaElement,
+	mediaSourceId,
+	elementType,
+	querySelector,
+} ) {
+	const { isPaused } = useMediaStore( mediaSourceId );
 
-			const { domTypeName } = getBlockSourceProps( mediaSourceType );
-			const query = `[data-media-source-id="${ mediaSourceId }"] ${ domTypeName }`;
+	// Media Source actions.
+	const {
+		playMediaSource,
+		pauseMediaSource,
+		updateMediaSourceData,
+	} = dispatch( mediaManagerStore );
 
-			dispatch( mediaManagerStore ).registerMediaSource( mediaSourceId, {
-				// source: mediaSource,
-				elementType: domTypeName,
-				state: STATE_PAUSED,
-				querySelector: query,
-			} );
+	function play() {
+		mediaElement.play().catch( () => {} );
+	}
+
+	function pause() {
+		mediaElement.pause();
+	}
+
+	function onMetadataReady( event ) {
+		updateMediaSourceData( mediaSourceId, {
+			duration: event?.srcElement?.duration,
 		} );
 	}
 
-	// All Media Center blocks.
-	const mediaCenterBlocks = document.querySelectorAll( '.wp-block-media-manager-media-center' );
-	if ( ! mediaCenterBlocks?.length ) {
+	function onMediaPlay() {
+		playMediaSource( mediaSourceId );
+	}
+
+	function onMediaPause() {
+		pauseMediaSource( mediaSourceId );
+	}
+
+	/*
+	 * Pre load mediaElement metadata.
+	 * It allows preloading useful metadata
+	 * of the media source, for instance,
+	 * the media duration.
+	 */
+	mediaElement.preload = 'metadata';
+	mediaElement.autoplay = false;
+
+	/*
+	 * - Register Media into the store.
+	 * - Get the metadata from the client.
+	 * - Listen Play and Pause events.
+	 */
+	useEffect( () => {
+		dispatch( mediaManagerStore ).registerMediaSource( mediaSourceId, {
+			// source: mediaSource,
+			elementType,
+			state: STATE_PAUSED,
+			querySelector,
+		} );
+
+		// Subscribe to media events.
+		mediaElement.addEventListener( 'loadedmetadata', onMetadataReady );
+		mediaElement.addEventListener( 'play', onMediaPlay );
+		mediaElement.addEventListener( 'pause', onMediaPause );
+
+		// Clean.
+		return function () {
+			// Remove listeners.
+			mediaElement.removeEventListener( 'loadedmetadata', onMetadataReady );
+			mediaElement.removeEventListener( 'play', onMediaPlay );
+			mediaElement.removeEventListener( 'pause', onMediaPause );
+
+			// Unregister media from store.
+			unregisterMediaSource( mediaSourceId );
+		};
+	}, [] );
+
+	// Play/Pause media depending on playing status (via store).
+	useEffect( () => {
+		const action = mediaElement.paused ? play : pause;
+		const debouncedAction = debounce( action, 100 );
+
+		if ( isPaused !== mediaElement.paused ) {
+			debouncedAction();
+		}
+
+		return () => {
+			debouncedAction.cancel();
+		};
+	}, [ isPaused, mediaElement ] );
+
+	return null;
+}
+
+domReady( function() {
+	// Media Providers.
+	const mediaElements = document.querySelectorAll( '[data-media-source-id]' );
+	if ( mediaElements.length ) {
+		mediaElements.forEach( function( media ) {
+			const { mediaSourceId, mediaSourceType } = media.dataset;
+			const { domTypeName } = getBlockSourceProps( mediaSourceType );
+			const query = `[data-media-source-id="${ mediaSourceId }"] ${ domTypeName }`;
+			const mediaElement = document.querySelector( query );
+			if ( mediaElement ) {
+			// if ( mediaElement && mediaElement.parentElement ) { // Keep wondering why checking parentElement.
+				render(
+					<MediaSourceWrapper
+						mediaSourceId={ mediaSourceId }
+						elementType={ domTypeName }
+						querySelector={ query }
+					>
+						{ mediaElement }
+					</MediaSourceWrapper>,
+					mediaElement
+				);
+			}
+		} );
+	}
+
+	// Media Consumers.
+	const mediaSourceConsumers = document.querySelectorAll( '[data-media-source-reference]' );
+	if ( ! mediaSourceConsumers?.length ) {
 		return;
 	}
 
-	mediaCenterBlocks.forEach( function( mediaCenterBlock ) {
-		const { mediaSourceRef } = mediaCenterBlock?.dataset;
+	console.log( 'mediaSourceConsumers: ', mediaSourceConsumers );
 
-		// Media Link Format Style.
-		const mediaLinkFormatElements = mediaCenterBlock.querySelectorAll( 'a.media-link-format-type' );
-		if ( mediaLinkFormatElements?.length ) {
-			mediaLinkFormatElements.forEach( function( anchor ) {
-				const { state, querySelector } = select( mediaManagerStore ).getMediaSourceById( mediaSourceRef );
-				const isPlayerPaused = STATE_PAUSED === state
-				const mediaElement = document.querySelector( querySelector );
-				
-				anchor.addEventListener( 'click', function( event ) {
-					event.stopPropagation();
-					const timestamp = event.target.getAttribute( 'href' ).replace( /#/, '' );
-					
-					const rePlay = 
-						Math.abs( Math.floor( timestamp - mediaElement.currentTime ) * 1000 ) >
-						2000;
-						
-					// Playback to the timestamp.
-					dispatch( mediaManagerStore ).setMediaSourceCurrentTime( mediaSourceRef, timestamp );
-					mediaElement.currentTime = timestamp;
-
-					if ( rePlay ) {
-						mediaElement.play();
-						dispatch( mediaManagerStore ).playMediaSource( mediaSourceRef );
-					} else {
-						if ( isPlayerPaused ) {
-							dispatch( mediaManagerStore ).playMediaSource( mediaSourceRef );
-							mediaElement.play();
-						} else {
-							dispatch( mediaManagerStore ).pauseMediaSource( mediaSourceRef );
-							mediaElement.pause();
-						}
-					}
-				} );
-			} );
-		}
+	mediaSourceConsumers.forEach( function( mediaCenterBlock ) {
+		const { mediaSourceReference } = mediaCenterBlock?.dataset;
 
 		// Player button blocks.
 		const mediaPlayerButtons = mediaCenterBlock.querySelectorAll( '.wp-media-manager-player-button' );
 		if ( mediaPlayerButtons?.length ) {
 			mediaPlayerButtons.forEach( function( playerButton ) {
-				const isPlayPauseButton = playerButton.classList.contains( 'wp-block-media-manager-play-pause-button' );
-				const isPlayButton = playerButton.classList.contains( 'wp-block-media-manager-play-button' );
-				const isPauseButton = playerButton.classList.contains( 'wp-block-media-manager-pause-button' );
-
-				playerButton.children[0].addEventListener( 'click', function( event ) {
-					event.stopPropagation();
-
-					const { state, querySelector } = select( mediaManagerStore ).getMediaSourceById( mediaSourceRef );
-					const isPlayerPaused = STATE_PAUSED === state
-					const mediaElement = document.querySelector( querySelector );
-
-					if ( isPlayerPaused ) {
-						if ( isPlayPauseButton || isPlayButton ) {
-							dispatch( mediaManagerStore ).playMediaSource( mediaSourceRef );
-							mediaElement.play();
-						}
-
-						playerButton.classList.remove( 'is-media-paused' );
-					} else {
-						if ( isPlayPauseButton || isPauseButton ) {
-							dispatch( mediaManagerStore ).pauseMediaSource( mediaSourceRef );
-							mediaElement.pause();
-						}
-						playerButton.classList.add( 'is-media-paused' );
-					}
-				} );
+				render(
+					<PlayPauseEditBlock mediaSourceId={ mediaSourceReference } />,
+					playerButton
+				);
 			} );
 		}
 	} );
