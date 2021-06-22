@@ -1,7 +1,7 @@
 useMediaStore hook
 ==================
 
-Uae this hook to get properties and helpers to interact with the media, from the store.
+Use this hook to connect your componeny with the media store.
 
 ```es6
 import useMediaStore from '../../components/hooks/use-media-store';
@@ -18,3 +18,35 @@ function MyComponent() {
 	);
 }
 ```
+
+the `useMediaStore()` expect a valid media source ID as parameter, and it returns an object with properties and helper functions:
+
+### isPaused
+
+-   Type: `boolean`
+
+True is the media is currently paused. Otherwise, False.
+
+### currentTime
+
+-   Type: `integer`
+
+Current playing time of the media, in milliseconds.
+
+### play()
+
+-   Type: `function`
+
+Use this helper function to play the media.
+
+### pause()
+
+-   Type: `function`
+
+Use this helper function to pause the media.
+
+### toggle()
+
+-   Type: `function`
+
+Use this helper function to play the media when it's paused, and vice versa.

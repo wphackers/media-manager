@@ -10,6 +10,14 @@ import { store as mediaManagerStore } from '../../../store';
 import { STATE_PAUSED } from '../../../store/constants';
 
 export default function useMediaStore( id ) {
+	const { isPaused, currentTime } = useSelect(
+		( select ) => ( {
+			isPaused: select( mediaManagerStore ).getMediaPlayerState( id ) === STATE_PAUSED,
+			currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( id ),
+		} ),
+		[ id ]
+	);
+
 	const {
 		playMediaSource,
 		pauseMediaSource,
@@ -17,13 +25,9 @@ export default function useMediaStore( id ) {
 	} = useDispatch( mediaManagerStore );
 
 	return {
-		...useSelect(
-			( select ) => ( {
-				isPaused: select( mediaManagerStore ).getMediaPlayerState( id ) === STATE_PAUSED,
-				currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( id ),
-			} ),
-			[ id ]
-		),
+		className: isPaused ? 'is-media-paused' : '',
+		isPaused,
+		currentTime,
 		play: () => playMediaSource( id ),
 		pause: () => pauseMediaSource( id ),
 		toggle: () => toggleMediaSource( id ),
