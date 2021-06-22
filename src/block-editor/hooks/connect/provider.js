@@ -55,6 +55,7 @@ const MediaEdit = ( providerProps ) => createHigherOrderComponent( ( BlockEdit )
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
 	// Media Source selectors.
+	// @TODO: Update with useMediaStore() hook
 	const { mediaPlayingState, currentTime, mediaSource } = useSelect(
 		( select ) => ( {
 			mediaPlayingState: select( mediaManagerStore ).getMediaPlayerState( mediaSourceIdAttr ),
@@ -251,8 +252,7 @@ const MediaEdit = ( providerProps ) => createHigherOrderComponent( ( BlockEdit )
 			}
 		);
 
-		const onTimeUpdate = ( e ) =>
-			throttledTimeChange( e.target.currentTime );
+		const onTimeUpdate = ( e ) => throttledTimeChange( e.target.currentTime );
 		mediaElement?.addEventListener( 'timeupdate', onTimeUpdate );
 
 		return () => {
