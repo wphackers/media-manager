@@ -50,22 +50,35 @@ add_action( 'wp_enqueue_scripts', 'add_frontend_scripts' );
  * Wrap media elements with media manager data.
  */
 function media_center_wrap_media_source( $block_content, $block ) {
-	if ( empty( $block_content) || ! isset( $block['attrs']['mediaSourceId'] ) ) {
+	if (
+		empty( $block_content ) ||
+		! (
+			isset( $block['attrs']['mediaSourceId'] ) ||
+			isset( $block['attrs']['mediaSourceReferenceId'] )
+		)
+	) {
 		return $block_content;
 	}
-
-	// Store media source data into the block wrapper element.
+	
 	$dom = new DomDocument();
 	@$dom->loadHTML( $block_content );
 	$elem = $dom->documentElement->childNodes->item( 0 )->childNodes->item( 0 );
-	$elem->setAttribute( 'data-media-source-id', $block['attrs']['mediaSourceId'] );
-	$elem->setAttribute( 'data-media-source-type', $block['blockName'] );
 
+	// Provider blocks: store media source reference.
+	if ( isset( $block['attrs']['mediaSourceId'] ) ) {
+		$elem->setAttribute( 'data-media-source-id', $block['attrs']['mediaSourceId'] );
+	}
+
+	// Consumer blocks: store media source reference.
+	if ( isset( $block['attrs']['mediaSourceReferenceId'] ) ) {
+		$elem->setAttribute( 'data-media-source-reference', $block['attrs']['mediaSourceReferenceId'] );
+	}
+
+	$elem->setAttribute( 'data-media-source-type', $block['blockName'] );
 	return $dom->saveHTML();
 }
- 
-add_filter( 'render_block', 'media_center_wrap_media_source', 10, 2 );
 
+add_filter( 'render_block', 'media_center_wrap_media_source', 10, 2 );
 
 function register_media_center_block_category() {
 	if ( class_exists( 'WP_Block_Patterns_Registry' ) ) {
