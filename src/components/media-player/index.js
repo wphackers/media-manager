@@ -38,7 +38,7 @@ export function JumpBackButton( { onClick, ...other } ) {
 	);
 }
 
-export function PlayPauseButton( { onClick, isPaused = false, scale,...other } ) {
+export function PlayPauseButton( { onClick, isPaused = false, scale, ...other } ) {
 	return (
 		<Button
 			icon={ isPaused
