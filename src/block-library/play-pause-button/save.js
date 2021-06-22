@@ -13,7 +13,7 @@ export default function save( { attributes } ) {
 	const scale = getButtonSizseBySlug( attributes?.size );
 	return (
 		<div { ...useBlockProps.save() }>
-			<button className="wp-media-manager-player-button__button">
+			<button className="wp-media-manager-player-button__button is-media-paused">
 				<PlayerPlayPauseIcon scale={ scale } />
 				<PlayerPauseIcon scale={ scale } />
 			</button>

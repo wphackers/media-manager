@@ -1,15 +1,13 @@
-.wp-block-media-manager-media-player {
-	.wp-block-media-manager-play-pause-button {
-		.player-play-pause-icon {
-			display: none;
-		}
-	
-		.player-pause-icon {
-			display: block;
-		}
+.wp-block-media-manager-play-pause-button {
+	.player-play-pause-icon {
+		display: none;
 	}
 
-	.wp-block-media-manager-play-pause-button.is-media-paused {
+	.player-pause-icon {
+		display: block;
+	}
+
+	.is-media-paused {
 		.player-play-pause-icon {
 			display: block;
 		}
