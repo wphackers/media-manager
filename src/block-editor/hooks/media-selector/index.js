@@ -27,6 +27,8 @@ import { MEDIA_NOT_DEFINED } from '../../../store/constants';
 import MediaSelector, { MediaItemPanelBody } from '../../../components/media-selector/';
 import useMediaSourceId from '../../../components/hooks/use-media-source-id';
 
+export const SUPPORT_NAME = 'media-manager/media-selector';
+
 const useInsertMediaBlock = () => {
 	const { insertBlock } = useDispatch( blockEditorStore );
 
@@ -36,7 +38,6 @@ const useInsertMediaBlock = () => {
 	}, [ insertBlock ] );
 };
 
-export const SUPPORT_NAME = 'media-manager/media-selector';
 
 export const withMediaSelector = createHigherOrderComponent ( ( OriginalBlock ) => {
 	return function ( props ) {
