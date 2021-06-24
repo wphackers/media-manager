@@ -7,8 +7,8 @@ import { debounce } from 'lodash';
  * External dependencies
  */
 import domReady from '@wordpress/dom-ready';
-import { render, useEffect } from '@wordpress/element';
 import { dispatch } from '@wordpress/data';
+import { render, useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -139,24 +139,32 @@ domReady( function() {
 
 	// Media Consumers.
 	const mediaSourceConsumers = document.querySelectorAll( '[data-media-source-reference]' );
-	if ( ! mediaSourceConsumers?.length ) {
-		return;
-	}
 
-	console.log( 'mediaSourceConsumers: ', mediaSourceConsumers );
+	// CSS class defined for the player button blocks.
+	const buttonBlockCssClass = 'wp-media-manager-player-button';
+	if ( mediaSourceConsumers?.length ) {
+		mediaSourceConsumers.forEach( function( mediaCenterBlock ) {
+			const { mediaSourceReference } = mediaCenterBlock?.dataset;
 
-	mediaSourceConsumers.forEach( function( mediaCenterBlock ) {
-		const { mediaSourceReference } = mediaCenterBlock?.dataset;
-
-		// Player button blocks.
-		const mediaPlayerButtons = mediaCenterBlock.querySelectorAll( '.wp-media-manager-player-button' );
-		if ( mediaPlayerButtons?.length ) {
-			mediaPlayerButtons.forEach( function( playerButton ) {
+			// Check is the consumer is a player-button block
+			const isButtonBlock = mediaCenterBlock.classList.contains( buttonBlockCssClass );
+			if ( isButtonBlock ) {
 				render(
 					<PlayPauseEditBlock mediaSourceId={ mediaSourceReference } />,
-					playerButton
+					mediaCenterBlock
 				);
-			} );
-		}
-	} );
+			} else {
+				// Query player button blocks.
+				const mediaPlayerButtons = mediaCenterBlock.querySelectorAll( `.${ buttonBlockCssClass }` );
+				if ( mediaPlayerButtons?.length ) {
+					mediaPlayerButtons.forEach( function( playerButton ) {
+						render(
+							<PlayPauseEditBlock mediaSourceId={ mediaSourceReference } />,
+							playerButton
+						);
+					} );
+				}
+			}
+		} );
+	}
 } );

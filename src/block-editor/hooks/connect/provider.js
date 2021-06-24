@@ -305,7 +305,7 @@ const MediaEdit = ( providerProps ) => createHigherOrderComponent( ( BlockEdit )
 	);
 }, 'MediaEdit' );
 
-// Block attibute name used to poulate the providers.
+// Block attibute name used to populate the providers.
 export const mediaProviderBlockAttributeName = 'mediaSourceId';
 
 function addMediaManagerConnectSupport( settings, name ) {
