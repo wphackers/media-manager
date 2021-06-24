@@ -12,8 +12,9 @@ import './editor.scss';
 
 export default function PlayEditBlock( { mediaSource, scale, className } ) {
 	return (
-		<div { ...useBlockProps( { className } ) }>
+		<div { ...useBlockProps() }>
 			<Button
+				className={ className }
 				isPaused= { mediaSource.isPaused }
 				scale={ scale }
 				onClick={ mediaSource.pause }
