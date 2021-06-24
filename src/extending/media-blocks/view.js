@@ -16,7 +16,9 @@ import { render, useEffect } from '@wordpress/element';
 import { store as mediaManagerStore } from '../../store';
 import { STATE_PAUSED } from '../../store/constants';
 import { getBlockSourceProps } from '../utils';
-import PlayPauseEditBlock from '../../block-library/play-pause-button/view';
+import PlayPauseButtonBlock from '../../block-library/play-pause-button/view';
+import PlayButtonBlock from '../../block-library/play-button/view';
+import PauseButtonBlock from '../../block-library/pause-button/view';
 import useMediaStore from '../../components/hooks/use-media-store';
 
 function MediaSourceWrapper( {
@@ -119,8 +121,22 @@ function MediaSourceWrapper( {
  * @returns {React.Component} Media player button
  */
 function renderPlayerButtonBlock( mediaSourceId, playerButtonElement ) {
+	let PlayerButtonComponent;
+
+	if ( playerButtonElement.classList.contains( 'wp-block-media-manager-play-pause-button' ) ) {
+		PlayerButtonComponent = PlayPauseButtonBlock;
+	} else if ( playerButtonElement.classList.contains( 'wp-block-media-manager-play-button' ) ) {
+		PlayerButtonComponent = PlayButtonBlock;
+	} else {
+		PlayerButtonComponent = PauseButtonBlock;
+	}
+
+	if ( ! PlayerButtonComponent ) {
+		return;
+	}
+
 	render(
-		<PlayPauseEditBlock mediaSourceId={ mediaSourceId } />,
+		<PlayerButtonComponent mediaSourceId={ mediaSourceId } />,
 		playerButtonElement
 	);
 }
