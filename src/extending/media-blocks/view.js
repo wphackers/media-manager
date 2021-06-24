@@ -112,6 +112,19 @@ function MediaSourceWrapper( {
 	return null;
 }
 
+/**
+ * Hlper function to render the Player Button Block, in the front-end.
+ *
+ * @param {string} mediaSourceId Media source ID
+ * @returns {React.Component} Media player button
+ */
+function renderPlayerButtonBlock( mediaSourceId, playerButtonElement ) {
+	render(
+		<PlayPauseEditBlock mediaSourceId={ mediaSourceId } />,
+		playerButtonElement
+	);
+}
+
 domReady( function() {
 	// Media Providers.
 	const mediaElements = document.querySelectorAll( '[data-media-source-id]' );
@@ -149,19 +162,13 @@ domReady( function() {
 			// Check is the consumer is a player-button block
 			const isButtonBlock = mediaCenterBlock.classList.contains( buttonBlockCssClass );
 			if ( isButtonBlock ) {
-				render(
-					<PlayPauseEditBlock mediaSourceId={ mediaSourceReference } />,
-					mediaCenterBlock
-				);
+				renderPlayerButtonBlock( mediaSourceReference, mediaCenterBlock );
 			} else {
 				// Query player button blocks.
 				const mediaPlayerButtons = mediaCenterBlock.querySelectorAll( `.${ buttonBlockCssClass }` );
 				if ( mediaPlayerButtons?.length ) {
-					mediaPlayerButtons.forEach( function( playerButton ) {
-						render(
-							<PlayPauseEditBlock mediaSourceId={ mediaSourceReference } />,
-							playerButton
-						);
+					mediaPlayerButtons.forEach( function( playerButtonElement ) {
+						renderPlayerButtonBlock( mediaSourceReference, playerButtonElement );
 					} );
 				}
 			}
