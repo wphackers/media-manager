@@ -59,9 +59,8 @@ domReady( function() {
 						mediaSourceId={ mediaSourceId }
 						elementType={ domTypeName }
 						querySelector={ query }
-					>
-						{ mediaElement }
-					</MediaSourceProviderWrapper>,
+						mediaElement={ mediaElement }
+					/>,
 					mediaElement
 				);
 			}

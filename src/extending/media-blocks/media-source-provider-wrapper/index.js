@@ -20,7 +20,7 @@ const MEDIA_CURRENT_TIME_THRESHOLD = 1000;
 const MEDIA_CURRENT_STATE_THRESHOLD = 1000;
 
 export default function MediaSourceProviderWrapper( {
-	children: mediaElement,
+	mediaElement,
 	mediaSourceId,
 	elementType,
 	querySelector,
