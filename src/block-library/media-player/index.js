@@ -14,8 +14,8 @@ import { PlayerIcon as icon } from '../../components/icons';
  */
 import Edit from './edit';
 import save from './save';
+import { SUPPORT_MEDIA_SELECTOR, SUPPORT_SIZES } from '../../block-editor/hooks';
 import './style.scss';
-import { SUPPORT_MEDIA_SELECTOR } from '../../block-editor/hooks';
  
 export const blockName = 'media-manager/media-player';
  
@@ -41,6 +41,9 @@ registerBlockType( blockName, {
 
 // Common supports for player buttons blocks.
 export const buttonSupports = {
+	[ SUPPORT_SIZES ]: {
+		__sectionTitle: __( 'Button size', 'media-manager' ),
+	},
 	align: true,
 	'media-manager/connect-consumer': true,
 	[ SUPPORT_MEDIA_SELECTOR ]: true,

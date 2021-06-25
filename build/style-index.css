@@ -120,22 +120,22 @@
 .media-source-panel .components-notice {
   margin: 0;
 }
-.wp-block-media-manager-media-player .wp-block-media-manager-play-button:not(.is-media-paused) {
+.wp-block-media-manager-play-button .components-button:not(.is-media-paused) {
   opacity: 0.7;
 }
-.wp-block-media-manager-media-player .wp-block-media-manager-pause-button.is-media-paused {
+.wp-block-media-manager-pause-button .components-button.is-media-paused {
   opacity: 0.7;
 }
-.wp-block-media-manager-media-player .wp-block-media-manager-play-pause-button .player-play-pause-icon {
+.wp-block-media-manager-play-pause-button .player-play-pause-icon {
   display: none;
 }
-.wp-block-media-manager-media-player .wp-block-media-manager-play-pause-button .player-pause-icon {
+.wp-block-media-manager-play-pause-button .player-pause-icon {
   display: block;
 }
-.wp-block-media-manager-media-player .wp-block-media-manager-play-pause-button.is-media-paused .player-play-pause-icon {
+.wp-block-media-manager-play-pause-button .is-media-paused .player-play-pause-icon {
   display: block;
 }
-.wp-block-media-manager-media-player .wp-block-media-manager-play-pause-button.is-media-paused .player-pause-icon {
+.wp-block-media-manager-play-pause-button .is-media-paused .player-pause-icon {
   display: none;
 }
 .wp-block-media-manager-time-position-diaplay .time-position-diaplay__wrapper {
@@ -153,10 +153,6 @@
 
 .wp-media-manager-player-button {
   margin: 0 5px 0 0;
-  display: inline-block;
-  -ms-grid-row-align: center;
-      align-self: center;
-  max-width: var(--responsive--aligndefault-width);
   border-radius: 9999px;
   line-height: 0;
 }
@@ -180,30 +176,35 @@
   width: 24px;
   min-width: 24px;
   height: 24px;
+  max-height: 24px;
 }
 
 .is-normal-size button {
   width: 36px;
   min-width: 36px;
   height: 36px;
+  max-height: 36px;
 }
 
 .is-medium-size button {
   width: 48px;
   min-width: 48px;
   height: 48px;
+  max-height: 48px;
 }
 
 .is-large-size button {
   width: 60px;
   min-width: 60px;
   height: 60px;
+  max-height: 60px;
 }
 
 .is-giant-size button {
   width: 102px;
   min-width: 102px;
   height: 102px;
+  max-height: 102px;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

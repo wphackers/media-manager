@@ -14,7 +14,7 @@ import { getBlockSupport } from '@wordpress/blocks';
 /**
  * External dependencies
  */
-import withPlayerButtonSettings from '../../../components/with-player-button-settings';
+import withMediaManagerColors from '../../../components/with-colors';
 
 export const getMediaManagerColorSupport = ( settings ) => getBlockSupport( settings, 'media-manager/color' );
 export const getMediaManagerCustomClassNameSupport = ( settings ) => getBlockSupport( settings, 'media-manager/customClassName' );
@@ -125,7 +125,7 @@ function addMediaManagerColorSupport( settings ) {
 
 		edit: compose( [
 			withColors( supportStylePropsMap ),
-			withPlayerButtonSettings( mediaColor ),
+			withMediaManagerColors( mediaColor ),
 		] )( settings.edit ),
 	};
 }
