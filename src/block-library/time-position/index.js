@@ -14,7 +14,10 @@ import { TimePositionIcon as icon } from '../../components/icons';
  */
 import Edit from './edit';
 import save from './save';
-import { SUPPORT_MEDIA_SELECTOR } from '../../block-editor/hooks';
+import {
+	SUPPORT_CONNECT_CONSUMER,
+	SUPPORT_MEDIA_SELECTOR,
+} from '../../block-editor/hooks';
 import './style.scss';
 
 export const blockName = 'media-manager/time-position-display';
@@ -30,6 +33,7 @@ registerBlockType( blockName, {
 	save,
 	icon,
 	supports: {
+		[ SUPPORT_CONNECT_CONSUMER ]: true,
 		[ SUPPORT_MEDIA_SELECTOR ]: true,
 		align: true,
 		typography: {

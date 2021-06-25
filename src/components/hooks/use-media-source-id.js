@@ -11,7 +11,8 @@ import { mediaConsumerBlockAttributeName } from '../../block-editor/hooks/media-
  * - block context.
  * - default value in the store admin
  *
- * @returns {string|null} media source id
+ * @param {Object} props
+ * @return {string|null} media source id
  */
 export default function useMediaSourceId( props ) {
 	const { attributes, context } = props;
@@ -25,6 +26,4 @@ export default function useMediaSourceId( props ) {
 	if ( context?.mediaSourceId ) {
 		return context.mediaSourceId;
 	}
-
-	return;
 }
