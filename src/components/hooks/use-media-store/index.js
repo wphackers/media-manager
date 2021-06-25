@@ -40,8 +40,8 @@ export default function useMediaStore( id ) {
 		pause: useCallback( () => pauseMediaSource( id ), [ id ] ),
 		toggle: useCallback( () => toggleMediaSource( id ), [ id ] ),
 		register: useCallback( ( id, data ) => registerMediaSource( id, data ), [ id ] ),
-		unregister: useCallback( ( id ) => unregisterMediaSource( id ), [ id ] ),
-		updateData: useCallback( ( id, data ) => updateMediaSourceData( id, data ), [ id ] ),
+		unregister: useCallback( ( mediaSourceId ) => unregisterMediaSource( mediaSourceId ), [] ),
+		updateData: useCallback( ( mediaSourceI, data ) => updateMediaSourceData( mediaSourceI, data ), [] ),
 		setCurrentTime: useCallback( ( timestamp ) => setMediaSourceCurrentTime( id, timestamp ), [ id ] ),
 	};
 }
