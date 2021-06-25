@@ -27,9 +27,11 @@ import {
 	STATE_ERROR,
 	MEDIA_NOT_DEFINED,
 } from '../../../store/constants';
-
 import { MediaCenterPanelBody } from '../../../components/media-selector';
 import { blockName as mediaCenterBlockName } from '../../../block-library/media-center';
+
+// Define and export support name.
+export const SUPPORT_NAME = 'media-manager/connect-provider';
 
 // In-sync constants.
 const MEDIA_CURRENT_TIME_THRESHOLD = 1000;
@@ -348,7 +350,7 @@ export const mediaProviderBlockAttributeName = 'mediaSourceId';
 function addMediaManagerConnectSupport( settings, name ) {
 	const blockProviderProps = getBlockSupport(
 		settings,
-		'media-manager/connect-provider'
+		SUPPORT_NAME
 	);
 	if ( ! blockProviderProps ) {
 		return settings;
