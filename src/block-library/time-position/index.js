@@ -14,6 +14,7 @@ import { TimePositionIcon as icon } from '../../components/icons';
  */
 import Edit from './edit';
 import save from './save';
+import { SUPPORT_MEDIA_SELECTOR } from '../../block-editor/hooks';
 import './style.scss';
 
 export const blockName = 'media-manager/time-position-display';
@@ -29,12 +30,20 @@ registerBlockType( blockName, {
 	save,
 	icon,
 	supports: {
+		[ SUPPORT_MEDIA_SELECTOR ]: true,
+		align: true,
 		typography: {
 			fontSize: true,
 			lineHeight: true,
 			__experimentalFontStyle: true,
 			__experimentalFontWeight: true,
 			__experimentalFontFamily: true,
+		},
+		'media-manager/color': {
+			text: {
+				label: __( 'Text color', 'media-manager' ),
+			},
+			__sectionTitle: __( 'Color', 'media-manager' ),
 		},
 	},
 } );

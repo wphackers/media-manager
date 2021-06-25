@@ -9,8 +9,8 @@ import { useBlockProps } from '@wordpress/block-editor';
 import useCurrentTime from '../../components/hooks/use-current-time';
 import './editor.scss';
 
-export default function TimePositionDisplayEditBlock( { context } ) {
-	const { currentTimeFormatted } = useCurrentTime( context.mediaSourceId );
+export default function TimePositionDisplayEditBlock( { mediaSourceId } ) {
+	const { currentTimeFormatted } = useCurrentTime( mediaSourceId );
 
 	return (
 		<div { ...useBlockProps() }>

@@ -75,8 +75,9 @@ export const withMediaSelector = createHigherOrderComponent(
 				[ mediaSourceId ]
 			);
 
-			const setSourceReferenceId = ( mediaSourceReferenceId ) =>
-				setAttributes( { mediaSourceReferenceId } );
+			const setSourceReferenceId = ( sourceId ) =>
+				setAttributes( { mediaSourceReferenceId: sourceId } );
+
 			const insertMediaBlock = useInsertMediaBlock();
 
 			function insertEmptyMediaBlock( type ) {
@@ -153,7 +154,8 @@ export const withMediaSelector = createHigherOrderComponent(
 											'media-manager'
 										) }
 									</Button>
-								) }
+								)
+							}
 
 							{ ( ! isReplacing ||
 								mediaSourceId === MEDIA_NOT_DEFINED ) && (
