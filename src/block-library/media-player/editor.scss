@@ -11,6 +11,15 @@
 		margin: 0 5px 0 0;
 		max-width: var(--responsive--aligndefault-width);
 	}
+
+	// Time position block
+	.wp-block-media-manager-time-position-display[data-block] {
+		margin-top: 0;
+		margin-right: 1em;
+		margin-bottom: 0;
+		margin-left: 0.5em;
+	}
+	
 }
 
 .editor-styles-wrapper .wp-media-manager-player-button {
