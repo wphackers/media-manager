@@ -45,9 +45,10 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 		[]
 	);
 
+	const { mediaSourceReferenceId } = mediaCenterBlock?.attributes || {};
 	const { domRef } = useSelect(
 		( select ) => ( {
-			domRef: select( mediaManagerStore ).getMediaSourceDomReference( mediaSourceId ),
+			domRef: select( mediaManagerStore ).getMediaSourceDomReference( mediaSourceReferenceId ),
 		} ),
 		[]
 	);
@@ -56,8 +57,6 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	if ( ! mediatCenterBlockClientId?.length ) {
 		return null;
 	}
-
-	const { mediaSourceId } = mediaCenterBlock?.attributes || {};
 
 	// Media link format time position.
 	const { attributes } = getActiveFormat( value, MEDIA_LINK_FORMAT_TYPE ) || {};
@@ -150,7 +149,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 				contentRef={ contentRef }
 				currentTime={ mediaLinkFormatTimestamp }
 				isActive={ isActive }
-				mediaSourceId={ mediaSourceId }
+				mediaSourceId={ mediaSourceReferenceId }
 				onTimeChange={ applyFormatStyleHandler }
 				onIgnoreMultipleFormat={ () => {
 					setIsMultipleEdition( false );
