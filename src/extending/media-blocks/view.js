@@ -11,6 +11,7 @@ import { getBlockSourceProps } from '../utils';
 import PlayPauseButtonBlock from '../../block-library/play-pause-button/view';
 import PlayButtonBlock from '../../block-library/play-button/view';
 import PauseButtonBlock from '../../block-library/pause-button/view';
+import TimePositionBlock from '../../block-library/time-position/view';
 import MediaLinkFormatType from '../../components/media-link-format-type/view';
 import renderReplace from '../../lib/render';
 import MediaSourceProviderWrapper from './media-source-provider-wrapper';
@@ -19,9 +20,10 @@ import MediaSourceProviderWrapper from './media-source-provider-wrapper';
  * Hlper function to render the Player Button Block, in the front-end.
  *
  * @param {string} mediaSourceId Media source ID
+ * @param {elementType} playerButtonElement
  * @returns {React.Component} Media player button
  */
-function renderPlayerButtonBlock( mediaSourceId, playerButtonElement ) {
+function renderPlayerComponentBlock( mediaSourceId, playerButtonElement ) {
 	let PlayerButtonComponent;
 
 	if (
@@ -36,8 +38,14 @@ function renderPlayerButtonBlock( mediaSourceId, playerButtonElement ) {
 		)
 	) {
 		PlayerButtonComponent = PlayButtonBlock;
-	} else {
+	} else if (
+		playerButtonElement.classList.contains(
+			'wp-block-media-manager-pause-button'
+		)
+	) {
 		PlayerButtonComponent = PauseButtonBlock;
+	} else {
+		PlayerButtonComponent = TimePositionBlock;
 	}
 
 	if ( ! PlayerButtonComponent ) {
@@ -91,7 +99,7 @@ domReady( function () {
 				buttonBlockCssClass
 			);
 			if ( isButtonBlock ) {
-				renderPlayerButtonBlock(
+				renderPlayerComponentBlock(
 					mediaSourceReference,
 					mediaCenterBlock
 				);
@@ -104,7 +112,7 @@ domReady( function () {
 					mediaPlayerButtons.forEach( function (
 						playerButtonElement
 					) {
-						renderPlayerButtonBlock(
+						renderPlayerComponentBlock(
 							mediaSourceReference,
 							playerButtonElement
 						);
@@ -121,8 +129,7 @@ domReady( function () {
 						elRef={ mediaFormatLinkElement }
 						mediaSourceId={ mediaSourceReference }
 					/>,
-					mediaFormatLinkElement,
-					true
+					mediaFormatLinkElement
 				);
 			} );
 		} );
