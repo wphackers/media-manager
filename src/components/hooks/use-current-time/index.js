@@ -10,12 +10,16 @@ import { convertSecondsToTimeCode } from '../../../lib/utils/time';
 import { store as mediaManagerStore } from '../../../store';
 
 export default function useCurrentTime( id ) {
-	return useSelect( ( select ) => {
-		const currentTime = select( mediaManagerStore ).getMediaSourceCurrentTime( id ) || 0;
-		return {
-			currentTime,
-			currentTimeFormatted: convertSecondsToTimeCode( currentTime ),
-		};
-	},
-	[ id ]
-) };
+	return useSelect(
+		( select ) => {
+			const currentTime =
+				select( mediaManagerStore ).getMediaSourceCurrentTime( id ) ||
+				0;
+			return {
+				currentTime,
+				currentTimeFormatted: convertSecondsToTimeCode( currentTime ),
+			};
+		},
+		[ id ]
+	);
+}

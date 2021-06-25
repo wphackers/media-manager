@@ -10,6 +10,6 @@ export default function renderReplace( Component, reference, replace = false ) {
 
 	const tempReference = document.createElement( 'div' );
 	render( Component, tempReference, () => {
-		reference.replaceWith(...Array.from( tempReference.childNodes ) );
+		reference.replaceWith( ...Array.from( tempReference.childNodes ) );
 	} );
 }

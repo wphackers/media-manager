@@ -13,7 +13,9 @@ export default function save( { attributes } ) {
 	return (
 		<div { ...useBlockProps.save() }>
 			<button className="wp-media-manager-player-button__button">
-				<PlayerPlayIcon scale={ getButtonSizeBySlug( attributes?.size ) } />
+				<PlayerPlayIcon
+					scale={ getButtonSizeBySlug( attributes?.size ) }
+				/>
 			</button>
 		</div>
 	);

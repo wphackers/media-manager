@@ -9,7 +9,11 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { PlayPauseButton as Button } from '../../components/media-player';
 import './editor.scss';
 
-export default function PlayPauseEditBlock( { mediaSource, scale, className } ) {
+export default function PlayPauseEditBlock( {
+	mediaSource,
+	scale,
+	className,
+} ) {
 	return (
 		<div { ...useBlockProps() }>
 			<Button

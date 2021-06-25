@@ -31,7 +31,8 @@ export default function MediaLinkPopover( {
 		settings: mediaLinkFormatButtonSettings,
 	} );
 
-	const showMultipleEdition = isMultipleEdition && hasMultipleTimeformats?.length && ! isActive;
+	const showMultipleEdition =
+		isMultipleEdition && hasMultipleTimeformats?.length && ! isActive;
 
 	if ( ! ( showMultipleEdition || isActive ) ) {
 		return null;
@@ -45,8 +46,8 @@ export default function MediaLinkPopover( {
 		>
 			<div className="media-link-popover">
 				{ showMultipleEdition && (
-					<div className="media-link-popover__multiple-styling">{
-						createInterpolateElement(
+					<div className="media-link-popover__multiple-styling">
+						{ createInterpolateElement(
 							sprintf(
 								/* translators: %d: number of timeformats found. */
 								_n(
@@ -58,28 +59,24 @@ export default function MediaLinkPopover( {
 								hasMultipleTimeformats?.length
 							),
 							{
-								strong: (
-									<strong />
-								),
+								strong: <strong />,
 							}
-						)
-					}
-					<Button
-						isSecondary
-						isSmall
-						onClick={ onApplyMultipleFormat }
-					>
-						{ __( 'Apply Media Link format', 'media-manager' ) }	
-					</Button>
+						) }
+						<Button
+							isSecondary
+							isSmall
+							onClick={ onApplyMultipleFormat }
+						>
+							{ __( 'Apply Media Link format', 'media-manager' ) }
+						</Button>
 
-					<Button
-						isTertiary
-						isSmall
-						onClick={ onIgnoreMultipleFormat }
-					>
-						{ __( 'Ignore', 'media-manager' ) }	
-					</Button>
-
+						<Button
+							isTertiary
+							isSmall
+							onClick={ onIgnoreMultipleFormat }
+						>
+							{ __( 'Ignore', 'media-manager' ) }
+						</Button>
 					</div>
 				) }
 
@@ -90,7 +87,7 @@ export default function MediaLinkPopover( {
 						onChange={ onTimeChange }
 					/>
 				) }
-				</div>
+			</div>
 		</Popover>
 	);
 }

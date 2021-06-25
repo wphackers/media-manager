@@ -1,4 +1,3 @@
-
 /**
  * WordPress dependencies
  */
@@ -12,49 +11,61 @@ import {
 import { __ } from '@wordpress/i18n';
 
 export default ( supportProps ) => {
-	return createHigherOrderComponent( ( BlockEdit ) => ( props ) => {
-		// Panel title.
-		const panelTitle = supportProps.__sectionTitle || __( 'Color settings', 'media-manager' );
+	return createHigherOrderComponent(
+		( BlockEdit ) => ( props ) => {
+			// Panel title.
+			const panelTitle =
+				supportProps.__sectionTitle ||
+				__( 'Color settings', 'media-manager' );
 
-		// Panel color settings.
-		let colorSettings = [];
+			// Panel color settings.
+			let colorSettings = [];
 
-		// Contrast checker.
-		let contrastCheckerProps = {};
+			// Contrast checker.
+			let contrastCheckerProps = {};
 
-		for( const prop in supportProps ) {
-			if ( /^__/.test( prop ) ) {
-				continue;
+			for ( const prop in supportProps ) {
+				if ( /^__/.test( prop ) ) {
+					continue;
+				}
+
+				const support = supportProps[ prop ];
+				const value = props[ support.attributeName ]?.color;
+				colorSettings.push( {
+					label: supportProps[ prop ]?.label,
+					value,
+					onChange: props[ support.setterAttributeName ],
+				} );
+
+				if ( supportProps.__contrastChecker ) {
+					contrastCheckerProps[
+						support.style === 'color'
+							? 'textColor'
+							: 'backgroundColor'
+					] = value;
+				}
 			}
 
-			const support = supportProps[ prop ];
-			const value = props[ support.attributeName ]?.color;
-			colorSettings.push( {
-				label: supportProps[ prop ]?.label,
-				value,
-				onChange: props[ support.setterAttributeName ],
-			} );
+			return (
+				<Fragment>
+					<InspectorControls>
+						<PanelColorSettings
+							title={ panelTitle }
+							colorSettings={ colorSettings }
+						>
+							{ supportProps.__contrastChecker && (
+								<ContrastChecker
+									{ ...contrastCheckerProps }
+									isLargeText={ false }
+								/>
+							) }
+						</PanelColorSettings>
+					</InspectorControls>
 
-			if ( supportProps.__contrastChecker ) {
-				contrastCheckerProps[ support.style === 'color' ? 'textColor' : 'backgroundColor' ] = value;
-			}
-		}
-
-		return (
-			<Fragment>
-				<InspectorControls>
-					<PanelColorSettings
-						title={ panelTitle }
-						colorSettings={ colorSettings }
-					>
-						{ supportProps.__contrastChecker && (
-							<ContrastChecker { ...contrastCheckerProps } isLargeText={ false } />
-						) }
-					</PanelColorSettings>
-				</InspectorControls>
-
-				<BlockEdit { ...props } />
-			</Fragment>
-		);
-	}, 'withMediaManagerColors' );
+					<BlockEdit { ...props } />
+				</Fragment>
+			);
+		},
+		'withMediaManagerColors'
+	);
 };

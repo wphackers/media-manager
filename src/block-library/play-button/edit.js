@@ -1,4 +1,3 @@
-
 /**
  * WordPress dependencies
  */
@@ -15,7 +14,7 @@ export default function PlayEditBlock( { mediaSource, scale, className } ) {
 		<div { ...useBlockProps() }>
 			<Button
 				className={ className }
-				isPaused= { mediaSource.isPaused }
+				isPaused={ mediaSource.isPaused }
 				scale={ scale }
 				onClick={ mediaSource.play }
 			/>

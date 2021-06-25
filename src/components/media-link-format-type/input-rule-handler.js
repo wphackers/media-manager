@@ -1,4 +1,3 @@
-
 /**
  * External dependencies
  */
@@ -10,14 +9,19 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import { convertTimeCodeToSeconds, isMarkfownTimeformat } from '../../lib/utils/time';
+import {
+	convertTimeCodeToSeconds,
+	isMarkfownTimeformat,
+} from '../../lib/utils/time';
 import { MEDIA_LINK_FORMAT_TYPE } from './';
 import { blockName as mediaCenterBlockName } from '../../block-library/media-center';
 
-export default function( value ) {
+export default function ( value ) {
 	// Apply rule handler only when current block
 	// is child of media center.
-	const { getSelectedBlockClientId, getBlockParentsByBlockName } = select( blockEditorStore );
+	const { getSelectedBlockClientId, getBlockParentsByBlockName } = select(
+		blockEditorStore
+	);
 	const isChildOfMediaCenter = getBlockParentsByBlockName(
 		getSelectedBlockClientId(),
 		mediaCenterBlockName
@@ -34,16 +38,18 @@ export default function( value ) {
 	const { start, text } = value;
 
 	const characterBefore = text.slice( start - 1, start );
-	const trigger = text.slice( start - 2, start - 1);
+	const trigger = text.slice( start - 2, start - 1 );
 
-	const isTriggerChar = trigger === SIMPLE_CLOSE_TRIGGER_CHAR || trigger === MD_CLOSE_TRIGGER_CHAR;
+	const isTriggerChar =
+		trigger === SIMPLE_CLOSE_TRIGGER_CHAR ||
+		trigger === MD_CLOSE_TRIGGER_CHAR;
 	if ( ! isTriggerChar ) {
 		return value;
 	}
 
 	const textBefore = text.substr( 0, start );
 	if ( characterBefore !== MD_OPEN_TRIGGER_CHAR ) {
-		const startIndex = textBefore.lastIndexOf( SIMPLE_OPEN_TRIGGER_CHAR );		
+		const startIndex = textBefore.lastIndexOf( SIMPLE_OPEN_TRIGGER_CHAR );
 		if ( startIndex === -1 ) {
 			return value;
 		}
@@ -61,14 +67,12 @@ export default function( value ) {
 		value = remove( value, endIndex, endIndex + 1 );
 
 		value = applyFormat(
-			value, {
+			value,
+			{
 				type: MEDIA_LINK_FORMAT_TYPE,
 				attributes: {
 					timestamp: `#${ convertTimeCodeToSeconds( timestamp ) }`,
-					label: sprintf(
-						__( 'Playback at %1$s' ),
-						timestamp
-					),
+					label: sprintf( __( 'Playback at %1$s' ), timestamp ),
 				},
 			},
 			startIndex,
@@ -79,4 +83,4 @@ export default function( value ) {
 	}
 
 	return value;
-};
+}

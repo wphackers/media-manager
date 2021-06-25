@@ -9,7 +9,7 @@ import domReady from '@wordpress/dom-ready';
  * Internal dependencies
  */
 import { PlayerPlayIcon as icon } from '../../components/icons';
- 
+
 /**
  * Internal dependencies
  */
@@ -17,10 +17,11 @@ import { buttonSupports as supports } from '../media-player';
 import Edit from './edit';
 import save from './save';
 import './style.scss';
- 
+
 export const blockName = 'media-manager/play-button';
 
-domReady( function() { // we need this if we'd like to extend the block :'(
+domReady( function () {
+	// we need this if we'd like to extend the block :'(
 	registerBlockType( blockName, {
 		apiVersion: 2,
 		title: __( 'Play Button', 'media-manager' ),
@@ -29,4 +30,4 @@ domReady( function() { // we need this if we'd like to extend the block :'(
 		icon,
 		supports,
 	} );
-} )
+} );

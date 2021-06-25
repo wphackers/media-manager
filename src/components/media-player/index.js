@@ -1,10 +1,9 @@
-
 /**
  * External dependencies
  */
- import { debounce } from 'lodash';
- 
- /**
+import { debounce } from 'lodash';
+
+/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -38,12 +37,20 @@ export function JumpBackButton( { onClick, ...other } ) {
 	);
 }
 
-export function PlayPauseButton( { onClick, isPaused = false, scale, ...other } ) {
+export function PlayPauseButton( {
+	onClick,
+	isPaused = false,
+	scale,
+	...other
+} ) {
 	return (
 		<Button
-			icon={ isPaused
-				? <PlayerPlayPauseIcon scale={ scale } />
-				: <PlayerPauseIcon  scale={ scale } />
+			icon={
+				isPaused ? (
+					<PlayerPlayPauseIcon scale={ scale } />
+				) : (
+					<PlayerPauseIcon scale={ scale } />
+				)
 			}
 			disabled={ false }
 			onClick={ onClick }
@@ -57,7 +64,7 @@ export function PlayPauseButton( { onClick, isPaused = false, scale, ...other } 
 	);
 }
 
-export function PlayButton( { onClick, isPaused = false, scale,...other } ) {
+export function PlayButton( { onClick, isPaused = false, scale, ...other } ) {
 	return (
 		<Button
 			icon={ <PlayerPlayIcon scale={ scale } /> }
@@ -68,7 +75,7 @@ export function PlayButton( { onClick, isPaused = false, scale,...other } ) {
 	);
 }
 
-export function PauseButton( { onClick, isPaused = false, scale,...other } ) {
+export function PauseButton( { onClick, isPaused = false, scale, ...other } ) {
 	return (
 		<Button
 			icon={ <PlayerPauseIcon scale={ scale } /> }
@@ -103,8 +110,12 @@ export function MediaPlayerControl( {
 			mediaPlayingState: select( mediaManagerStore ).getMediaPlayerState(
 				mediaSourceId
 			),
-			mediaDuration: select( mediaManagerStore ).getMediaSourceDuration( mediaSourceId ),
-			mediaSource: select( mediaManagerStore ).getMediaSourceById( mediaSourceId ),
+			mediaDuration: select( mediaManagerStore ).getMediaSourceDuration(
+				mediaSourceId
+			),
+			mediaSource: select( mediaManagerStore ).getMediaSourceById(
+				mediaSourceId
+			),
 		} ),
 		[ mediaSourceId ]
 	);
@@ -122,8 +133,9 @@ export function MediaPlayerControl( {
 			}
 
 			onChange( time );
-		}, 250 )
-	, [ isPaused ] );
+		}, 250 ),
+		[ isPaused ]
+	);
 
 	/**
 	 * Toggle media playing status.
@@ -168,7 +180,9 @@ export function MediaPlayerControl( {
 
 			<SkipForwardButton
 				disabled={ ! mediaSource }
-				onClick={ () => onChangeTimeHandler( Math.min( mediaDuration, time + 5 ) ) }
+				onClick={ () =>
+					onChangeTimeHandler( Math.min( mediaDuration, time + 5 ) )
+				}
 			/>
 
 			<div className="media-player-control__display">
@@ -176,7 +190,9 @@ export function MediaPlayerControl( {
 			</div>
 
 			<RangeControl
-				disabled={ ! mediaSource || typeof mediaDuration === 'undefined' }
+				disabled={
+					! mediaSource || typeof mediaDuration === 'undefined'
+				}
 				value={ rangeTime }
 				min={ 0 }
 				max={ mediaDuration }

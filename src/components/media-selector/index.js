@@ -57,11 +57,11 @@ export function MediaItem( {
 		mediaElement.addEventListener( 'play', onPlayHandler );
 		mediaElement.addEventListener( 'pause', onPauseHandler );
 
-		return function() {
+		return function () {
 			onRemove( mediaElement, id );
 			mediaElement.removeEventListener( 'play', onPlayHandler );
 			mediaElement.removeEventListener( 'pause', onPauseHandler );
-		}
+		};
 	}, [ itemReference ] );
 
 	return (
@@ -78,16 +78,17 @@ export function MediaItem( {
 					size={ 36 }
 				/>
 
-				{ showTypeLabel && (
-					<strong> { type }</strong>
-				) }
+				{ showTypeLabel && <strong> { type }</strong> }
 
 				<PlayPauseButton
 					className="media__item-play-button"
 					isPaused={ ! isPlaying }
 					onClick={ ( event ) => {
 						event.stopPropagation();
-						onPlayToggle( itemReference.current?.querySelector( type ), id );
+						onPlayToggle(
+							itemReference.current?.querySelector( type ),
+							id
+						);
 					} }
 					isSmall
 				/>
@@ -107,8 +108,16 @@ export function MediaItemPanelBody( {
 	const { selectBlock } = useDispatch( blockEditorStore );
 
 	return (
-		<PanelBody className="media-source-panel" title={ __( 'Media Source', 'media-manager' ) }>
-			<p>{ __( 'Media source connected to the media center block', 'media-manager' ) }</p>
+		<PanelBody
+			className="media-source-panel"
+			title={ __( 'Media Source', 'media-manager' ) }
+		>
+			<p>
+				{ __(
+					'Media source connected to the media center block',
+					'media-manager'
+				) }
+			</p>
 
 			{ isMediaNotDefined && (
 				<Fragment>
@@ -126,7 +135,10 @@ export function MediaItemPanelBody( {
 						<Button
 							isSecondary
 							isSmall
-							label={ __( 'Link to a media source', 'media-manager' ) }
+							label={ __(
+								'Link to a media source',
+								'media-manager'
+							) }
 							onClick={ onReplace }
 						>
 							{ __( 'Link to Media', 'media-manager' ) }
@@ -163,17 +175,20 @@ export function MediaItemPanelBody( {
 							</li>
 							<li>
 								{ __( 'Duration:', 'media-manager' ) }
-								<strong> { convertSecondsToTimeCode( source.duration ) }</strong>
+								<strong>
+									{ ' ' }
+									{ convertSecondsToTimeCode(
+										source.duration
+									) }
+								</strong>
 							</li>
 
 							<li>
-								{
-									sprintf(
-										/* translators: %1$s: block title, %2$s: author name. */
-										__( 'Connected to a %1$s.' ),
-										source.elementType
-									)
-								}
+								{ sprintf(
+									/* translators: %1$s: block title, %2$s: author name. */
+									__( 'Connected to a %1$s.' ),
+									source.elementType
+								) }
 
 								<Button
 									className="components-button__focus"
@@ -182,7 +197,9 @@ export function MediaItemPanelBody( {
 										if ( ! source.mediaBlockClientId ) {
 											return;
 										}
-										selectBlock( source.mediaBlockClientId );
+										selectBlock(
+											source.mediaBlockClientId
+										);
 									} }
 								>
 									{ __( 'Focus', 'media-manager' ) }
@@ -197,7 +214,10 @@ export function MediaItemPanelBody( {
 								<Button
 									isSecondary
 									isSmall
-									label={ __( 'Replacing linked media source', 'media-manager' ) }
+									label={ __(
+										'Replacing linked media source',
+										'media-manager'
+									) }
 									onClick={ onReplace }
 								>
 									{ __( 'Replace Media', 'media-manager' ) }
@@ -206,7 +226,10 @@ export function MediaItemPanelBody( {
 								<Button
 									isTertiary
 									isSmall
-									label={ __( 'Unlink media source', 'media-manager' ) }
+									label={ __(
+										'Unlink media source',
+										'media-manager'
+									) }
 									onClick={ () => onUnlink( true ) }
 								>
 									{ __( 'Unlink Media', 'media-manager' ) }
@@ -226,8 +249,13 @@ export function MediaCenterPanelBody( { source } ) {
 	}
 
 	return (
-		<PanelBody className="media-source-panel" title={ __( 'Media Source', 'media-manager' ) }>
-			<p>{ __( 'Media Center connected to the media', 'media-manager' ) }</p>
+		<PanelBody
+			className="media-source-panel"
+			title={ __( 'Media Source', 'media-manager' ) }
+		>
+			<p>
+				{ __( 'Media Center connected to the media', 'media-manager' ) }
+			</p>
 		</PanelBody>
 	);
 }
@@ -258,15 +286,18 @@ export default function MediaSelector( { media, onMediaSelect } ) {
 								onPlayToggle={ ( element ) => {
 									// Seek previous media element by media Id.
 									// If so, stop it.
-									if ( mediaPlayingElementRef && mediaPlayingElementRef !== element) {
+									if (
+										mediaPlayingElementRef &&
+										mediaPlayingElementRef !== element
+									) {
 										mediaPlayingElementRef?.pause();
-									};
+									}
 
 									if ( element.paused ) {
 										setMediaPlayingElementRef( element );
 										return element.play();
 									}
-				
+
 									setMediaPlayingElementRef( null );
 									element.pause();
 								} }

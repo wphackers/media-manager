@@ -14,10 +14,9 @@ export default function MediaLinkFormatType( { mediaSourceId, elRef } ) {
 
 	// Use dispatch instead of use MediaStore hook,
 	// to avoid unnecessary rendering.
-	const {
-		setMediaSourceCurrentTime,
-		playMediaSource,
-	} = useDispatch( mediaManagerStore );
+	const { setMediaSourceCurrentTime, playMediaSource } = useDispatch(
+		mediaManagerStore
+	);
 
 	return (
 		<a

@@ -1,4 +1,3 @@
-
 /**
  * WordPress dependencies
  */
@@ -42,43 +41,49 @@ const defaultSizes = [
 ];
 
 export function getButtonSizeBySlug( slug ) {
-	return defaultSizes.find( option => option.slug === slug )?.size || 1.5
+	return defaultSizes.find( ( option ) => option.slug === slug )?.size || 1.5;
 }
 
 export default ( supportProps ) => {
-	return createHigherOrderComponent( ( BlockEdit ) => ( props ) => {
-		const { attributes, setAttributes } = props;
-		const { size } = attributes;
-		const scale = getButtonSizeBySlug( size );
+	return createHigherOrderComponent(
+		( BlockEdit ) => ( props ) => {
+			const { attributes, setAttributes } = props;
+			const { size } = attributes;
+			const scale = getButtonSizeBySlug( size );
 
-		function setSize( { selectedItem } ) {
-			if ( ! selectedItem?.slug ) {
-				return;
+			function setSize( { selectedItem } ) {
+				if ( ! selectedItem?.slug ) {
+					return;
+				}
+				setAttributes( { size: selectedItem.slug } );
 			}
-			setAttributes( { size: selectedItem.slug } );
-		}
 
-		// Panel title.
-		const panelTitle = supportProps.__sectionTitle;
-		const selectorTitle = supportProps.__selectorTitle || __( 'Sizes', 'media-manager' );
+			// Panel title.
+			const panelTitle = supportProps.__sectionTitle;
+			const selectorTitle =
+				supportProps.__selectorTitle || __( 'Sizes', 'media-manager' );
 
-		return (
-			<Fragment>
-				<InspectorControls>
-					<Panel>
-						<PanelBody title={ panelTitle }>
-							<CustomSelectControl
-								label={ selectorTitle }
-								options={ defaultSizes }
-								onChange={ setSize }
-								value={ defaultSizes.find( option => option.slug === size ) }
-							/>
-						</PanelBody>
-					</Panel>
-				</InspectorControls>
+			return (
+				<Fragment>
+					<InspectorControls>
+						<Panel>
+							<PanelBody title={ panelTitle }>
+								<CustomSelectControl
+									label={ selectorTitle }
+									options={ defaultSizes }
+									onChange={ setSize }
+									value={ defaultSizes.find(
+										( option ) => option.slug === size
+									) }
+								/>
+							</PanelBody>
+						</Panel>
+					</InspectorControls>
 
-				<BlockEdit { ...props } scale={ scale } />
-			</Fragment>
-		);
-	}, 'withSizes' );
+					<BlockEdit { ...props } scale={ scale } />
+				</Fragment>
+			);
+		},
+		'withSizes'
+	);
 };

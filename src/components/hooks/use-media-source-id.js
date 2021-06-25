@@ -1,8 +1,7 @@
-
 /**
  * Internal dependencies
  */
-import { mediaConsumerBlockAttributeName } from "../../block-editor/hooks/media-selector";
+import { mediaConsumerBlockAttributeName } from '../../block-editor/hooks/media-selector';
 
 /**
  * This hook picks up the media source,

@@ -36,7 +36,10 @@ export default function MediaSourceProviderWrapper( {
 	} = useMediaStore( mediaSourceId );
 
 	const currentTime = useSelect(
-		( select ) => select( mediaManagerStore ).getMediaSourceCurrentTime( mediaSourceId ),
+		( select ) =>
+			select( mediaManagerStore ).getMediaSourceCurrentTime(
+				mediaSourceId
+			),
 		[ mediaSourceId ]
 	);
 
@@ -84,7 +87,10 @@ export default function MediaSourceProviderWrapper( {
 		// Clean.
 		return function () {
 			// Remove listeners.
-			mediaElement.removeEventListener( 'loadedmetadata', onMetadataReady );
+			mediaElement.removeEventListener(
+				'loadedmetadata',
+				onMetadataReady
+			);
 			mediaElement.removeEventListener( 'play', playMedia );
 			mediaElement.removeEventListener( 'pause', pauseMedia );
 
@@ -107,10 +113,9 @@ export default function MediaSourceProviderWrapper( {
 		};
 	}, [ isPaused, mediaElement ] );
 
-
 	/*
 	 * Handling current time state,
-	 * updating its status in the store, 
+	 * updating its status in the store,
 	 * listening the `timeupdate` element event.
 	 */
 
@@ -124,7 +129,8 @@ export default function MediaSourceProviderWrapper( {
 			}
 		);
 
-		const onTimeUpdate = ( e ) => throttledTimeChange( e.target.currentTime );
+		const onTimeUpdate = ( e ) =>
+			throttledTimeChange( e.target.currentTime );
 		mediaElement.addEventListener( 'timeupdate', onTimeUpdate );
 
 		return () => {
@@ -149,8 +155,9 @@ export default function MediaSourceProviderWrapper( {
 		 * the threshold  MEDIA_CURRENT_TIME_THRESHOLD.
 		 */
 		if (
-			Math.abs( Math.floor( currentTime - mediaElement.currentTime ) * 1000 ) >
-			MEDIA_CURRENT_STATE_THRESHOLD
+			Math.abs(
+				Math.floor( currentTime - mediaElement.currentTime ) * 1000
+			) > MEDIA_CURRENT_STATE_THRESHOLD
 		) {
 			mediaElement.currentTime = currentTime;
 		}

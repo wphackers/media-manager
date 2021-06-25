@@ -12,11 +12,15 @@ import { STATE_PAUSED } from '../../../store/constants';
 
 export default function useMediaStore( id ) {
 	const { isPaused, playingState } = useSelect(
-		function( select ) {
-			const playingState = select( mediaManagerStore ).getMediaPlayerState( id );
+		function ( select ) {
+			const playingState = select(
+				mediaManagerStore
+			).getMediaPlayerState( id );
 			return {
 				playingState,
-				isPaused: typeof playingState === 'undefined' || playingState === STATE_PAUSED,
+				isPaused:
+					typeof playingState === 'undefined' ||
+					playingState === STATE_PAUSED,
 			};
 		},
 		[ id ]
@@ -39,9 +43,22 @@ export default function useMediaStore( id ) {
 		play: useCallback( () => playMediaSource( id ), [ id ] ),
 		pause: useCallback( () => pauseMediaSource( id ), [ id ] ),
 		toggle: useCallback( () => toggleMediaSource( id ), [ id ] ),
-		register: useCallback( ( id, data ) => registerMediaSource( id, data ), [ id ] ),
-		unregister: useCallback( ( mediaSourceId ) => unregisterMediaSource( mediaSourceId ), [] ),
-		updateData: useCallback( ( mediaSourceI, data ) => updateMediaSourceData( mediaSourceI, data ), [] ),
-		setCurrentTime: useCallback( ( timestamp ) => setMediaSourceCurrentTime( id, timestamp ), [ id ] ),
+		register: useCallback(
+			( id, data ) => registerMediaSource( id, data ),
+			[ id ]
+		),
+		unregister: useCallback(
+			( mediaSourceId ) => unregisterMediaSource( mediaSourceId ),
+			[]
+		),
+		updateData: useCallback(
+			( mediaSourceI, data ) =>
+				updateMediaSourceData( mediaSourceI, data ),
+			[]
+		),
+		setCurrentTime: useCallback(
+			( timestamp ) => setMediaSourceCurrentTime( id, timestamp ),
+			[ id ]
+		),
 	};
 }

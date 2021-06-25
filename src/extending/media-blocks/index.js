@@ -18,8 +18,8 @@ function registerMediaBlocksSource( settings, name ) {
 		supports: {
 			...settings.support,
 			'media-manager/connect-provider': getBlockSourceProps( name ),
-		}
-	}
+		},
+	};
 }
 
 addFilter(

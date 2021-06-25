@@ -16,8 +16,10 @@ import { getBlockSupport } from '@wordpress/blocks';
  */
 import withMediaManagerColors from '../../../components/with-colors';
 
-export const getMediaManagerColorSupport = ( settings ) => getBlockSupport( settings, 'media-manager/color' );
-export const getMediaManagerCustomClassNameSupport = ( settings ) => getBlockSupport( settings, 'media-manager/customClassName' );
+export const getMediaManagerColorSupport = ( settings ) =>
+	getBlockSupport( settings, 'media-manager/color' );
+export const getMediaManagerCustomClassNameSupport = ( settings ) =>
+	getBlockSupport( settings, 'media-manager/customClassName' );
 
 function addMediaManagerColorSaveProps( props, settings, attributes ) {
 	const mediaColor = getMediaManagerColorSupport( settings );
@@ -30,7 +32,7 @@ function addMediaManagerColorSaveProps( props, settings, attributes ) {
 	const newProps = { ...props, style: props.style || {} };
 
 	const mediaColorClassNames = [];
-	for( const prop in mediaColor ) {
+	for ( const prop in mediaColor ) {
 		if ( /^__/.test( prop ) ) {
 			continue;
 		}
@@ -44,17 +46,20 @@ function addMediaManagerColorSaveProps( props, settings, attributes ) {
 
 		const attrName = mediaColor[ prop ].customAttributeName;
 
-		const stylePropName = mediaColor[ prop ].style === 'background-color'
-			? 'backgroundColor'
-			: 'color';
+		const stylePropName =
+			mediaColor[ prop ].style === 'background-color'
+				? 'backgroundColor'
+				: 'color';
 
-		newProps.style[ stylePropName ] = colorClassName ? undefined : attributes[ attrName ];
+		newProps.style[ stylePropName ] = colorClassName
+			? undefined
+			: attributes[ attrName ];
 	}
 
 	newProps.className = classnames(
 		props?.className,
 		...mediaColorClassNames,
-		customClassName,
+		customClassName
 	);
 
 	return newProps;
@@ -78,7 +83,8 @@ function addMediaManagerColorSupport( settings ) {
 		}
 
 		const attributeName = /\wColor$/.test( prop ) ? prop : `${ prop }Color`;
-		const upperCaseName = attributeName.charAt( 0 ).toUpperCase() + attributeName.slice( 1 );
+		const upperCaseName =
+			attributeName.charAt( 0 ).toUpperCase() + attributeName.slice( 1 );
 
 		// Populate mediaColor supports object.
 		mediaColor[ prop ] = {
@@ -95,7 +101,9 @@ function addMediaManagerColorSupport( settings ) {
 
 		// Populate block attributes.
 		attributes[ attributeName ] = { type: 'string' };
-		attributes[ mediaColor[ prop ].customAttributeName ] = { type: 'string' };
+		attributes[ mediaColor[ prop ].customAttributeName ] = {
+			type: 'string',
+		};
 	}
 
 	const existingGetEditWrapperProps = settings.getEditWrapperProps;
@@ -126,7 +134,7 @@ function addMediaManagerColorSupport( settings ) {
 addFilter(
 	'blocks.registerBlockType',
 	'media-manager/register-media-player-buttons-blocks',
-	addMediaManagerColorSupport,
+	addMediaManagerColorSupport
 );
 
 addFilter(

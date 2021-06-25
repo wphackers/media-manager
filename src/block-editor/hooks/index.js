@@ -2,7 +2,7 @@
  * Internal dependencies
  */
 import './colors';
-import './connect'
+import './connect';
 import './media-selector';
 
 // Export support names.

@@ -1,29 +1,21 @@
-
 /**
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../store';
-import { convertSecondsToTimeCode } from '../../lib/utils/time';
+import useCurrentTime from '../../components/hooks/use-current-time';
 import './editor.scss';
 
 export default function TimePositionDisplayEditBlock( { context } ) {
-	const mediaSourceId = context.mediaSourceId;
-
-	const { currentTime = 0 } = useSelect( ( select ) => ( {
-		currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime( mediaSourceId ),
-	} ), [ mediaSourceId ] );
+	const { currentTimeFormatted } = useCurrentTime( context.mediaSourceId );
 
 	return (
 		<div { ...useBlockProps() }>
 			<div className="time-position-diaplay__wrapper">
-				{ convertSecondsToTimeCode( currentTime ) }
+				{ currentTimeFormatted }
 			</div>
 		</div>
 	);

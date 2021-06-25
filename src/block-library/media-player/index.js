@@ -8,21 +8,27 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { PlayerIcon as icon } from '../../components/icons';
- 
+
 /**
  * Internal dependencies
  */
 import Edit from './edit';
 import save from './save';
-import { SUPPORT_MEDIA_SELECTOR, SUPPORT_SIZES } from '../../block-editor/hooks';
+import {
+	SUPPORT_MEDIA_SELECTOR,
+	SUPPORT_SIZES,
+} from '../../block-editor/hooks';
 import './style.scss';
- 
+
 export const blockName = 'media-manager/media-player';
- 
+
 registerBlockType( blockName, {
 	apiVersion: 2,
 	title: __( 'Media Player', 'media-manager' ),
-	description: __( 'Compose your custom media player with blocks', 'media-manager' ),
+	description: __(
+		'Compose your custom media player with blocks',
+		'media-manager'
+	),
 	edit: Edit,
 	save,
 	icon,
@@ -31,7 +37,7 @@ registerBlockType( blockName, {
 		'media-manager/connect-consumer': true,
 		[ SUPPORT_MEDIA_SELECTOR ]: true,
 		'media-manager/color': {
-			background:  {
+			background: {
 				label: __( 'Background color', 'media-manager' ),
 				style: 'background-color',
 			},

@@ -48,7 +48,9 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	const { mediaSourceReferenceId } = mediaCenterBlock?.attributes || {};
 	const { domRef } = useSelect(
 		( select ) => ( {
-			domRef: select( mediaManagerStore ).getMediaSourceDomReference( mediaSourceReferenceId ),
+			domRef: select( mediaManagerStore ).getMediaSourceDomReference(
+				mediaSourceReferenceId
+			),
 		} ),
 		[]
 	);
@@ -59,7 +61,8 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	}
 
 	// Media link format time position.
-	const { attributes } = getActiveFormat( value, MEDIA_LINK_FORMAT_TYPE ) || {};
+	const { attributes } =
+		getActiveFormat( value, MEDIA_LINK_FORMAT_TYPE ) || {};
 
 	const { ownerDocument } = contentRef.current;
 	const { defaultView } = ownerDocument;
@@ -74,9 +77,11 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	// Check whether the selected text has a timestamp shape.
 	const selection = defaultView.getSelection();
 	const selectedText = selection.toString();
-	
+
 	if ( attributes?.timestamp ) {
-		mediaLinkFormatTimestamp = Number( attributes?.timestamp?.replace(/#/, '' ) );
+		mediaLinkFormatTimestamp = Number(
+			attributes?.timestamp?.replace( /#/, '' )
+		);
 	} else if ( ! isCollapsed( value ) ) {
 		if ( isTimeformat( selectedText ) ) {
 			isSingleOnTheFlyStyle = true;
@@ -90,7 +95,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 
 	/**
 	 * Helper function to apply the style format
-	 * 
+	 *
 	 * @param {string} time timestamp to apply to the format
 	 * @returns {object} style forat object
 	 */
@@ -104,20 +109,24 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 					convertSecondsToTimeCode( time )
 				),
 			},
-		}
+		};
 	}
 
 	/**
 	 * Apply style format event handler.
-	 * 
+	 *
 	 * @param {string} newTimestamp new timestamp value to apply (optional)
 	 */
 	function applyFormatStyleHandler( newTimestamp ) {
 		if ( newTimestamp ) {
-			return onChange( applyFormat( value, getStyleObject( newTimestamp ) ) );
+			return onChange(
+				applyFormat( value, getStyleObject( newTimestamp ) )
+			);
 		}
 
-		onChange( toggleFormat( value, getStyleObject( mediaLinkFormatTimestamp ) ) );
+		onChange(
+			toggleFormat( value, getStyleObject( mediaLinkFormatTimestamp ) )
+		);
 	}
 
 	return (
@@ -133,7 +142,11 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 					 * - it is not a single selection
 					 * - there is not format active
 					 */
-					if ( multipleFormats?.length && ! isSingleOnTheFlyStyle && ! isActive ) {
+					if (
+						multipleFormats?.length &&
+						! isSingleOnTheFlyStyle &&
+						! isActive
+					) {
 						return setIsMultipleEdition( true );
 					}
 
@@ -144,8 +157,8 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 
 			<MediaLinkPopover
 				value={ value }
-				hasMultipleTimeformats = { multipleFormats }
-				isMultipleEdition = { isMultipleEdition }
+				hasMultipleTimeformats={ multipleFormats }
+				isMultipleEdition={ isMultipleEdition }
 				contentRef={ contentRef }
 				currentTime={ mediaLinkFormatTimestamp }
 				isActive={ isActive }
@@ -155,18 +168,23 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 					setIsMultipleEdition( false );
 					applyFormatStyleHandler();
 				} }
-				onApplyMultipleFormat={ () => {	
+				onApplyMultipleFormat={ () => {
 					let match;
-					while ( ( match = getTimeformatMatch( selectedText ) ) != null) {
+					while (
+						( match = getTimeformatMatch( selectedText ) ) != null
+					) {
 						const timestamp = match[ 0 ];
 						const { index: startIndex } = match;
 						const endIndex = startIndex + timestamp.length;
 
 						value = applyFormat(
-							value, {
+							value,
+							{
 								type: MEDIA_LINK_FORMAT_TYPE,
 								attributes: {
-									timestamp: `#${ convertTimeCodeToSeconds( timestamp ) }`,
+									timestamp: `#${ convertTimeCodeToSeconds(
+										timestamp
+									) }`,
 									label: sprintf(
 										__( 'Playback at %1$s' ),
 										timestamp

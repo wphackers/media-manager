@@ -1,4 +1,3 @@
-
 /**
  * External dependencies
  */
@@ -25,9 +24,17 @@ import MediaSourceProviderWrapper from './media-source-provider-wrapper';
 function renderPlayerButtonBlock( mediaSourceId, playerButtonElement ) {
 	let PlayerButtonComponent;
 
-	if ( playerButtonElement.classList.contains( 'wp-block-media-manager-play-pause-button' ) ) {
+	if (
+		playerButtonElement.classList.contains(
+			'wp-block-media-manager-play-pause-button'
+		)
+	) {
 		PlayerButtonComponent = PlayPauseButtonBlock;
-	} else if ( playerButtonElement.classList.contains( 'wp-block-media-manager-play-button' ) ) {
+	} else if (
+		playerButtonElement.classList.contains(
+			'wp-block-media-manager-play-button'
+		)
+	) {
 		PlayerButtonComponent = PlayButtonBlock;
 	} else {
 		PlayerButtonComponent = PauseButtonBlock;
@@ -43,17 +50,17 @@ function renderPlayerButtonBlock( mediaSourceId, playerButtonElement ) {
 	);
 }
 
-domReady( function() {
+domReady( function () {
 	// Media Providers.
 	const mediaElements = document.querySelectorAll( '[data-media-source-id]' );
 	if ( mediaElements.length ) {
-		mediaElements.forEach( function( media ) {
+		mediaElements.forEach( function ( media ) {
 			const { mediaSourceId, mediaSourceType } = media.dataset;
 			const { domTypeName } = getBlockSourceProps( mediaSourceType );
 			const query = `[data-media-source-id="${ mediaSourceId }"] ${ domTypeName }`;
 			const mediaElement = document.querySelector( query );
 			if ( mediaElement ) {
-			// if ( mediaElement && mediaElement.parentElement ) { // Keep wondering why checking parentElement.
+				// if ( mediaElement && mediaElement.parentElement ) { // Keep wondering why checking parentElement.
 				render(
 					<MediaSourceProviderWrapper
 						mediaSourceId={ mediaSourceId }
@@ -68,31 +75,47 @@ domReady( function() {
 	}
 
 	// Media Consumers.
-	const mediaSourceConsumers = document.querySelectorAll( '[data-media-source-reference]' );
+	const mediaSourceConsumers = document.querySelectorAll(
+		'[data-media-source-reference]'
+	);
 
 	// CSS class defined for the player button blocks.
 	const buttonBlockCssClass = 'wp-media-manager-player-button';
 	const linkFormatCssClass = 'media-link-format-type';
 	if ( mediaSourceConsumers?.length ) {
-		mediaSourceConsumers.forEach( function( mediaCenterBlock ) {
+		mediaSourceConsumers.forEach( function ( mediaCenterBlock ) {
 			const { mediaSourceReference } = mediaCenterBlock?.dataset;
 
 			// Check is the consumer is a player-button block
-			const isButtonBlock = mediaCenterBlock.classList.contains( buttonBlockCssClass );
+			const isButtonBlock = mediaCenterBlock.classList.contains(
+				buttonBlockCssClass
+			);
 			if ( isButtonBlock ) {
-				renderPlayerButtonBlock( mediaSourceReference, mediaCenterBlock );
+				renderPlayerButtonBlock(
+					mediaSourceReference,
+					mediaCenterBlock
+				);
 			} else {
 				// Query player button blocks.
-				const mediaPlayerButtons = mediaCenterBlock.querySelectorAll( `.${ buttonBlockCssClass }` );
+				const mediaPlayerButtons = mediaCenterBlock.querySelectorAll(
+					`.${ buttonBlockCssClass }`
+				);
 				if ( mediaPlayerButtons?.length ) {
-					mediaPlayerButtons.forEach( function( playerButtonElement ) {
-						renderPlayerButtonBlock( mediaSourceReference, playerButtonElement );
+					mediaPlayerButtons.forEach( function (
+						playerButtonElement
+					) {
+						renderPlayerButtonBlock(
+							mediaSourceReference,
+							playerButtonElement
+						);
 					} );
 				}
 			}
 
-			const mediaFormatLinks = mediaCenterBlock.querySelectorAll( `.${ linkFormatCssClass }` );
-			mediaFormatLinks.forEach( function( mediaFormatLinkElement ) {
+			const mediaFormatLinks = mediaCenterBlock.querySelectorAll(
+				`.${ linkFormatCssClass }`
+			);
+			mediaFormatLinks.forEach( function ( mediaFormatLinkElement ) {
 				renderReplace(
 					<MediaLinkFormatType
 						elRef={ mediaFormatLinkElement }
