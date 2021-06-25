@@ -1,6 +1,6 @@
 {
 	"apiVersion": 2,
-	"name": "media-manager/time-position-diaplay",
+	"name": "media-manager/time-position-display",
 	"title": "Time position display",
 	"category": "media",
 	"icon": "time",

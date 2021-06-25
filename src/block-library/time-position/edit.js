@@ -14,7 +14,7 @@ export default function TimePositionDisplayEditBlock( { context } ) {
 
 	return (
 		<div { ...useBlockProps() }>
-			<div className="time-position-diaplay__wrapper">
+			<div className="time-position-display__wrapper">
 				{ currentTimeFormatted }
 			</div>
 		</div>

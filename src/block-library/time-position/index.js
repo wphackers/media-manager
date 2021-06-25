@@ -16,7 +16,7 @@ import Edit from './edit';
 import save from './save';
 import './style.scss';
 
-export const blockName = 'media-manager/time-position-diaplay';
+export const blockName = 'media-manager/time-position-display';
 
 registerBlockType( blockName, {
 	apiVersion: 2,
@@ -28,9 +28,13 @@ registerBlockType( blockName, {
 	edit: Edit,
 	save,
 	icon,
-	usesContext: [ 'mediaSourceId' ],
 	supports: {
-		fontSize: true,
-		lineHeight: true,
+		typography: {
+			fontSize: true,
+			lineHeight: true,
+			__experimentalFontStyle: true,
+			__experimentalFontWeight: true,
+			__experimentalFontFamily: true,
+		},
 	},
 } );
