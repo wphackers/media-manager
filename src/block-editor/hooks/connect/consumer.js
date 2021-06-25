@@ -17,6 +17,9 @@ import { BlockContextProvider } from '@wordpress/block-editor';
 import useMediaSourceId from '../../../components/hooks/use-media-source-id';
 import useMediaStore from '../../../components/hooks/use-media-store';
 
+// Define and export support name.
+export const SUPPORT_NAME = 'media-manager/connect-consumer';
+
 export const withMediaConnect = createHigherOrderComponent(
 	( OriginalBlock ) => ( props ) => {
 		const mediaSourceId = useMediaSourceId( props );
@@ -39,7 +42,7 @@ export const withMediaConnect = createHigherOrderComponent(
 );
 
 function addMediaManagerConnectSupport( settings ) {
-	if ( ! getBlockSupport( settings, 'media-manager/connect-consumer' ) ) {
+	if ( ! getBlockSupport( settings, SUPPORT_NAME ) ) {
 		return settings;
 	}
 

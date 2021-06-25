@@ -16,7 +16,10 @@ import save from './save';
 import './style.scss';
 
 export const blockName = 'media-manager/media-center';
-import { SUPPORT_MEDIA_SELECTOR } from '../../block-editor/hooks';
+import {
+	SUPPORT_CONNECT_CONSUMER,
+	SUPPORT_MEDIA_SELECTOR,
+} from '../../block-editor/hooks';
 
 registerBlockType( blockName, {
 	apiVersion: 2,
@@ -25,7 +28,7 @@ registerBlockType( blockName, {
 	icon,
 	supports: {
 		align: true,
-		'media-manager/connect-consumer': true,
+		[ SUPPORT_CONNECT_CONSUMER ]: true,
 		[ SUPPORT_MEDIA_SELECTOR ]: true,
 	},
 } );

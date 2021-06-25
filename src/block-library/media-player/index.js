@@ -15,6 +15,7 @@ import { PlayerIcon as icon } from '../../components/icons';
 import Edit from './edit';
 import save from './save';
 import {
+	SUPPORT_CONNECT_CONSUMER,
 	SUPPORT_MEDIA_SELECTOR,
 	SUPPORT_SIZES,
 } from '../../block-editor/hooks';
@@ -34,7 +35,7 @@ registerBlockType( blockName, {
 	icon,
 	supports: {
 		align: true,
-		'media-manager/connect-consumer': true,
+		[ SUPPORT_CONNECT_CONSUMER ]: true,
 		[ SUPPORT_MEDIA_SELECTOR ]: true,
 		'media-manager/color': {
 			background: {
@@ -51,7 +52,7 @@ export const buttonSupports = {
 		__sectionTitle: __( 'Button size', 'media-manager' ),
 	},
 	align: true,
-	'media-manager/connect-consumer': true,
+	[ SUPPORT_CONNECT_CONSUMER ]: true,
 	[ SUPPORT_MEDIA_SELECTOR ]: true,
 	'media-manager/color': {
 		icon: {
