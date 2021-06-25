@@ -18,6 +18,7 @@ import withMediaManagerColors from '../../../components/with-colors';
 
 export const getMediaManagerColorSupport = ( settings ) =>
 	getBlockSupport( settings, 'media-manager/color' );
+
 export const getMediaManagerCustomClassNameSupport = ( settings ) =>
 	getBlockSupport( settings, 'media-manager/customClassName' );
 
@@ -72,7 +73,7 @@ function addMediaManagerColorSupport( settings ) {
 	}
 
 	// HOC withColors settings object.
-	let supportStylePropsMap = {};
+	const supportStylePropsMap = {};
 
 	// Block attributes.
 	const attributes = {};
@@ -89,7 +90,7 @@ function addMediaManagerColorSupport( settings ) {
 		// Populate mediaColor supports object.
 		mediaColor[ prop ] = {
 			...mediaColor[ prop ],
-			attributeName: attributeName,
+			attributeName,
 			customAttributeName: `custom${ upperCaseName }`,
 			setterAttributeName: `set${ upperCaseName }`,
 			style: mediaColor[ prop ]?.style || 'color',
@@ -115,13 +116,13 @@ function addMediaManagerColorSupport( settings ) {
 			...attributes,
 		},
 
-		getEditWrapperProps: ( attributes ) => {
+		getEditWrapperProps: ( attrs ) => {
 			let props = {};
 			if ( existingGetEditWrapperProps ) {
-				props = existingGetEditWrapperProps( attributes );
+				props = existingGetEditWrapperProps( attrs );
 			}
 
-			return addMediaManagerColorSaveProps( props, settings, attributes );
+			return addMediaManagerColorSaveProps( props, settings, attrs );
 		},
 
 		edit: compose( [

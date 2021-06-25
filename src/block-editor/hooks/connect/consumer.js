@@ -18,24 +18,22 @@ import useMediaSourceId from '../../../components/hooks/use-media-source-id';
 import useMediaStore from '../../../components/hooks/use-media-store';
 
 export const withMediaConnect = createHigherOrderComponent(
-	( OriginalBlock ) => {
-		return function ( props ) {
-			const mediaSourceId = useMediaSourceId( props );
-			const mediaSource = useMediaStore( mediaSourceId );
+	( OriginalBlock ) => ( props ) => {
+		const mediaSourceId = useMediaSourceId( props );
+		const mediaSource = useMediaStore( mediaSourceId );
 
-			return (
-				<BlockContextProvider value={ { mediaSourceId } }>
-					<OriginalBlock
-						{ ...props }
-						mediaContext={ { mediaSourceId } }
-						mediaSource={ mediaSource }
-						className={ classnames( props.className, {
-							'is-media-paused': mediaSource.isPaused,
-						} ) }
-					/>
-				</BlockContextProvider>
-			);
-		};
+		return (
+			<BlockContextProvider value={ { mediaSourceId } }>
+				<OriginalBlock
+					{ ...props }
+					mediaContext={ { mediaSourceId } }
+					mediaSource={ mediaSource }
+					className={ classnames( props.className, {
+						'is-media-paused': mediaSource.isPaused,
+					} ) }
+				/>
+			</BlockContextProvider>
+		);
 	},
 	'withMediaConnect'
 );
