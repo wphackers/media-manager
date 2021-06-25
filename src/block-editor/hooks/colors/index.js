@@ -27,8 +27,6 @@ function addMediaManagerColorSaveProps( props, settings, attributes ) {
 
 	const customClassName = getMediaManagerCustomClassNameSupport( settings );
 
-	const { size } = attributes;
-
 	const newProps = { ...props, style: props.style || {} };
 
 	const mediaColorClassNames = [];
@@ -56,7 +54,6 @@ function addMediaManagerColorSaveProps( props, settings, attributes ) {
 	newProps.className = classnames(
 		props?.className,
 		...mediaColorClassNames,
-		`is-${ size }-size`,
 		customClassName,
 	);
 
@@ -108,10 +105,6 @@ function addMediaManagerColorSupport( settings ) {
 		attributes: {
 			...settings.attributes,
 			...attributes,
-			size: {
-				type: 'string',
-				default: 'normal',
-			},
 		},
 
 		getEditWrapperProps: ( attributes ) => {
