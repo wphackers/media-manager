@@ -9,7 +9,7 @@ import { Button } from '@wordpress/components';
 import { PlayerPauseIcon } from '../../components/icons';
 import useMediaStore from '../../components/hooks/use-media-store';
 
-export default function PlayPauseBlock( { mediaSourceId } ) {
+export default function PauseBlock( { mediaSourceId } ) {
 	const { pause, className } = useMediaStore( mediaSourceId );
 
 	return (
