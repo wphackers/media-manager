@@ -187,15 +187,17 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	);
 }
 
+export const mediaLinkFormatButtonAttrs = {
+	timestamp: 'href',
+	label: 'title',
+};
+
 export const mediaLinkFormatButtonSettings = {
 	name: MEDIA_LINK_FORMAT_TYPE,
 	title: 'Media link',
 	tagName: 'a',
 	className: 'media-link-format-type',
-	attributes: {
-		timestamp: 'href',
-		label: 'title',
-	},
+	attributes: mediaLinkFormatButtonAttrs,
 	edit: MediaLinkFormatButton,
 	__unstableInputRule: inputRuleHandler,
 };

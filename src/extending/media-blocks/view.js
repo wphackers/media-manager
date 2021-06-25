@@ -1,118 +1,20 @@
-/**
- * External dependencies
- */
-import { debounce } from 'lodash';
 
 /**
  * External dependencies
  */
 import domReady from '@wordpress/dom-ready';
-import { dispatch } from '@wordpress/data';
-import { render, useEffect } from '@wordpress/element';
+import { render } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../store';
-import { STATE_PAUSED } from '../../store/constants';
 import { getBlockSourceProps } from '../utils';
 import PlayPauseButtonBlock from '../../block-library/play-pause-button/view';
 import PlayButtonBlock from '../../block-library/play-button/view';
 import PauseButtonBlock from '../../block-library/pause-button/view';
-import useMediaStore from '../../components/hooks/use-media-store';
-
-function MediaSourceWrapper( {
-	children: mediaElement,
-	mediaSourceId,
-	elementType,
-	querySelector,
-} ) {
-	const { isPaused } = useMediaStore( mediaSourceId );
-
-	// Media Source actions.
-	const {
-		playMediaSource,
-		pauseMediaSource,
-		updateMediaSourceData,
-	} = dispatch( mediaManagerStore );
-
-	function play() {
-		mediaElement.play().catch( () => {} );
-	}
-
-	function pause() {
-		mediaElement.pause();
-	}
-
-	function onMetadataReady( event ) {
-		updateMediaSourceData( mediaSourceId, {
-			duration: event?.srcElement?.duration,
-		} );
-	}
-
-	function onMediaPlay() {
-		playMediaSource( mediaSourceId );
-	}
-
-	function onMediaPause() {
-		pauseMediaSource( mediaSourceId );
-	}
-
-	/*
-	 * Pre load mediaElement metadata.
-	 * It allows preloading useful metadata
-	 * of the media source, for instance,
-	 * the media duration.
-	 */
-	mediaElement.preload = 'metadata';
-	mediaElement.autoplay = false;
-
-	/*
-	 * - Register Media into the store.
-	 * - Get the metadata from the client.
-	 * - Listen Play and Pause events.
-	 */
-	useEffect( () => {
-		dispatch( mediaManagerStore ).registerMediaSource( mediaSourceId, {
-			// source: mediaSource,
-			elementType,
-			state: STATE_PAUSED,
-			querySelector,
-		} );
-
-		// Subscribe to media events.
-		mediaElement.addEventListener( 'loadedmetadata', onMetadataReady );
-		mediaElement.addEventListener( 'play', onMediaPlay );
-		mediaElement.addEventListener( 'pause', onMediaPause );
-
-		// Clean.
-		return function () {
-			// Remove listeners.
-			mediaElement.removeEventListener( 'loadedmetadata', onMetadataReady );
-			mediaElement.removeEventListener( 'play', onMediaPlay );
-			mediaElement.removeEventListener( 'pause', onMediaPause );
-
-			// Unregister media from store.
-			unregisterMediaSource( mediaSourceId );
-		};
-	}, [] );
-
-	// Play/Pause media depending on playing status (via store).
-	useEffect( () => {
-		const action = mediaElement.paused ? play : pause;
-		const debouncedAction = debounce( action, 100 );
-
-		if ( isPaused !== mediaElement.paused ) {
-			debouncedAction();
-		}
-
-		return () => {
-			debouncedAction.cancel();
-		};
-	}, [ isPaused, mediaElement ] );
-
-	return null;
-}
+import MediaLinkFormatType from '../../components/media-link-format-type/view';
+import renderReplace from '../../lib/render';
+import MediaSourceProviderWrapper from './media-source-provider-wrapper';
 
 /**
  * Hlper function to render the Player Button Block, in the front-end.
@@ -153,13 +55,13 @@ domReady( function() {
 			if ( mediaElement ) {
 			// if ( mediaElement && mediaElement.parentElement ) { // Keep wondering why checking parentElement.
 				render(
-					<MediaSourceWrapper
+					<MediaSourceProviderWrapper
 						mediaSourceId={ mediaSourceId }
 						elementType={ domTypeName }
 						querySelector={ query }
 					>
 						{ mediaElement }
-					</MediaSourceWrapper>,
+					</MediaSourceProviderWrapper>,
 					mediaElement
 				);
 			}
@@ -171,6 +73,7 @@ domReady( function() {
 
 	// CSS class defined for the player button blocks.
 	const buttonBlockCssClass = 'wp-media-manager-player-button';
+	const linkFormatCssClass = 'media-link-format-type';
 	if ( mediaSourceConsumers?.length ) {
 		mediaSourceConsumers.forEach( function( mediaCenterBlock ) {
 			const { mediaSourceReference } = mediaCenterBlock?.dataset;
@@ -188,6 +91,18 @@ domReady( function() {
 					} );
 				}
 			}
+
+			const mediaFormatLinks = mediaCenterBlock.querySelectorAll( `.${ linkFormatCssClass }` );
+			mediaFormatLinks.forEach( function( mediaFormatLinkElement ) {
+				renderReplace(
+					<MediaLinkFormatType
+						elRef={ mediaFormatLinkElement }
+						mediaSourceId={ mediaSourceReference }
+					/>,
+					mediaFormatLinkElement,
+					true
+				);
+			} );
 		} );
 	}
 } );
