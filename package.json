@@ -8,6 +8,7 @@
 	"scripts": {
 		"build": "wp-scripts build",
 		"clean:packages": "rimraf \"./packages/*/@(build|build-module|build-style)\"",
+		"prebuild:packages": "npm run clean:packages && lerna run build",
 		"build:packages": "node ./bin/packages/build.js",
 		"dev:packages": "node ./bin/packages/watch.js",
 		"format:js": "wp-scripts format-js",
