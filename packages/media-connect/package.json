@@ -1,6 +1,6 @@
 {
 	"name": "@media-manager/media-connect",
-	"version": "1.0.0-prerelease",
+	"version": "1.0.0-beta.0",
 	"description": "Connect media sources",
 	"author": "The MediaBlocks Contributors",
 	"license": "GPL-2.0-or-later",
