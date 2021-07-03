@@ -18,7 +18,7 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"dependencies": {
-		"@mediamanager/media-connect": "file:packages/media-connect",
+		"@media-manager/media-connect": "file:packages/media-connect",
 		"@wordpress/block-editor": "^5.3.0",
 		"@wordpress/blocks": "^8.0.0",
 		"@wordpress/components": "^14.1.4",

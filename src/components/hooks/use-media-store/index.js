@@ -7,7 +7,7 @@ import { useCallback } from '@wordpress/element';
 import {
 	store as mediaManagerStore,
 	STATE_PAUSED,
-} from '@mediamanager/media-connect';
+} from '@media-manager/media-connect';
 
 /**
  * Internal dependencies

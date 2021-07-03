@@ -15,7 +15,7 @@ import {
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { useState } from '@wordpress/element';
-import { store as mediaManagerStore } from '@mediamanager/media-connect';
+import { store as mediaManagerStore } from '@media-manager/media-connect';
 
 /**
  * Internal dependencies

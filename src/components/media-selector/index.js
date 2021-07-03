@@ -11,7 +11,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import { PanelBody, PanelRow, Button, Notice } from '@wordpress/components';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
-import { MEDIA_NOT_DEFINED } from '@mediamanager/media-connect';
+import { MEDIA_NOT_DEFINED } from '@media-manager/media-connect';
 
 /**
  * Internal dependencies

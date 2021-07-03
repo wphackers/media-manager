@@ -22,7 +22,7 @@ import {
 	STATE_PLAYING,
 	STATE_ERROR,
 	MEDIA_NOT_DEFINED,
-} from '@mediamanager/media-connect';
+} from '@media-manager/media-connect';
 
 /**
  * Internal dependencies

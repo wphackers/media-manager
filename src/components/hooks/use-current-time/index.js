@@ -4,7 +4,7 @@
 import { useSelect } from '@wordpress/data';
 import { convertSecondsToTimeCode } from '../../../lib/utils/time';
 
-import { store as mediaManagerStore } from '@mediamanager/media-connect';
+import { store as mediaManagerStore } from '@media-manager/media-connect';
 
 /**
  * Internal dependencies

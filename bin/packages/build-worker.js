@@ -146,7 +146,7 @@ async function buildJS( file ) {
 		);
 		const babelOptions = getBabelConfig(
 			environment,
-			file.replace( PACKAGES_DIR, '@mediamanager' )
+			file.replace( PACKAGES_DIR, '@media-manager' )
 		);
 
 		const [ , transformed ] = await Promise.all( [

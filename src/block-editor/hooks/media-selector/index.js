@@ -21,7 +21,7 @@ import { Placeholder, Panel, Button, Toolbar } from '@wordpress/components';
 import {
 	store as mediaManagerStore,
 	MEDIA_NOT_DEFINED,
-} from '@mediamanager/media-connect';
+} from '@media-manager/media-connect';
 
 /**
  * Internal dependencies

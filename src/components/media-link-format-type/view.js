@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { useDispatch } from '@wordpress/data';
-import { store as mediaManagerStore } from '@mediamanager/media-connect';
+import { store as mediaManagerStore } from '@media-manager/media-connect';
 
 /**
  * Internal dependencies
