@@ -16,17 +16,17 @@ import {
 	InspectorControls,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
-
-/**
- * Internal dependencies
- */
-import { store as mediaManagerStore } from '../../../store';
 import {
+	store as mediaManagerStore,
 	STATE_PAUSED,
 	STATE_PLAYING,
 	STATE_ERROR,
 	MEDIA_NOT_DEFINED,
-} from '../../../store/constants';
+} from '@mediamanager/media-connect';
+
+/**
+ * Internal dependencies
+ */
 import { MediaCenterPanelBody } from '../../../components/media-selector';
 import { blockName as mediaCenterBlockName } from '../../../block-library/media-center';
 

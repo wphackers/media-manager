@@ -2,11 +2,11 @@
  * WordPress dependencies
  */
 import { useDispatch } from '@wordpress/data';
+import { store as mediaManagerStore } from '@mediamanager/media-connect';
 
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../store';
 
 export default function MediaLinkFormatType( { mediaSourceId, elRef } ) {
 	const { hash: timehash, innerHTML } = elRef;

@@ -11,6 +11,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import { PanelBody, PanelRow, Button, Notice } from '@wordpress/components';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
+import { MEDIA_NOT_DEFINED } from '@mediamanager/media-connect';
 
 /**
  * Internal dependencies
@@ -18,7 +19,6 @@ import { useDispatch } from '@wordpress/data';
 import './style.scss';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import { PlayPauseButton } from '../media-player';
-import { MEDIA_NOT_DEFINED } from '../../store/constants';
 
 export function MediaItem( {
 	elementType: type,

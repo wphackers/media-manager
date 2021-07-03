@@ -4,10 +4,11 @@
 import { useSelect } from '@wordpress/data';
 import { convertSecondsToTimeCode } from '../../../lib/utils/time';
 
+import { store as mediaManagerStore } from '@mediamanager/media-connect';
+
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../../store';
 
 export default function useCurrentTime( id ) {
 	return useSelect(

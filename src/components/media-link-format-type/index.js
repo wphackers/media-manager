@@ -15,11 +15,11 @@ import {
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { useState } from '@wordpress/element';
+import { store as mediaManagerStore } from '@mediamanager/media-connect';
 
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../store';
 import { MediaLinkIcon } from '../icons';
 import { shouldExtendBlockWithMedia } from '../../extending/utils';
 import MediaLinkPopover from './media-link-popover';

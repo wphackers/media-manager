@@ -10,6 +10,10 @@ import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useState, useEffect, useCallback } from '@wordpress/element';
 import { RangeControl, Notice, Button } from '@wordpress/components';
+import {
+	store as mediaManagerStore,
+	STATE_PAUSED,
+} from '@mediamanager/media-connect';
 
 /**
  * Internal dependencies
@@ -22,8 +26,6 @@ import {
 	PlayerPlayPauseIcon,
 } from '../icons';
 import { convertSecondsToTimeCode } from '../../lib/utils/time';
-import { store as mediaManagerStore } from '../../store';
-import { STATE_PAUSED } from '../../store/constants';
 import './style.scss';
 
 export function JumpBackButton( { onClick, ...other } ) {

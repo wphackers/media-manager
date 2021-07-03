@@ -6,14 +6,16 @@ import { debounce, throttle } from 'lodash';
 /**
  * External dependencies
  */
-import { dispatch, useSelect } from '@wordpress/data';
+import { useSelect } from '@wordpress/data';
 import { useEffect } from '@wordpress/element';
+import {
+	store as mediaManagerStore,
+	STATE_PAUSED,
+} from '@mediamanager/media-connect';
 
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../../store';
-import { STATE_PAUSED } from '../../../store/constants';
 import useMediaStore from '../../../components/hooks/use-media-store';
 
 const MEDIA_CURRENT_TIME_THRESHOLD = 1000;

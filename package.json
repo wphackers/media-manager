@@ -7,13 +7,18 @@
 	"main": "build/index.js",
 	"scripts": {
 		"build": "wp-scripts build",
+		"clean:packages": "rimraf \"./packages/*/@(build|build-module|build-style)\"",
+		"build:packages": "node ./bin/packages/build.js",
+		"dev:packages": "node ./bin/packages/watch.js",
 		"format:js": "wp-scripts format-js",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
+		"dev": "npm run build:packages && concurrently \"npm run start\" \"npm run dev:packages\"",
 		"start": "wp-scripts start src/index.js src/view.js",
 		"packages-update": "wp-scripts packages-update"
 	},
 	"dependencies": {
+		"@mediamanager/media-connect": "file:packages/media-connect",
 		"@wordpress/block-editor": "^5.3.0",
 		"@wordpress/blocks": "^8.0.0",
 		"@wordpress/components": "^14.1.4",
@@ -24,14 +29,26 @@
 		"@wordpress/hooks": "^3.1.1",
 		"@wordpress/i18n": "^3.20.0",
 		"@wordpress/rich-text": "^3.25.0",
+		"chalk": "^4.1.1",
 		"classnames": "^2.3.1",
 		"gridicons": "^3.3.1",
-		"lodash": "^4.17.21"
+		"lodash": "^4.17.21",
+		"node-watch": "^0.7.1"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.14.6",
 		"@wordpress/eslint-plugin": "^9.0.6",
+		"@wordpress/postcss-plugins-preset": "^3.1.4",
 		"@wordpress/prettier-config": "^1.0.5",
-		"@wordpress/scripts": "^14.0.1"
+		"@wordpress/scripts": "^14.0.1",
+		"concurrently": "^6.2.0",
+		"fast-glob": "^3.2.6",
+		"make-dir": "^3.1.0",
+		"postcss": "^8.3.5",
+		"progress": "^2.0.3",
+		"rtlcss": "^3.2.1",
+		"sass": "^1.35.1",
+		"worker-farm": "^1.7.0"
 	},
 	"prettier": "@wordpress/prettier-config"
 }

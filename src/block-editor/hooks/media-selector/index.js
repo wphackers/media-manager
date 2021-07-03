@@ -18,12 +18,14 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { Placeholder, Panel, Button, Toolbar } from '@wordpress/components';
+import {
+	store as mediaManagerStore,
+	MEDIA_NOT_DEFINED,
+} from '@mediamanager/media-connect';
 
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../../store';
-import { MEDIA_NOT_DEFINED } from '../../../store/constants';
 import MediaSelector, {
 	MediaItemPanelBody,
 } from '../../../components/media-selector/';

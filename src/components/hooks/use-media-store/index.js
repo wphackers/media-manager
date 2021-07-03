@@ -4,11 +4,14 @@
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useCallback } from '@wordpress/element';
 
+import {
+	store as mediaManagerStore,
+	STATE_PAUSED,
+} from '@mediamanager/media-connect';
+
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore } from '../../../store';
-import { STATE_PAUSED } from '../../../store/constants';
 
 export default function useMediaStore( id ) {
 	const { isPaused, playingState } = useSelect(
