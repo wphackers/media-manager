@@ -10,7 +10,8 @@
 		"block-editor",
 		"video",
 		"audio",
-		"media"
+		"media",
+		"media-store"
 	],
 	"homepage": "https://github.com/MediaBlocks/media-manager/blob/HEAD/packages/media-connect/README.md",
 	"repository": {
