@@ -12,7 +12,7 @@
 		"audio",
 		"media"
 	],
-	"homepage": "https://github.com/MediaBlocks/media-manager/tree/HEAD/packages/media-manager/README.md",
+	"homepage": "https://github.com/MediaBlocks/media-manager/blob/HEAD/packages/media-connect/README.md",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/MediaBlocks/media-manager.git",
