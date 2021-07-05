@@ -2,12 +2,12 @@
  * WordPress dependencies
  */
 import { Button } from '@wordpress/components';
+import { useMediaStore } from '@media-manager/media-connect';
 
 /**
  * Internal dependencies
  */
 import { PlayerPauseIcon } from '../../components/icons';
-import useMediaStore from '../../components/hooks/use-media-store';
 
 export default function PauseBlock( { mediaSourceId } ) {
 	const { pause, className } = useMediaStore( mediaSourceId );

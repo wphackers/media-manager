@@ -2,12 +2,12 @@
  * WordPress dependencies
  */
 import { Button } from '@wordpress/components';
+import { useMediaStore } from '@media-manager/media-connect';
 
 /**
  * Internal dependencies
  */
 import { PlayerPlayIcon } from '../../components/icons';
-import useMediaStore from '../../components/hooks/use-media-store';
 
 export default function PlayBlock( { mediaSourceId } ) {
 	const { play, className } = useMediaStore( mediaSourceId );

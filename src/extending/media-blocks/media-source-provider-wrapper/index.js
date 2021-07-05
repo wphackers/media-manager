@@ -11,12 +11,8 @@ import { useEffect } from '@wordpress/element';
 import {
 	store as mediaManagerStore,
 	STATE_PAUSED,
+	useMediaStore,
 } from '@media-manager/media-connect';
-
-/**
- * Internal dependencies
- */
-import useMediaStore from '../../../components/hooks/use-media-store';
 
 const MEDIA_CURRENT_TIME_THRESHOLD = 1000;
 const MEDIA_CURRENT_STATE_THRESHOLD = 1000;

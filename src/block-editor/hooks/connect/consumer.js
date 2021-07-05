@@ -10,12 +10,12 @@ import { addFilter } from '@wordpress/hooks';
 import { getBlockSupport } from '@wordpress/blocks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { BlockContextProvider } from '@wordpress/block-editor';
+import { useMediaStore } from '@media-manager/media-connect';
 
 /**
  * External dependencies
  */
 import useMediaSourceId from '../../../components/hooks/use-media-source-id';
-import useMediaStore from '../../../components/hooks/use-media-store';
 
 // Define and export support name.
 export const SUPPORT_NAME = 'media-manager/connect-consumer';
