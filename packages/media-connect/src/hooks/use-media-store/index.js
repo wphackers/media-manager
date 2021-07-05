@@ -3,6 +3,10 @@
  */
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useCallback } from '@wordpress/element';
+
+/**
+ * Internal dependencies
+ */
 import { store as mediaManagerStore, STATE_PAUSED } from '../../';
 
 /**

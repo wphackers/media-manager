@@ -2,9 +2,12 @@
  * External dependencies
  */
 import { useSelect } from '@wordpress/data';
-import { convertSecondsToTimeCode } from '../../../lib/utils/time';
+import { convertSecondsToTimeCode } from '../../../../../src/lib/utils/time';
 
-import { store as mediaManagerStore } from '@media-manager/media-connect';
+/**
+ * Internal dependencies
+ */
+import { store as mediaManagerStore } from '../../';
 
 /**
  * Internal dependencies
