@@ -1,0 +1,41 @@
+{
+	"name": "@media-manager/block-editor-complements",
+	"version": "0.0.0-alpha.0",
+	"description": "Block Editor complements.",
+	"author": "The Media Manager Contributors",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"gutenberg",
+		"wordpress",
+		"block-editor"
+	],
+	"homepage": "https://github.com/FancyBlocks/media-manager/blob/HEAD/packages/block-editor-complements/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/FancyBlocks/media-manager.git",
+		"directory": "packages/media-manager"
+	},
+	"bugs": {
+		"url": "https://github.com/FancyBlocks/media-manager/issues"
+	},
+	"main": "build/index.js",
+	"module": "build-module/index.js",
+	"react-native": "src/index",
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@media-manager/media-connect": "file:../media-connect",
+		"@babel/runtime": "^7.14.6",
+		"@wordpress/block-editor": "^6.1.8",
+		"@wordpress/blocks": "^9.1.4",
+		"@wordpress/components": "^14.1.5",
+		"@wordpress/compose": "^4.1.2",
+		"@wordpress/data": "^5.1.2",
+		"@wordpress/element": "^3.1.1",
+		"@wordpress/hooks": "^3.1.1",
+		"@wordpress/i18n": "^4.1.1",
+		"classnames": "^2.3.1",
+		"lodash": "^4.17.21"
+	}
+}
