@@ -16,8 +16,6 @@ The media-connect package provides a way to register media sources in the app co
 
 _This package assumes that your code will run in an **ES2015+** environment. If you're using an environment that has limited or no support for ES2015+ such as IE browsers then using [core-js](https://github.com/zloirock/core-js) will add polyfills for these methods._
 
-<br/><br/><p align="center"><img src="https://s.w.org/style/images/codeispoetry.png?1" alt="Code is Poetry." /></p>
-
 ## API
 
 ### Hooks
@@ -26,3 +24,5 @@ _This package assumes that your code will run in an **ES2015+** environment. If 
 
 #### useMediaStore()
 #### useCurrentTime()
+
+<br/><br/><p align="center"><img src="https://s.w.org/style/images/codeispoetry.png?1" alt="Code is Poetry." /></p>
