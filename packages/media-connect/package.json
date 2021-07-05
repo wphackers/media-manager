@@ -2,7 +2,7 @@
 	"name": "@media-manager/media-connect",
 	"version": "0.1.0-alpha.0",
 	"description": "Connect media sources",
-	"author": "The FancyBlocks Contributors",
+	"author": "The Media Manager Contributors",
 	"license": "GPL-2.0-or-later",
 	"keywords": [
 		"gutenberg",
@@ -29,6 +29,7 @@
 		"access": "public"
 	},
 	"dependencies": {
+		"@media-manager/time-utils": "file:../time-utils",
 		"@wordpress/data": "^5.1.2",
 		"@wordpress/element": "^3.1.1"
 	}

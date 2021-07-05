@@ -2,16 +2,12 @@
  * External dependencies
  */
 import { useSelect } from '@wordpress/data';
-import { convertSecondsToTimeCode } from '../../../../../src/lib/utils/time';
+import { convertSecondsToTimeCode } from '@media-manager/time-utils';
 
 /**
  * Internal dependencies
  */
 import { store as mediaManagerStore } from '../../';
-
-/**
- * Internal dependencies
- */
 
 export default function useCurrentTime( id ) {
 	return useSelect(
