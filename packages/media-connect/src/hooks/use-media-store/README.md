@@ -1,5 +1,4 @@
-useMediaStore hook
-==================
+# useMediaStore hook
 
 Use this hook to connect your componeny with the media store.
 
