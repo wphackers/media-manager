@@ -20,6 +20,7 @@ import {
 import { Placeholder, Panel, Button, Toolbar } from '@wordpress/components';
 import {
 	store as mediaManagerStore,
+	useMediaSourceId,
 	MEDIA_NOT_DEFINED,
 } from '@media-manager/media-connect';
 
@@ -29,7 +30,6 @@ import {
 import MediaSelector, {
 	MediaItemPanelBody,
 } from '../../../components/media-selector/';
-import useMediaSourceId from '../../../components/hooks/use-media-source-id';
 
 export const SUPPORT_NAME = 'media-manager/media-selector';
 
@@ -59,7 +59,7 @@ export const withMediaSelector = createHigherOrderComponent(
 
 			const [ isReplacing, setIsReplacing ] = useState( false );
 
-			const mediaSourceId = useMediaSourceId( props );
+			const mediaSourceId = useMediaSourceId( mediaConsumerBlockAttributeName, props );
 			const { mediaSources } = useSelect( ( select ) => {
 				return {
 					mediaSources: select( mediaManagerStore ).getMediaSources(),

@@ -2,7 +2,6 @@
  * External dependencies
  */
 import classnames from 'classnames';
-
 /**
  * WordPress dependencies
  */
@@ -10,19 +9,22 @@ import { addFilter } from '@wordpress/hooks';
 import { getBlockSupport } from '@wordpress/blocks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { BlockContextProvider } from '@wordpress/block-editor';
-import { useMediaStore } from '@media-manager/media-connect';
+import { useMediaStore, useMediaSourceId } from '@media-manager/media-connect';
 
 /**
- * External dependencies
+ * Internal dependencies
  */
-import useMediaSourceId from '../../../components/hooks/use-media-source-id';
+import { mediaConsumerBlockAttributeName } from '../../../block-editor/hooks/media-selector';
 
 // Define and export support name.
 export const SUPPORT_NAME = 'media-manager/connect-consumer';
 
 export const withMediaConnect = createHigherOrderComponent(
 	( OriginalBlock ) => ( props ) => {
-		const mediaSourceId = useMediaSourceId( props );
+		const mediaSourceId = useMediaSourceId(
+			mediaConsumerBlockAttributeName,
+			props
+		);
 		const mediaSource = useMediaStore( mediaSourceId );
 
 		return (
