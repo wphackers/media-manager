@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import useCurrentTime from '../../components/hooks/use-current-time';
+import { useCurrentTime } from '@media-manager/media-connect';
 
 export default function TimePositionDisplayEditBlock( { mediaSourceId } ) {
 	const { currentTimeFormatted } = useCurrentTime( mediaSourceId );

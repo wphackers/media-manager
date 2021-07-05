@@ -2,11 +2,11 @@
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { useCurrentTime } from '@media-manager/media-connect';
 
 /**
  * Internal dependencies
  */
-import useCurrentTime from '../../components/hooks/use-current-time';
 import './editor.scss';
 
 export default function TimePositionDisplayEditBlock( { mediaSourceId } ) {
