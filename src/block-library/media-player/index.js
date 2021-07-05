@@ -3,22 +3,18 @@
  */
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
+import {
+	SUPPORT_CONNECT_CONSUMER,
+	SUPPORT_MEDIA_SELECTOR,
+	SUPPORT_SIZES,
+} from '@media-manager/block-editor-complements';
 
 /**
  * Internal dependencies
  */
 import { PlayerIcon as icon } from '../../components/icons';
-
-/**
- * Internal dependencies
- */
 import Edit from './edit';
 import save from './save';
-import {
-	SUPPORT_CONNECT_CONSUMER,
-	SUPPORT_MEDIA_SELECTOR,
-	SUPPORT_SIZES,
-} from '../../block-editor/hooks';
 import './style.scss';
 
 export const blockName = 'media-manager/media-player';

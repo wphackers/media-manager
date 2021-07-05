@@ -7,4 +7,3 @@
  */
 import './extending';
 import './block-library';
-import './block-editor';

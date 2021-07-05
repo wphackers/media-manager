@@ -7,7 +7,7 @@ import { addFilter } from '@wordpress/hooks';
  * Internal dependencies
  */
 import { getBlockSourceProps, shouldExtendMediaBlock } from '../utils';
-import { SUPPORT_CONNECT_PROVIDER } from '../../block-editor/hooks';
+import { SUPPORT_CONNECT_PROVIDER } from '@media-manager/block-editor-complements';
 
 function registerMediaBlocksSource( settings, name ) {
 	if ( ! shouldExtendMediaBlock( name, settings ) ) {

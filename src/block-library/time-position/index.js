@@ -3,21 +3,17 @@
  */
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
+import {
+	SUPPORT_CONNECT_CONSUMER,
+	SUPPORT_MEDIA_SELECTOR,
+} from '@media-manager/block-editor-complements';
 
 /**
  * Internal dependencies
  */
 import { TimePositionIcon as icon } from '../../components/icons';
-
-/**
- * Internal dependencies
- */
 import Edit from './edit';
 import save from './save';
-import {
-	SUPPORT_CONNECT_CONSUMER,
-	SUPPORT_MEDIA_SELECTOR,
-} from '../../block-editor/hooks';
 import './style.scss';
 
 export const blockName = 'media-manager/time-position-display';
