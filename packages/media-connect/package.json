@@ -2,7 +2,7 @@
 	"name": "@media-manager/media-connect",
 	"version": "0.1.0-alpha.0",
 	"description": "Connect media sources",
-	"author": "The MediaBlocks Contributors",
+	"author": "The FancyBlocks Contributors",
 	"license": "GPL-2.0-or-later",
 	"keywords": [
 		"gutenberg",
@@ -13,14 +13,14 @@
 		"media",
 		"media-store"
 	],
-	"homepage": "https://github.com/MediaBlocks/media-manager/blob/HEAD/packages/media-connect/README.md",
+	"homepage": "https://github.com/FancyBlocks/media-manager/blob/HEAD/packages/media-connect/README.md",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/MediaBlocks/media-manager.git",
+		"url": "https://github.com/FancyBlocks/media-manager.git",
 		"directory": "packages/media-manager"
 	},
 	"bugs": {
-		"url": "https://github.com/MediaBlocks/media-manager/issues"
+		"url": "https://github.com/FancyBlocks/media-manager/issues"
 	},
 	"main": "build/index.js",
 	"module": "build-module/index.js",
