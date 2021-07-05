@@ -12,12 +12,12 @@ import { PanelBody, PanelRow, Button, Notice } from '@wordpress/components';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
 import { MEDIA_NOT_DEFINED } from '@media-manager/media-connect';
+import { convertSecondsToTimeCode } from '@media-manager/time-utils';
 
 /**
  * Internal dependencies
  */
 import './style.scss';
-import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import { PlayPauseButton } from '../media-player';
 
 export function MediaItem( {

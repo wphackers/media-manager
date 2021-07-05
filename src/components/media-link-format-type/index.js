@@ -16,6 +16,11 @@ import {
 import { useSelect } from '@wordpress/data';
 import { useState } from '@wordpress/element';
 import { store as mediaManagerStore } from '@media-manager/media-connect';
+import {
+	convertSecondsToTimeCode,
+	convertTimeCodeToSeconds,
+	isTimeformat,
+} from '@media-manager/time-utils';
 
 /**
  * Internal dependencies
@@ -25,9 +30,6 @@ import { shouldExtendBlockWithMedia } from '../../extending/utils';
 import MediaLinkPopover from './media-link-popover';
 import './style.scss';
 import {
-	convertSecondsToTimeCode,
-	convertTimeCodeToSeconds,
-	isTimeformat,
 	hasMultipleTimeformats,
 	getTimeformatMatch,
 } from '../../lib/utils/time';

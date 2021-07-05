@@ -14,6 +14,7 @@ import {
 	store as mediaManagerStore,
 	STATE_PAUSED,
 } from '@media-manager/media-connect';
+import { convertSecondsToTimeCode } from '@media-manager/time-utils';
 
 /**
  * Internal dependencies
@@ -25,7 +26,6 @@ import {
 	PlayerPauseIcon,
 	PlayerPlayPauseIcon,
 } from '../icons';
-import { convertSecondsToTimeCode } from '../../lib/utils/time';
 import './style.scss';
 
 export function JumpBackButton( { onClick, ...other } ) {
@@ -66,7 +66,7 @@ export function PlayPauseButton( {
 	);
 }
 
-export function PlayButton( { onClick, isPaused = false, scale, ...other } ) {
+export function PlayButton( { onClick, scale, ...other } ) {
 	return (
 		<Button
 			icon={ <PlayerPlayIcon scale={ scale } /> }
@@ -77,7 +77,7 @@ export function PlayButton( { onClick, isPaused = false, scale, ...other } ) {
 	);
 }
 
-export function PauseButton( { onClick, isPaused = false, scale, ...other } ) {
+export function PauseButton( { onClick, scale, ...other } ) {
 	return (
 		<Button
 			icon={ <PlayerPauseIcon scale={ scale } /> }
@@ -129,12 +129,12 @@ export function MediaPlayerControl( {
 	const isPaused = mediaPlayingState === STATE_PAUSED;
 
 	const debouncedOnChange = useCallback(
-		debounce( function ( time, onChange ) {
+		debounce( function ( debTime, debOnChange ) {
 			if ( ! isPaused ) {
-				setMediaSourceCurrentTime( mediaSourceId, time );
+				setMediaSourceCurrentTime( mediaSourceId, debTime );
 			}
 
-			onChange( time );
+			debOnChange( time );
 		}, 250 ),
 		[ isPaused ]
 	);
@@ -150,9 +150,9 @@ export function MediaPlayerControl( {
 		toggleMediaSource( mediaSourceId );
 	}
 
-	function onChangeTimeHandler( time ) {
-		setRangeTime( time );
-		debouncedOnChange( time, onChange );
+	function onChangeTimeHandler( newTimeValue ) {
+		setRangeTime( newTimeValue );
+		debouncedOnChange( newTimeValue, onChange );
 	}
 
 	const currentTimeFormatted = convertSecondsToTimeCode( rangeTime );
