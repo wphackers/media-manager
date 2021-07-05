@@ -1,0 +1,28 @@
+{
+	"name": "@media-manager/time-utils",
+	"version": "0.0.0-alpha.0",
+	"description": "Library with useful functions to deal with time issues. Time is gold.",
+	"author": "The Media Manager Contributors",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"gutenberg",
+		"wordpress",
+		"block-editor",
+		"time"
+	],
+	"homepage": "https://github.com/FancyBlocks/media-manager/blob/HEAD/packages/time-utils/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/FancyBlocks/media-manager.git",
+		"directory": "packages/media-manager"
+	},
+	"bugs": {
+		"url": "https://github.com/FancyBlocks/media-manager/issues"
+	},
+	"main": "build/index.js",
+	"module": "build-module/index.js",
+	"react-native": "src/index",
+	"publishConfig": {
+		"access": "public"
+	}
+}
