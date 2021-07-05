@@ -5,14 +5,12 @@ import { applyFormat, remove } from '@wordpress/rich-text';
 import { __, sprintf } from '@wordpress/i18n';
 import { select } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+import { convertTimeCodeToSeconds } from '@media-manager/time-utils';
 
 /**
  * Internal dependencies
  */
-import {
-	convertTimeCodeToSeconds,
-	isMarkfownTimeformat,
-} from '../../lib/utils/time';
+import { isMarkdownTimeformat } from '../../lib/utils/time';
 import { MEDIA_LINK_FORMAT_TYPE } from './';
 import { blockName as mediaCenterBlockName } from '../../block-library/media-center';
 
@@ -37,7 +35,6 @@ export default function ( value ) {
 	const MD_CLOSE_TRIGGER_CHAR = ')';
 	const { start, text } = value;
 
-	const characterBefore = text.slice( start - 1, start );
 	const trigger = text.slice( start - 2, start - 1 );
 
 	const isTriggerChar =
@@ -48,13 +45,15 @@ export default function ( value ) {
 	}
 
 	const textBefore = text.substr( 0, start );
+	const characterBefore = text.slice( start - 1, start );
+
 	if ( characterBefore !== MD_OPEN_TRIGGER_CHAR ) {
 		const startIndex = textBefore.lastIndexOf( SIMPLE_OPEN_TRIGGER_CHAR );
 		if ( startIndex === -1 ) {
 			return value;
 		}
 
-		const parts = isMarkfownTimeformat( textBefore );
+		const parts = isMarkdownTimeformat( textBefore );
 		if ( ! parts?.[ 1 ] ) {
 			return value;
 		}
@@ -72,7 +71,10 @@ export default function ( value ) {
 				type: MEDIA_LINK_FORMAT_TYPE,
 				attributes: {
 					timestamp: `#${ convertTimeCodeToSeconds( timestamp ) }`,
-					label: sprintf( __( 'Playback at %1$s' ), timestamp ),
+					label: sprintf(
+						__( 'Playback at %1$s', 'media-manager' ),
+						timestamp
+					),
 				},
 			},
 			startIndex,
