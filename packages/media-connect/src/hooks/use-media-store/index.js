@@ -5,7 +5,6 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { useCallback } from '@wordpress/element';
 import { store as mediaManagerStore, STATE_PAUSED } from '../../';
 
-
 /**
  * Media Store hook that provides properties and helper functions
  * to get useful data as well as be able to control the media.
