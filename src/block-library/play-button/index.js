@@ -4,11 +4,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
-
-/**
- * Internal dependencies
- */
-import { PlayerPlayIcon as icon } from '../../components/icons';
+import { PlayerPlayIcon as icon } from '@media-manager/components';
 
 /**
  * Internal dependencies

@@ -7,11 +7,11 @@ import {
 	SUPPORT_CONNECT_CONSUMER,
 	SUPPORT_MEDIA_SELECTOR,
 } from '@media-manager/block-editor-complements';
+import { TimePositionIcon as icon } from '@media-manager/components';
 
 /**
  * Internal dependencies
  */
-import { TimePositionIcon as icon } from '../../components/icons';
 import Edit from './edit';
 import save from './save';
 import './style.scss';

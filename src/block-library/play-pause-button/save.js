@@ -2,12 +2,8 @@
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Internal dependencies
- */
-import { getButtonSizeBySlug } from '../../components/with-sizes';
-import { PlayerPauseIcon, PlayerPlayPauseIcon } from '../../components/icons';
+import { getButtonSizeBySlug } from '@media-manager/block-editor-complements';
+import { PlayerPauseIcon, PlayerPlayPauseIcon } from '@media-manager/components';
 
 export default function save( { attributes } ) {
 	const scale = getButtonSizeBySlug( attributes?.size );

@@ -2,11 +2,11 @@
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { PlayPauseButton as Button } from '@media-manager/components';
 
 /**
  * Internal dependencies
  */
-import { PauseButton as Button } from '../../components/media-player';
 import './editor.scss';
 
 export default function PlayEditBlock( { mediaSource, scale, className } ) {

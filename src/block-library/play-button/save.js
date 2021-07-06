@@ -2,12 +2,8 @@
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Internal dependencies
- */
-import { PlayerPlayIcon } from '../../components/icons';
-import { getButtonSizeBySlug } from '../../components/with-sizes';
+import { PlayerPlayIcon } from '@media-manager/components';
+import { getButtonSizeBySlug } from '@media-manager/block-editor-complements';
 
 export default function save( { attributes } ) {
 	return (

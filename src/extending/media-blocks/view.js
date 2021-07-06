@@ -12,7 +12,7 @@ import PlayPauseButtonBlock from '../../block-library/play-pause-button/view';
 import PlayButtonBlock from '../../block-library/play-button/view';
 import PauseButtonBlock from '../../block-library/pause-button/view';
 import TimePositionBlock from '../../block-library/time-position/view';
-import MediaLinkFormatType from '../../components/media-link-format-type/view';
+// import MediaLinkFormatType from '../../components/media-link-format-type/view';
 import renderReplace from '../../lib/render';
 import MediaSourceProviderWrapper from './media-source-provider-wrapper';
 
@@ -123,15 +123,15 @@ domReady( function () {
 			const mediaFormatLinks = mediaCenterBlock.querySelectorAll(
 				`.${ linkFormatCssClass }`
 			);
-			mediaFormatLinks.forEach( function ( mediaFormatLinkElement ) {
-				renderReplace(
-					<MediaLinkFormatType
-						elRef={ mediaFormatLinkElement }
-						mediaSourceId={ mediaSourceReference }
-					/>,
-					mediaFormatLinkElement
-				);
-			} );
+			// mediaFormatLinks.forEach( function ( mediaFormatLinkElement ) {
+			// 	renderReplace(
+			// 		<MediaLinkFormatType
+			// 			elRef={ mediaFormatLinkElement }
+			// 			mediaSourceId={ mediaSourceReference }
+			// 		/>,
+			// 		mediaFormatLinkElement
+			// 	);
+			// } );
 		} );
 	}
 } );

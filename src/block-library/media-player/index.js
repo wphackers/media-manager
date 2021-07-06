@@ -8,11 +8,11 @@ import {
 	SUPPORT_MEDIA_SELECTOR,
 	SUPPORT_SIZES,
 } from '@media-manager/block-editor-complements';
+import { PlayerIcon as icon } from '@media-manager/components';
 
 /**
  * Internal dependencies
  */
-import { PlayerIcon as icon } from '../../components/icons';
 import Edit from './edit';
 import save from './save';
 import './style.scss';

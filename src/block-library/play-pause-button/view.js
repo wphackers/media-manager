@@ -3,11 +3,7 @@
  */
 import { Button } from '@wordpress/components';
 import { useMediaStore } from '@media-manager/media-connect';
-
-/**
- * Internal dependencies
- */
-import { PlayerPauseIcon, PlayerPlayPauseIcon } from '../../components/icons';
+import { PlayerPauseIcon, PlayerPlayPauseIcon } from '@media-manager/components';
 
 export default function PlayPauseBlock( { mediaSourceId } ) {
 	const { isPaused, toggle, className } = useMediaStore( mediaSourceId );
