@@ -26,7 +26,6 @@ import {
 	PlayerPauseIcon,
 	PlayerPlayPauseIcon,
 } from '../icons';
-import './style.scss';
 
 export function JumpBackButton( { onClick, ...other } ) {
 	return (
