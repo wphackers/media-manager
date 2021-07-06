@@ -83,6 +83,7 @@ async function buildCSS( file ) {
 		file.replace( '.scss', '.css' ),
 		'build-style'
 	);
+
 	const outputFileRTL = getBuildPath(
 		file.replace( '.scss', '-rtl.css' ),
 		'build-style'
@@ -92,27 +93,9 @@ async function buildCSS( file ) {
 		makeDir( path.dirname( outputFile ) ),
 		readFile( file, 'utf8' ),
 	] );
+
 	const builtSass = await renderSass( {
 		file,
-		includePaths: [ path.join( PACKAGES_DIR, 'base-styles' ) ],
-		data:
-			[
-				'colors',
-				'breakpoints',
-				'variables',
-				'mixins',
-				'animations',
-				'z-index',
-			]
-				// Editor styles should be excluded from the default CSS vars output.
-				.concat(
-					file.includes( 'common.scss' ) ||
-						! file.includes( 'block-library' )
-						? [ 'default-custom-properties' ]
-						: []
-				)
-				.map( ( imported ) => `@import "${ imported }";` )
-				.join( ' ' ) + contents,
 	} );
 
 	const result = await postcss(
