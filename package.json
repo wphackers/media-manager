@@ -16,7 +16,7 @@
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"dev": "npm run build:packages && concurrently \"npm run start\" \"npm run dev:packages\"",
-		"start": "wp-scripts start",
+		"start": "wp-scripts start src/index.js src/view.js",
 		"packages-update": "wp-scripts packages-update"
 	},
 	"dependencies": {
