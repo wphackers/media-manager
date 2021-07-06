@@ -28,7 +28,9 @@ import {
  * Internal dependencies
  */
 import { MediaCenterPanelBody } from '../../';
-import { blockName as mediaCenterBlockName } from '../../../../../src/block-library/media-center';
+
+// @TODO: audit the implementation.
+const mediaCenterBlockName = 'media-manager/media-center';
 
 // Define and export support name.
 export const SUPPORT_NAME = 'media-manager/connect-provider';

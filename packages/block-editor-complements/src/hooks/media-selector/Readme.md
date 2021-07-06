@@ -1,22 +1,18 @@
-# Media selector supports
+# Media Selector hook
 
-Use the `media-manager/media-selector` key to supports the media selectors component in your blocks.
+It hooks a function to the `'blocks.registerBlockType` filter to add the `media-manager/media-selector` block support.
+
+## `media-manager/media-selector` block support
+
+Use this support to provide the ability to associate a media source to the block.
 
 ```es6
-import { SUPPORT_MEDIA_SELECTOR } from '../../block-editor/hooks';
-
 registerBlockType( `my-plugin/my-block`, {
 	supports: {
-		[ SUPPORT_MEDIA_SELECTOR ]: true,
+		'media-manager/media-selector': true,
 	},
 } );
 ```
-
-## API
-
-### Full support
-
-Setting the support to True will provide full media selector features.
 
 #### insertEmptyBlock
 
@@ -25,7 +21,7 @@ Set the block names that the media selector component will support, or False in 
 ```es6
 registerBlockType( `my-plugin/my-block`, {
 	supports: {
-		[ SUPPORT_MEDIA_SELECTOR ]: {
+		'media-manager/media-selector': {
 			insertEmptyBlock: [ 'core/video', 'jetpack/videopress' ],
 		},
 	},
