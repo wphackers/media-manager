@@ -26,6 +26,8 @@
 	},
 	"dependencies": {
 		"@media-manager/media-connect": "file:../media-connect",
+		"@media-manager/components": "file:../components",
+		"@media-manager/time-utils": "file:../time-utils",
 		"@babel/runtime": "^7.14.6",
 		"@wordpress/block-editor": "^6.1.8",
 		"@wordpress/blocks": "^9.1.4",

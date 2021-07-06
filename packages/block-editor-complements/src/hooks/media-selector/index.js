@@ -27,9 +27,7 @@ import {
 /**
  * Internal dependencies
  */
-import MediaSelector, {
-	MediaItemPanelBody,
-} from '../../../../../src/components/media-selector/';
+import { MediaSelector, MediaItemPanelBody } from '../../';
 
 export const SUPPORT_NAME = 'media-manager/media-selector';
 

@@ -44,7 +44,7 @@ export function getButtonSizeBySlug( slug ) {
 	return defaultSizes.find( ( option ) => option.slug === slug )?.size || 1.5;
 }
 
-export default ( supportProps ) => {
+export function withSizes( supportProps ) {
 	return createHigherOrderComponent(
 		( BlockEdit ) => ( props ) => {
 			const { attributes, setAttributes } = props;
@@ -86,4 +86,4 @@ export default ( supportProps ) => {
 		},
 		'withSizes'
 	);
-};
+}

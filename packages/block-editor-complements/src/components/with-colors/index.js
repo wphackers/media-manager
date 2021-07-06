@@ -10,7 +10,7 @@ import {
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
-export default ( supportProps ) => {
+export function withMediaManagerColors( supportProps ) {
 	return createHigherOrderComponent(
 		( BlockEdit ) => ( props ) => {
 			// Panel title.
@@ -19,10 +19,10 @@ export default ( supportProps ) => {
 				__( 'Color settings', 'media-manager' );
 
 			// Panel color settings.
-			let colorSettings = [];
+			const colorSettings = [];
 
 			// Contrast checker.
-			let contrastCheckerProps = {};
+			const contrastCheckerProps = {};
 
 			for ( const prop in supportProps ) {
 				if ( /^__/.test( prop ) ) {
@@ -68,4 +68,4 @@ export default ( supportProps ) => {
 		},
 		'withMediaManagerColors'
 	);
-};
+}

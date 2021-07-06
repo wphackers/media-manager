@@ -12,9 +12,9 @@ import { compose } from '@wordpress/compose';
 import { getBlockSupport } from '@wordpress/blocks';
 
 /**
- * External dependencies
+ * Internal dependencies
  */
-import withMediaManagerColors from '../../../../../src/components/with-colors';
+import { withMediaManagerColors } from '../../';
 
 export const getMediaManagerColorSupport = ( settings ) =>
 	getBlockSupport( settings, 'media-manager/color' );

@@ -10,9 +10,9 @@ import { addFilter } from '@wordpress/hooks';
 import { getBlockSupport } from '@wordpress/blocks';
 
 /**
- * External dependencies
+ * Internal dependencies
  */
-import withSizes from '../../../../../src/components/with-sizes';
+import { withSizes } from '../../';
 
 // Define and export support name.
 export const SUPPORT_NAME = 'media-manager/sizes';

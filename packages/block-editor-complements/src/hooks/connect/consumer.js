@@ -25,6 +25,7 @@ export const withMediaConnect = createHigherOrderComponent(
 			mediaConsumerBlockAttributeName,
 			props
 		);
+
 		const mediaSource = useMediaStore( mediaSourceId );
 
 		return (

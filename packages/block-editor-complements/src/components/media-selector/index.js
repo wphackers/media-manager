@@ -13,12 +13,11 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
 import { MEDIA_NOT_DEFINED } from '@media-manager/media-connect';
 import { convertSecondsToTimeCode } from '@media-manager/time-utils';
+import { PlayPauseButton } from '@media-manager/components';
 
 /**
  * Internal dependencies
  */
-import './style.scss';
-import { PlayPauseButton } from '../media-player';
 
 export function MediaItem( {
 	elementType: type,
@@ -260,7 +259,7 @@ export function MediaCenterPanelBody( { source } ) {
 	);
 }
 
-export default function MediaSelector( { media, onMediaSelect } ) {
+export function MediaSelector( { media, onMediaSelect } ) {
 	if ( ! media?.length ) {
 		return null;
 	}

@@ -27,7 +27,7 @@ import {
 /**
  * Internal dependencies
  */
-import { MediaCenterPanelBody } from '../../../../../src/components/media-selector';
+import { MediaCenterPanelBody } from '../../';
 import { blockName as mediaCenterBlockName } from '../../../../../src/block-library/media-center';
 
 // Define and export support name.
