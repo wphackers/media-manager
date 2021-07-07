@@ -5,16 +5,17 @@ import { applyFormat, remove } from '@wordpress/rich-text';
 import { __, sprintf } from '@wordpress/i18n';
 import { select } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
-import { convertTimeCodeToSeconds } from '@media-manager/time-utils';
+import { convertTimeCodeToSeconds, isMarkdownTimeformat } from '@media-manager/time-utils';
 
 /**
  * Internal dependencies
  */
-import { isMarkdownTimeformat } from '../../lib/utils/time';
-import { MEDIA_LINK_FORMAT_TYPE } from './';
-import { blockName as mediaCenterBlockName } from '../../block-library/media-center';
+import { name } from './';
 
-export default function ( value ) {
+// @TODO: make it extensible.
+const mediaCenterBlockName = 'media-manager/media-center';
+
+export default function( value ) {
 	// Apply rule handler only when current block
 	// is child of media center.
 	const { getSelectedBlockClientId, getBlockParentsByBlockName } = select(
@@ -68,7 +69,7 @@ export default function ( value ) {
 		value = applyFormat(
 			value,
 			{
-				type: MEDIA_LINK_FORMAT_TYPE,
+				type: name,
 				attributes: {
 					timestamp: `#${ convertTimeCodeToSeconds( timestamp ) }`,
 					label: sprintf(

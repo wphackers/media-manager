@@ -5,12 +5,12 @@ import { Popover, Button } from '@wordpress/components';
 import { useAnchorRef } from '@wordpress/rich-text';
 import { createInterpolateElement } from '@wordpress/element';
 import { __, sprintf, _n } from '@wordpress/i18n';
+import { MediaPlayerControl } from '@media-manager/components';
 
 /**
  * Internal dependencies
  */
-import { mediaLinkFormatButtonSettings } from './';
-import { MediaPlayerControl } from '../media-player';
+import { settings } from './';
 
 export default function MediaLinkPopover( {
 	value,
@@ -28,7 +28,7 @@ export default function MediaLinkPopover( {
 	const anchorRef = useAnchorRef( {
 		ref: contentRef,
 		value,
-		settings: mediaLinkFormatButtonSettings,
+		settings,
 	} );
 
 	const showMultipleEdition =

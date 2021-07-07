@@ -3,7 +3,6 @@
  */
 import { __, sprintf } from '@wordpress/i18n';
 import {
-	registerFormatType,
 	toggleFormat,
 	applyFormat,
 	isCollapsed,
@@ -20,22 +19,21 @@ import {
 	convertSecondsToTimeCode,
 	convertTimeCodeToSeconds,
 	isTimeformat,
+	hasMultipleTimeformats,
+	getTimeformatMatch,
 } from '@media-manager/time-utils';
+import { MediaLinkIcon } from '@media-manager/components';
 
 /**
  * Internal dependencies
  */
-import { MediaLinkIcon } from '../icons';
-import { shouldExtendBlockWithMedia } from '../../extending/utils';
+import { shouldExtendBlockWithMedia } from '../../../../src/extending/utils';
 import MediaLinkPopover from './media-link-popover';
-import './style.scss';
-import {
-	hasMultipleTimeformats,
-	getTimeformatMatch,
-} from '../../lib/utils/time';
+// import './style.scss';
+
 import inputRuleHandler from './input-rule-handler';
 
-export const MEDIA_LINK_FORMAT_TYPE = 'media-manager/media-link-format-type';
+export const name = 'media-manager/media-link-format-type';
 
 function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	const mediatCenterBlockClientId = shouldExtendBlockWithMedia();
@@ -64,7 +62,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 
 	// Media link format time position.
 	const { attributes } =
-		getActiveFormat( value, MEDIA_LINK_FORMAT_TYPE ) || {};
+		getActiveFormat( value, name ) || {};
 
 	const { ownerDocument } = contentRef.current;
 	const { defaultView } = ownerDocument;
@@ -99,11 +97,11 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	 * Helper function to apply the style format
 	 *
 	 * @param {string} time timestamp to apply to the format
-	 * @returns {object} style forat object
+	 * @return {Object} style forat object
 	 */
 	function getStyleObject( time ) {
 		return {
-			type: MEDIA_LINK_FORMAT_TYPE,
+			type: name,
 			attributes: {
 				timestamp: `#${ time }`,
 				label: sprintf(
@@ -182,7 +180,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 						value = applyFormat(
 							value,
 							{
-								type: MEDIA_LINK_FORMAT_TYPE,
+								type: name,
 								attributes: {
 									timestamp: `#${ convertTimeCodeToSeconds(
 										timestamp
@@ -206,19 +204,17 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	);
 }
 
-export const mediaLinkFormatButtonAttrs = {
+export const attributes = {
 	timestamp: 'href',
 	label: 'title',
 };
 
-export const mediaLinkFormatButtonSettings = {
-	name: MEDIA_LINK_FORMAT_TYPE,
+export const settings = {
+	name,
 	title: 'Media link',
 	tagName: 'a',
 	className: 'media-link-format-type',
-	attributes: mediaLinkFormatButtonAttrs,
+	attributes,
 	edit: MediaLinkFormatButton,
 	__unstableInputRule: inputRuleHandler,
 };
-
-registerFormatType( MEDIA_LINK_FORMAT_TYPE, mediaLinkFormatButtonSettings );

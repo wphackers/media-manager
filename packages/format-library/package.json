@@ -1,0 +1,39 @@
+{
+	"name": "@media-manager/format-library",
+	"version": "0.0.0",
+	"description": "Format library for the WordPress block editor.",
+	"author": "The Media Manager Contributors",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"gutenberg",
+		"wordpress",
+		"block-editor",
+		"format-library"
+	],
+	"homepage": "https://github.com/FancyBlocks/media-manager/blob/HEAD/packages/format-library/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/FancyBlocks/media-manager.git",
+		"directory": "packages/media-manager"
+	},
+	"bugs": {
+		"url": "https://github.com/FancyBlocks/media-manager/issues"
+	},
+	"main": "build/index.js",
+	"module": "build-module/index.js",
+	"react-native": "src/index",
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@media-manager/components": "file:../components",
+		"@media-manager/media-connect": "file:../media-connect",
+		"@media-manager/time-utils": "file:../time-utils",
+		"@wordpress/block-editor": "^6.1.9",
+		"@wordpress/components": "^14.1.6",
+		"@wordpress/data": "^5.1.3",
+		"@wordpress/element": "^3.1.1",
+		"@wordpress/i18n": "^4.1.1",
+		"@wordpress/rich-text": "^4.1.3"
+	}
+}
