@@ -100,11 +100,27 @@ const MediaEditProviderWrapper = ( props ) => {
 	function onTimeChange( time ) {
 		setMediaSourceCurrentTime( mediaSourceIdAttr, time );
 	}
+
 	/*
 	* querySelector is the string used to pick up
 	* the DOM Element reference.
 	*/
 	let querySelector;
+
+	function updateElementRef() {
+		if ( ! querySelector ) {
+			return;
+		}
+
+		const mediaElement = document?.querySelector( querySelector );
+		if ( ! mediaElement ) {
+			return;
+		}
+
+		// Update media element reference (useRef).
+		mediaElementRef.current = mediaElement;
+		return mediaElement;
+	}
 
 	/*
 	 * - Register/Unregister Media source in the store.
@@ -129,7 +145,7 @@ const MediaEditProviderWrapper = ( props ) => {
 
 		// Do not register the media when no element is found.
 		querySelector = `[data-media-source-provider-id="${ mediaSourceId }"] ${ domTypeName }`;
-		const mediaElement = document?.querySelector( querySelector );
+		const mediaElement = updateElementRef();
 		if ( ! mediaElement ) {
 			return;
 		}
@@ -296,15 +312,7 @@ const MediaEditProviderWrapper = ( props ) => {
 			return;
 		}
 
-		const observer = new window.MutationObserver( function() {
-			const mediaElement = document?.querySelector( querySelector );
-			if ( ! mediaElement ) {
-				return;
-			}
-
-			// Update media element reference (useRef).
-			mediaElementRef.current = mediaElement;
-		} );
+		const observer = new window.MutationObserver( updateElementRef );
 
 		observer.observe( ref.current, {
 			childList: true,
