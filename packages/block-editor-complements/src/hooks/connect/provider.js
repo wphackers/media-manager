@@ -27,7 +27,7 @@ import {
 /**
  * Internal dependencies
  */
-import { MediaCenterPanelBody } from '../../';
+import { MediaConnectProviderPanelBody } from '../../';
 
 // @TODO: audit the implementation.
 const mediaCenterBlockName = 'media-manager/media-center';
@@ -63,7 +63,7 @@ const MediaEditProviderWrapper = ( props ) => {
 
 	// Media Source selectors.
 	// @TODO: Update with useMediaStore() hook
-	const { mediaPlayingState, currentTime, mediaSource } = useSelect(
+	const { mediaPlayingState, currentTime } = useSelect(
 		( select ) => ( {
 			mediaPlayingState: select( mediaManagerStore ).getMediaPlayerState(
 				mediaSourceIdAttr
@@ -77,6 +77,8 @@ const MediaEditProviderWrapper = ( props ) => {
 		} ),
 		[]
 	);
+
+	// console.log( 'mediaSource: ', mediaSource );
 
 	const mediaCenterParentBlock = useSelect(
 		( select ) =>
@@ -312,7 +314,7 @@ const MediaEditProviderWrapper = ( props ) => {
 		return <BlockEdit { ...props } />;
 	}
 
-	if ( ! mediaSourceUrl ) {
+	if ( ! mediaSourceIdAttr ) {
 		return <BlockEdit { ...props } />;
 	}
 
@@ -320,11 +322,11 @@ const MediaEditProviderWrapper = ( props ) => {
 		<Fragment>
 			<InspectorControls>
 				<Panel>
-					<MediaCenterPanelBody source={ mediaSource } />
+					<MediaConnectProviderPanelBody />
 				</Panel>
 			</InspectorControls>
 
-			<div data-media-source-provider-id={ attributes?.mediaSourceId }>
+			<div data-media-source-provider-id={ mediaSourceIdAttr }>
 				<BlockEdit { ...props } />
 			</div>
 		</Fragment>
