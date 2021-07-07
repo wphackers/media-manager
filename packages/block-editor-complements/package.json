@@ -1,6 +1,6 @@
 {
 	"name": "@media-manager/block-editor-complements",
-	"version": "0.0.0-alpha.0",
+	"version": "0.0.0",
 	"description": "Block Editor complements.",
 	"author": "The Media Manager Contributors",
 	"license": "GPL-2.0-or-later",
@@ -25,10 +25,10 @@
 		"access": "public"
 	},
 	"dependencies": {
-		"@media-manager/media-connect": "file:../media-connect",
-		"@media-manager/components": "file:../components",
-		"@media-manager/time-utils": "file:../time-utils",
 		"@babel/runtime": "^7.14.6",
+		"@media-manager/components": "file:../components",
+		"@media-manager/media-connect": "file:../media-connect",
+		"@media-manager/time-utils": "file:../time-utils",
 		"@wordpress/block-editor": "^6.1.8",
 		"@wordpress/blocks": "^9.1.4",
 		"@wordpress/components": "^14.1.5",
