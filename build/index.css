@@ -94,6 +94,26 @@
   margin: 0;
 }
 
+.media-link-popover {
+  margin: 0;
+  padding: 16px;
+  min-width: 250px;
+}
+
+.media-player-control__display {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: bottom;
+  height: 36px;
+  padding: 6px;
+  float: right;
+}
+
+.media-link-popover__multiple-styling .components-button {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
 .media-source-panel__actions .components-button {
   margin-right: 5px;
 }

@@ -1083,7 +1083,7 @@ function getMediaSourceDomReference(state, id) {
 /*!***************************************************!*\
   !*** ./packages/time-utils/build-module/index.js ***!
   \***************************************************/
-/*! exports provided: timecodeRegExp, convertSecondsToTimeCode, convertTimeCodeToSeconds, isTimeformat */
+/*! exports provided: timecodeRegExp, convertSecondsToTimeCode, convertTimeCodeToSeconds, isTimeformat, isMarkdownTimeformat, hasMultipleTimeformats, getTimeformatMatch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1092,7 +1092,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "convertSecondsToTimeCode", function() { return convertSecondsToTimeCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "convertTimeCodeToSeconds", function() { return convertTimeCodeToSeconds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isTimeformat", function() { return isTimeformat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isMarkdownTimeformat", function() { return isMarkdownTimeformat; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasMultipleTimeformats", function() { return hasMultipleTimeformats; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTimeformatMatch", function() { return getTimeformatMatch; });
 const timecodeRegExp = new RegExp(/^(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/);
+const multiple = /(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)/;
+const singleTimecodeRegExp = new RegExp(multiple, 'g');
+const multipleTimecodeRegExp = new RegExp(multiple, 'gm');
+const markdownTimeformat = /\[((?:(?:(?:[01]?\d|2[0-3]:):)?[0-5]?\d:)?[0-5]?\d)\](?:\(([^\(\)]+)\))?.$/;
+const markdownTimeformatRegExp = new RegExp(markdownTimeformat);
 function convertSecondsToTimeCode(seconds) {
   if (!seconds) {
     return '00:00:00';
@@ -1126,6 +1134,9 @@ const convertTimeCodeToSeconds = string => {
   return time;
 };
 const isTimeformat = value => timecodeRegExp.test(value);
+const isMarkdownTimeformat = value => markdownTimeformatRegExp.exec(value);
+const hasMultipleTimeformats = value => value.match(multipleTimecodeRegExp);
+const getTimeformatMatch = value => singleTimecodeRegExp.exec(value);
 
 /***/ }),
 
