@@ -29,6 +29,7 @@ function reducer( state = DEFAULT_STATE, action ) {
 					[ action.id ]: {
 						id: action.id,
 						...action.mediaSourceState,
+						state: action.mediaSourceState.state ?? STATE_PAUSED,
 					},
 				},
 			};
