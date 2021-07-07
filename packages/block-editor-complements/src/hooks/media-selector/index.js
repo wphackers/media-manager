@@ -28,6 +28,7 @@ import {
  * Internal dependencies
  */
 import { MediaSelector, MediaItemPanelBody } from '../../';
+import { mediaConsumerBlockAttributeName } from '../../constants';
 
 export const SUPPORT_NAME = 'media-manager/media-selector';
 
@@ -57,7 +58,10 @@ export const withMediaSelector = createHigherOrderComponent(
 
 			const [ isReplacing, setIsReplacing ] = useState( false );
 
-			const mediaSourceId = useMediaSourceId( mediaConsumerBlockAttributeName, props );
+			const mediaSourceId = useMediaSourceId(
+				mediaConsumerBlockAttributeName,
+				props
+			);
 			const { mediaSources } = useSelect( ( select ) => {
 				return {
 					mediaSources: select( mediaManagerStore ).getMediaSources(),
@@ -214,9 +218,6 @@ export const withMediaSelector = createHigherOrderComponent(
 	},
 	'withMediaSelector'
 );
-
-// Block attibute name used to poulate the consumers.
-export const mediaConsumerBlockAttributeName = 'mediaSourceReferenceId';
 
 function addMediaSelectorSupport( settings ) {
 	if ( ! getBlockSupport( settings, SUPPORT_NAME ) ) {

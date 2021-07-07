@@ -14,7 +14,7 @@ import { useMediaStore, useMediaSourceId } from '@media-manager/media-connect';
 /**
  * Internal dependencies
  */
-import { mediaConsumerBlockAttributeName } from '../media-selector';
+import { mediaConsumerBlockAttributeName } from '../../constants';
 
 // Define and export support name.
 export const SUPPORT_NAME = 'media-manager/connect-consumer';

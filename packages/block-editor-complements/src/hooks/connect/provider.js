@@ -28,6 +28,10 @@ import {
  * Internal dependencies
  */
 import { MediaConnectProviderPanelBody } from '../../';
+import {
+	mediaProviderBlockAttributeName,
+	mediaConsumerBlockAttributeName,
+} from '../../constants';
 
 // @TODO: audit the implementation.
 const mediaCenterBlockName = 'media-manager/media-center';
@@ -78,8 +82,6 @@ const MediaEditProviderWrapper = ( props ) => {
 		[]
 	);
 
-	// console.log( 'mediaSource: ', mediaSource );
-
 	const mediaCenterParentBlock = useSelect(
 		( select ) =>
 			select( blockEditorStore ).getBlock(
@@ -126,27 +128,26 @@ const MediaEditProviderWrapper = ( props ) => {
 		/*
 		 * Check if the mediaSourceId attribute is defined.
 		 * If so, take it as the media reference.
-		 * Otherwise, creates a new ID using the current clientId.
+		 * Otherwise, creates a new ID using the block clientId.
 		 */
 		let mediaSourceId = mediaSourceIdAttr;
 		if ( ! mediaSourceId ) {
 			mediaSourceId = `media-source-${ clientId }`;
-			// update the block attribute.
 			setAttributes( { mediaSourceId } );
 		}
 
 		/*
-		 * `querySelector` is the string used to pick up
+		 * querySelector is the string used to pick up
 		 * the DOM Element reference.
+		 * Do not register the media when no element is found.
 		 */
 		const querySelector = `[data-media-source-provider-id="${ mediaSourceId }"] ${ domTypeName }`;
-
 		const mediaElement = document?.querySelector( querySelector );
 		if ( ! mediaElement ) {
 			return;
 		}
 
-		// Store the media element reference.
+		// Update media element reference (useRef).
 		mediaElementRef.current = mediaElement;
 
 		/*
@@ -197,6 +198,10 @@ const MediaEditProviderWrapper = ( props ) => {
 		mediaCenterParentSourceIdAttr,
 	] );
 
+	/* Child provider.
+	 * Check whether the provider is child of a block consumer.
+	 * If so, it means that the provider is a media center block.
+	 */
 	useEffect( () => {
 		// Block doesn't have defined its source. Bail early.
 		if ( ! mediaSourceUrl || ! mediaSourceIdAttr ) {
@@ -208,7 +213,7 @@ const MediaEditProviderWrapper = ( props ) => {
 			return;
 		}
 
-		// Media Center source ID is defined properly. Bail eraly.
+		// Media Center source ID is defined properly. Bail early.
 		if (
 			mediaCenterParentSourceIdAttr &&
 			mediaCenterParentSourceIdAttr !== MEDIA_NOT_DEFINED
@@ -218,7 +223,7 @@ const MediaEditProviderWrapper = ( props ) => {
 
 		// Link MediaCenter block on the fly with the media block.
 		updateBlockAttributes( mediaCenterParentClientId, {
-			mediaSourceId: mediaSourceIdAttr,
+			[ mediaConsumerBlockAttributeName ]: mediaSourceIdAttr,
 		} );
 	}, [
 		mediaSourceUrl,
@@ -344,9 +349,6 @@ const MediaEditConnectProvider = ( providerProps ) =>
 		),
 		'MediaEditConnectProvider'
 	);
-
-// Block attibute name used to populate the providers.
-export const mediaProviderBlockAttributeName = 'mediaSourceId';
 
 function addMediaManagerConnectSupport( settings ) {
 	const blockProviderProps = getBlockSupport( settings, SUPPORT_NAME );
