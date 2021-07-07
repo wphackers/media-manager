@@ -128,7 +128,7 @@ export function MediaPlayerControl( {
 	const isPaused = mediaPlayingState === STATE_PAUSED;
 
 	const debouncedOnChange = useCallback(
-		debounce( function ( debTime, debOnChange ) {
+		debounce( function( debTime, debOnChange ) {
 			if ( ! isPaused ) {
 				setMediaSourceCurrentTime( mediaSourceId, debTime );
 			}
