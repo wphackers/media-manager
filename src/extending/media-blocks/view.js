@@ -13,7 +13,6 @@ import PlayButtonBlock from '../../block-library/play-button/view';
 import PauseButtonBlock from '../../block-library/pause-button/view';
 import TimePositionBlock from '../../block-library/time-position/view';
 // import MediaLinkFormatType from '../../components/media-link-format-type/view';
-import renderReplace from '../../lib/render';
 import MediaSourceProviderWrapper from './media-source-provider-wrapper';
 
 /**

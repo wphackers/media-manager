@@ -83,7 +83,7 @@ export default function MediaSourceProviderWrapper( {
 		mediaElement.addEventListener( 'pause', pauseMedia );
 
 		// Clean.
-		return function () {
+		return function() {
 			// Remove listeners.
 			mediaElement.removeEventListener(
 				'loadedmetadata',

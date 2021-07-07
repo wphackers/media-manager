@@ -11,7 +11,7 @@ import {
 	EXTENDED_MEDIA_BLOCKS,
 	MEDIA_BLOCKS_ATTRIBUTE_SCHEMA,
 	EXTEND_BLOCKS_WITH_MEDIA,
-} from './extended-blocks';
+} from './constants';
 
 function isMediaBlockListed( name ) {
 	return EXTENDED_MEDIA_BLOCKS.indexOf( name ) >= 0;
@@ -45,6 +45,13 @@ function hasBlockValidScheme( name, attributes ) {
 	return true;
 }
 
+/**
+ * Check whether the given block should be extended with media source.
+ *
+ * @param {string} name Block name.
+ * @param {Object} settings Block attributes.
+ * @return {boolean} True if the block should be extended. Otherwise, False.
+ */
 export function shouldExtendMediaBlock( name, settings ) {
 	if ( ! isMediaBlockListed( name ) ) {
 		return false;
