@@ -6,6 +6,7 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
+		"clean": "rimraf build",
 		"distclean": "rimraf node_modules packages/*/node_modules",
 		"clean:packages": "rimraf \"./packages/*/@(build|build-module|build-style)\"",
 		"prebuild:packages": "npm run clean:packages && lerna run build",
