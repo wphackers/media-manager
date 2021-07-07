@@ -18,7 +18,6 @@ import {
 } from '@wordpress/block-editor';
 import {
 	store as mediaManagerStore,
-	STATE_PAUSED,
 	MEDIA_NOT_DEFINED,
 	useMediaStore,
 	useCurrentTime,
@@ -149,7 +148,6 @@ const MediaEditProviderWrapper = ( props ) => {
 			mediaBlockClientId: clientId,
 			source: mediaSourceUrl,
 			elementType: domTypeName,
-			state: STATE_PAUSED,
 			querySelector,
 		} );
 
