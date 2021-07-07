@@ -4,10 +4,10 @@ You can connect blocks to the Media Source in two different ways. As a media pro
 
 ## Connect Provider
 
-Use the `media-manager/connect-provider` to connect the block as a media provider.
-It will try to inspect and make it connect to the media source (media store). In this way, every time that the block is inserted in the editor, it will register a new media ready to use.
-
-For this purpose, it's needed to pass some essential data to the support:
+Use the `media-manager/connect-provider` to define the block as a media provider.
+It will try to inspect and connect it to the media source store (@media-mannager/connect lib).
+In this way, every time that the block is inserted in the editor, it will register a new media ready to use.
+When registering the block, it requires define the attribute `name` where the media source is defined. Also, it requires define the DOM type name that the media gets when rendered.
 
 * **name**: the attribute name which contains reference to the media source
 * **domTypeName**: the name of the DOM type, for instance `video`, `audio`.
