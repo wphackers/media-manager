@@ -21,7 +21,6 @@
 	},
 	"dependencies": {
 		"@media-manager/block-editor-complements": "file:packages/block-editor-complements",
-		"@media-manager/block-library": "file:packages/block-library",
 		"@media-manager/components": "file:packages/components",
 		"@media-manager/format-library": "file:packages/format-library",
 		"@media-manager/media-connect": "file:packages/media-connect",
