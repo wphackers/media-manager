@@ -16,7 +16,6 @@ export default function PlayEditBlock( { mediaSource, scale, className, isSelect
 			<Disabled isDisabled={ ! isSelected }>
 				<Button
 					className={ className }
-					isPaused={ mediaSource.isPaused }
 					scale={ scale }
 					onClick={ mediaSource.pause }
 				/>
