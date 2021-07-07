@@ -13,7 +13,7 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
 import { MEDIA_NOT_DEFINED } from '@media-manager/media-connect';
 import { convertSecondsToTimeCode } from '@media-manager/time-utils';
-import { PlayPauseButton } from '@media-manager/components';
+import { PlayPauseButton, MediaConnectIcon } from '@media-manager/components';
 
 /**
  * Internal dependencies
@@ -242,18 +242,22 @@ export function MediaItemPanelBody( {
 	);
 }
 
-export function MediaCenterPanelBody( { source } ) {
-	if ( ! source ) {
-		return null;
-	}
-
+/**
+ * Block settings Pane to show info
+ * about block as media provider
+ */
+export function MediaConnectProviderPanelBody() {
 	return (
 		<PanelBody
+			icon={ MediaConnectIcon }
 			className="media-source-panel"
-			title={ __( 'Media Source', 'media-manager' ) }
+			title={ __( 'Media Source Provider', 'media-manager' ) }
 		>
 			<p>
-				{ __( 'Media Center connected to the media', 'media-manager' ) }
+				{ __(
+					'This block has been defined as media provider, meaning you can connect and command it from other blocks.',
+					'media-manager'
+				) }
 			</p>
 		</PanelBody>
 	);
