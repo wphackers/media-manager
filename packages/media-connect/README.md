@@ -19,7 +19,6 @@ _This package assumes that your code will run in an **ES2015+** environment. If 
 ## API
 
 ### Hooks
-
 #### useMediaSourceId()
 
 #### useMediaStore()

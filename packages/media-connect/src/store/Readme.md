@@ -12,3 +12,42 @@ function MediaComponent( { mediaSourceId } ) {
 
 	return <div>`Current time: ${ currentTime }`</div>;
 }
+```
+
+## API
+
+### Selectors
+
+#### getMediaSources( state )
+
+#### getMediaSourceById( state, id )
+
+#### getDefaultMediaSource( state )
+
+#### getMediaPlayerState( state, id )
+
+#### getMediaSourceCurrentTime( state, id )
+
+#### getMediaSourceDuration( state, id )
+
+#### getMediaSourceDomReference( state, id )
+
+### Actions
+
+##### registerMediaSource( id, mediaSourceState )
+
+##### updateMediaSourceData( id, data )
+
+##### unregisterMediaSource( id )
+
+##### setDefaultMediaSource( id )
+
+##### playMediaSource( id )
+
+##### toggleMediaSource( id )
+
+##### pauseMediaSource( id )
+
+##### errorMediaSource( id )
+
+##### setMediaSourceCurrentTime( id, currentTime )
