@@ -19,9 +19,9 @@ import {
 import {
 	store as mediaManagerStore,
 	STATE_PAUSED,
-	STATE_PLAYING,
-	STATE_ERROR,
 	MEDIA_NOT_DEFINED,
+	useMediaStore,
+	useCurrentTime,
 } from '@media-manager/media-connect';
 
 /**
@@ -33,7 +33,6 @@ import {
 	mediaConsumerBlockAttributeName,
 } from '../../constants';
 
-// @TODO: audit the implementation.
 const mediaCenterBlockName = 'media-manager/media-center';
 
 // Define and export support name.
@@ -66,21 +65,8 @@ const MediaEditProviderWrapper = ( props ) => {
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
 	// Media Source selectors.
-	// @TODO: Update with useMediaStore() hook
-	const { mediaPlayingState, currentTime } = useSelect(
-		( select ) => ( {
-			mediaPlayingState: select( mediaManagerStore ).getMediaPlayerState(
-				mediaSourceIdAttr
-			),
-			currentTime: select( mediaManagerStore ).getMediaSourceCurrentTime(
-				mediaSourceIdAttr
-			),
-			mediaSource: select( mediaManagerStore ).getMediaSourceById(
-				mediaSourceIdAttr
-			),
-		} ),
-		[]
-	);
+	const { isPaused } = useMediaStore( mediaSourceIdAttr );
+	const { currentTime } = useCurrentTime( mediaSourceIdAttr );
 
 	const mediaCenterParentBlock = useSelect(
 		( select ) =>
@@ -201,6 +187,7 @@ const MediaEditProviderWrapper = ( props ) => {
 	/* Child provider.
 	 * Check whether the provider is child of a block consumer.
 	 * If so, it means that the provider is a media center block.
+	 * @TODO: Move/improve this logic. Currently, it's harcoded to the MediaCenter block.
 	 */
 	useEffect( () => {
 		// Block doesn't have defined its source. Bail early.
@@ -238,34 +225,23 @@ const MediaEditProviderWrapper = ( props ) => {
 			return;
 		}
 
-		if ( ! mediaPlayingState ) {
-			return;
-		}
-
 		const { current: mediaElement } = mediaElementRef;
 
 		/*
 		 * Get the current status of the mediaElement element,
 		 * and the required action to toggle it.
 		 */
-		const [ mediaElementStatus, action ] =
-			mediaElement.paused === false
-				? [ STATE_PLAYING, pause ]
-				: [ STATE_PAUSED, play ];
-
+		const action = mediaElement.paused ? play : pause;
 		const debouncedAction = debounce( action, 100 );
 
-		if (
-			STATE_ERROR !== mediaPlayingState &&
-			mediaElementStatus !== mediaPlayingState
-		) {
+		if ( isPaused !== mediaElement.paused ) {
 			debouncedAction();
 		}
 
 		return () => {
 			debouncedAction.cancel();
 		};
-	}, [ mediaPlayingState, mediaElementRef ] );
+	}, [ isPaused, mediaElementRef ] );
 
 	// Handling media state.
 	useEffect( () => {
