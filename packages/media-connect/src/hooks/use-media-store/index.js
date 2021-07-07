@@ -18,7 +18,7 @@ import { store as mediaManagerStore, STATE_PAUSED } from '../../';
  */
 export default function useMediaStore( id ) {
 	const { isPaused, playingState } = useSelect(
-		function ( select ) {
+		function( select ) {
 			const playState = select( mediaManagerStore ).getMediaPlayerState(
 				id
 			);
