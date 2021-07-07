@@ -172,7 +172,7 @@ const MediaEditProviderWrapper = ( props ) => {
 		mediaElement.addEventListener( 'loadedmetadata', onMetadataReady );
 
 		// Clean.
-		return function () {
+		return function() {
 			// Cleaning Media Source source ID
 			// if the block is linked to it.
 			if ( mediaCenterParentSourceIdAttr === mediaSourceIdAttr ) {
