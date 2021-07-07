@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
-import { PlayPauseButton as Button } from '@media-manager/components';
+import { PlayButton as Button } from '@media-manager/components';
 
 /**
  * Internal dependencies
