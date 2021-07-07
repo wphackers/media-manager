@@ -10,7 +10,7 @@ import { addFilter } from '@wordpress/hooks';
 import { getBlockSupport } from '@wordpress/blocks';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { useRef, useEffect, Fragment } from '@wordpress/element';
+import { useRef, useEffect, Fragment, useLayoutEffect } from '@wordpress/element';
 import { Panel } from '@wordpress/components';
 import {
 	InspectorControls,
@@ -46,6 +46,7 @@ const MediaEditProviderWrapper = ( props ) => {
 	const { clientId, providerProps, BlockEdit } = props;
 
 	const mediaElementRef = useRef();
+	const ref = useRef();
 	const { attributes, setAttributes } = props;
 	const { mediaSourceId: mediaSourceIdAttr } = attributes;
 
@@ -100,6 +101,11 @@ const MediaEditProviderWrapper = ( props ) => {
 	function onTimeChange( time ) {
 		setMediaSourceCurrentTime( mediaSourceIdAttr, time );
 	}
+	/*
+	* querySelector is the string used to pick up
+	* the DOM Element reference.
+	*/
+	let querySelector;
 
 	/*
 	 * - Register/Unregister Media source in the store.
@@ -122,19 +128,12 @@ const MediaEditProviderWrapper = ( props ) => {
 			setAttributes( { mediaSourceId } );
 		}
 
-		/*
-		 * querySelector is the string used to pick up
-		 * the DOM Element reference.
-		 * Do not register the media when no element is found.
-		 */
-		const querySelector = `[data-media-source-provider-id="${ mediaSourceId }"] ${ domTypeName }`;
+		// Do not register the media when no element is found.
+		querySelector = `[data-media-source-provider-id="${ mediaSourceId }"] ${ domTypeName }`;
 		const mediaElement = document?.querySelector( querySelector );
 		if ( ! mediaElement ) {
 			return;
 		}
-
-		// Update media element reference (useRef).
-		mediaElementRef.current = mediaElement;
 
 		/*
 		 * Pre load mediaElement metadata.
@@ -290,6 +289,36 @@ const MediaEditProviderWrapper = ( props ) => {
 		}
 	}, [ mediaElementRef, currentTime ] );
 
+	/*
+	 * Observe the block element in the DOM subtree,
+	 * and update the media element reference accordingly.
+	 */
+	useLayoutEffect( () => {
+		if ( ! ref?.current ) {
+			return;
+		}
+
+		const observer = new window.MutationObserver( function() {
+			const mediaElement = document?.querySelector( querySelector );
+			if ( ! mediaElement ) {
+				return;
+			}
+
+			// Update media element reference (useRef).
+			mediaElementRef.current = mediaElement;
+		} );
+
+		observer.observe( ref.current, {
+			childList: true,
+			attributes: false,
+			subtree: true,
+		} );
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [ ref ] );
+
 	// Bail early when no clientId.
 	if ( ! clientId ) {
 		return <BlockEdit { ...props } />;
@@ -307,7 +336,7 @@ const MediaEditProviderWrapper = ( props ) => {
 				</Panel>
 			</InspectorControls>
 
-			<div data-media-source-provider-id={ mediaSourceIdAttr }>
+			<div ref={ ref } data-media-source-provider-id={ mediaSourceIdAttr }>
 				<BlockEdit { ...props } />
 			</div>
 		</Fragment>
