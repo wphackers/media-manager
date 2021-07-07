@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { Disabled } from '@wordpress/components';
 import { PlayPauseButton as Button } from '@media-manager/components';
 
 /**
@@ -13,15 +14,18 @@ export default function PlayPauseEditBlock( {
 	mediaSource,
 	scale,
 	className,
+	isSelected,
 } ) {
 	return (
 		<div { ...useBlockProps() }>
-			<Button
-				className={ className }
-				isPaused={ mediaSource.isPaused }
-				scale={ scale }
-				onClick={ mediaSource.toggle }
-			/>
+			<Disabled isDisabled={ ! isSelected }>
+				<Button
+					className={ className }
+					isPaused={ mediaSource.isPaused }
+					scale={ scale }
+					onClick={ mediaSource.toggle }
+				/>
+			</Disabled>
 		</div>
 	);
 }
