@@ -46,7 +46,7 @@ const useInsertMediaBlock = () => {
 
 export const withMediaSelector = createHigherOrderComponent(
 	( OriginalBlock ) => {
-		return function ( props ) {
+		return function( props ) {
 			const {
 				attributes,
 				setAttributes,
@@ -143,23 +143,22 @@ export const withMediaSelector = createHigherOrderComponent(
 
 							{ isReplacing &&
 								mediaSourceId !== MEDIA_NOT_DEFINED && (
-									<Button
-										isTertiary
-										label={ __(
-											'Cancel replacing media source',
-											'media-manager'
-										) }
-										onClick={ () =>
-											setIsReplacing( false )
-										}
-									>
-										{ __(
-											'Cancel replacement',
-											'media-manager'
-										) }
-									</Button>
-								)
-							}
+								<Button
+									isTertiary
+									label={ __(
+										'Cancel replacing media source',
+										'media-manager'
+									) }
+									onClick={ () =>
+										setIsReplacing( false )
+									}
+								>
+									{ __(
+										'Cancel replacement',
+										'media-manager'
+									) }
+								</Button>
+							) }
 
 							{ ( ! isReplacing ||
 								mediaSourceId === MEDIA_NOT_DEFINED ) && (
