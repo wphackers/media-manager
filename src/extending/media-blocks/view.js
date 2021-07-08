@@ -12,16 +12,9 @@ import PlayPauseButtonBlock from '../../block-library/play-pause-button/view';
 import PlayButtonBlock from '../../block-library/play-button/view';
 import PauseButtonBlock from '../../block-library/pause-button/view';
 import TimePositionBlock from '../../block-library/time-position/view';
-// import MediaLinkFormatType from '../../components/media-link-format-type/view';
+import { MediaLinkViewFormatType } from '@media-manager/format-library';
 import MediaSourceProviderWrapper from './media-source-provider-wrapper';
 
-/**
- * Hlper function to render the Player Button Block, in the front-end.
- *
- * @param {string} mediaSourceId Media source ID
- * @param {elementType} playerButtonElement
- * @returns {React.Component} Media player button
- */
 function renderPlayerComponentBlock( mediaSourceId, playerButtonElement ) {
 	let PlayerButtonComponent;
 
@@ -57,11 +50,11 @@ function renderPlayerComponentBlock( mediaSourceId, playerButtonElement ) {
 	);
 }
 
-domReady( function () {
+domReady( function() {
 	// Media Providers.
 	const mediaElements = document.querySelectorAll( '[data-media-source-id]' );
 	if ( mediaElements.length ) {
-		mediaElements.forEach( function ( media ) {
+		mediaElements.forEach( function( media ) {
 			const { mediaSourceId, mediaSourceType } = media.dataset;
 			const { domTypeName } = getBlockSourceProps( mediaSourceType );
 			const query = `[data-media-source-id="${ mediaSourceId }"] ${ domTypeName }`;
@@ -90,7 +83,7 @@ domReady( function () {
 	const buttonBlockCssClass = 'wp-media-manager-player-button';
 	const linkFormatCssClass = 'media-link-format-type';
 	if ( mediaSourceConsumers?.length ) {
-		mediaSourceConsumers.forEach( function ( mediaCenterBlock ) {
+		mediaSourceConsumers.forEach( function( mediaCenterBlock ) {
 			const { mediaSourceReference } = mediaCenterBlock?.dataset;
 
 			// Check is the consumer is a player-button block
@@ -108,7 +101,7 @@ domReady( function () {
 					`.${ buttonBlockCssClass }`
 				);
 				if ( mediaPlayerButtons?.length ) {
-					mediaPlayerButtons.forEach( function (
+					mediaPlayerButtons.forEach( function(
 						playerButtonElement
 					) {
 						renderPlayerComponentBlock(
@@ -122,15 +115,21 @@ domReady( function () {
 			const mediaFormatLinks = mediaCenterBlock.querySelectorAll(
 				`.${ linkFormatCssClass }`
 			);
-			// mediaFormatLinks.forEach( function ( mediaFormatLinkElement ) {
-			// 	renderReplace(
-			// 		<MediaLinkFormatType
-			// 			elRef={ mediaFormatLinkElement }
-			// 			mediaSourceId={ mediaSourceReference }
-			// 		/>,
-			// 		mediaFormatLinkElement
-			// 	);
-			// } );
+
+			mediaFormatLinks.forEach( function( mediaFormatLinkElement ) {
+				const { hash: timehash, text } = mediaFormatLinkElement;
+
+				render(
+					<MediaLinkViewFormatType
+						timestamp={ Number( timehash.substr( 1 ) ) }
+						mediaSourceId={ mediaSourceReference }
+						elementRef={ mediaFormatLinkElement }
+					>
+						{ text }
+					</MediaLinkViewFormatType>,
+					mediaFormatLinkElement
+				);
+			} );
 		} );
 	}
 } );
