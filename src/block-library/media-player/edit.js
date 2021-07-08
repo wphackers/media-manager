@@ -22,12 +22,34 @@ export const PLAYER_BLOCKS = [
 	TimePositionBlockName,
 ];
 
+const INNER_BLOCKS_TEMPLATE = [
+	[
+		playPauseButtonBlockName,
+		{
+			size: 'medium',
+		},
+	],
+
+	[
+		pauseButtonBlockName,
+		{
+			size: 'medium',
+		},
+	],
+
+	[
+		TimePositionBlockName,
+	],
+];
+
 export default function MediaPlayerEditBlock() {
 	const blockProps = useBlockProps();
+
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: PLAYER_BLOCKS,
 		orientation: 'horizontal',
 		templateLock: false,
+		template: INNER_BLOCKS_TEMPLATE,
 	} );
 
 	return <div { ...innerBlocksProps } />;
