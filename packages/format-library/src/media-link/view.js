@@ -1,33 +1,27 @@
 /**
  * WordPress dependencies
  */
-import { useDispatch } from '@wordpress/data';
-import { store as mediaManagerStore } from '@media-manager/media-connect';
+import { useEffect } from '@wordpress/element';
+import { useMediaStore } from '@media-manager/media-connect';
 
-/**
- * Internal dependencies
- */
+export default function MediaLinkViewFormatType( { mediaSourceId, timestamp, children, elementRef } ) {
+	const { play } = useMediaStore( mediaSourceId );
 
-export default function MediaLinkFormatType( { mediaSourceId, elRef } ) {
-	const { hash: timehash, innerHTML } = elRef;
-	const timestamp = Number( timehash.substr( 1 ) );
+	function onLinkClick() {
+		play( timestamp );
+	}
 
-	// Use dispatch instead of use MediaStore hook,
-	// to avoid unnecessary rendering.
-	const { setMediaSourceCurrentTime, playMediaSource } = useDispatch(
-		mediaManagerStore
-	);
+	useEffect( () => {
+		if ( ! elementRef ) {
+			return;
+		}
 
-	return (
-		<a
-			href={ timehash }
-			onClick={ ( event ) => {
-				event.preventDefault();
-				setMediaSourceCurrentTime( mediaSourceId, timestamp );
-				playMediaSource( mediaSourceId );
-			} }
-		>
-			{ innerHTML }
-		</a>
-	);
+		elementRef.addEventListener( 'click', onLinkClick );
+
+		return function() {
+			elementRef.removeEventListener( 'click', onLinkClick );
+		};
+	}, [ elementRef ] );
+
+	return children;
 }

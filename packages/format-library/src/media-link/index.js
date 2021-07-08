@@ -59,8 +59,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	}
 
 	// Media link format time position.
-	const { attributes } =
-		getActiveFormat( value, name ) || {};
+	const { attributes } = getActiveFormat( value, name ) || {};
 
 	const { ownerDocument } = contentRef.current;
 	const { defaultView } = ownerDocument;
