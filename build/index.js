@@ -3071,13 +3071,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _media_manager_media_connect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @media-manager/media-connect */ "./packages/media-connect/build-module/index.js");
-/* harmony import */ var _media_manager_time_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @media-manager/time-utils */ "./packages/time-utils/build-module/index.js");
-/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../icons */ "./packages/components/build-module/icons/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _media_manager_media_connect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @media-manager/media-connect */ "./packages/media-connect/build-module/index.js");
+/* harmony import */ var _media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @media-manager/time-utils */ "./packages/time-utils/build-module/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../icons */ "./packages/components/build-module/icons/index.js");
 
 
 /**
@@ -3094,7 +3092,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 /**
  * Internal dependencies
  */
@@ -3104,8 +3101,8 @@ function JumpBackButton({
   onClick,
   ...other
 }) {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    icon: _icons__WEBPACK_IMPORTED_MODULE_8__["ControlBackFiveIcon"],
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    icon: _icons__WEBPACK_IMPORTED_MODULE_7__["ControlBackFiveIcon"],
     onClick: onClick,
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Jump back', 'media-manager')
   }, other));
@@ -3116,10 +3113,10 @@ function PlayPauseButton({
   scale,
   ...other
 }) {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    icon: isPaused ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_8__["PlayerPlayPauseIcon"], {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    icon: isPaused ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_7__["PlayerPlayPauseIcon"], {
       scale: scale
-    }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_8__["PlayerPauseIcon"], {
+    }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_7__["PlayerPauseIcon"], {
       scale: scale
     }),
     disabled: false,
@@ -3132,8 +3129,8 @@ function PlayButton({
   scale,
   ...other
 }) {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_8__["PlayerPlayIcon"], {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_7__["PlayerPlayIcon"], {
       scale: scale
     }),
     onClick: onClick,
@@ -3145,8 +3142,8 @@ function PauseButton({
   scale,
   ...other
 }) {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_8__["PlayerPauseIcon"], {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_7__["PlayerPauseIcon"], {
       scale: scale
     }),
     onClick: onClick,
@@ -3157,8 +3154,8 @@ function SkipForwardButton({
   onClick,
   ...other
 }) {
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    icon: _icons__WEBPACK_IMPORTED_MODULE_8__["ControlForwardFiveIcon"],
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    icon: _icons__WEBPACK_IMPORTED_MODULE_7__["ControlForwardFiveIcon"],
     onClick: onClick,
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Skip forward', 'media-manager')
   }, other));
@@ -3171,25 +3168,18 @@ function MediaPlayerControl({
   const [rangeTime, setRangeTime] = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useState"])(time);
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(() => setRangeTime(time), [time]);
   const {
-    mediaPlayingState,
-    mediaDuration,
-    mediaSource
-  } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["useSelect"])(select => ({
-    mediaPlayingState: select(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_6__["store"]).getMediaPlayerState(mediaSourceId),
-    mediaDuration: select(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_6__["store"]).getMediaSourceDuration(mediaSourceId),
-    mediaSource: select(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_6__["store"]).getMediaSourceById(mediaSourceId)
-  }), [mediaSourceId]);
-  const {
-    toggleMediaSource,
-    setMediaSourceCurrentTime
-  } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["useDispatch"])(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_6__["store"]);
-  const isPaused = mediaPlayingState === _media_manager_media_connect__WEBPACK_IMPORTED_MODULE_6__["STATE_PAUSED"];
+    isPaused,
+    isReady,
+    duration,
+    toggle,
+    setCurrentTime
+  } = Object(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_5__["useMediaStore"])(mediaSourceId);
   const debouncedOnChange = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["debounce"])(function (debTime, debOnChange) {
     if (!isPaused) {
-      setMediaSourceCurrentTime(mediaSourceId, debTime);
+      setCurrentTime(debTime);
     }
 
-    debOnChange(time);
+    debOnChange(debTime);
   }, 250), [isPaused]);
   /**
    * Toggle media playing status.
@@ -3198,10 +3188,10 @@ function MediaPlayerControl({
 
   function toggleInTime() {
     if (isPaused) {
-      setMediaSourceCurrentTime(mediaSourceId, time);
+      setCurrentTime(time);
     }
 
-    toggleMediaSource(mediaSourceId);
+    toggle(mediaSourceId);
   }
 
   function onChangeTimeHandler(newTimeValue) {
@@ -3209,30 +3199,30 @@ function MediaPlayerControl({
     debouncedOnChange(newTimeValue, onChange);
   }
 
-  const currentTimeFormatted = Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_7__["convertSecondsToTimeCode"])(rangeTime);
+  const currentTimeFormatted = Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__["convertSecondsToTimeCode"])(rangeTime);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "media-player-control"
-  }, !mediaSource && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["Notice"], {
+  }, !isReady && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Notice"], {
     spokenMessage: null,
     status: "warning",
     isDismissible: false
   }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('No media linked to this block', 'context')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(JumpBackButton, {
-    disabled: !mediaSource,
+    disabled: !isReady,
     onClick: () => onChangeTimeHandler(Math.max(0, time - 5))
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PlayPauseButton, {
     isPaused: isPaused,
-    disabled: !mediaSource,
+    disabled: !isReady,
     onClick: () => toggleInTime()
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(SkipForwardButton, {
-    disabled: !mediaSource,
-    onClick: () => onChangeTimeHandler(Math.min(mediaDuration, time + 5))
+    disabled: !isReady,
+    onClick: () => onChangeTimeHandler(Math.min(duration, time + 5))
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "media-player-control__display"
-  }, currentTimeFormatted), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__["RangeControl"], {
-    disabled: !mediaSource || typeof mediaDuration === 'undefined',
+  }, currentTimeFormatted), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RangeControl"], {
+    disabled: !isReady,
     value: rangeTime,
     min: 0,
-    max: mediaDuration,
+    max: duration,
     onChange: onChangeTimeHandler,
     withInputField: false,
     showTooltip: false
@@ -3302,8 +3292,8 @@ __webpack_require__.r(__webpack_exports__);
  * Internal dependencies
  */
 
+ // @Todo: extend this!
 
- // import './style.scss';
 
 
 const name = 'media-manager/media-link-format-type';
@@ -3341,8 +3331,8 @@ function MediaLinkFormatButton({
     defaultView
   } = ownerDocument; // Set the initial time position for the format:
   // (1) From extended `timestamp` block attr.
-  // (2) Selected text when it has time format.
-  // (3) Current position of the media source
+  // (2) Selected text when it has time format (HH:MM:SS).
+  // (3) Current position of the media source.
 
   let mediaLinkFormatTimestamp = 0;
   let isSingleOnTheFlyStyle = false; // <- detects a single timeformat selected hh:mm:ss
@@ -3366,7 +3356,7 @@ function MediaLinkFormatButton({
 
   const multipleFormats = Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__["hasMultipleTimeformats"])(selectedText);
   /**
-   * Helper function to apply the style format
+   * Helper function to apply the style format.
    *
    * @param {string} time timestamp to apply to the format
    * @return {Object} style forat object
@@ -3377,7 +3367,9 @@ function MediaLinkFormatButton({
       type: name,
       attributes: {
         timestamp: `#${time}`,
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Playback at %1$s'), Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__["convertSecondsToTimeCode"])(time))
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(
+        /* translators: Playback at the specific position. %s: Time position */
+        Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Playback at %1$s', 'media-manager'), Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__["convertSecondsToTimeCode"])(time))
       }
     };
   }
@@ -3430,7 +3422,7 @@ function MediaLinkFormatButton({
     onApplyMultipleFormat: () => {
       let match;
 
-      while ((match = Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__["getTimeformatMatch"])(selectedText)) != null) {
+      while ((match = Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__["getTimeformatMatch"])(selectedText)) !== null) {
         const timestamp = match[0];
         const {
           index: startIndex
@@ -3440,7 +3432,9 @@ function MediaLinkFormatButton({
           type: name,
           attributes: {
             timestamp: `#${Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__["convertTimeCodeToSeconds"])(timestamp)}`,
-            label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Playback at %1$s'), timestamp)
+            label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(
+            /* translators: Playback at the specific position. %s: Time position */
+            Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Playback at %s', 'media-manager'), timestamp)
           }
         }, startIndex, endIndex);
       }
@@ -3502,8 +3496,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const mediaCenterBlockName = 'media-manager/media-center';
 /* harmony default export */ __webpack_exports__["default"] = (function (value) {
-  // Apply rule handler only when current block
-  // is child of media center.
+  /*
+   * Apply rule handler only when current block
+   * is child of media center.
+   */
   const {
     getSelectedBlockClientId,
     getBlockParentsByBlockName
@@ -3548,7 +3544,7 @@ const mediaCenterBlockName = 'media-manager/media-center';
     const timestamp = parts[1];
     const endIndex = start - (parts !== null && parts !== void 0 && parts[2] ? timestamp.length + 5 : 3); // [hh:mm:ss].
 
-    const charsToRemove = parts !== null && parts !== void 0 && parts[2] ? timestamp.length + 3 : 1; // // [hh:mm:ss](link).
+    const charsToRemove = parts !== null && parts !== void 0 && parts[2] ? timestamp.length + 3 : 1; // [hh:mm:ss](link).
 
     value = Object(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_0__["remove"])(value, startIndex, startIndex + charsToRemove);
     value = Object(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_0__["remove"])(value, endIndex, endIndex + 1);
@@ -3556,7 +3552,9 @@ const mediaCenterBlockName = 'media-manager/media-center';
       type: ___WEBPACK_IMPORTED_MODULE_5__["name"],
       attributes: {
         timestamp: `#${Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_4__["convertTimeCodeToSeconds"])(timestamp)}`,
-        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Playback at %1$s', 'media-manager'), timestamp)
+        label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["sprintf"])(
+        /* translators: Playback at the specific position. %s: Time position */
+        Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Playback at %s', 'media-manager'), timestamp)
       }
     }, startIndex, endIndex);
     value = Object(_wordpress_rich_text__WEBPACK_IMPORTED_MODULE_0__["remove"])(value, endIndex + 1, endIndex + 2); // <- move the carte at the init position.
@@ -3769,6 +3767,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ */ "./packages/media-connect/build-module/index.js");
+/* harmony import */ var _store_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/constants */ "./packages/media-connect/build-module/store/constants.js");
 /**
  * External dependencies
  */
@@ -3777,6 +3776,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 
 /**
@@ -3790,12 +3790,16 @@ __webpack_require__.r(__webpack_exports__);
 function useMediaStore(id) {
   const {
     isPaused,
-    playingState
+    isReady,
+    playingState,
+    duration
   } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["useSelect"])(function (select) {
-    const playState = select(___WEBPACK_IMPORTED_MODULE_2__["store"]).getMediaPlayerState(id);
+    const state = select(___WEBPACK_IMPORTED_MODULE_2__["store"]).getMediaPlayerState(id);
     return {
-      playingState: playState,
-      isPaused: typeof playState === 'undefined' || playState === ___WEBPACK_IMPORTED_MODULE_2__["STATE_PAUSED"]
+      playingState: state,
+      isReady: typeof state !== _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_NOT_READY"],
+      isPaused: typeof state === 'undefined' || state === _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_PAUSED"],
+      duration: select(___WEBPACK_IMPORTED_MODULE_2__["store"]).getMediaSourceDuration(id)
     };
   }, [id]);
   const {
@@ -3809,8 +3813,11 @@ function useMediaStore(id) {
   } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["useDispatch"])(___WEBPACK_IMPORTED_MODULE_2__["store"]);
   return {
     className: isPaused ? 'is-media-paused' : '',
+    // @Todo: Considering remove this className prp.
     playingState,
     isPaused,
+    isReady,
+    duration,
     play: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(() => playMediaSource(id), [id]),
     pause: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(() => pauseMediaSource(id), [id]),
     toggle: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(() => toggleMediaSource(id), [id]),
@@ -3951,20 +3958,22 @@ function setMediaSourceCurrentTime(id, currentTime) {
 /*!****************************************************************!*\
   !*** ./packages/media-connect/build-module/store/constants.js ***!
   \****************************************************************/
-/*! exports provided: STORE_NAME, STATE_PLAYING, STATE_ERROR, STATE_PAUSED, MEDIA_NOT_DEFINED, DEFAULT_STATE */
+/*! exports provided: STORE_NAME, STATE_NOT_READY, STATE_PLAYING, STATE_ERROR, STATE_PAUSED, MEDIA_NOT_DEFINED, DEFAULT_STATE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STORE_NAME", function() { return STORE_NAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_NOT_READY", function() { return STATE_NOT_READY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_PLAYING", function() { return STATE_PLAYING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_ERROR", function() { return STATE_ERROR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STATE_PAUSED", function() { return STATE_PAUSED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MEDIA_NOT_DEFINED", function() { return MEDIA_NOT_DEFINED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DEFAULT_STATE", function() { return DEFAULT_STATE; });
 // Store ID
-const STORE_NAME = 'media-manager/media-source'; // Media statuses
+const STORE_NAME = 'media-manager/media-source'; // Media statuses.
 
+const STATE_NOT_READY = 'is-not-ready';
 const STATE_PLAYING = 'is-playing';
 const STATE_ERROR = 'is-error';
 const STATE_PAUSED = 'is-paused';
@@ -4205,7 +4214,12 @@ function getMediaPlayerState(state, id) {
   var _state$sources2;
 
   const defaultMediaSource = id ? (_state$sources2 = state.sources) === null || _state$sources2 === void 0 ? void 0 : _state$sources2[id] : getDefaultMediaSource(state);
-  return defaultMediaSource === null || defaultMediaSource === void 0 ? void 0 : defaultMediaSource.state;
+
+  if (!(defaultMediaSource !== null && defaultMediaSource !== void 0 && defaultMediaSource.state)) {
+    return _constants__WEBPACK_IMPORTED_MODULE_0__["STATE_NOT_READY"];
+  }
+
+  return defaultMediaSource.state;
 }
 function getMediaSourceCurrentTime(state, id) {
   var _state$sources3;
