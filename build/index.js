@@ -3235,13 +3235,21 @@ function MediaPlayerControl({
 /*!*******************************************************!*\
   !*** ./packages/format-library/build-module/index.js ***!
   \*******************************************************/
-/*! exports provided: mediaLink */
+/*! exports provided: mediaLink, MediaLinkViewFormatType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _media_link__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./media-link */ "./packages/format-library/build-module/media-link/index.js");
-/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "mediaLink", function() { return _media_link__WEBPACK_IMPORTED_MODULE_0__; });
+/* harmony import */ var _media_link_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./media-link/view */ "./packages/format-library/build-module/media-link/view.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MediaLinkViewFormatType", function() { return _media_link_view__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _media_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./media-link */ "./packages/format-library/build-module/media-link/index.js");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "mediaLink", function() { return _media_link__WEBPACK_IMPORTED_MODULE_1__; });
+/**
+ * Internal dependencies
+ */
+
+
 
 
 
@@ -3652,6 +3660,53 @@ function MediaLinkPopover({
 
 /***/ }),
 
+/***/ "./packages/format-library/build-module/media-link/view.js":
+/*!*****************************************************************!*\
+  !*** ./packages/format-library/build-module/media-link/view.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MediaLinkViewFormatType; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _media_manager_media_connect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @media-manager/media-connect */ "./packages/media-connect/build-module/index.js");
+/**
+ * WordPress dependencies
+ */
+
+
+function MediaLinkViewFormatType({
+  mediaSourceId,
+  timestamp,
+  children,
+  elementRef
+}) {
+  const {
+    play
+  } = Object(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_1__["useMediaStore"])(mediaSourceId);
+
+  function onLinkClick() {
+    play(timestamp);
+  }
+
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (!elementRef) {
+      return;
+    }
+
+    elementRef.addEventListener('click', onLinkClick);
+    return function () {
+      elementRef.removeEventListener('click', onLinkClick);
+    };
+  }, [elementRef]);
+  return children;
+}
+
+/***/ }),
+
 /***/ "./packages/media-connect/build-module/constants.js":
 /*!**********************************************************!*\
   !*** ./packages/media-connect/build-module/constants.js ***!
@@ -3818,12 +3873,18 @@ function useMediaStore(id) {
     isPaused,
     isReady,
     duration,
-    play: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(() => playMediaSource(id), [id]),
+    play: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(timestamp => {
+      if (timestamp && typeof timestamp === 'number') {
+        setMediaSourceCurrentTime(id, timestamp);
+      }
+
+      playMediaSource(id);
+    }, [id]),
     pause: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(() => pauseMediaSource(id), [id]),
     toggle: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(() => toggleMediaSource(id), [id]),
     register: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])((storeId, data) => registerMediaSource(storeId, data), [id]),
     unregister: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(mediaSourceId => unregisterMediaSource(mediaSourceId), []),
-    updateData: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])((mediaSourceI, data) => updateMediaSourceData(mediaSourceI, data), []),
+    updateData: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])((mediaSourceId, data) => updateMediaSourceData(mediaSourceId, data), []),
     setCurrentTime: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(timestamp => setMediaSourceCurrentTime(id, timestamp), [id])
   };
 }
