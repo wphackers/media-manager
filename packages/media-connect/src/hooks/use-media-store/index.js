@@ -49,7 +49,12 @@ export default function useMediaStore( id ) {
 		isPaused,
 		isReady,
 		duration,
-		play: useCallback( () => playMediaSource( id ), [ id ] ),
+		play: useCallback( ( timestamp ) => {
+			if ( timestamp && typeof timestamp === 'number' ) {
+				setMediaSourceCurrentTime( id, timestamp );
+			}
+			playMediaSource( id );
+		}, [ id ] ),
 		pause: useCallback( () => pauseMediaSource( id ), [ id ] ),
 		toggle: useCallback( () => toggleMediaSource( id ), [ id ] ),
 		register: useCallback(
@@ -61,8 +66,8 @@ export default function useMediaStore( id ) {
 			[]
 		),
 		updateData: useCallback(
-			( mediaSourceI, data ) =>
-				updateMediaSourceData( mediaSourceI, data ),
+			( mediaSourceId, data ) =>
+				updateMediaSourceData( mediaSourceId, data ),
 			[]
 		),
 		setCurrentTime: useCallback(

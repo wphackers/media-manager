@@ -53,11 +53,11 @@ Total duration of the media, in seconds.
 
 Retunrs the `is-media-paused` classname when it's paused. Otherwise, its an empty string.
 
-### play()
+### play( timestamp )
 
 -   Type: `function`
 
-Use this helper function to play the media.
+Use this helper function to play the media. Accepts an optional `timestamp` that when is defined it playbacks the player at this value.
 
 ### pause()
 
