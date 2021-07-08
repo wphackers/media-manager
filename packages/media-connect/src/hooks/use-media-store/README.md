@@ -7,7 +7,11 @@ import { useMediaStore } from '@media-manager/media-connect';
 
 function MyComponent() {
 	const mediaSourceId = '<the-media-store-id-here>';
-	const { isPaused, play } = useMediaStore( mediaSourceId );
+	const { isReady, isPaused, play } = useMediaStore( mediaSourceId );
+
+	if ( ! isReady ) {
+		return <div>Media is not ready :'(</div>;
+	}
 
 	return (
 		<div>
@@ -20,6 +24,11 @@ function MyComponent() {
 
 the `useMediaStore()` expect a valid media source ID as parameter, and it returns an object with properties and helper functions:
 
+### isReady
+
+-   Type: `boolean`
+
+True is the media is ready to play. Otherwise, False.
 ### isPaused
 
 -   Type: `boolean`
@@ -30,13 +39,13 @@ True is the media is currently paused. Otherwise, False.
 
 -   Type: `string`
 
-Media playing state: `is-playing`, `is-paused`.
+Media playing state: `is-ready`, `is-playing`, `is-paused`.
 
-### currentTime
+### duration
 
 -   Type: `integer`
 
-Current playing time of the media, in milliseconds.
+Total duration of the media, in seconds.
 
 ### className
 

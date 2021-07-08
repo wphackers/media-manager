@@ -7,7 +7,8 @@ import { useCallback } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { store as mediaManagerStore, STATE_PAUSED } from '../../';
+import { store as mediaManagerStore } from '../../';
+import { STATE_NOT_READY, STATE_PAUSED } from '../../store/constants';
 
 /**
  * Media Store hook that provides properties and helper functions
@@ -17,16 +18,16 @@ import { store as mediaManagerStore, STATE_PAUSED } from '../../';
  * @return {Object} Media store object, with properties and helpers.
  */
 export default function useMediaStore( id ) {
-	const { isPaused, playingState } = useSelect(
+	const { isPaused, isReady, playingState, duration } = useSelect(
 		function( select ) {
-			const playState = select( mediaManagerStore ).getMediaPlayerState(
-				id
-			);
+			const state = select( mediaManagerStore ).getMediaPlayerState( id );
 			return {
-				playingState: playState,
+				playingState: state,
+				isReady: typeof state !== STATE_NOT_READY,
 				isPaused:
-					typeof playState === 'undefined' ||
-					playState === STATE_PAUSED,
+					typeof state === 'undefined' ||
+					state === STATE_PAUSED,
+				duration: select( mediaManagerStore ).getMediaSourceDuration( id ),
 			};
 		},
 		[ id ]
@@ -43,9 +44,11 @@ export default function useMediaStore( id ) {
 	} = useDispatch( mediaManagerStore );
 
 	return {
-		className: isPaused ? 'is-media-paused' : '',
+		className: isPaused ? 'is-media-paused' : '', // @Todo: Considering remove this className prp.
 		playingState,
 		isPaused,
+		isReady,
+		duration,
 		play: useCallback( () => playMediaSource( id ), [ id ] ),
 		pause: useCallback( () => pauseMediaSource( id ), [ id ] ),
 		toggle: useCallback( () => toggleMediaSource( id ), [ id ] ),
