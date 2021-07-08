@@ -1,7 +1,7 @@
 /**
  * Internal dependencies
  */
-import { MEDIA_NOT_DEFINED } from './constants';
+import { MEDIA_NOT_DEFINED, STATE_NOT_READY } from './constants';
 
 export function getMediaSources( state ) {
 	return state.sources;
@@ -45,7 +45,11 @@ export function getMediaPlayerState( state, id ) {
 		? state.sources?.[ id ]
 		: getDefaultMediaSource( state );
 
-	return defaultMediaSource?.state;
+	if ( ! defaultMediaSource?.state ) {
+		return STATE_NOT_READY;
+	}
+
+	return defaultMediaSource.state;
 }
 
 export function getMediaSourceCurrentTime( state, id ) {
