@@ -16,7 +16,7 @@ import './style.scss';
 
 export const blockName = 'media-manager/play-button';
 
-domReady( function () {
+domReady( function() {
 	// we need this if we'd like to extend the block :'(
 	registerBlockType( blockName, {
 		apiVersion: 2,
