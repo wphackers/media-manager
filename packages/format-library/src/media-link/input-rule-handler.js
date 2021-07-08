@@ -16,8 +16,10 @@ import { name } from './';
 const mediaCenterBlockName = 'media-manager/media-center';
 
 export default function( value ) {
-	// Apply rule handler only when current block
-	// is child of media center.
+	/*
+	 * Apply rule handler only when current block
+	 * is child of media center.
+	 */
 	const { getSelectedBlockClientId, getBlockParentsByBlockName } = select(
 		blockEditorStore
 	);
@@ -61,7 +63,7 @@ export default function( value ) {
 
 		const timestamp = parts[ 1 ];
 		const endIndex = start - ( parts?.[ 2 ] ? timestamp.length + 5 : 3 ); // [hh:mm:ss].
-		const charsToRemove = parts?.[ 2 ] ? timestamp.length + 3 : 1; // // [hh:mm:ss](link).
+		const charsToRemove = parts?.[ 2 ] ? timestamp.length + 3 : 1; // [hh:mm:ss](link).
 
 		value = remove( value, startIndex, startIndex + charsToRemove );
 		value = remove( value, endIndex, endIndex + 1 );
@@ -73,7 +75,8 @@ export default function( value ) {
 				attributes: {
 					timestamp: `#${ convertTimeCodeToSeconds( timestamp ) }`,
 					label: sprintf(
-						__( 'Playback at %1$s', 'media-manager' ),
+						/* translators: Playback at the specific position. %s: Time position */
+						__( 'Playback at %s', 'media-manager' ),
 						timestamp
 					),
 				},

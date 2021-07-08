@@ -27,10 +27,8 @@ import { MediaLinkIcon } from '@media-manager/components';
 /**
  * Internal dependencies
  */
-import { shouldExtendBlockWithMedia } from '../../../../src/extending/utils';
+import { shouldExtendBlockWithMedia } from '../../../../src/extending/utils'; // @Todo: extend this!
 import MediaLinkPopover from './media-link-popover';
-// import './style.scss';
-
 import inputRuleHandler from './input-rule-handler';
 
 export const name = 'media-manager/media-link-format-type';
@@ -69,8 +67,8 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 
 	// Set the initial time position for the format:
 	// (1) From extended `timestamp` block attr.
-	// (2) Selected text when it has time format.
-	// (3) Current position of the media source
+	// (2) Selected text when it has time format (HH:MM:SS).
+	// (3) Current position of the media source.
 	let mediaLinkFormatTimestamp = 0;
 	let isSingleOnTheFlyStyle = false; // <- detects a single timeformat selected hh:mm:ss
 
@@ -94,7 +92,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 	const multipleFormats = hasMultipleTimeformats( selectedText );
 
 	/**
-	 * Helper function to apply the style format
+	 * Helper function to apply the style format.
 	 *
 	 * @param {string} time timestamp to apply to the format
 	 * @return {Object} style forat object
@@ -105,7 +103,8 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 			attributes: {
 				timestamp: `#${ time }`,
 				label: sprintf(
-					__( 'Playback at %1$s' ),
+					/* translators: Playback at the specific position. %s: Time position */
+					__( 'Playback at %1$s', 'media-manager' ),
 					convertSecondsToTimeCode( time )
 				),
 			},
@@ -171,7 +170,7 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 				onApplyMultipleFormat={ () => {
 					let match;
 					while (
-						( match = getTimeformatMatch( selectedText ) ) != null
+						( match = getTimeformatMatch( selectedText ) ) !== null
 					) {
 						const timestamp = match[ 0 ];
 						const { index: startIndex } = match;
@@ -186,7 +185,8 @@ function MediaLinkFormatButton( { value, onChange, isActive, contentRef } ) {
 										timestamp
 									) }`,
 									label: sprintf(
-										__( 'Playback at %1$s' ),
+										/* translators: Playback at the specific position. %s: Time position */
+										__( 'Playback at %s', 'media-manager' ),
 										timestamp
 									),
 								},
