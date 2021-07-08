@@ -7,13 +7,9 @@ import { debounce } from 'lodash';
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useSelect, useDispatch } from '@wordpress/data';
 import { useState, useEffect, useCallback } from '@wordpress/element';
 import { RangeControl, Notice, Button } from '@wordpress/components';
-import {
-	store as mediaManagerStore,
-	STATE_PAUSED,
-} from '@media-manager/media-connect';
+import { useMediaStore } from '@media-manager/media-connect';
 import { convertSecondsToTimeCode } from '@media-manager/time-utils';
 
 /**
@@ -105,35 +101,15 @@ export function MediaPlayerControl( {
 } ) {
 	const [ rangeTime, setRangeTime ] = useState( time );
 	useEffect( () => setRangeTime( time ), [ time ] );
-
-	const { mediaPlayingState, mediaDuration, mediaSource } = useSelect(
-		( select ) => ( {
-			mediaPlayingState: select( mediaManagerStore ).getMediaPlayerState(
-				mediaSourceId
-			),
-			mediaDuration: select( mediaManagerStore ).getMediaSourceDuration(
-				mediaSourceId
-			),
-			mediaSource: select( mediaManagerStore ).getMediaSourceById(
-				mediaSourceId
-			),
-		} ),
-		[ mediaSourceId ]
-	);
-
-	const { toggleMediaSource, setMediaSourceCurrentTime } = useDispatch(
-		mediaManagerStore
-	);
-
-	const isPaused = mediaPlayingState === STATE_PAUSED;
+	const { isPaused, isReady, duration, toggle, setCurrentTime } = useMediaStore( mediaSourceId );
 
 	const debouncedOnChange = useCallback(
 		debounce( function( debTime, debOnChange ) {
 			if ( ! isPaused ) {
-				setMediaSourceCurrentTime( mediaSourceId, debTime );
+				setCurrentTime( debTime );
 			}
 
-			debOnChange( time );
+			debOnChange( debTime );
 		}, 250 ),
 		[ isPaused ]
 	);
@@ -144,9 +120,9 @@ export function MediaPlayerControl( {
 	 */
 	function toggleInTime() {
 		if ( isPaused ) {
-			setMediaSourceCurrentTime( mediaSourceId, time );
+			setCurrentTime( time );
 		}
-		toggleMediaSource( mediaSourceId );
+		toggle( mediaSourceId );
 	}
 
 	function onChangeTimeHandler( newTimeValue ) {
@@ -158,7 +134,7 @@ export function MediaPlayerControl( {
 
 	return (
 		<div className="media-player-control">
-			{ ! mediaSource && (
+			{ ! isReady && (
 				<Notice
 					spokenMessage={ null }
 					status="warning"
@@ -169,21 +145,19 @@ export function MediaPlayerControl( {
 			) }
 
 			<JumpBackButton
-				disabled={ ! mediaSource }
+				disabled={ ! isReady }
 				onClick={ () => onChangeTimeHandler( Math.max( 0, time - 5 ) ) }
 			/>
 
 			<PlayPauseButton
 				isPaused={ isPaused }
-				disabled={ ! mediaSource }
+				disabled={ ! isReady }
 				onClick={ () => toggleInTime() }
 			/>
 
 			<SkipForwardButton
-				disabled={ ! mediaSource }
-				onClick={ () =>
-					onChangeTimeHandler( Math.min( mediaDuration, time + 5 ) )
-				}
+				disabled={ ! isReady }
+				onClick={ () => onChangeTimeHandler( Math.min( duration, time + 5 ) ) }
 			/>
 
 			<div className="media-player-control__display">
@@ -191,12 +165,10 @@ export function MediaPlayerControl( {
 			</div>
 
 			<RangeControl
-				disabled={
-					! mediaSource || typeof mediaDuration === 'undefined'
-				}
+				disabled={ ! isReady }
 				value={ rangeTime }
 				min={ 0 }
-				max={ mediaDuration }
+				max={ duration }
 				onChange={ onChangeTimeHandler }
 				withInputField={ false }
 				showTooltip={ false }
