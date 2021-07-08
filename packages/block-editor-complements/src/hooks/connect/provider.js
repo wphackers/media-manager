@@ -272,8 +272,7 @@ const MediaEditProviderWrapper = ( props ) => {
 			}
 		);
 
-		const onTimeUpdate = ( e ) =>
-			throttledTimeChange( e.target.currentTime );
+		const onTimeUpdate = ( e ) => throttledTimeChange( e.target.currentTime );
 		mediaElement?.addEventListener( 'timeupdate', onTimeUpdate );
 
 		return () => {
