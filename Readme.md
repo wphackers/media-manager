@@ -1,6 +1,6 @@
 # Media Manager
 
-The lord of the media. A WordPress plugin to rule them all media.
+💍 The lord of the media. _A WordPress plugin to rule them all media._
 
 <img src="../assets/media-manager-editor-canvas-01.png?raw=true" width="600px" />
 
