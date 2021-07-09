@@ -1,7 +1,6 @@
-Media Manager Plugin
-===================
+# Media Manager
 
-Bind different media sources and with generic blocks with each other.
+The lord of the media. A WordPress plugin to rule them all media.
 
 <img src="../assets/media-manager-media-theater-video.png?raw=true" width="600px" />
 
@@ -9,7 +8,7 @@ Bind different media sources and with generic blocks with each other.
 
 * Clone this repository
 * `> npm install`
-* `> npm start`
+* `> npm run dev`
 
 ## DevEnv
 
