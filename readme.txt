@@ -1,5 +1,5 @@
 === Media Manager ===
-Contributors:      Damián Suárez (retrofox)
+Contributors:      retrofox
 Tags:              block
 Requires at least: 5.6.0
 Tested up to:      5.7.0
