@@ -4574,12 +4574,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const PLAYER_BLOCKS = [_play_button__WEBPACK_IMPORTED_MODULE_2__["blockName"], _pause_button__WEBPACK_IMPORTED_MODULE_3__["blockName"], _play_pause_button__WEBPACK_IMPORTED_MODULE_4__["blockName"], _time_position__WEBPACK_IMPORTED_MODULE_5__["blockName"]];
+const INNER_BLOCKS_TEMPLATE = [[_play_pause_button__WEBPACK_IMPORTED_MODULE_4__["blockName"], {
+  size: 'medium'
+}], [_pause_button__WEBPACK_IMPORTED_MODULE_3__["blockName"], {
+  size: 'medium'
+}], [_time_position__WEBPACK_IMPORTED_MODULE_5__["blockName"]]];
 function MediaPlayerEditBlock() {
   const blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"])();
   const innerBlocksProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["__experimentalUseInnerBlocksProps"])(blockProps, {
     allowedBlocks: PLAYER_BLOCKS,
     orientation: 'horizontal',
-    templateLock: false
+    templateLock: false,
+    template: INNER_BLOCKS_TEMPLATE
   });
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", innerBlocksProps);
 }
