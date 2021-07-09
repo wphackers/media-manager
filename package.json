@@ -1,7 +1,7 @@
 {
 	"name": "media-manager",
 	"version": "0.0.1",
-	"description": "Connect different media sources and blocks in general with each other.",
+	"description": "The lord of the media. A WordPress plugin to rule them all media.",
 	"author": "Damián Suárez (retrofox)",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",

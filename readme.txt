@@ -8,38 +8,38 @@ Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Connect different media sources and blocks in general with each other.
+💍 The lord of the media. _A WordPress plugin to rule them all media._
 
 == Description ==
+
+Connect media sources such as audios and videos with Gutenberg blocks providing fancy functionalities allowing the users to interact with them.
+Play, stop, change time position of the media from a player block, or even from a text link are nice examples of the features provides.
 
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/media-manager` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
+REQUIREMENTS
+
+This is an initial beta release that requires [the Gutenberg Plugin](https://wordpress.org/plugins/gutenberg/) to work.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= What's the recommended Plugin Gutenberg Version? =
 
-An answer to that question.
+We try to keep the implementation working across different Gutenberg versions in the same way. However, the development process is always with the latest version of Gutenberg.
 
-= What about foo bar? =
+== Source and support ==
 
-Answer to foo bar dilemma.
+You can follow development, file an issue, suggest features, and view the source at the Github repo: https://github.com/FancyBlocks/media-manager
 
 == Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
 
 == Changelog ==
 
 = 0.0.1 =
-* Release
+* Initial release.
 
 == Arbitrary section ==
 
