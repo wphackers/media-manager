@@ -5,12 +5,12 @@
 	"category": "media",
 	"description": "Manage all media sources, comfortable, from your couch.",
 	"supports": {
-		"align": true
+		"align": true,
+		"media-manager/connect-consumer": true,
+		"media-manager/media-selector": true
 	},
-	"attributes": {
-		"mediaSourceId": {
-			"type": "string"
-		}
-	},
-	"textdomain": "media-manager"
+	"textdomain": "media-manager",
+	"editorScript": "fancy-blocks/media-manager",
+	"editorStyle": "fancy-blocks/media-manager",
+	"style": "fancy-blocks/media-manager-front-end"
 }

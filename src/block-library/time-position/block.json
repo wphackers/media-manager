@@ -3,8 +3,27 @@
 	"name": "media-manager/time-position-display",
 	"title": "Time position display",
 	"category": "media",
-	"icon": "time",
-	"description": "Block show the current time position of the media source",
-	"supports": {},
-	"textdomain": "media-manager"
+	"description": "Block to display the current time position of the media.",
+	"supports": {
+		"media-manager/connect-consumer": true,
+		"media-manager/media-selector": true,
+		"typography": {
+			"fontSize": true,
+			"lineHeigh": true,
+			"__experimentalFontStyle": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontFamily": true
+		},
+		"media-manager/color": {
+			"text": {
+				"labe": "Text color"
+			},
+			"__sectionTitl": "Color"
+		},
+		"media-manager/customClassName": "wp-media-manager-player-button"
+	},
+	"textdomain": "media-manager",
+	"editorScript": "fancy-blocks/media-manager",
+	"editorStyle": "fancy-blocks/media-manager",
+	"style": "fancy-blocks/media-manager-front-end"
 }

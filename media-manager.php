@@ -11,10 +11,51 @@
  * @package         media-manager
  */
 
-function media_center_media_center_block_init() {
-	register_block_type_from_metadata( __DIR__ );
-}
-add_action( 'init', 'media_center_media_center_block_init' );
+
+/*
+ * Load frontend scripts.
+ */
+
+add_action( 'init', function () {
+	$asset_file   = __DIR__ . '/build/index.asset.php';
+	$asset        = file_exists( $asset_file ) ? require_once $asset_file : null;
+	$dependencies = isset( $asset['dependencies'] ) ? $asset['dependencies'] : [];
+	$version      = isset( $asset['version'] ) ? $asset['version'] : filemtime( __DIR__ . '/build/index.js' );
+	
+	// Block editor scripts.
+	wp_register_script(
+		'fancy-blocks/media-manager',
+		plugins_url( 'build/index.js', __FILE__ ),
+		$dependencies,
+		$version,
+		true
+	);
+
+	// Block editor style.
+	wp_register_style(
+		'fancy-blocks/media-manager',
+		plugins_url( 'build/index.css', __FILE__ ),
+		[],
+		filemtime( __DIR__ . '/build/index.css' )
+	);
+
+	// Block front-end style.
+	wp_register_style(
+		'fancy-blocks/media-manager-front-end',
+		plugins_url( 'build/style-index.css', __FILE__ ),
+		[],
+		filemtime( __DIR__ . '/build/style-index.css' )
+	);
+
+	$blocks_folder = __DIR__ . '/src/block-library/';
+
+	register_block_type_from_metadata( $blocks_folder .'media-center' );
+	register_block_type_from_metadata( $blocks_folder .'media-player' );
+	register_block_type_from_metadata( $blocks_folder .'pause-button' );
+	register_block_type_from_metadata( $blocks_folder .'play-button' );
+	register_block_type_from_metadata( $blocks_folder .'play-pause-button' );
+	register_block_type_from_metadata( $blocks_folder .'time-position' );
+} );
 
 /*
  * Load frontend scripts.

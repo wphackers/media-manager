@@ -1,10 +1,29 @@
 {
 	"apiVersion": 2,
 	"name": "media-manager/play-pause-button",
-	"title": "Play/Pause button",
+	"title": "Pause & Pause button",
 	"category": "media",
-	"icon": "media-play",
-	"description": "Block to play and pause a media, connected through Media Center block",
-	"supports": {},
-	"textdomain": "media-manager"
+	"description": "Button block to pause and pause the media.",
+	"supports": {
+		"media-manager/connect-consumer": true,
+		"media-manager/media-selector": true,
+		"media-manager/sizes": {
+			"__sectionTitle": "Button size"
+		},
+		"media-manager/color": {
+			"icon": {
+				"label": "Icon color",
+				"style": "background-color"
+			},
+			"background": {
+				"label": "Background color"
+			},
+			"__contrastChecker": [ "icon", "background" ],
+			"__sectionTitle": "Color"
+		}
+	},
+	"textdomain": "media-manager",
+	"editorScript": "fancy-blocks/media-manager",
+	"editorStyle": "fancy-blocks/media-manager",
+	"style": "fancy-blocks/media-manager-front-end"
 }

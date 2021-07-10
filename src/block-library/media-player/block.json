@@ -3,14 +3,20 @@
 	"name": "media-manager/media-player",
 	"title": "Player Player",
 	"category": "media",
-	"icon": "media-play",
 	"description": "Compose your custom media player with blocks",
-	"textdomain": "media-manager",
-	"attributes": {
-		"backgroundColor": {
-			"type": "string"
+	"supports": {
+		"align": true,
+		"media-manager/connect-consumer": true,
+		"media-manager/media-selector": true,
+		"media-manager/color": {
+			"background": {
+				"label": "Background color",
+				"style": "background-color"
+			}
 		}
 	},
-	"editorStyle": "wp-block-player-editor",
-	"style": "wp-block-player"
+	"textdomain": "media-manager",
+	"editorScript": "fancy-blocks/media-manager",
+	"editorStyle": "fancy-blocks/media-manager",
+	"style": "fancy-blocks/media-manager-front-end"
 }
