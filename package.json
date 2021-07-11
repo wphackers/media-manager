@@ -11,7 +11,7 @@
 		"clean:packages": "rimraf \"./packages/*/@(build|build-module|build-style)\"",
 		"prebuild:packages": "npm run clean:packages && lerna run build",
 		"build:packages": "node ./bin/packages/build.js",
-		"build": "npm run build:packages && wp-scripts build",
+		"build": "npm run build:packages && wp-scripts build src/index.js src/view.js",
 		"dev:packages": "node ./bin/packages/watch.js",
 		"format:js": "wp-scripts format-js",
 		"lint:css": "wp-scripts lint-style",
