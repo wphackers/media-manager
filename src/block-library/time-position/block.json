@@ -19,8 +19,7 @@
 				"labe": "Text color"
 			},
 			"__sectionTitl": "Color"
-		},
-		"media-manager/customClassName": "wp-media-manager-player-button"
+		}
 	},
 	"textdomain": "media-manager",
 	"editorScript": "fancy-blocks/media-manager",

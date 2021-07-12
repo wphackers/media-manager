@@ -20,7 +20,8 @@
 			},
 			"__contrastChecker": [ "icon", "background" ],
 			"__sectionTitle": "Color"
-		}
+		},
+		"media-manager/customClassName": "wp-media-manager-player-button"
 	},
 	"textdomain": "media-manager",
 	"editorScript": "fancy-blocks/media-manager",
