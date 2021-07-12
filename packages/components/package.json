@@ -1,6 +1,6 @@
 {
 	"name": "@media-manager/components",
-	"version": "0.0.0",
+	"version": "0.1.0-alpha.0",
 	"description": "Media Manager components.",
 	"author": "The Media Manager Contributors",
 	"license": "GPL-2.0-or-later",
