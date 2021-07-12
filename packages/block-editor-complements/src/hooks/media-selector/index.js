@@ -95,7 +95,7 @@ export const withMediaSelector = createHigherOrderComponent(
 
 			if ( isReplacing || ! mediaSourceId ) {
 				return (
-					<div className="media-selector-placeholder">
+					<div className="media-selector-placeholder wp-block">
 						<Placeholder
 							icon={ icon.src }
 							label={ label }
