@@ -17,7 +17,6 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import {
-	store as mediaManagerStore,
 	MEDIA_NOT_DEFINED,
 	useMediaStore,
 	useCurrentTime,
@@ -54,18 +53,17 @@ const MediaEditProviderWrapper = ( props ) => {
 	// Check media has defined its source.
 	const mediaSourceUrl = attributes?.[ attrName ];
 
-	// Media Source actions.
-	const {
-		registerMediaSource,
-		updateMediaSourceData,
-		unregisterMediaSource,
-		setMediaSourceCurrentTime,
-	} = useDispatch( mediaManagerStore );
-
 	const { updateBlockAttributes } = useDispatch( blockEditorStore );
 
-	// Media Source selectors.
-	const { isPaused } = useMediaStore( mediaSourceIdAttr );
+	// Media properties / helpers.
+	const {
+		isPaused,
+		register,
+		unregister,
+		updateData,
+		setCurrentTime,
+	} = useMediaStore( mediaSourceIdAttr );
+
 	const { currentTime } = useCurrentTime( mediaSourceIdAttr );
 
 	const mediaCenterParentBlock = useSelect(
@@ -84,7 +82,7 @@ const MediaEditProviderWrapper = ( props ) => {
 		mediaCenterParentBlock?.attributes.mediaSourceId;
 
 	function onMetadataReady( event ) {
-		updateMediaSourceData( mediaSourceIdAttr, {
+		updateData( {
 			duration: event?.srcElement?.duration,
 		} );
 	}
@@ -98,7 +96,7 @@ const MediaEditProviderWrapper = ( props ) => {
 	}
 
 	function onTimeChange( time ) {
-		setMediaSourceCurrentTime( mediaSourceIdAttr, time );
+		setCurrentTime( time );
 	}
 
 	/*
@@ -160,7 +158,7 @@ const MediaEditProviderWrapper = ( props ) => {
 		mediaElement.autoplay = false;
 
 		// Register media source in the store.
-		registerMediaSource( mediaSourceId, {
+		register( mediaSourceId, {
 			mediaBlockClientId: clientId,
 			source: mediaSourceUrl,
 			elementType: domTypeName,
@@ -187,7 +185,7 @@ const MediaEditProviderWrapper = ( props ) => {
 			);
 
 			// Unregister media from store.
-			unregisterMediaSource( mediaSourceId );
+			unregister( mediaSourceId );
 		};
 	}, [
 		mediaSourceIdAttr,
