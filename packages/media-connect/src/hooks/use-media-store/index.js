@@ -66,8 +66,8 @@ export default function useMediaStore( id ) {
 			[]
 		),
 		updateData: useCallback(
-			( mediaSourceId, data ) =>
-				updateMediaSourceData( mediaSourceId, data ),
+			( data ) =>
+				updateMediaSourceData( id, data ),
 			[]
 		),
 		setCurrentTime: useCallback(
