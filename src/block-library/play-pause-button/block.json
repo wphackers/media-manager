@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
 	"name": "media-manager/play-pause-button",
-	"title": "Pause & Pause button",
+	"title": "Play & Pause button",
 	"category": "media",
 	"description": "Button block to pause and pause the media.",
 	"supports": {
