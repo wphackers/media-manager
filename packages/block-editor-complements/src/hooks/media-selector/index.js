@@ -16,6 +16,7 @@ import {
 	InspectorControls,
 	BlockControls,
 	store as blockEditorStore,
+	BlockIcon,
 } from '@wordpress/block-editor';
 import { Placeholder, Panel, Button, Toolbar } from '@wordpress/components';
 import {
@@ -97,7 +98,7 @@ export const withMediaSelector = createHigherOrderComponent(
 				return (
 					<div className="media-selector-placeholder wp-block">
 						<Placeholder
-							icon={ icon.src }
+							icon={ <BlockIcon icon={ icon } /> }
 							label={ label }
 							instructions={ instructions }
 						>
