@@ -2,8 +2,6 @@
 
 Complements used to enhance the WordPress Block Editor.
 
-
-
 ## Components
 
 ### `<MediaSelector />`
