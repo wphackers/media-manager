@@ -23,9 +23,10 @@ export default function useMediaStore( id ) {
 			const state = select( mediaManagerStore ).getMediaPlayerState( id );
 			return {
 				playingState: state,
-				isReady: typeof state !== STATE_NOT_READY,
+				isReady: state !== STATE_NOT_READY,
 				isPaused:
 					typeof state === 'undefined' ||
+					state === STATE_NOT_READY ||
 					state === STATE_PAUSED,
 				duration: select( mediaManagerStore ).getMediaSourceDuration( id ),
 			};
