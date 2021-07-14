@@ -8,7 +8,11 @@ import { debounce, throttle } from 'lodash';
  */
 import { addFilter } from '@wordpress/hooks';
 import { getBlockSupport } from '@wordpress/blocks';
-import { useSelect, useDispatch } from '@wordpress/data';
+import {
+	useSelect,
+	useDispatch,
+	select as doSelect,
+} from '@wordpress/data';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { useRef, useEffect, Fragment, useLayoutEffect } from '@wordpress/element';
 import { Panel } from '@wordpress/components';
@@ -17,6 +21,7 @@ import {
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import {
+	store as mediaSourceStore,
 	MEDIA_NOT_DEFINED,
 	useMediaStore,
 	useCurrentTime,
@@ -131,12 +136,19 @@ const MediaEditProviderWrapper = ( props ) => {
 		}
 
 		/*
-		 * Check if the mediaSourceId attribute is defined.
-		 * If so, take it as the media reference.
-		 * Otherwise, creates a new ID using the block clientId.
+		 * Get the media source ID, based on:
+		 *
+		 * - the mediaSourceId attribute when it's defined:
+		 * If the attribute is not defined, then let's assing
+		 * a new one based on the clientId of the media block.
+		 *
+		 * - checking whether it's already present in the store.
+		 * It happens when the block is duplicated. In this case,
+		 * we need to assign a new ID.
 		 */
 		let mediaSourceId = mediaSourceIdAttr;
-		if ( ! mediaSourceId ) {
+		const mediaIdExists = !! doSelect( mediaSourceStore ).getMediaSourceById( mediaSourceId );
+		if ( ! mediaSourceId || mediaIdExists ) {
 			mediaSourceId = `media-source-${ clientId }`;
 			setAttributes( { mediaSourceId } );
 		}
