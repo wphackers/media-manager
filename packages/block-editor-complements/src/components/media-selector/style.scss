@@ -40,8 +40,6 @@ $item-size: 120px;
 			width: $item-size;
 			justify-content: center;
     		align-items: center;
-			border: 1px solid transparent;
-			border-radius: 3px;
 
 			.media__item {
 				display: flex;
@@ -58,10 +56,6 @@ $item-size: 120px;
 				position: absolute;
 				left: 3px;
 				top: 3px;
-				fill: #fff;
-				background: #007cba;
-    			background: var(--wp-admin-theme-color);
-				border-radius: 3px;
 				transition: opacity ease-in-out 200ms;
 			}
 
@@ -88,6 +82,12 @@ $item-size: 120px;
 	}
 }
 
+.media__item-wrapper {
+	background-color: #eee;
+	border: 1px solid transparent;
+	border-radius: 3px;
+}
+
 // Media Source Panel
 .media-source-panel {
 	.media__item-wrapper {
@@ -98,6 +98,13 @@ $item-size: 120px;
 		display: flex;
 		align-items: center;
 		position: relative;
+		min-height: 30px;
+
+		.media__item-icon {
+			margin-left: 5px;
+			margin-right: 5px;
+		}
+
 	}
 
 	.media__item-play-button {

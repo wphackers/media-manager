@@ -1,14 +1,9 @@
 /**
- * External dependencies
- */
-import Gridicon from 'gridicons';
-
-/**
  * WordPress dependencies
  */
 import { useRef, useEffect, useState, Fragment } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
-import { PanelBody, PanelRow, Button, Notice } from '@wordpress/components';
+import { PanelBody, PanelRow, Button, Notice, Icon } from '@wordpress/components';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
 import { MEDIA_NOT_DEFINED } from '@media-manager/media-connect';
@@ -56,7 +51,7 @@ export function MediaItem( {
 		mediaElement.addEventListener( 'play', onPlayHandler );
 		mediaElement.addEventListener( 'pause', onPauseHandler );
 
-		return function () {
+		return function() {
 			onRemove( mediaElement, id );
 			mediaElement.removeEventListener( 'play', onPlayHandler );
 			mediaElement.removeEventListener( 'pause', onPauseHandler );
@@ -71,9 +66,9 @@ export function MediaItem( {
 			<div className="media__item" ref={ itemReference } />
 
 			<div className="media__item-metadata">
-				<Gridicon
-					className={ `media__item-icon is-${ type }` }
-					icon={ type }
+				<Icon
+					className="media__item-icon"
+					icon={ `format-${ type }` }
 					size={ 36 }
 				/>
 
@@ -109,11 +104,11 @@ export function MediaItemPanelBody( {
 	return (
 		<PanelBody
 			className="media-source-panel"
-			title={ __( 'Media Source', 'media-manager' ) }
+			title={ __( 'Media Source consumer', 'media-manager' ) }
 		>
 			<p>
 				{ __(
-					'Media source connected to the media center block',
+					'This block is connected to a media source.',
 					'media-manager'
 				) }
 			</p>
@@ -126,7 +121,7 @@ export function MediaItemPanelBody( {
 							status="warning"
 							isDismissible={ false }
 						>
-							{ __( 'No media linked to this block', 'context' ) }
+							{ __( 'No media linked to this block', 'media-manager' ) }
 						</Notice>
 					</PanelRow>
 
@@ -185,7 +180,7 @@ export function MediaItemPanelBody( {
 							<li>
 								{ sprintf(
 									/* translators: %1$s: block title, %2$s: author name. */
-									__( 'Connected to a %1$s.' ),
+									__( 'Connected to a %1$s.', 'media-manager' ),
 									source.elementType
 								) }
 
@@ -264,11 +259,11 @@ export function MediaConnectProviderPanelBody() {
 }
 
 export function MediaSelector( { media, onMediaSelect } ) {
+	const [ mediaPlayingElementRef, setMediaPlayingElementRef ] = useState();
+
 	if ( ! media?.length ) {
 		return null;
 	}
-
-	const [ mediaPlayingElementRef, setMediaPlayingElementRef ] = useState();
 
 	return (
 		<div className="media-selector">
@@ -279,7 +274,7 @@ export function MediaSelector( { media, onMediaSelect } ) {
 				) }
 			</h4>
 			<ul>
-				{ media.map( function ( { id, ...other } ) {
+				{ media.map( function( { id, ...other } ) {
 					return (
 						<li key={ `item-${ id }` }>
 							<MediaItem
