@@ -18,6 +18,7 @@ export default function PlayEditBlock( { mediaSource, scale, className, isSelect
 					className={ className }
 					scale={ scale }
 					onClick={ mediaSource.pause }
+					disabled={ mediaSource.isNotRegistered }
 				/>
 			</Disabled>
 		</div>

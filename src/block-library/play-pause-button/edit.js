@@ -24,6 +24,7 @@ export default function PlayPauseEditBlock( {
 					isPaused={ mediaSource.isPaused }
 					scale={ scale }
 					onClick={ mediaSource.toggle }
+					disabled={ mediaSource.isNotRegistered }
 				/>
 			</Disabled>
 		</div>
