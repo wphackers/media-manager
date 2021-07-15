@@ -18,12 +18,13 @@ import { STATE_NOT_READY, STATE_PAUSED } from '../../store/constants';
  * @return {Object} Media store object, with properties and helpers.
  */
 export default function useMediaStore( id ) {
-	const { isPaused, isReady, playingState, duration } = useSelect(
+	const { isPaused, isReady, playingState, duration, isNotRegistered } = useSelect(
 		function( select ) {
 			const state = select( mediaManagerStore ).getMediaPlayerState( id );
 			return {
 				playingState: state,
 				isReady: state !== STATE_NOT_READY,
+				isNotRegistered: ! select( mediaManagerStore ).getMediaSourceById( id ),
 				isPaused:
 					typeof state === 'undefined' ||
 					state === STATE_NOT_READY ||
@@ -45,6 +46,7 @@ export default function useMediaStore( id ) {
 	} = useDispatch( mediaManagerStore );
 
 	return {
+		isNotRegistered,
 		className: isPaused ? 'is-media-paused' : '', // @Todo: Considering remove this className prp.
 		playingState,
 		isPaused,
