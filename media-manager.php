@@ -11,11 +11,13 @@
  * @package         media-manager
  */
 
+namespace FancyBlocks\MediaManager;
+
+// Tip: define functions prefixing with fbmm -> Fancy Blocks Media Manager :smart:.
 
 /*
  * Load frontend scripts.
  */
-
 add_action( 'init', function () {
 	$asset_file   = __DIR__ . '/build/index.asset.php';
 	$asset        = file_exists( $asset_file ) ? require_once $asset_file : null;
@@ -60,7 +62,7 @@ add_action( 'init', function () {
 /*
  * Load frontend scripts.
  */
-function add_frontend_scripts() {
+function fbmm_add_frontend_scripts() {
 	$path = plugins_url( 'build/view.js', __FILE__ );
 	$build_assets = require_once __DIR__ . '/build/view.asset.php';
 
@@ -73,12 +75,12 @@ function add_frontend_scripts() {
 	);
 }
 
-add_action( 'wp_enqueue_scripts', 'add_frontend_scripts' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\fbmm_add_frontend_scripts' );
 
 /*
  * Wrap media elements with media manager data.
  */
-function media_center_wrap_media_source( $block_content, $block ) {
+function fbmm_media_center_wrap_media_source( $block_content, $block ) {
 	if (
 		empty( $block_content ) ||
 		! (
@@ -89,7 +91,7 @@ function media_center_wrap_media_source( $block_content, $block ) {
 		return $block_content;
 	}
 	
-	$dom = new DomDocument();
+	$dom = new \DomDocument();
 	@$dom->loadHTML( $block_content );
 	$elem = $dom->documentElement->childNodes->item( 0 )->childNodes->item( 0 );
 
@@ -107,9 +109,9 @@ function media_center_wrap_media_source( $block_content, $block ) {
 	return $dom->saveHTML();
 }
 
-add_filter( 'render_block', 'media_center_wrap_media_source', 10, 2 );
+add_filter( 'render_block', __NAMESPACE__ . '\fbmm_media_center_wrap_media_source', 10, 2 );
 
-function register_media_center_block_category() {
+function fbmm_register_media_center_block_category() {
 	if ( class_exists( 'WP_Block_Patterns_Registry' ) ) {
 
 		register_block_pattern_category(
@@ -118,3 +120,5 @@ function register_media_center_block_category() {
 		);
 	}
 }
+
+add_action( 'init', __NAMESPACE__ . '\fbmm_register_media_center_block_category' );
