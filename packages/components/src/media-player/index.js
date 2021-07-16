@@ -9,7 +9,7 @@ import { debounce } from 'lodash';
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useCallback } from '@wordpress/element';
 import { RangeControl, Notice, Button } from '@wordpress/components';
-import { useMediaStore } from '@media-manager/media-connect';
+import { useMediaStore, MEDIA_NOT_DEFINED } from '@media-manager/media-connect';
 import { convertSecondsToTimeCode } from '@media-manager/time-utils';
 
 /**
@@ -100,7 +100,16 @@ export function MediaPlayerControl( {
 } ) {
 	const [ rangeTime, setRangeTime ] = useState( time );
 	useEffect( () => setRangeTime( time ), [ time ] );
-	const { isPaused, isReady, duration, toggle, setCurrentTime } = useMediaStore( mediaSourceId );
+	const {
+		isPaused,
+		isReady,
+		duration,
+		toggle,
+		setCurrentTime,
+		isNotAvailable,
+	} = useMediaStore( mediaSourceId );
+
+	const isNotDefined = mediaSourceId === MEDIA_NOT_DEFINED;
 
 	const debouncedOnChange = useCallback(
 		debounce( function( debTime, debOnChange ) {
@@ -133,13 +142,17 @@ export function MediaPlayerControl( {
 
 	return (
 		<div className="media-player-control">
-			{ ! isReady && (
+			{ ( ! isReady || isNotAvailable || isNotDefined ) && (
 				<Notice
 					spokenMessage={ null }
-					status="warning"
+					status={ isNotAvailable && ! isNotDefined ? 'error' : 'warning' }
 					isDismissible={ false }
 				>
-					{ __( 'No media linked to this block', 'context' ) }
+					{
+						isNotAvailable && ! isNotDefined
+							? __( 'Media is not available anymore', 'media-manager' )
+							: __( 'No media linked to this block', 'media-manager' )
+					}
 				</Notice>
 			) }
 
