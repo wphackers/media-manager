@@ -16,9 +16,9 @@
 		},
 		"media-manager/color": {
 			"text": {
-				"labe": "Text color"
+				"label": "Text color"
 			},
-			"__sectionTitl": "Color"
+			"__sectionTitle": "Color"
 		}
 	},
 	"textdomain": "media-manager",
