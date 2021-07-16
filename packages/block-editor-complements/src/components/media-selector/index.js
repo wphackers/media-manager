@@ -104,7 +104,7 @@ export function MediaItemPanelBody( {
 	return (
 		<PanelBody
 			className="media-source-panel"
-			title={ __( 'Media Source consumer', 'media-manager' ) }
+			title={ __( 'Media Source Consumer', 'media-manager' ) }
 		>
 			<p>
 				{ __(
