@@ -65,7 +65,9 @@ export const withMediaSelector = createHigherOrderComponent(
 				props
 			);
 
-			const { source, isReady } = useMediaStore( mediaSourceId );
+			const isNotDefined = mediaSourceId === MEDIA_NOT_DEFINED;
+
+			const { source, isReady, isNotAvailable } = useMediaStore( mediaSourceId );
 
 			const { mediaSources } = useSelect( ( select ) => {
 				return {
@@ -198,6 +200,8 @@ export const withMediaSelector = createHigherOrderComponent(
 							<MediaItemPanelBody
 								source={ source }
 								isReady={ isReady }
+								isNotAvailable={ isNotAvailable }
+								isNotDefined={ isNotDefined }
 								isMediaInherited={ ! mediaSourceReferenceId }
 								onReplace={ setIsReplacing }
 								onUnlink={ () => setSourceReferenceId( null ) }

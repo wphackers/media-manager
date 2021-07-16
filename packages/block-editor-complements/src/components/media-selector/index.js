@@ -6,7 +6,6 @@ import { __, sprintf } from '@wordpress/i18n';
 import { PanelBody, PanelRow, Button, Notice, Icon } from '@wordpress/components';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
-import { MEDIA_NOT_DEFINED } from '@media-manager/media-connect';
 import { convertSecondsToTimeCode } from '@media-manager/time-utils';
 import { PlayPauseButton, MediaConnectIcon } from '@media-manager/components';
 
@@ -94,6 +93,8 @@ export function MediaItem( {
 export function MediaItemPanelBody( {
 	source,
 	isReady,
+	isNotAvailable,
+	isNotDefined,
 	onReplace,
 	onUnlink,
 	isMediaInherited,
@@ -112,15 +113,19 @@ export function MediaItemPanelBody( {
 				) }
 			</p>
 
-			{ ! isReady && (
+			{ ( ! isReady || isNotAvailable || isNotDefined ) && (
 				<Fragment>
 					<PanelRow>
 						<Notice
 							spokenMessage={ null }
-							status="warning"
+							status={ isNotAvailable && ! isNotDefined ? 'error' : 'warning' }
 							isDismissible={ false }
 						>
-							{ __( 'No media linked to this block', 'media-manager' ) }
+							{
+								isNotAvailable && ! isNotDefined
+									? __( 'Media is not available anymore', 'media-manager' )
+									: __( 'No media linked to this block', 'media-manager' )
+							}
 						</Notice>
 					</PanelRow>
 
