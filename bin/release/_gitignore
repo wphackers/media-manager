@@ -1,0 +1,40 @@
+build
+build-module
+build-style
+build-types
+node_modules
+
+Readme.md
+babel.config.js
+bin/
+lerna.json
+node_modules
+package-lock.json
+package.json
+packages/
+src/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variables file
+.env
+
+.wp-env.json
+.vscode
