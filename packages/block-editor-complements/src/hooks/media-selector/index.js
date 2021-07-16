@@ -23,6 +23,7 @@ import {
 	store as mediaManagerStore,
 	useMediaSourceId,
 	MEDIA_NOT_DEFINED,
+	useMediaStore,
 } from '@media-manager/media-connect';
 
 /**
@@ -63,22 +64,14 @@ export const withMediaSelector = createHigherOrderComponent(
 				mediaConsumerBlockAttributeName,
 				props
 			);
+
+			const { source, isReady } = useMediaStore( mediaSourceId );
+
 			const { mediaSources } = useSelect( ( select ) => {
 				return {
 					mediaSources: select( mediaManagerStore ).getMediaSources(),
 				};
 			}, [] );
-
-			const { mediaSource } = useSelect(
-				( select ) => {
-					return {
-						mediaSource: select(
-							mediaManagerStore
-						).getMediaSourceById( mediaSourceId ),
-					};
-				},
-				[ mediaSourceId ]
-			);
 
 			const setSourceReferenceId = ( sourceId ) =>
 				setAttributes( { mediaSourceReferenceId: sourceId } );
@@ -203,8 +196,8 @@ export const withMediaSelector = createHigherOrderComponent(
 					<InspectorControls>
 						<Panel>
 							<MediaItemPanelBody
-								source={ mediaSource }
-								mediaSourceId={ mediaSourceId }
+								source={ source }
+								isReady={ isReady }
 								isMediaInherited={ ! mediaSourceReferenceId }
 								onReplace={ setIsReplacing }
 								onUnlink={ () => setSourceReferenceId( null ) }

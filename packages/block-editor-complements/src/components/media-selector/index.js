@@ -93,12 +93,11 @@ export function MediaItem( {
 
 export function MediaItemPanelBody( {
 	source,
-	mediaSourceId,
+	isReady,
 	onReplace,
 	onUnlink,
 	isMediaInherited,
 } ) {
-	const isMediaNotDefined = mediaSourceId === MEDIA_NOT_DEFINED;
 	const { selectBlock } = useDispatch( blockEditorStore );
 
 	return (
@@ -113,7 +112,7 @@ export function MediaItemPanelBody( {
 				) }
 			</p>
 
-			{ isMediaNotDefined && (
+			{ ! isReady && (
 				<Fragment>
 					<PanelRow>
 						<Notice
