@@ -1,4 +1,4 @@
-=== Media Manager ===
+=== Block Editor Media Manager ===
 Contributors:      retrofox
 Tags:              block
 Requires at least: 5.6.0

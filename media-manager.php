@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Media Manager
+ * Plugin Name:     Block Editor Media Manager
  * Description:     The lord of the media. A WordPress plugin to rule them all media..
  * Version:         0.0.1
  * Author:          Damián Suárez (retrofox)
