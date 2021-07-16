@@ -81,24 +81,46 @@ domReady( function() {
 
 	// CSS class defined for the player button blocks.
 	const buttonBlockCssClass = 'wp-media-manager-player-button';
+
+	// CSS class defined for the time-position block.
+	const timePositionBlockCssClass = 'wp-block-media-manager-time-position-display';
+
+	// CSS class defined for the media-link format type.
 	const linkFormatCssClass = 'media-link-format-type';
+
 	if ( mediaSourceConsumers?.length ) {
 		mediaSourceConsumers.forEach( function( mediaCenterBlock ) {
 			const { mediaSourceReference } = mediaCenterBlock?.dataset;
 
-			// Check is the consumer is a player-button block
+			/*
+			 * Check is the consumer is a actionable block:
+			 * - media-manager/play-button block.
+			 * - media-manager/pause-button block.
+			 * - media-manager/play-pause-button block.
+			 * - media-manager/time-position block.
+			 */
 			const isButtonBlock = mediaCenterBlock.classList.contains(
 				buttonBlockCssClass
 			);
-			if ( isButtonBlock ) {
+
+			const isTimePositionBlock = mediaCenterBlock.classList.contains(
+				timePositionBlockCssClass
+			);
+
+			if ( isButtonBlock || isTimePositionBlock ) {
 				renderPlayerComponentBlock(
 					mediaSourceReference,
 					mediaCenterBlock
 				);
 			} else {
+				/*
+				 * Consumer is a wrapper block:
+				 * - media-manager/media-center block.
+				 * - media-manager/media-player block.
+				 */
 				// Query player button blocks.
 				const mediaPlayerButtons = mediaCenterBlock.querySelectorAll(
-					`.${ buttonBlockCssClass }`
+					`.${ buttonBlockCssClass }, .${ timePositionBlockCssClass }`
 				);
 				if ( mediaPlayerButtons?.length ) {
 					mediaPlayerButtons.forEach( function(
