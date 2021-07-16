@@ -49,7 +49,6 @@ export function PlayPauseButton( {
 					<PlayerPauseIcon scale={ scale } />
 				)
 			}
-			disabled={ false }
 			onClick={ onClick }
 			label={
 				isPaused
