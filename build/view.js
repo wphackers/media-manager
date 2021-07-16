@@ -370,7 +370,6 @@ function PlayPauseButton({
     }) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_icons__WEBPACK_IMPORTED_MODULE_7__["PlayerPauseIcon"], {
       scale: scale
     }),
-    disabled: false,
     onClick: onClick,
     label: isPaused ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Play', 'media-manager') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Pause', 'media-manager')
   }, other));
@@ -423,8 +422,10 @@ function MediaPlayerControl({
     isReady,
     duration,
     toggle,
-    setCurrentTime
+    setCurrentTime,
+    isNotAvailable
   } = Object(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_5__["useMediaStore"])(mediaSourceId);
+  const isNotDefined = mediaSourceId === _media_manager_media_connect__WEBPACK_IMPORTED_MODULE_5__["MEDIA_NOT_DEFINED"];
   const debouncedOnChange = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["debounce"])(function (debTime, debOnChange) {
     if (!isPaused) {
       setCurrentTime(debTime);
@@ -453,11 +454,11 @@ function MediaPlayerControl({
   const currentTimeFormatted = Object(_media_manager_time_utils__WEBPACK_IMPORTED_MODULE_6__["convertSecondsToTimeCode"])(rangeTime);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
     className: "media-player-control"
-  }, !isReady && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Notice"], {
+  }, (!isReady || isNotAvailable || isNotDefined) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Notice"], {
     spokenMessage: null,
-    status: "warning",
+    status: isNotAvailable && !isNotDefined ? 'error' : 'warning',
     isDismissible: false
-  }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('No media linked to this block', 'context')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(JumpBackButton, {
+  }, isNotAvailable && !isNotDefined ? Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('Media is not available anymore', 'media-manager') : Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__["__"])('No media linked to this block', 'media-manager')), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(JumpBackButton, {
     disabled: !isReady,
     onClick: () => onChangeTimeHandler(Math.max(0, time - 5))
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(PlayPauseButton, {
@@ -1098,13 +1099,18 @@ function useMediaStore(id) {
     isPaused,
     isReady,
     playingState,
-    duration
+    duration,
+    isNotAvailable,
+    source
   } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["useSelect"])(function (select) {
+    const mediaSource = select(___WEBPACK_IMPORTED_MODULE_2__["store"]).getMediaSourceById(id);
     const state = select(___WEBPACK_IMPORTED_MODULE_2__["store"]).getMediaPlayerState(id);
     return {
+      source: mediaSource,
       playingState: state,
-      isReady: typeof state !== _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_NOT_READY"],
-      isPaused: typeof state === 'undefined' || state === _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_PAUSED"],
+      isReady: state !== _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_NOT_READY"],
+      isNotAvailable: !mediaSource,
+      isPaused: typeof state === 'undefined' || state === _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_NOT_READY"] || state === _store_constants__WEBPACK_IMPORTED_MODULE_3__["STATE_PAUSED"],
       duration: select(___WEBPACK_IMPORTED_MODULE_2__["store"]).getMediaSourceDuration(id)
     };
   }, [id]);
@@ -1118,6 +1124,8 @@ function useMediaStore(id) {
     updateMediaSourceData
   } = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__["useDispatch"])(___WEBPACK_IMPORTED_MODULE_2__["store"]);
   return {
+    source,
+    isNotAvailable,
     className: isPaused ? 'is-media-paused' : '',
     // @Todo: Considering remove this className prp.
     playingState,
@@ -1135,7 +1143,7 @@ function useMediaStore(id) {
     toggle: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(() => toggleMediaSource(id), [id]),
     register: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])((storeId, data) => registerMediaSource(storeId, data), [id]),
     unregister: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(mediaSourceId => unregisterMediaSource(mediaSourceId), []),
-    updateData: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])((mediaSourceId, data) => updateMediaSourceData(mediaSourceId, data), []),
+    updateData: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(data => updateMediaSourceData(id, data), []),
     setCurrentTime: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useCallback"])(timestamp => setMediaSourceCurrentTime(id, timestamp), [id])
   };
 }
@@ -1657,12 +1665,14 @@ function PauseBlock({
 }) {
   const {
     pause,
-    className
+    className,
+    isNotAvailable
   } = Object(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_2__["useMediaStore"])(mediaSourceId);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     className: `wp-media-manager-player-button__button ${className}`,
     icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayerPauseIcon"], null),
-    onClick: pause
+    onClick: pause,
+    disabled: isNotAvailable
   });
 }
 
@@ -1697,12 +1707,14 @@ function PlayBlock({
 }) {
   const {
     play,
-    className
+    className,
+    isNotAvailable
   } = Object(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_2__["useMediaStore"])(mediaSourceId);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     className: `wp-media-manager-player-button__button ${className}`,
     icon: Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayerPlayIcon"], null),
-    onClick: play
+    onClick: play,
+    disabled: isNotAvailable
   });
 }
 
@@ -1738,12 +1750,14 @@ function PlayPauseBlock({
   const {
     isPaused,
     toggle,
-    className
+    className,
+    isNotAvailable
   } = Object(_media_manager_media_connect__WEBPACK_IMPORTED_MODULE_2__["useMediaStore"])(mediaSourceId);
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__["Button"], {
     className: `wp-media-manager-player-button__button ${className}`,
     icon: isPaused ? Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayerPlayPauseIcon"], null) : Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayerPauseIcon"], null),
-    onClick: toggle
+    onClick: toggle,
+    disabled: isNotAvailable
   });
 }
 
@@ -2097,22 +2111,38 @@ _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_1___default()(function () {
 
   const mediaSourceConsumers = document.querySelectorAll('[data-media-source-reference]'); // CSS class defined for the player button blocks.
 
-  const buttonBlockCssClass = 'wp-media-manager-player-button';
+  const buttonBlockCssClass = 'wp-media-manager-player-button'; // CSS class defined for the time-position block.
+
+  const timePositionBlockCssClass = 'wp-block-media-manager-time-position-display'; // CSS class defined for the media-link format type.
+
   const linkFormatCssClass = 'media-link-format-type';
 
   if (mediaSourceConsumers !== null && mediaSourceConsumers !== void 0 && mediaSourceConsumers.length) {
     mediaSourceConsumers.forEach(function (mediaCenterBlock) {
       const {
         mediaSourceReference
-      } = mediaCenterBlock === null || mediaCenterBlock === void 0 ? void 0 : mediaCenterBlock.dataset; // Check is the consumer is a player-button block
+      } = mediaCenterBlock === null || mediaCenterBlock === void 0 ? void 0 : mediaCenterBlock.dataset;
+      /*
+       * Check is the consumer is a actionable block:
+       * - media-manager/play-button block.
+       * - media-manager/pause-button block.
+       * - media-manager/play-pause-button block.
+       * - media-manager/time-position block.
+       */
 
       const isButtonBlock = mediaCenterBlock.classList.contains(buttonBlockCssClass);
+      const isTimePositionBlock = mediaCenterBlock.classList.contains(timePositionBlockCssClass);
 
-      if (isButtonBlock) {
+      if (isButtonBlock || isTimePositionBlock) {
         renderPlayerComponentBlock(mediaSourceReference, mediaCenterBlock);
       } else {
+        /*
+         * Consumer is a wrapper block:
+         * - media-manager/media-center block.
+         * - media-manager/media-player block.
+         */
         // Query player button blocks.
-        const mediaPlayerButtons = mediaCenterBlock.querySelectorAll(`.${buttonBlockCssClass}`);
+        const mediaPlayerButtons = mediaCenterBlock.querySelectorAll(`.${buttonBlockCssClass}, .${timePositionBlockCssClass}`);
 
         if (mediaPlayerButtons !== null && mediaPlayerButtons !== void 0 && mediaPlayerButtons.length) {
           mediaPlayerButtons.forEach(function (playerButtonElement) {
