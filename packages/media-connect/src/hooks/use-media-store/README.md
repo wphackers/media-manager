@@ -59,6 +59,12 @@ Total duration of the media, in seconds.
 
 Retunrs the `is-media-paused` classname when it's paused. Otherwise, its an empty string.
 
+### source
+
+-   Type: `object`
+
+Media source object picked and delivered straight up from the store.
+
 ### play( timestamp )
 
 -   Type: `function`
