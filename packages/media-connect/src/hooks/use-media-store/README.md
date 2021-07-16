@@ -24,6 +24,12 @@ function MyComponent() {
 
 the `useMediaStore()` expect a valid media source ID as parameter, and it returns an object with properties and helper functions:
 
+### isNotAvailable
+
+-   Type: `boolean`
+
+True when, for some reason, the media source is not registered which means it doesn't exist anymore. It's doable, for instance, removing the media source block from the canvas. Otherwise, False.
+
 ### isReady
 
 -   Type: `boolean`
