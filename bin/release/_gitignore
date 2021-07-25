@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+build
+>>>>>>> f86b7e7b21496659754ac6d841c57a30791aa55a
 build-module
 build-style
 build-types
@@ -11,6 +15,10 @@ node_modules
 package-lock.json
 package.json
 packages/
+<<<<<<< HEAD
+=======
+src/
+>>>>>>> f86b7e7b21496659754ac6d841c57a30791aa55a
 
 # Logs
 logs
