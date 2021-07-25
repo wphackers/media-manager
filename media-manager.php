@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:     Block Editor Media Manager
- * Description:     The lord of the media. A WordPress plugin to rule them all media..
+ * Description:     💍 The lord of the media. A WordPress plugin to rule them all media.
  * Version:         0.0.1
  * Author:          Damián Suárez (retrofox)
  * License:         GPL-2.0-or-later
@@ -51,6 +51,7 @@ add_action( 'init', function () {
 
 	$blocks_folder = __DIR__ . '/src/block-library/';
 
+	// Register blocks from library.
 	register_block_type_from_metadata( $blocks_folder .'media-center' );
 	register_block_type_from_metadata( $blocks_folder .'media-player' );
 	register_block_type_from_metadata( $blocks_folder .'pause-button' );
