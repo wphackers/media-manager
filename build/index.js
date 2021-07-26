@@ -376,7 +376,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /*!****************************************************************************!*\
   !*** ./packages/block-editor-complements/build-module/components/index.js ***!
   \****************************************************************************/
-/*! exports provided: MediaItem, MediaItemPanelBody, MediaConnectProviderPanelBody, MediaSelector, withMediaManagerColors, getButtonSizeBySlug, withSizes */
+/*! exports provided: MediaItem, MediaItemPanelBody, MediaConnectProviderPanelBody, MediaSelector, withMediaManagerColors, getSlugBySize, withSizes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -394,7 +394,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withMediaManagerColors", function() { return _with_colors__WEBPACK_IMPORTED_MODULE_1__["withMediaManagerColors"]; });
 
 /* harmony import */ var _with_sizes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./with-sizes */ "./packages/block-editor-complements/build-module/components/with-sizes/index.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getButtonSizeBySlug", function() { return _with_sizes__WEBPACK_IMPORTED_MODULE_2__["getButtonSizeBySlug"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSlugBySize", function() { return _with_sizes__WEBPACK_IMPORTED_MODULE_2__["getSlugBySize"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withSizes", function() { return _with_sizes__WEBPACK_IMPORTED_MODULE_2__["withSizes"]; });
 
@@ -704,25 +704,23 @@ function withMediaManagerColors(supportProps) {
 /*!***************************************************************************************!*\
   !*** ./packages/block-editor-complements/build-module/components/with-sizes/index.js ***!
   \***************************************************************************************/
-/*! exports provided: getButtonSizeBySlug, withSizes */
+/*! exports provided: getSlugBySize, withSizes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getButtonSizeBySlug", function() { return getButtonSizeBySlug; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSlugBySize", function() { return getSlugBySize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withSizes", function() { return withSizes; });
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
-/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
-
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
 
 /**
  * WordPress dependencies
@@ -734,38 +732,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const defaultSizes = [{
-  name: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Small', 'media-manager'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Small', 'media-manager'),
   slug: 'small',
-  key: 'key-small',
-  size: 1
+  value: 1
 }, {
-  name: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Normal', 'media-manager'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Normal', 'media-manager'),
   slug: 'normal',
-  key: 'key-normal',
-  size: 1.5
+  value: 1.5
 }, {
-  name: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Medium', 'media-manager'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Medium', 'media-manager'),
   slug: 'medium',
-  key: 'key-medium',
-  size: 2
+  value: 2
 }, {
-  name: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Large', 'media-manager'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Large', 'media-manager'),
   slug: 'large',
-  key: 'key-large',
-  size: 2.5
+  value: 2.5
 }, {
-  name: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Giant', 'media-manager'),
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Giant', 'media-manager'),
   slug: 'giant',
-  key: 'key-giant',
-  size: 4
+  value: 4
 }];
-function getButtonSizeBySlug(slug) {
-  var _defaultSizes$find;
+function getSlugBySize(sizes = defaultSizes, size) {
+  var _sizes$find;
 
-  return ((_defaultSizes$find = defaultSizes.find(option => option.slug === slug)) === null || _defaultSizes$find === void 0 ? void 0 : _defaultSizes$find.size) || 1.5;
+  return (_sizes$find = sizes.find(option => option.value === size)) === null || _sizes$find === void 0 ? void 0 : _sizes$find.slug;
 }
 function withSizes(supportProps) {
-  return Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__["createHigherOrderComponent"])(BlockEdit => props => {
+  return Object(_wordpress_compose__WEBPACK_IMPORTED_MODULE_1__["createHigherOrderComponent"])(BlockEdit => props => {
+    var _supportProps$options;
+
     const {
       attributes,
       setAttributes
@@ -773,35 +768,27 @@ function withSizes(supportProps) {
     const {
       size
     } = attributes;
-    const scale = getButtonSizeBySlug(size);
 
-    function setSize({
-      selectedItem
-    }) {
-      if (!(selectedItem !== null && selectedItem !== void 0 && selectedItem.slug)) {
-        return;
-      }
-
+    function setSize(value) {
       setAttributes({
-        size: selectedItem.slug
+        size: Number(value)
       });
     } // Panel title.
 
 
     const panelTitle = supportProps.__sectionTitle;
 
-    const selectorTitle = supportProps.__selectorTitle || Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__["__"])('Sizes', 'media-manager');
+    const selectorTitle = supportProps.__selectorTitle || Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('Sizes', 'media-manager');
 
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Panel"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
+    const sizes = (_supportProps$options = supportProps === null || supportProps === void 0 ? void 0 : supportProps.options) !== null && _supportProps$options !== void 0 ? _supportProps$options : defaultSizes;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Panel"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
       title: panelTitle
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["CustomSelectControl"], {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["SelectControl"], {
       label: selectorTitle,
-      options: defaultSizes,
+      options: sizes,
       onChange: setSize,
-      value: defaultSizes.find(option => option.slug === size)
-    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(BlockEdit, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
-      scale: scale
-    })));
+      value: size
+    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props));
   }, 'withSizes');
 }
 
@@ -1686,6 +1673,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var ___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ */ "./packages/block-editor-complements/build-module/index.js");
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components */ "./packages/block-editor-complements/build-module/components/index.js");
 /**
  * External dependencies
  */
@@ -1699,6 +1687,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
  // Define and export support name.
 
@@ -1714,8 +1703,9 @@ function addMediaManagerSizeSaveProps(props, settings, attributes) {
   const {
     size
   } = attributes;
+  const slug = Object(_components__WEBPACK_IMPORTED_MODULE_4__["getSlugBySize"])(sizes.options, size);
   return { ...props,
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(props === null || props === void 0 ? void 0 : props.className, `is-${size}-size`)
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(props === null || props === void 0 ? void 0 : props.className, `is-${slug}-size`)
   };
 }
 
@@ -1730,8 +1720,8 @@ function addMediaManagerSizeSupport(settings) {
   return { ...settings,
     attributes: { ...settings.attributes,
       size: {
-        type: 'string',
-        default: 'normal'
+        type: 'number',
+        default: 1
       }
     },
     getEditWrapperProps: attributes => {
@@ -1757,7 +1747,7 @@ Object(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__["addFilter"])('blocks.getSa
 /*!*****************************************************************!*\
   !*** ./packages/block-editor-complements/build-module/index.js ***!
   \*****************************************************************/
-/*! exports provided: SUPPORT_MEDIA_SELECTOR, SUPPORT_SIZES, SUPPORT_CONNECT_PROVIDER, SUPPORT_CONNECT_CONSUMER, MediaItem, MediaItemPanelBody, MediaConnectProviderPanelBody, MediaSelector, withMediaManagerColors, getButtonSizeBySlug, withSizes */
+/*! exports provided: SUPPORT_MEDIA_SELECTOR, SUPPORT_SIZES, SUPPORT_CONNECT_PROVIDER, SUPPORT_CONNECT_CONSUMER, MediaItem, MediaItemPanelBody, MediaConnectProviderPanelBody, MediaSelector, withMediaManagerColors, getSlugBySize, withSizes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1782,7 +1772,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withMediaManagerColors", function() { return _components__WEBPACK_IMPORTED_MODULE_1__["withMediaManagerColors"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getButtonSizeBySlug", function() { return _components__WEBPACK_IMPORTED_MODULE_1__["getButtonSizeBySlug"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getSlugBySize", function() { return _components__WEBPACK_IMPORTED_MODULE_1__["getSlugBySize"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withSizes", function() { return _components__WEBPACK_IMPORTED_MODULE_1__["withSizes"]; });
 
@@ -3501,9 +3491,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const PLAYER_BLOCKS = [_play_button__WEBPACK_IMPORTED_MODULE_2__["blockName"], _pause_button__WEBPACK_IMPORTED_MODULE_3__["blockName"], _play_pause_button__WEBPACK_IMPORTED_MODULE_4__["blockName"], _time_position__WEBPACK_IMPORTED_MODULE_5__["blockName"]];
 const INNER_BLOCKS_TEMPLATE = [[_play_pause_button__WEBPACK_IMPORTED_MODULE_4__["blockName"], {
-  size: 'medium'
+  size: 2
 }], [_pause_button__WEBPACK_IMPORTED_MODULE_3__["blockName"], {
-  size: 'medium'
+  size: 2
 }], [_time_position__WEBPACK_IMPORTED_MODULE_5__["blockName"]]];
 function MediaPlayerEditBlock() {
   const blockProps = Object(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"])();
@@ -3628,7 +3618,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function PlayEditBlock({
   mediaSource,
-  scale,
   className,
   isSelected
 }) {
@@ -3636,7 +3625,6 @@ function PlayEditBlock({
     isDisabled: !isSelected
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PauseButton"], {
     className: className,
-    scale: scale,
     onClick: mediaSource.pause,
     disabled: mediaSource.isNotAvailable
   })));
@@ -3715,8 +3703,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _media_manager_block_editor_complements__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @media-manager/block-editor-complements */ "./packages/block-editor-complements/build-module/index.js");
-/* harmony import */ var _media_manager_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @media-manager/components */ "./packages/components/build-module/index.js");
+/* harmony import */ var _media_manager_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @media-manager/components */ "./packages/components/build-module/index.js");
 
 
 /**
@@ -3724,15 +3711,10 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
-function save({
-  attributes
-}) {
+function save() {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
     className: "wp-media-manager-player-button__button"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayerPauseIcon"], {
-    scale: Object(_media_manager_block_editor_complements__WEBPACK_IMPORTED_MODULE_2__["getButtonSizeBySlug"])(attributes === null || attributes === void 0 ? void 0 : attributes.size)
-  })));
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_2__["PlayerPauseIcon"], null)));
 }
 
 /***/ }),
@@ -3770,7 +3752,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function PlayEditBlock({
   mediaSource,
-  scale,
   className,
   isSelected
 }) {
@@ -3778,7 +3759,6 @@ function PlayEditBlock({
     isDisabled: !isSelected
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayButton"], {
     className: className,
-    scale: scale,
     onClick: mediaSource.play,
     disabled: mediaSource.isNotAvailable
   })));
@@ -3858,7 +3838,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _media_manager_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @media-manager/components */ "./packages/components/build-module/index.js");
-/* harmony import */ var _media_manager_block_editor_complements__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @media-manager/block-editor-complements */ "./packages/block-editor-complements/build-module/index.js");
 
 
 /**
@@ -3866,15 +3845,10 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
-function save({
-  attributes
-}) {
+function save() {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
     className: "wp-media-manager-player-button__button"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_2__["PlayerPlayIcon"], {
-    scale: Object(_media_manager_block_editor_complements__WEBPACK_IMPORTED_MODULE_3__["getButtonSizeBySlug"])(attributes === null || attributes === void 0 ? void 0 : attributes.size)
-  })));
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_2__["PlayerPlayIcon"], null)));
 }
 
 /***/ }),
@@ -3912,7 +3886,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function PlayPauseEditBlock({
   mediaSource,
-  scale,
   className,
   isSelected
 }) {
@@ -3921,7 +3894,6 @@ function PlayPauseEditBlock({
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayPauseButton"], {
     className: className,
     isPaused: mediaSource.isPaused,
-    scale: scale,
     onClick: mediaSource.toggle,
     disabled: mediaSource.isNotAvailable
   })));
@@ -4000,8 +3972,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _media_manager_block_editor_complements__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @media-manager/block-editor-complements */ "./packages/block-editor-complements/build-module/index.js");
-/* harmony import */ var _media_manager_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @media-manager/components */ "./packages/components/build-module/index.js");
+/* harmony import */ var _media_manager_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @media-manager/components */ "./packages/components/build-module/index.js");
 
 
 /**
@@ -4009,18 +3980,10 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-
-function save({
-  attributes
-}) {
-  const scale = Object(_media_manager_block_editor_complements__WEBPACK_IMPORTED_MODULE_2__["getButtonSizeBySlug"])(attributes === null || attributes === void 0 ? void 0 : attributes.size);
+function save() {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["useBlockProps"].save(), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
     className: "wp-media-manager-player-button__button is-media-paused"
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayerPlayPauseIcon"], {
-    scale: scale
-  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_3__["PlayerPauseIcon"], {
-    scale: scale
-  })));
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_2__["PlayerPlayPauseIcon"], null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_media_manager_components__WEBPACK_IMPORTED_MODULE_2__["PlayerPauseIcon"], null)));
 }
 
 /***/ }),
