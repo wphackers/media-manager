@@ -60,8 +60,8 @@ export function withSizes( supportProps ) {
 
 			// Panel title.
 			const panelTitle = supportProps.__sectionTitle;
-			const selectorTitle =
-				supportProps.__selectorTitle || __( 'Sizes', 'media-manager' );
+			const selectorTitle = supportProps.__selectorTitle || __( 'Sizes', 'media-manager' );
+			const sizes = supportProps?.options ?? defaultSizes;
 
 			return (
 				<Fragment>
@@ -70,9 +70,9 @@ export function withSizes( supportProps ) {
 							<PanelBody title={ panelTitle }>
 								<CustomSelectControl
 									label={ selectorTitle }
-									options={ defaultSizes }
+									options={ sizes }
 									onChange={ setSize }
-									value={ defaultSizes.find(
+									value={ sizes.find(
 										( option ) => option.slug === size
 									) }
 								/>

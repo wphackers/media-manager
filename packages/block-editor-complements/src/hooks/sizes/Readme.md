@@ -20,6 +20,41 @@ Add a sizes support to your block.
 }
 ```
 
+It's possible to set the size options, too:
+
+```json
+{
+	"apiVersion": 2,
+	"name": "your-plugin/your-block",
+	"title": "Your nice block, with sizes support.",
+	"category": "layout",
+	"supports": {
+		"media-manager/sizes": {
+			"options": [
+				{
+					"name": "Small",
+					"slug": "small",
+					"key": "key-small",
+					"size": 1
+				},
+				{
+					"name": "Medium",
+					"slug": "normal",
+					"key": "key-normal",
+					"size": 2
+				},
+				{
+					"name": "Large",
+					"slug": "large",
+					"key": "key-large",
+					"size": 3
+				}
+			]
+		}
+	}
+}
+```
+
 ### Using in the block edit function context.
 
 ```es6
