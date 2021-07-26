@@ -38,7 +38,7 @@ It's possible to set the size options, too:
 				},
 				{
 					"label": "Medium",
-					"slug": "normal",
+					"slug": "medium",
 					"value": 2
 				},
 				{
