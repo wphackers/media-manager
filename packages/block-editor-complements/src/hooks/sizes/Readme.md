@@ -32,22 +32,19 @@ It's possible to set the size options, too:
 		"media-manager/sizes": {
 			"options": [
 				{
-					"name": "Small",
+					"label": "Small",
 					"slug": "small",
-					"key": "key-small",
-					"size": 1
+					"value": 1
 				},
 				{
-					"name": "Medium",
+					"label": "Medium",
 					"slug": "normal",
-					"key": "key-normal",
-					"size": 2
+					"value": 2
 				},
 				{
-					"name": "Large",
+					"label": "Large",
 					"slug": "large",
-					"key": "key-large",
-					"size": 3
+					"value": 3
 				}
 			]
 		}
@@ -58,14 +55,14 @@ It's possible to set the size options, too:
 ### Using in the block edit function context.
 
 ```es6
-import { getButtonSizeBySlug } from '@media-manager/block-editor-complements';
+import { getSlugBySize } from '@media-manager/block-editor-complements';
 
 export default function MyBlockEdit( { attributes } ) {
 	const { size } = attributes;
 
 	return (
 		<figure { ...useBlockProps() }>
-			{ `${ size } is the size, and ${ getButtonSizeBySlug( size ) } is its value.` }
+			{ `${ size } is the size, and ${ getSlugBySize( size ) } is its slug.` }
 		</figure>
 	);
 }

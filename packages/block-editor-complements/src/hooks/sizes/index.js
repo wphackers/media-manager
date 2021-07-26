@@ -13,6 +13,7 @@ import { getBlockSupport } from '@wordpress/blocks';
  * Internal dependencies
  */
 import { withSizes } from '../../';
+import { getSlugBySize } from '../../components';
 
 // Define and export support name.
 export const SUPPORT_NAME = 'media-manager/sizes';
@@ -24,9 +25,11 @@ function addMediaManagerSizeSaveProps( props, settings, attributes ) {
 	}
 
 	const { size } = attributes;
+	const slug = getSlugBySize( sizes.options, size );
+
 	return {
 		...props,
-		className: classnames( props?.className, `is-${ size }-size` ),
+		className: classnames( props?.className, `is-${ slug }-size` ),
 	};
 }
 
@@ -43,8 +46,8 @@ function addMediaManagerSizeSupport( settings ) {
 		attributes: {
 			...settings.attributes,
 			size: {
-				type: 'string',
-				default: 'normal',
+				type: 'number',
+				default: 1,
 			},
 		},
 

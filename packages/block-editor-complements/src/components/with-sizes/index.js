@@ -3,45 +3,40 @@
  */
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
-import { CustomSelectControl, Panel, PanelBody } from '@wordpress/components';
+import { SelectControl, Panel, PanelBody } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 const defaultSizes = [
 	{
-		name: __( 'Small', 'media-manager' ),
+		label: __( 'Small', 'media-manager' ),
 		slug: 'small',
-		key: 'key-small',
-		size: 1,
+		value: 1,
 	},
 	{
-		name: __( 'Normal', 'media-manager' ),
+		label: __( 'Normal', 'media-manager' ),
 		slug: 'normal',
-		key: 'key-normal',
-		size: 1.5,
+		value: 1.5,
 	},
 	{
-		name: __( 'Medium', 'media-manager' ),
+		label: __( 'Medium', 'media-manager' ),
 		slug: 'medium',
-		key: 'key-medium',
-		size: 2,
+		value: 2,
 	},
 	{
-		name: __( 'Large', 'media-manager' ),
+		label: __( 'Large', 'media-manager' ),
 		slug: 'large',
-		key: 'key-large',
-		size: 2.5,
+		value: 2.5,
 	},
 	{
-		name: __( 'Giant', 'media-manager' ),
+		label: __( 'Giant', 'media-manager' ),
 		slug: 'giant',
-		key: 'key-giant',
-		size: 4,
+		value: 4,
 	},
 ];
 
-export function getButtonSizeBySlug( slug ) {
-	return defaultSizes.find( ( option ) => option.slug === slug )?.size || 1.5;
+export function getSlugBySize( sizes = defaultSizes, size ) {
+	return sizes.find( ( option ) => option.value === size )?.slug;
 }
 
 export function withSizes( supportProps ) {
@@ -49,13 +44,9 @@ export function withSizes( supportProps ) {
 		( BlockEdit ) => ( props ) => {
 			const { attributes, setAttributes } = props;
 			const { size } = attributes;
-			const scale = getButtonSizeBySlug( size );
 
-			function setSize( { selectedItem } ) {
-				if ( ! selectedItem?.slug ) {
-					return;
-				}
-				setAttributes( { size: selectedItem.slug } );
+			function setSize( value ) {
+				setAttributes( { size: Number( value ) } );
 			}
 
 			// Panel title.
@@ -68,19 +59,17 @@ export function withSizes( supportProps ) {
 					<InspectorControls>
 						<Panel>
 							<PanelBody title={ panelTitle }>
-								<CustomSelectControl
+								<SelectControl
 									label={ selectorTitle }
 									options={ sizes }
 									onChange={ setSize }
-									value={ sizes.find(
-										( option ) => option.slug === size
-									) }
+									value={ size }
 								/>
 							</PanelBody>
 						</Panel>
 					</InspectorControls>
 
-					<BlockEdit { ...props } scale={ scale } />
+					<BlockEdit { ...props } />
 				</Fragment>
 			);
 		},
