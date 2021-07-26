@@ -10,13 +10,12 @@ import { PauseButton as Button } from '@media-manager/components';
  */
 import './editor.scss';
 
-export default function PlayEditBlock( { mediaSource, scale, className, isSelected } ) {
+export default function PlayEditBlock( { mediaSource, className, isSelected } ) {
 	return (
 		<div { ...useBlockProps() }>
 			<Disabled isDisabled={ ! isSelected }>
 				<Button
 					className={ className }
-					scale={ scale }
 					onClick={ mediaSource.pause }
 					disabled={ mediaSource.isNotAvailable }
 				/>
