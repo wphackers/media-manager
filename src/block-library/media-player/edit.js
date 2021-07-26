@@ -26,14 +26,14 @@ const INNER_BLOCKS_TEMPLATE = [
 	[
 		playPauseButtonBlockName,
 		{
-			size: 'medium',
+			size: 2,
 		},
 	],
 
 	[
 		pauseButtonBlockName,
 		{
-			size: 'medium',
+			size: 2,
 		},
 	],
 
