@@ -22,12 +22,6 @@ if ( shell.exec( 'npm run clean' ).code !== 0 ) {
 } else if ( shell.exec( `git checkout -b v${ version }` ).code !== 0 ) {
 	shell.echo( 'Error' );
 	shell.exit( 1 );
-} else if ( shell.exec( 'git add build/' ).code !== 0 ) {
-	shell.echo( 'Error' );
-	shell.exit( 1 );
-} else if ( shell.exec( `git commit -m "built v${ version }"` ).code !== 0 ) {
-	shell.echo( 'Error' );
-	shell.exit( 1 );
 }
 
 if ( shell.exec( `zip -r media-manager-${ version }.zip build/ src/ media-manager.php readme.txt license.txt` ).code !== 0 ) {
