@@ -7,6 +7,7 @@ Stable tag:        0.0.1
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Tags:              block, blocks, media, media-manager, audio, video, play
 
 💍 The lord of the media. _A WordPress plugin to rule them all media._
 
@@ -17,7 +18,7 @@ Play, stop, change time position of the media from a player block, or even from 
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/media-manager` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/media-manager-blocks` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
 REQUIREMENTS
@@ -32,7 +33,7 @@ We try to keep the implementation working across different Gutenberg versions in
 
 == Source and support ==
 
-You can follow development, file an issue, suggest features, and view the source at the Github repo: https://github.com/FancyBlocks/media-manager
+You can follow development, file an issue, suggest features, and view the source at the Github repo: [https://github.com/FancyBlocks/media-manager](https://github.com/FancyBlocks/media-manager)
 
 == Screenshots ==
 
@@ -40,9 +41,3 @@ You can follow development, file an issue, suggest features, and view the source
 
 = 0.0.1 =
 * Initial release.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
