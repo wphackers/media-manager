@@ -1,13 +1,12 @@
 === Block Editor Media Manager ===
 Contributors:      retrofox
-Tags:              block
+Tags:              block, blocks, media, media-manager, audio, video, play
 Requires at least: 5.6.0
 Tested up to:      5.8.0
 Stable tag:        0.0.1
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Tags:              block, blocks, media, media-manager, audio, video, play
 
 💍 The lord of the media. _A WordPress plugin to rule them all media._
 
