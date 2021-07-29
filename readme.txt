@@ -23,8 +23,6 @@ Play, stop, change time position of the media from a player block, or even from 
 
 REQUIREMENTS
 
-This is an initial beta release that requires [the Gutenberg Plugin](https://wordpress.org/plugins/gutenberg/) to work.
-
 == Frequently Asked Questions ==
 
 = What's the recommended Plugin Gutenberg Version? =
@@ -36,6 +34,8 @@ We try to keep the implementation working across different Gutenberg versions in
 You can follow development, file an issue, suggest features, and view the source at the Github repo: [https://github.com/FancyBlocks/media-manager](https://github.com/FancyBlocks/media-manager)
 
 == Screenshots ==
+
+1. Editing timestamp value of a media link
 
 == Changelog ==
 
