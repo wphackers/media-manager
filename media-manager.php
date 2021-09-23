@@ -11,9 +11,9 @@
  * @package         media-manager
  */
 
-namespace FancyBlocks\MediaManager;
+namespace WPHackers\MediaManager;
 
-// Tip: define functions prefixing with fbmm -> Fancy Blocks Media Manager :smart:.
+// Tip: define functions prefixing with fbmm -> wphackers Media Manager :smart:.
 
 /*
  * Load frontend scripts.
@@ -26,7 +26,7 @@ add_action( 'init', function () {
 	
 	// Block editor scripts.
 	wp_register_script(
-		'fancy-blocks/media-manager',
+		'wphackers/media-manager',
 		plugins_url( 'build/index.js', __FILE__ ),
 		$dependencies,
 		$version,
@@ -35,7 +35,7 @@ add_action( 'init', function () {
 
 	// Block editor style.
 	wp_register_style(
-		'fancy-blocks/media-manager',
+		'wphackers/media-manager',
 		plugins_url( 'build/index.css', __FILE__ ),
 		[],
 		filemtime( __DIR__ . '/build/index.css' )
@@ -43,7 +43,7 @@ add_action( 'init', function () {
 
 	// Block front-end style.
 	wp_register_style(
-		'fancy-blocks/media-manager-front-end',
+		'wphackers/media-manager-front-end',
 		plugins_url( 'build/style-index.css', __FILE__ ),
 		[],
 		filemtime( __DIR__ . '/build/style-index.css' )

@@ -30,7 +30,7 @@ We try to keep the implementation working across different Gutenberg versions in
 
 == Source and support ==
 
-You can follow development, file an issue, suggest features, and view the source at the Github repo: [https://github.com/FancyBlocks/media-manager](https://github.com/FancyBlocks/media-manager)
+You can follow development, file an issue, suggest features, and view the source at the Github repo: [https://github.com/wphackers/media-manager](https://github.com/wphackers/media-manager)
 
 == Screenshots ==
 

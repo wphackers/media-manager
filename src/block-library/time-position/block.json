@@ -22,7 +22,7 @@
 		}
 	},
 	"textdomain": "media-manager",
-	"editorScript": "fancy-blocks/media-manager",
-	"editorStyle": "fancy-blocks/media-manager",
-	"style": "fancy-blocks/media-manager-front-end"
+	"editorScript": "wphackers/media-manager",
+	"editorStyle": "wphackers/media-manager",
+	"style": "wphackers/media-manager-front-end"
 }

@@ -10,14 +10,14 @@
 		"block-editor",
 		"time"
 	],
-	"homepage": "https://github.com/FancyBlocks/media-manager/blob/HEAD/packages/time-utils/README.md",
+	"homepage": "https://github.com/wphackers/media-manager/blob/HEAD/packages/time-utils/README.md",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/FancyBlocks/media-manager.git",
+		"url": "https://github.com/wphackers/media-manager.git",
 		"directory": "packages/media-manager"
 	},
 	"bugs": {
-		"url": "https://github.com/FancyBlocks/media-manager/issues"
+		"url": "https://github.com/wphackers/media-manager/issues"
 	},
 	"main": "build/index.js",
 	"module": "build-module/index.js",
