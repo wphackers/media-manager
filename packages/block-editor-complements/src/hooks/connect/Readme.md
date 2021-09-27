@@ -72,7 +72,7 @@ When a block supports connect-consumer, it gets some behaviors specific to the c
 
 Initially, a consumer block doesn't have any media linked to it by default. Thus, the block shows the Media selector in the UI which will help the user to link a media.
 
-<img src="../assets/media-manager__media-selector_01.png?raw=true" width="300" />
+<img src="https://github.com/wphackers/media-manager/tree/assets/media-manager__media-selector_01.png?raw=true" width="300" />
 
 ### Block edit function
 
