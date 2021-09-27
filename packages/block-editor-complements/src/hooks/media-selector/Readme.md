@@ -4,7 +4,7 @@ It hooks a function to the `'blocks.registerBlockType` filter to add the `media-
 
 ## `media-manager/media-selector` block support
 
-Use this support to provide the ability to associate a media source to the block.
+Use this support to provide the ability to link a media source with to the block.
 
 ```es6
 registerBlockType( `my-plugin/my-block`, {

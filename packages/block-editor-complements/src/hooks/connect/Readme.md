@@ -1,15 +1,17 @@
 # Connect supports
 
-You can connect blocks to the Media Source in two different ways. As a media provider or as a media consumer.
+Connect implements a way to connect media with certain blocks/components. For this purpose, Connect exposes two support: `Connect Provider` and `Connect Consumer`.
 
 ## Connect Provider
 
-Use the `media-manager/connect-provider` to define the block as a media provider.
+Use the `media-manager/connect-provider` support to define the block as a media provider.
 It will try to inspect and connect it to the media source store (@media-mannager/connect lib).
-In this way, every time that the block is inserted in the editor, it will register a new media ready to use.
-When registering the block, it requires define the attribute `name` where the media source is defined. Also, it requires define the DOM type name that the media gets when rendered.
 
-* **name**: the attribute name which contains reference to the media source
+In this way, every time that the block is inserted in the editor, it will register a new media ready to be consumed.
+
+When registering the block, it requires defining the attribute `name` where the media source is defined. Also, it requires defining the DOM type name that the media gets when rendered.
+
+* **name**: the attribute name which contains a reference to the media source
 * **domTypeName**: the name of the DOM type, for instance `video`, `audio`.
 
 ```es6
@@ -52,7 +54,7 @@ addFilter(
 
 ## Connect Consumer
 
-Use the `media-manager/connect-consumer` key to supports media manager connection with your blocks.
+Use the `media-manager/connect-consumer` support to provide to the block a way to consume a media source.
 
 ```es6
 registerBlockType( `my-plugin/my-block`, {
