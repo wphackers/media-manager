@@ -64,6 +64,16 @@ registerBlockType( `my-plugin/my-block`, {
 } );
 ```
 
+### Consumer connection workflow
+
+When a block supports connect-consumer, it gets some behaviors specific to the characteristic, the nature of the block, and its state.
+
+#### Initial state - not connected
+
+Initially, a consumer block doesn't have any media linked to it by default. Thus, the block shows the Media selector in the UI which will help the user to link a media.
+
+<img src="../assets/media-manager__media-selector_01.png" width="300" />
+
 ### Block edit function
 
 Blocks with media manager connect support will be populated with the following props:
