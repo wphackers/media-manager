@@ -70,9 +70,7 @@ When a block supports connect-consumer, it gets some behaviors specific to the c
 
 #### Initial state - not connected
 
-Initially, a consumer block doesn't have any media linked to it by default. Thus, the block shows the Media selector in the UI which will help the user to link a media.
-
-<img src="https://raw.githubusercontent.com/wphackers/media-manager/assets/media-manager__media-selector_01.png" width="600" />
+Initially, a consumer block doesn't have any media linked to it by default. Thus, the block shows the [Media Selector](../../components/media-selector/README.md) in the UI which will help the user to link a media.
 
 ### Block edit function
 
