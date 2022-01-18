@@ -9,7 +9,7 @@
 		"media-manager/media-selector": true,
 		"typography": {
 			"fontSize": true,
-			"lineHeigh": true,
+			"lineHeight": true,
 			"__experimentalFontStyle": true,
 			"__experimentalFontWeight": true,
 			"__experimentalFontFamily": true
